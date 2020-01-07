@@ -1,7 +1,11 @@
-import Controller from './UserController'
+import Controller from './UserController';
 // import { getCookieOriginByContext } from './User/util'
-import createReqSrc from '@ctrip/x-req-src'
-
+import createReqSrc from '@ctrip/x-req-src';
+// const MARKETING_API = {
+//   fat: 'http://offline.fx.fws.qa.nt.ctripcorp.com/ttd',
+//   uat: 'http://offline.fx.uat.qa.nt.ctripcorp.com/ttd',
+//   prod: 'http://offline.fx.ctripcorp.com/ttd'
+// };
 export default class extends Controller {
   // requireLogin = false // 是否需要登陆才能访问
   // requireUserInfo = false // 是否需要用户信息
@@ -12,11 +16,9 @@ export default class extends Controller {
   // async getInitialState(initialState) {
   //   let { requireLogin, requireUserInfo } = this
   //   let userInfo
-
   //   if (requireLogin || requireUserInfo) {
   //     userInfo = await this.getUserInfo()
   //   }
-
   //   return {
   //     ...initialState,
   //     userInfo,
@@ -26,7 +28,6 @@ export default class extends Controller {
   //     jumpUrlMap: this.context.jumpUrlMap
   //   }
   // }
-
   // /**
   //  * 服务端的 context 和客户端的 context 是两个对象
   //  * 服务端的生命周期里获取了自定义数据存入 context，不会在客户端集成
@@ -40,7 +41,6 @@ export default class extends Controller {
   //     context.userInfo = state.userInfo
   //   }
   // }
-
   // fetch(url, options) {
   //   let result = this.resolveFetchArgs(url, options);
   //   url = result.url;
@@ -54,7 +54,6 @@ export default class extends Controller {
   //       h5Version: this.context.h5Version
   //     })
   //   }
-
   //   const { isClient, basename } = this.context;
   //   if (url.startsWith("/shark") || url.startsWith("/shield")) {
   //     url = basename + url;
@@ -75,12 +74,10 @@ export default class extends Controller {
   //   }
   //   return super.fetch(url, { ...options, headers })
   // }
-
   // // 设置 data 默认值为 {}，这样 resolveFeatchArgs 可以补充 head
   // post(url, data = {}, options) {
   //   return super.post(url, data, options)
   // }
-
   // /**
   //  * 处理 ctrip gateway 需要的跨域 header 参数 cookirorigin
   //  * 处理 ctirp gateway post 请求需要的 head 参数
@@ -90,20 +87,16 @@ export default class extends Controller {
   //   if (this.API && this.API.hasOwnProperty(url)) {
   //     url = this.API[url]
   //   }
-
   //   let context = this.context
-
   //   // 构造 cookieorigin
   //   options.headers = {
   //     ...options.headers,
   //     cookieorigin: getCookieOriginByContext(context)
   //   }
-
   //   let postData =
   //     options.body && typeof options.body === 'string'
   //       ? JSON.parse(options.body)
   //       : null
-
   //   /**
   //    * post 请求，构造一个 head 参数
   //    */
@@ -114,7 +107,6 @@ export default class extends Controller {
   //       let prefix = url.includes('?') ? '&' : '?'
   //       url += prefix + `_fxpcqlniredt=${cid}`
   //     }
-
   //     let shareData = {
   //       contentType: 'json',
   //       head: {
@@ -128,17 +120,13 @@ export default class extends Controller {
   //         extension: []
   //       }
   //     }
-
   //     if (context.userInfo && context.userInfo.Auth) {
   //       shareData.head.auth = context.userInfo.Auth
   //     }
-
   //     options.body = JSON.stringify(Object.assign(shareData, postData))
   //   }
-
   //   return { url, options }
   // }
-
   // /**
   //  * 如果 requireLogin 为 true，isLogin 为 false，则去登陆
   //  *
@@ -149,7 +137,6 @@ export default class extends Controller {
   //     return false
   //   }
   // }
-
   // /**
   //  * 在页面第一次 mount 时记录 pv
   //  */
@@ -160,10 +147,8 @@ export default class extends Controller {
   //     const {language} = this.store.getState();
   //     language.title && (document.title = language.title);
   //   } catch (error) {
-      
   //   }
   // }
-
   // /**
   //  * 封装调用 ctrip app bridge 的方法
   //  * options 是一个对象
@@ -181,7 +166,6 @@ export default class extends Controller {
   //     )
   //   }
   // }
-
   // /**
   //  * 页面 pageid 记录
   //  */
@@ -201,7 +185,6 @@ export default class extends Controller {
   //     }
   //   ])
   // }
-
   // /**
   //  * 页面埋点记录
   //  */
@@ -213,7 +196,6 @@ export default class extends Controller {
   //   window['__bfi'] = window['__bfi'] || []
   //   window['__bfi'].push(['_tracklog', key, value, callback])
   // }
-
   // /**
   //  * 获取用户代理字符串
   //  */
@@ -224,21 +206,18 @@ export default class extends Controller {
   //     return window.navigator.userAgent
   //   }
   // }
-
   // /**
   //  * 是否在微信里
   //  */
   // isInWeixin() {
   //   return /MicroMessenger/i.test(this.getUserAgent())
   // }
-
   // /**
   //  * 是否在携程 app 里
   //  */
   // isInCtripApp() {
   //   return /ctripwireless/i.test(this.getUserAgent())
   // }
-
   // /**
   //  * 微信分享接口
   //  * @param {Object}          options
@@ -274,25 +253,20 @@ export default class extends Controller {
   //   await __ctrip_weixin__.share(options, handleSuccess, handleCancel)
   //   return true
   // }
-
   // //获得新的clientId
   // async syncClientId() {
   //   if (this.context.isServer) return
-
   //   let ls = window.localStorage
   //   let cookieCid = this.cookie('GUID')
   //   let cid = ls.getItem('GUID')
-
   //   let list = location.host.split('.')
   //   let cookieOptions = {
   //     expires: new Date(new Date().getTime() + 3 * 360 * 24 * 60 * 60 * 1000),
   //     path: '/'
   //   }
-
   //   if (list.length > 2) {
   //     cookieOptions.domain = '.' + list.slice(-2).join('.')
   //   }
-
   //   // 处理在携程 app 的情况，通过 bridge 拿到设备ID，存入 cookie 和 storage
   //   if (this.isInCtripApp()) {
   //     return CtripUtil.app_init_member_H5_info(params => {
@@ -303,17 +277,14 @@ export default class extends Controller {
   //       this.cookie('GUID', params.clientID, cookieOptions)
   //     })
   //   }
-
   //   //如果cid不存在或者是老的cid格式,发起查询服务
   //   if (!cookieCid && (!cid || cid.indexOf('-') > -1)) {
   //     let params = {}
-
   //     //如果CID存在,此时应为一个老格式,做一个备份
   //     if (cid) {
   //       ls.setItem('BGUID', cid)
   //       params.PreviousID = cid
   //     }
-
   //     let api = '/10290/createclientid'
   //     let query = {
   //       systemcode: '09',
@@ -321,7 +292,6 @@ export default class extends Controller {
   //       contentType: 'json'
   //     }
   //     let data = await this.get(api, query)
-
   //     if (data && data.ClientID) {
   //       ls.setItem('GUID', data.ClientID)
   //       this.cookie('GUID', data.ClientID, cookieOptions)
@@ -333,7 +303,6 @@ export default class extends Controller {
   //     }
   //   }
   // }
-
   // /*
   // *获取语言包
   // */
@@ -360,7 +329,6 @@ export default class extends Controller {
   //   try {
   //     language.title && (document.title = language.title);
   //   } catch (error) {
-      
   //   }
   //   return language;
   // }

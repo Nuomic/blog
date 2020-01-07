@@ -1,24 +1,24 @@
-import React, { useRef, useEffect } from 'react'
-import { Style, Link } from 'react-imvc/component'
-import {themeColor} from './../config'
-import bgimg from '../images/bgimg.jpg'
+import React, { useRef, useEffect } from 'react';
+import { Style, Link } from 'react-imvc/component';
+import { themeColor } from './../config';
+import bgimg from '../images/bgimg.jpg';
 export default ({ children }) => {
   useEffect(() => {
-    window.addEventListener('resize', draw)
-    return draw()
-  }, [])
-  const canvasRef = useRef(null)
+    window.addEventListener('resize', draw);
+    return draw();
+  }, []);
+  const canvasRef = useRef(null);
   const draw = () => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
     // implement draw on ctx here
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.lineWidth = .3;
-    ctx.strokeStyle = (new Color(250)).style;
+    ctx.lineWidth = 0.3;
+    ctx.strokeStyle = new Color(250).style;
     let mousePosition = {
-      x: 30 * canvas.width / 100,
-      y: 30 * canvas.height / 100
+      x: (30 * canvas.width) / 100,
+      y: (30 * canvas.height) / 100
     };
     let dots = {
       nb: canvas.height / 3,
@@ -53,14 +53,14 @@ export default ({ children }) => {
     function Dot() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.vx = -.5 + Math.random();
-      this.vy = -.5 + Math.random();
+      this.vx = -0.5 + Math.random();
+      this.vy = -0.5 + Math.random();
       this.radius = Math.random() * 2;
       this.color = new Color();
       // console.log(this);
     }
     Dot.prototype = {
-      draw: function () {
+      draw: function() {
         ctx.beginPath();
         ctx.fillStyle = this.color.style;
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -76,32 +76,43 @@ export default ({ children }) => {
       dots.array.forEach(dot => {
         if (dot.y < 0 || dot.y > canvas.height) {
           dot.vx = dot.vx;
-          dot.vy = - dot.vy;
-        }
-        else if (dot.x < 0 || dot.x > canvas.width) {
-          dot.vx = - dot.vx;
+          dot.vy = -dot.vy;
+        } else if (dot.x < 0 || dot.x > canvas.width) {
+          dot.vx = -dot.vx;
           dot.vy = dot.vy;
-        } dot.x += dot.vx;
+        }
+        dot.x += dot.vx;
         dot.y += dot.vy;
-      })
+      });
     }
     function connectDots() {
-      dots.array.forEach((i_dot) => {
-        dots.array.forEach((j_dot) => {
-          if ((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > - dots.distance && (i_dot.y - j_dot.y) > - dots.distance) {
-            if ((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > - dots.d_radius && (i_dot.y - mousePosition.y) > - dots.d_radius) {
+      dots.array.forEach(i_dot => {
+        dots.array.forEach(j_dot => {
+          if (
+            i_dot.x - j_dot.x < dots.distance &&
+            i_dot.y - j_dot.y < dots.distance &&
+            i_dot.x - j_dot.x > -dots.distance &&
+            i_dot.y - j_dot.y > -dots.distance
+          ) {
+            if (
+              i_dot.x - mousePosition.x < dots.d_radius &&
+              i_dot.y - mousePosition.y < dots.d_radius &&
+              i_dot.x - mousePosition.x > -dots.d_radius &&
+              i_dot.y - mousePosition.y > -dots.d_radius
+            ) {
               ctx.beginPath();
               ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
               ctx.moveTo(i_dot.x, i_dot.y);
               ctx.lineTo(j_dot.x, j_dot.y);
-              ctx.stroke(); ctx.closePath();
+              ctx.stroke();
+              ctx.closePath();
             }
           }
-        })
-      })
+        });
+      });
     }
     function drawDots() {
-      dots.array.forEach(item => item.draw())
+      dots.array.forEach(item => item.draw());
     }
     function animateDots() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -111,29 +122,37 @@ export default ({ children }) => {
       requestAnimationFrame(animateDots);
     }
 
-    // canvas.onmousemove = e => {
-    //   mousePosition.x = e.screenX;
-    //   mousePosition.y = e.screenY;
-    // };
-    // canvas.onmouseleave = () => {
-    //   mousePosition.x = canvas.width / 2;
-    //   mousePosition.y = canvas.height / 2;
-    // };
+    canvas.onmousemove = e => {
+      mousePosition.x = e.screenX;
+      mousePosition.y = e.screenY;
+    };
+    canvas.onmouseleave = () => {
+      mousePosition.x = canvas.width / 2;
+      mousePosition.y = canvas.height / 2;
+    };
     createDots();
     requestAnimationFrame(animateDots);
-  }
+  };
   return (
     <div>
       <canvas
-        style={{ position: "fixed", background: themeColor.starBgColor, top: 0, bottom: 0, left: 0, right: 0, zIndex: "-1" }}
+        style={{
+          position: 'fixed',
+          background: themeColor.starBgColor,
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: '-1'
+        }}
         ref={canvasRef}
         height={1000}
         width={2000}
-      >
-      </canvas>
+      ></canvas>
       <Style name="antd" />
       <Style name="antdPro" />
       <Style name="customize" />
       {children}
-    </div>)
-}
+    </div>
+  );
+};

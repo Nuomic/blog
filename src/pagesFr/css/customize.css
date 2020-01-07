@@ -13,10 +13,6 @@
   margin-bottom: 12px;
 }
 
-.ant-card {
-  box-shadow: 0 2px 12px 0 rgba(255, 255, 255,.8 );
-}
-
 /* antD pro  */
 .antd-pro-exception-actions {
   display: none;
@@ -30,7 +26,7 @@
 
 .layout .logo-wrapper {
   float: left;
-  color: rgba(0, 0, 0, .65);
+  color: rgba(0, 0, 0, 0.65);
   margin-right: 20px;
 }
 
@@ -49,13 +45,16 @@
   line-height: 64px;
   padding: 0 24px;
   cursor: pointer;
-  transition: color .3s;
+  transition: color 0.3s;
 }
 
 .customized-layout .trigger:hover {
   color: #1890ff;
 }
-
+.logo {
+  width: 1100px;
+  margin: 0 auto;
+}
 .customized-layout .logo {
   height: 32px;
   /* background: rgba(255, 255, 255, .2); */
@@ -95,11 +94,10 @@
   left: 0;
 }
 
-.ant-layout-header .header-function .action>i {
+.ant-layout-header .header-function .action > i {
   /* color: hsla(0, 0%, 100%, .85); */
   vertical-align: middle;
 }
-
 
 .ant-layout-sider {
   min-height: 100vh;
@@ -120,7 +118,7 @@
   margin-bottom: 24px;
 }
 
-.tableListForm .ant-form-item>.ant-form-item-label {
+.tableListForm .ant-form-item > .ant-form-item-label {
   width: auto;
   padding-right: 8px;
   line-height: 32px;
@@ -181,6 +179,75 @@
   color: rgba(0, 0, 0, 0.65);
   line-height: 20px;
 }
-.ant-carousel{
+.ant-carousel {
   margin-top: 66px;
+}
+.ant-card {
+  margin: 10px 0 12px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 1px 2px 6px rgba(63, 74, 105, 0.16);
+  border-radius: 3px;
+}
+.ant-tag {
+  margin: 4px 10px;
+  padding: 3px 8px;
+}
+.basic-footer {
+  border-top: 2px solid red;
+  text-align: center;
+  padding: 25px 0;
+}
+.brand h4 {
+  color: #fff;
+  font-family: SignPainter;
+  font-weight: 400;
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+.social-section h4 {
+  color: #fff;
+  font-family: Oswald, sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+}
+.connect-icon {
+  color: #fff;
+  font-size: 32px;
+  margin: 0 10px;
+}
+
+.copyright-section {
+  font-size: 18px;
+  padding-top: 15px;
+  color: #fff;
+}
+/* .ant-list-item :hover{
+  cursor: pointer;
+  background-color: #fff;
+} */
+.img-hover {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
+.img-hover:hover {
+  transform-origin: 50% 50% 0;
+  transform: scale(1.2);
+}
+.title-style {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 30px;
+  color: #555;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
+.title-style:hover {
+  color: #1890ff;
 }
