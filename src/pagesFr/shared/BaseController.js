@@ -109,12 +109,13 @@ export default class extends Controller {
     }
     try {
       let res = await func();
-      if (res.ResponseStatus.Ack == 'Success') {
-        if (res.returnStatus.isSuccess === true) {
-          return success(res);
+      const { ResponseStatus, returnStatus, ...data } = res;
+      if (ResponseStatus.Ack == 'Success') {
+        if (returnStatus.isSuccess === true) {
+          return success(data);
         } else {
           // this.recordLog({...options,respdata:res},{ctripUid})
-          return fail(res);
+          return fail(res.returnStatus);
         }
       } else {
         if (

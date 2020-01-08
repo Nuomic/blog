@@ -1,6 +1,5 @@
 import Controller from './UserController';
 // import { getCookieOriginByContext } from './User/util'
-import createReqSrc from '@ctrip/x-req-src';
 // const MARKETING_API = {
 //   fat: 'http://offline.fx.fws.qa.nt.ctripcorp.com/ttd',
 //   uat: 'http://offline.fx.uat.qa.nt.ctripcorp.com/ttd',
@@ -303,45 +302,4 @@ export default class extends Controller {
   //     }
   //   }
   // }
-  // /*
-  // *获取语言包
-  // */
-  // async callShark(locale, pageName) {
-  //   locale && this.setCookie("ttd-shark-locale-lang", locale, {
-  //     expires: new Date(new Date().getTime() + 3 * 360 * 24 * 60 * 60 * 1000),
-  //     path: '/'
-  //   });
-  //   let options = {
-  //     method: "post",
-  //     body: JSON.stringify({
-  //       locale: locale || this.getCookie("ttd-shark-locale-lang") || "zh-CN",
-  //       group: "trip",
-  //       pageName: pageName || [this.pageName, 'common']
-  //     })
-  //   };
-  //   let language = {};
-  //   try {
-  //     language = await this.fetch("/shark/getTranslation", options);
-  //     // console.log('language', language);
-  //   } catch (err) {
-  //     console.log("myerr", err);
-  //   }
-  //   try {
-  //     language.title && (document.title = language.title);
-  //   } catch (error) {
-  //   }
-  //   return language;
-  // }
-  // async fetchQConfig(fileName) {
-  //   if (!fileName) {
-  //     return {};
-  //   }
-  //   const url = this.context.isClient ? `//${location.host}` : '';
-  //   const { basename } = this.context;
-  //   return await this.fetch(url + basename+`/qconfig/${fileName}`, { raw: true }).then(res => {
-  //     return res || {}
-  //   }).catch(e => {
-  //     return {}
-  //   })
-  // };
 }

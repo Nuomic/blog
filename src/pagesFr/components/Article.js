@@ -12,26 +12,16 @@ import {
 import connect from 'react-imvc/hoc/connect';
 const withData = connect(({ state }) => {
   return {
-    state: state
+    articleList: state.articleList
   };
 });
+
 const { Paragraph } = Typography;
-export default withData(({ state }) => {
-  console.log('state', state);
-  const listData = [];
-  for (let i = 0; i < 23; i++) {
-    listData.push({
-      href: 'http://ant.design',
-      title: `ant design part ${i}`,
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.sssssss ssssssssssssssssssssss sssssssssssssssss ssssssssss ssssssssssssss ssssssssss sssss sssss ssssss ssssss ssssssss sssss ssss ssss ssssssssssss ssssssssssssssss sssss ssss ssssWe supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully '
-    });
-  }
+export default withData(({ articleList }) => {
   const [loading, setLoading] = useState(true);
   setTimeout(() => setLoading(false), 0);
-  const [likeCount, setLikeCount] = useState(10000);
+  const [likeCount, setLikeCount] = useState(articleList.like_count);
+
   const IconText = ({ type, text }) => (
     <span style={{ padding: '0 20px 0 0' }}>
       <Icon type={type} style={{ marginRight: 8 }} />
@@ -59,14 +49,14 @@ export default withData(({ state }) => {
         },
         pageSize: 6
       }}
-      dataSource={listData}
+      dataSource={articleList}
       renderItem={item => (
         <Skeleton
           loading={loading}
           active
           paragraph={{ rows: 4, width: '100%' }}
         >
-          <List.Item key={item.title}>
+          <List.Item key={item.id}>
             <Card style={{ opacity: 0.9, margin: 0 }} size="small">
               <List.Item.Meta
                 style={{
@@ -83,7 +73,7 @@ export default withData(({ state }) => {
                       style={{ marginBottom: 10 }}
                     >
                       <Tag color="magenta">magenta</Tag>
-                      {item.title}
+                      {/* {item.title} */}
                     </Paragraph>
                     <Divider className="margin-0"></Divider>
                   </>
@@ -106,25 +96,25 @@ export default withData(({ state }) => {
                     >
                       <IconText
                         type="clock-circle"
-                        text={new Date().toLocaleString()}
+                        text={item.date}
                         key="list-vertical-star-o"
                       />
                       <IconText
                         type="eye"
-                        text="20000"
+                        text={item.view_count}
                         key="list-vertical-eye"
                         style
                       ></IconText>
                       <IconText
                         type="like-o"
-                        text={likeCount}
+                        text={item.like_count}
                         onClick={handleAddLikeCount}
                         key="list-vertical-like-o"
                       />
                       <span>
                         <IconText
                           type="message"
-                          text="20000"
+                          text={item.comment_count}
                           key="list-vertical-message"
                         />
                         <Button
