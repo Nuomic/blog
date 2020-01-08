@@ -152,6 +152,7 @@ export default ({ children }) => {
       <Style name="antd" />
       <Style name="antdPro" />
       <Style name="customize" />
+      <Style name="common" />
       {children}
     </div>
   );

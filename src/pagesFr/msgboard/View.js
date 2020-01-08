@@ -63,7 +63,7 @@ export default props => {
 
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
-      <Card style={{ marginRight: 10, minHeight: 'calc(100% - 200px)' }}>
+      <Card style={{ minHeight: 'calc(100% - 200px)' }}>
         <Form>
           <Form.Item>
             <TextArea rows={5} style={{ opacity: 0.8 }}></TextArea>

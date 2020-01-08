@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-imvc/component';
-import { Breadcrumb, Row, Col } from 'antd';
+import { Breadcrumb, Row, Col, Card } from 'antd';
+import { themeColor } from '../config';
 import StarBG from './StarBG';
 import Header from './Header';
 import Footer from './Footer';
@@ -9,18 +10,9 @@ export default ({ children, BreadcrumbList }) => {
   return (
     <StarBG>
       <Header />
-      <div style={{ width: '78%', minWidth: 1200, margin: 'auto' }}>
+      <div style={{ width: '70%', minWidth: 1180, margin: 'auto' }}>
         {BreadcrumbList && (
-          <Breadcrumb
-            separator=">"
-            style={{
-              padding: 10,
-              marginTop: 10,
-              backgroundColor: 'rgba(255,255,255,.5)',
-              boxShadow: '1px 2px 6px rgba(63,74,105,.16)',
-              borderRadius: 3
-            }}
-          >
+          <Breadcrumb separator=">" className="basic-layout-breadcrumb-bg">
             {BreadcrumbList.map(item => (
               <Breadcrumb.Item>
                 <Link to={item.href}>{item.name}</Link>
@@ -29,17 +21,21 @@ export default ({ children, BreadcrumbList }) => {
           </Breadcrumb>
         )}
         <Row style={{ overflow: 'hidden' }}>
-          <Col
-            span={18}
-            style={{ paddingBottom: 9999, marginBottom: '-9999px' }}
-          >
-            {children}
+          <Col span={18}>
+            <div
+              className="basic-layout-article-bg"
+              style={{ backgroundColor: themeColor.articleBgColor }}
+            >
+              {children}
+            </div>
           </Col>
-          <Col
-            span={6}
-            style={{ paddingBottom: 9999, marginBottom: '-9999px' }}
-          >
-            <Sider></Sider>
+          <Col span={6}>
+            <div
+              className="basic-layout-sider-bg"
+              style={{ background: themeColor.siderBgColor }}
+            >
+              <Sider />
+            </div>
           </Col>
         </Row>
       </div>

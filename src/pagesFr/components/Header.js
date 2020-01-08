@@ -1,6 +1,6 @@
 import React from 'react';
 import { themeColor } from './../config';
-import { Menu, Icon, Breadcrumb, Layout } from 'antd';
+import { Menu, Layout } from 'antd';
 import connect from 'react-imvc/hoc/connect';
 const { Header } = Layout;
 const withData = connect(({ state }) => {
@@ -19,27 +19,16 @@ export default withData(({ children, currentPath }) => {
       }}
     >
       <Header
-        style={{
-          position: 'fixed',
-          zIndex: 1,
-          width: '100%',
-          height: '66px',
-          backgroundColor: themeColor.headBgColor,
-          padding: 0
-        }}
+        style={{ backgroundColor: themeColor.headBgColor }}
+        className="basic-header"
       >
         <div className="logo" />
         <Menu
           onClick={handleClick}
           mode="horizontal"
-          defaultSelectedKeys={currentPath}
-          style={{
-            width: '100%',
-            lineHeight: '64px',
-            backgroundColor: themeColor.headBgColor,
-            color: '#fff',
-            textAlign: 'center'
-          }}
+          defaultSelectedKeys={currentPath != '/' ? currentPath : 'homes'}
+          style={{ backgroundColor: themeColor.headBgColor }}
+          className="basic-header-menu"
         >
           <Menu.Item key="home">首页</Menu.Item>
           <Menu.Item key="about">关于</Menu.Item>

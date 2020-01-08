@@ -8,10 +8,7 @@ export default props => {
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
       <Style name="about" />
-      <Card
-        style={{ height: '100vh', marginRight: 10 }}
-        title={'关于我'}
-      ></Card>
+      <Card style={{ height: '100vh' }} title={'关于我'}></Card>
     </BasicLayout>
   );
 };
