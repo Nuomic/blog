@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import connect from 'react-imvc/hoc/connect';
 import {
   List,
   Icon,
@@ -9,18 +10,16 @@ import {
   Card,
   Tag
 } from 'antd';
-import connect from 'react-imvc/hoc/connect';
+const { Paragraph } = Typography;
 const withData = connect(({ state }) => {
   return {
     articleList: state.articleList
   };
 });
-
-const { Paragraph } = Typography;
 export default withData(({ articleList }) => {
   const [loading, setLoading] = useState(true);
   setTimeout(() => setLoading(false), 0);
-  const [likeCount, setLikeCount] = useState(articleList.like_count);
+  const [likeCount, setLikeCount] = useState(articleList.likeCount);
 
   const IconText = ({ type, text }) => (
     <span style={{ padding: '0 20px 0 0' }}>
@@ -67,13 +66,13 @@ export default withData(({ articleList }) => {
                 title={
                   <>
                     <Paragraph
-                      ellipsis
+                      ellipsis={{ rows: 1 }}
                       className="title-style"
                       onClick={handleToDetail}
-                      style={{ marginBottom: 10 }}
+                      style={{ marginBottom: 10, maxWidth: 520 }}
                     >
-                      <Tag color="magenta">magenta</Tag>
-                      {/* {item.title} */}
+                      <Tag color="magenta">{item.tagInfo.name}</Tag>
+                      {item.title}
                     </Paragraph>
                     <Divider className="margin-0"></Divider>
                   </>
@@ -81,7 +80,11 @@ export default withData(({ articleList }) => {
                 avatar={
                   //左边图片
                   <div className="article-avatar" onClick={handleToDetail}>
-                    <img className="img-hover" alt="logo" src={item.avatar} />
+                    <img
+                      className="img-hover"
+                      alt="logo"
+                      src={item.avatar || item.categoryInfo.avatar}
+                    />
                   </div>
                 }
                 description={
@@ -101,20 +104,20 @@ export default withData(({ articleList }) => {
                       />
                       <IconText
                         type="eye"
-                        text={item.view_count}
+                        text={item.viewCount}
                         key="list-vertical-eye"
                         style
                       ></IconText>
                       <IconText
                         type="like-o"
-                        text={item.like_count}
+                        text={item.likeCount}
                         onClick={handleAddLikeCount}
                         key="list-vertical-like-o"
                       />
                       <span>
                         <IconText
                           type="message"
-                          text={item.comment_count}
+                          text={item.commentCount}
                           key="list-vertical-message"
                         />
                         <Button

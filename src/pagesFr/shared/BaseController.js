@@ -8,6 +8,7 @@ export default class extends Controller {
     customize: '/pagesFr/css/customize.css',
     common: '/pagesFr/css/common.css'
   };
+  SSR = this.location.query.ssr !== '0';
   /**
    * 动态获取初始化状态
    */
@@ -90,6 +91,10 @@ export default class extends Controller {
       url + (params ? `?${querystring.stringify(params)}` : ''),
       options
     );
+  }
+  handleChangeState(date) {
+    const { updateMergeState } = this.store.actions;
+    updateMergeState(date);
   }
   /**
    * 请求结构处理

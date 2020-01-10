@@ -26,9 +26,8 @@ export default class extends Controller {
     await this.resHandler(
       () => this.postApi(api.getArticleList),
       res => {
-        const { updateMergeState } = this.store.actions;
-        updateMergeState(res);
         console.log('res', res);
+        this.handleChangeState(res);
       },
       res => {
         console.log('res', res);

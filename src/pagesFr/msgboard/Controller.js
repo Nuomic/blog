@@ -1,6 +1,7 @@
 // src/home/Controller
 import Controller from '../shared/BaseController'; // 加载 react-imvc controller 控制器
 import View from './View';
+import api from '../api';
 export default class Home extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
@@ -13,4 +14,22 @@ export default class Home extends Controller {
       currentPath: this.location.pathname
     };
   }
+  async componentWillCreate() {
+    await this.handleGetCommentList();
+  }
+  async componentDidFirstMount() {
+    // await super.componentDidFirstMount();
+  }
+  handleGetCommentList = async () => {
+    await this.resHandler(
+      () => this.postApi(api.getCommentList),
+      res => {
+        console.log('res', res);
+        this.handleChangeState({ ...res });
+      },
+      res => {
+        console.log('res', res);
+      }
+    );
+  };
 }
