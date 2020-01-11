@@ -1,5 +1,9 @@
 export default [
   {
+    path: '/login',
+    controller: () => import('./login/Controller')
+  },
+  {
     path: '/admin',
     controller: () => import('./home/Controller')
   },
@@ -11,5 +15,12 @@ export default [
     path: '/login',
     controller: () => import('./login/Controller')
   },
-  {}
+  {
+    path: '/login',
+    controller: () => import('./login/Controller')
+  },
+  {
+    path: '/login',
+    controller: () => import('./login/Controller')
+  }
 ];

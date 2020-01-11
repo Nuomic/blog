@@ -6,6 +6,7 @@ import Controller from './UserController';
 //   prod: 'http://offline.fx.ctripcorp.com/ttd'
 // };
 export default class extends Controller {
+  SSR = this.location.query.ssr != 0;
   // requireLogin = false // 是否需要登陆才能访问
   // requireUserInfo = false // 是否需要用户信息
   // pageId = 0 // 页面 pageid

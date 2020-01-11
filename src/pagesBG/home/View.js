@@ -1,8 +1,40 @@
-import React from 'react'
-
-function View(props) {
-  console.log('props', props)
+import React from 'react';
+import BasicLayout from '../components/BasicLayout';
+export default () => {
   return (
-      <h1>Hello React-IMVC 我是后台</h1>
-  )}
-  export default View
+    <BasicLayout>
+      {`首页 // 站点监控 站点总览 站点统计`}
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      dsd
+    </BasicLayout>
+  );
+};

@@ -3,10 +3,10 @@ import * as sharedActions from './sharedActions';
 import { message } from 'antd';
 export default class extends Controller {
   preload = {
-    antd: '/pagesFr/css/antd.min.css',
-    antdPro: '/pagesFr/css/ant-design-pro.css',
-    customize: '/pagesFr/css/customize.css',
-    common: '/pagesFr/css/common.css'
+    antd: '/pagesBG/css/antd.min.css',
+    antdPro: '/pagesBG/css/ant-design-pro.css',
+    customize: '/pagesBG/css/customize.css',
+    common: '/pagesBG/css/common.css'
   };
   SSR = this.location.query.ssr != 0;
   /**
