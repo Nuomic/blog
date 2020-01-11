@@ -44,14 +44,14 @@ var _default = function _default(_ref) {
       overflow: 'hidden'
     }
   }, _react["default"].createElement(_antd.Col, {
-    span: 18
+    span: 17
   }, _react["default"].createElement("div", {
     className: "basic-layout-article-bg",
     style: {
       backgroundColor: _config.themeColor.articleBgColor
     }
   }, children)), _react["default"].createElement(_antd.Col, {
-    span: 6
+    span: 7
   }, _react["default"].createElement("div", {
     className: "basic-layout-sider-bg",
     style: {

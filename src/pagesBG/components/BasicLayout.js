@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Icon, Breadcrumb } from 'antd';
 import connect from 'react-imvc/hoc/connect';
-import { Style } from 'react-imvc/component';
+import { Style, Link } from 'react-imvc/component';
 const { Header, Sider, Content, Footer } = Layout;
 const withData = connect(({ state }) => {
   return { state };
 });
-export default withData(({ state, children, BreadcrumbList }) => {
+export default withData(({ state, children, breadcrumbList }) => {
+  console.log('breadcrumbList', breadcrumbList);
   //目录
   const menuList = [
     {
@@ -77,18 +78,19 @@ export default withData(({ state, children, BreadcrumbList }) => {
               />
             </Header>
             <div className="basic-breadcrumb">
-              {BreadcrumbList && (
+              {(breadcrumbList && (
                 <Breadcrumb
                   separator=">"
                   className="basic-layout-breadcrumb-bg"
                 >
-                  {BreadcrumbList.map(item => (
+                  {breadcrumbList.map(item => (
                     <Breadcrumb.Item>
                       <Link to={item.href}>{item.name}</Link>
                     </Breadcrumb.Item>
                   ))}
                 </Breadcrumb>
-              )}
+              )) ||
+                's'}
             </div>
           </div>
           <div style={{ marginTop: 66 }}></div>

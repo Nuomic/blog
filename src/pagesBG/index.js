@@ -12,7 +12,7 @@ export default [
     controller: () => import('./home/Controller')
   },
   {
-    path: '/login',
+    path: '/article',
     controller: () => import('./login/Controller')
   },
   {

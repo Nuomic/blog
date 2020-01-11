@@ -5,15 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _BaseController = _interopRequireDefault(require("../shared/BaseController"));
+var _controller = _interopRequireDefault(require("react-imvc/controller"));
 
 var _View = _interopRequireDefault(require("./View"));
-
-var Model = _interopRequireWildcard(require("./Model"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -33,32 +27,31 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _default =
+var Home =
 /*#__PURE__*/
 function (_Controller) {
-  _inherits(_default, _Controller);
+  _inherits(Home, _Controller);
 
-  function _default() {
+  function Home() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, _default);
+    _classCallCheck(this, Home);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(_default)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Home)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "View", _View["default"]);
 
-    _defineProperty(_assertThisInitialized(_this), "Model", Model);
-
     return _this;
-  }
+  } // 将 react 组件赋值给控制器的 View 属性
 
-  return _default;
-}(_BaseController["default"]);
 
-exports["default"] = _default;
+  return Home;
+}(_controller["default"]);
+
+exports["default"] = Home;

@@ -1,4 +1,4 @@
-import Controller from '../../shared/BaseController';
+import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
 export default class extends Controller {

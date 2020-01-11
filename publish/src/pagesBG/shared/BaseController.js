@@ -64,10 +64,10 @@ function (_Controller) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(_default)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "preload", {
-      antd: '/pagesFr/css/antd.min.css',
-      antdPro: '/pagesFr/css/ant-design-pro.css',
-      customize: '/pagesFr/css/customize.css',
-      common: '/pagesFr/css/common.css'
+      antd: '/pagesBG/css/antd.min.css',
+      antdPro: '/pagesBG/css/ant-design-pro.css',
+      customize: '/pagesBG/css/customize.css',
+      common: '/pagesBG/css/common.css'
     });
 
     _defineProperty(_assertThisInitialized(_this), "SSR", _this.location.query.ssr != 0);

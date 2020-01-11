@@ -124,7 +124,7 @@ var _default = withData(function (_ref2) {
           onClick: handleToDetail,
           style: {
             marginBottom: 10,
-            maxWidth: 520
+            maxWidth: 480
           }
         }, _react["default"].createElement(_antd.Tag, {
           color: "magenta"
