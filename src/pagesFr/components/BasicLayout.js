@@ -21,7 +21,7 @@ export default ({ children, BreadcrumbList }) => {
           </Breadcrumb>
         )}
         <Row style={{ overflow: 'hidden' }}>
-          <Col span={18}>
+          <Col span={17}>
             <div
               className="basic-layout-article-bg"
               style={{ backgroundColor: themeColor.articleBgColor }}
@@ -29,7 +29,7 @@ export default ({ children, BreadcrumbList }) => {
               {children}
             </div>
           </Col>
-          <Col span={6}>
+          <Col span={7}>
             <div
               className="basic-layout-sider-bg"
               style={{ background: themeColor.siderBgColor }}

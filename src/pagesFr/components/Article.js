@@ -69,7 +69,7 @@ export default withData(({ articleList }) => {
                       ellipsis={{ rows: 1 }}
                       className="title-style"
                       onClick={handleToDetail}
-                      style={{ marginBottom: 10, maxWidth: 520 }}
+                      style={{ marginBottom: 10, maxWidth: 480 }}
                     >
                       <Tag color="magenta">{item.tagInfo.name}</Tag>
                       {item.title}
