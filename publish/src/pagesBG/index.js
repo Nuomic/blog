@@ -33,17 +33,17 @@ var _default = [{
     });
   }
 }, {
-  path: '/login',
+  path: '/md',
   controller: function controller() {
     return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./login/Controller'));
+      return _interopRequireWildcard(require('./article/Controller'));
     });
   }
 }, {
-  path: '/login',
+  path: '/category',
   controller: function controller() {
     return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./login/Controller'));
+      return _interopRequireWildcard(require('./category/Controller'));
     });
   }
 }, {

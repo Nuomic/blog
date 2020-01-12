@@ -36,7 +36,7 @@ export default withData(({ state, children, breadcrumbList }) => {
       icon: 'upload'
     }
   ];
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const handleToggle = () => {
     setCollapsed(!collapsed);
   };

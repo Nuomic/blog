@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _BaseController = _interopRequireDefault(require("../../shared/BaseController"));
+var _controller = _interopRequireDefault(require("react-imvc/controller"));
 
 var sharedActions = _interopRequireWildcard(require("./sharedActions"));
 
@@ -63,14 +63,14 @@ function (_Controller) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(_default)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
+    _defineProperty(_assertThisInitialized(_this), "SSR", _this.location.query.ssr != 0);
+
     _defineProperty(_assertThisInitialized(_this), "preload", {
       antd: '/pagesBG/css/antd.min.css',
       antdPro: '/pagesBG/css/ant-design-pro.css',
       customize: '/pagesBG/css/customize.css',
       common: '/pagesBG/css/common.css'
     });
-
-    _defineProperty(_assertThisInitialized(_this), "SSR", _this.location.query.ssr != 0);
 
     return _this;
   }
@@ -297,6 +297,6 @@ function (_Controller) {
   }]);
 
   return _default;
-}(_BaseController["default"]);
+}(_controller["default"]);
 
 exports["default"] = _default;

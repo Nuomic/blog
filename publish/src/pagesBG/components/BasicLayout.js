@@ -43,8 +43,9 @@ var withData = (0, _connect["default"])(function (_ref) {
 var _default = withData(function (_ref2) {
   var state = _ref2.state,
       children = _ref2.children,
-      BreadcrumbList = _ref2.BreadcrumbList;
-  //目录
+      breadcrumbList = _ref2.breadcrumbList;
+  console.log('breadcrumbList', breadcrumbList); //目录
+
   var menuList = [{
     key: 'home',
     name: '首页',
@@ -67,7 +68,7 @@ var _default = withData(function (_ref2) {
     icon: 'upload'
   }];
 
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       collapsed = _useState2[0],
       setCollapsed = _useState2[1];
@@ -118,14 +119,14 @@ var _default = withData(function (_ref2) {
     onClick: handleToggle
   })), _react["default"].createElement("div", {
     className: "basic-breadcrumb"
-  }, BreadcrumbList && _react["default"].createElement(_antd.Breadcrumb, {
+  }, breadcrumbList && _react["default"].createElement(_antd.Breadcrumb, {
     separator: ">",
     className: "basic-layout-breadcrumb-bg"
-  }, BreadcrumbList.map(function (item) {
-    return _react["default"].createElement(_antd.Breadcrumb.Item, null, _react["default"].createElement(Link, {
+  }, breadcrumbList.map(function (item) {
+    return _react["default"].createElement(_antd.Breadcrumb.Item, null, _react["default"].createElement(_component.Link, {
       to: item.href
     }, item.name));
-  })))), _react["default"].createElement("div", {
+  })) || 's')), _react["default"].createElement("div", {
     style: {
       marginTop: 66
     }

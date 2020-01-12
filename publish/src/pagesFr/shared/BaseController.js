@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _BaseController = _interopRequireDefault(require("../../shared/BaseController"));
+var _controller = _interopRequireDefault(require("react-imvc/controller"));
 
 var sharedActions = _interopRequireWildcard(require("./sharedActions"));
 
@@ -297,6 +297,6 @@ function (_Controller) {
   }]);
 
   return _default;
-}(_BaseController["default"]);
+}(_controller["default"]);
 
 exports["default"] = _default;

@@ -2,13 +2,14 @@ import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
 export default class extends Controller {
+  SSR = this.location.query.ssr != 0;
   preload = {
     antd: '/pagesBG/css/antd.min.css',
     antdPro: '/pagesBG/css/ant-design-pro.css',
     customize: '/pagesBG/css/customize.css',
     common: '/pagesBG/css/common.css'
   };
-  SSR = this.location.query.ssr != 0;
+
   /**
    * 动态获取初始化状态
    */

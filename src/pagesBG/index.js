@@ -12,12 +12,12 @@ export default [
     controller: () => import('./home/Controller')
   },
   {
-    path: '/article',
-    controller: () => import('./login/Controller')
+    path: '/md',
+    controller: () => import('./article/Controller')
   },
   {
-    path: '/login',
-    controller: () => import('./login/Controller')
+    path: '/category',
+    controller: () => import('./category/Controller')
   },
   {
     path: '/login',
