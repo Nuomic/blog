@@ -11,7 +11,11 @@ var _config = require("./../config");
 
 var _antd = require("antd");
 
+var _config2 = require("../config");
+
 var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
+
+var _component = require("react-imvc/component");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -26,11 +30,6 @@ var withData = (0, _connect["default"])(function (_ref) {
 var _default = withData(function (_ref2) {
   var children = _ref2.children,
       currentPath = _ref2.currentPath;
-
-  var handleClick = function handleClick(e) {
-    window.location.href = "/".concat(e.key);
-  };
-
   return _react["default"].createElement(_antd.Layout, {
     style: {
       backgroundColor: _config.themeColor.headBgColor
@@ -43,24 +42,24 @@ var _default = withData(function (_ref2) {
   }, _react["default"].createElement("div", {
     className: "logo"
   }), _react["default"].createElement(_antd.Menu, {
-    onClick: handleClick,
     mode: "horizontal",
     defaultSelectedKeys: currentPath != '/' ? currentPath : 'homes',
     style: {
-      backgroundColor: _config.themeColor.headBgColor
+      backgroundColor: _config.themeColor.headBgColor,
+      color: '#fff'
     },
     className: "basic-header-menu"
-  }, _react["default"].createElement(_antd.Menu.Item, {
-    key: "home"
-  }, "\u9996\u9875"), _react["default"].createElement(_antd.Menu.Item, {
-    key: "about"
-  }, "\u5173\u4E8E"), _react["default"].createElement(_antd.Menu.Item, {
-    key: "article"
-  }, "\u535A\u6587"), _react["default"].createElement(_antd.Menu.Item, {
-    key: "portfolio"
-  }, "\u4F5C\u54C1\u96C6"), _react["default"].createElement(_antd.Menu.Item, {
-    key: "msgboard"
-  }, "\u7559\u8A00\u677F"))), _react["default"].createElement("div", {
+  }, _config2.menuList && _config2.menuList.map(function (item) {
+    return _react["default"].createElement(_antd.Menu.Item, {
+      key: item.key
+    }, _react["default"].createElement(_component.Link, {
+      to: "/".concat(item.key)
+    }, _react["default"].createElement("span", {
+      style: {
+        color: '#fff'
+      }
+    }, item.name)));
+  }))), _react["default"].createElement("div", {
     style: {
       marginTop: 64
     }

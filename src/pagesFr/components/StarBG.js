@@ -121,11 +121,11 @@ export default ({ children }) => {
       requestAnimationFrame(animateDots);
     }
 
-    canvas.onmousemove = e => {
-      mousePosition.x = e.screenX;
-      mousePosition.y = e.screenY;
+    onmousemove = e => {
+      mousePosition.x = e.clientX;
+      mousePosition.y = e.clientY;
     };
-    canvas.onmouseleave = () => {
+    onmouseleave = () => {
       mousePosition.x = canvas.width / 2;
       mousePosition.y = canvas.height / 2;
     };

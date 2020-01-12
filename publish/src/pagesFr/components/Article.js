@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
+var _component = require("react-imvc/component");
+
 var _antd = require("antd");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -73,8 +75,8 @@ var _default = withData(function (_ref2) {
     }, text));
   };
 
-  var handleToDetail = function handleToDetail(e) {
-    console.log('e', e);
+  var handleToDetail = function handleToDetail(id) {
+    return "/articledetail/".concat(id);
   };
 
   var handleAddLikeCount = function handleAddLikeCount(e) {
@@ -116,12 +118,14 @@ var _default = withData(function (_ref2) {
           overflow: 'hidden',
           margin: '5px 0'
         },
-        title: _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(Paragraph, {
+        title: _react["default"].createElement(_component.Link, {
+          to: handleToDetail(item.id)
+        }, _react["default"].createElement(Paragraph, {
           ellipsis: {
             rows: 1
           },
-          className: "title-style",
-          onClick: handleToDetail,
+          className: "title-style" // onClick={handleToDetail(item.id)}
+          ,
           style: {
             marginBottom: 10,
             maxWidth: 480
@@ -132,14 +136,15 @@ var _default = withData(function (_ref2) {
           className: "margin-0"
         })),
         avatar: //左边图片
-        _react["default"].createElement("div", {
-          className: "article-avatar",
-          onClick: handleToDetail
+        _react["default"].createElement(_component.Link, {
+          to: handleToDetail(item.id)
+        }, _react["default"].createElement("div", {
+          className: "article-avatar"
         }, _react["default"].createElement("img", {
           className: "img-hover",
           alt: "logo",
           src: item.avatar || item.categoryInfo.avatar
-        })),
+        }))),
         description: _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(Paragraph, {
           ellipsis: {
             rows: 3
@@ -168,13 +173,14 @@ var _default = withData(function (_ref2) {
           type: "message",
           text: item.commentCount,
           key: "list-vertical-message"
-        }), _react["default"].createElement(_antd.Button, {
+        }), _react["default"].createElement(_component.Link, {
+          to: handleToDetail(item.id)
+        }, _react["default"].createElement(_antd.Button, {
           size: "small",
           style: {
             "float": 'right'
-          },
-          onClick: handleToDetail
-        }, "\u9605\u8BFB\u66F4\u591A"))))
+          }
+        }, "\u9605\u8BFB\u66F4\u591A")))))
       }))));
     }
   });

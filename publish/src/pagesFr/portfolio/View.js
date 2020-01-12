@@ -9,8 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _BasicLayout = _interopRequireDefault(require("../components/BasicLayout"));
 
-var _Article = _interopRequireDefault(require("../components/Article"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _default = function _default(props) {
@@ -23,12 +21,7 @@ var _default = function _default(props) {
   }];
   return _react["default"].createElement(_BasicLayout["default"], {
     BreadcrumbList: BreadcrumbList
-  }, _react["default"].createElement(_Article["default"], {
-    style: {
-      paddingLeft: 0,
-      marginTop: 10
-    }
-  }));
+  });
 };
 
 exports["default"] = _default;

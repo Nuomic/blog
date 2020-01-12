@@ -143,12 +143,12 @@ var _default = function _default(_ref) {
       requestAnimationFrame(animateDots);
     }
 
-    canvas.onmousemove = function (e) {
-      mousePosition.x = e.screenX;
-      mousePosition.y = e.screenY;
+    onmousemove = function onmousemove(e) {
+      mousePosition.x = e.clientX;
+      mousePosition.y = e.clientY;
     };
 
-    canvas.onmouseleave = function () {
+    onmouseleave = function onmouseleave() {
       mousePosition.x = canvas.width / 2;
       mousePosition.y = canvas.height / 2;
     };

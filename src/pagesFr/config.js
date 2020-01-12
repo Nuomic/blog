@@ -1,9 +1,9 @@
 export const themeColor = {
   headBgColor: 'rgba(55,55,55,.5)',
   footerBgColor: 'rgba(70,70,70,.7)',
-  starBgColor: '#000',
-  articleBgColor: 'rgba(255,255,255,.3)',
-  siderBgColor: 'rgba(255,255,255,.3)'
+  starBgColor: '#222',
+  articleBgColor: 'rgba(255,255,255,.07)',
+  siderBgColor: 'rgba(255,255,255,.07)'
 };
 //目录配置
 export const menuList = [
