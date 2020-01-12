@@ -13,8 +13,8 @@ export default ({ children, BreadcrumbList }) => {
       <div style={{ width: '70%', minWidth: 1180, margin: 'auto' }}>
         {BreadcrumbList && (
           <Breadcrumb separator=">" className="basic-layout-breadcrumb-bg">
-            {BreadcrumbList.map(item => (
-              <Breadcrumb.Item>
+            {BreadcrumbList.map((item, index) => (
+              <Breadcrumb.Item key={index}>
                 <Link to={item.href}>{item.name}</Link>
               </Breadcrumb.Item>
             ))}

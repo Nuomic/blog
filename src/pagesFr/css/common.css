@@ -7,6 +7,16 @@
 .align-center {
   text-align: center;
 }
+.link-color {
+  color: #555;
+}
+.link-color:hover {
+  color: #1890ff;
+  transition: 0.5s;
+}
+.font-bold {
+  font-weight: bold;
+}
 /* header */
 .basic-header {
   position: fixed;
@@ -98,10 +108,32 @@
   color: #1890ff;
 }
 /* 侧边栏 */
+.friend-link {
+  padding: 5px 0;
+}
 .basic-layout-sider-bg {
   padding: 2px 10px 5px;
   margin: 10px 0;
   border-radius: 3px;
+}
+.basic-sider .ant-card-head {
+  border: none;
+}
+.basic-sider .ant-card-head-wrapper {
+  border-bottom: 1px solid #e8e8e8;
+  position: relative;
+}
+.basic-sider .ant-card-head-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  width: 65px;
+  background-color: #e97777d3;
+  transition: 1s;
+}
+.basic-sider .ant-card-small:hover .ant-card-head-wrapper::after {
+  width: 120px;
 }
 /* 面包屑 */
 .basic-layout-breadcrumb-bg {

@@ -153,7 +153,9 @@ export default withData(({ commentList, getcommentList, total }) => {
               <Comments item={item}>
                 {item.subList.length > 0 &&
                   item.subList &&
-                  item.subList.map(item => <Comments item={item}></Comments>)}
+                  item.subList.map(item => (
+                    <Comments item={item} key={item.id}></Comments>
+                  ))}
               </Comments>
             </List.Item>
           )}

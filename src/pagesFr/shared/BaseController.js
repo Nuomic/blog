@@ -1,6 +1,7 @@
 import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
+import api from '../api';
 export default class extends Controller {
   preload = {
     antd: '/pagesFr/css/antd.min.css',
@@ -56,7 +57,24 @@ export default class extends Controller {
       ...actions
     };
   }
-
+  async componentWillCreate() {
+    await this.getSiderDate();
+  }
+  async componentDidFirstMount() {
+    // await super.componentDidFirstMount();
+  }
+  getSiderDate = async () => {
+    await this.resHandler(
+      () => this.postApi(api.getSiderDate),
+      siderDate => {
+        console.log('siderDate', siderDate);
+        this.handleChangeState({ siderDate });
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
+  };
   /** 对fetch接口封装一次 方便调用*/
   postApi(url, data = {}, options = {}) {
     options = {

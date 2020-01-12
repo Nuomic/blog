@@ -17,6 +17,7 @@ export default class extends Controller {
     };
   }
   async componentWillCreate() {
+    await super.componentWillCreate();
     await this.getArticleList();
   }
   async componentDidFirstMount() {

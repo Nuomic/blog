@@ -80,7 +80,6 @@ export default withData(({ articleList }) => {
                 }
                 avatar={
                   //左边图片
-
                   <Link to={handleToDetail(item.id)}>
                     <div className="article-avatar">
                       <img
