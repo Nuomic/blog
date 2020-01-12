@@ -1,7 +1,9 @@
 import React from 'react';
 import { themeColor } from './../config';
 import { Menu, Layout } from 'antd';
+import { menuList } from '../config';
 import connect from 'react-imvc/hoc/connect';
+import { Link } from 'react-imvc/component';
 const { Header } = Layout;
 const withData = connect(({ state }) => {
   return {
@@ -9,9 +11,6 @@ const withData = connect(({ state }) => {
   };
 });
 export default withData(({ children, currentPath }) => {
-  const handleClick = e => {
-    window.location.href = `/${e.key}`;
-  };
   return (
     <Layout
       style={{
@@ -24,17 +23,19 @@ export default withData(({ children, currentPath }) => {
       >
         <div className="logo" />
         <Menu
-          onClick={handleClick}
           mode="horizontal"
           defaultSelectedKeys={currentPath != '/' ? currentPath : 'homes'}
-          style={{ backgroundColor: themeColor.headBgColor }}
+          style={{ backgroundColor: themeColor.headBgColor, color: '#fff' }}
           className="basic-header-menu"
         >
-          <Menu.Item key="home">首页</Menu.Item>
-          <Menu.Item key="about">关于</Menu.Item>
-          <Menu.Item key="article">博文</Menu.Item>
-          <Menu.Item key="portfolio">作品集</Menu.Item>
-          <Menu.Item key="msgboard">留言板</Menu.Item>
+          {menuList &&
+            menuList.map(item => (
+              <Menu.Item key={item.key}>
+                <Link to={`/${item.key}`}>
+                  <span style={{ color: '#fff' }}>{item.name}</span>
+                </Link>
+              </Menu.Item>
+            ))}
         </Menu>
       </Header>
       <div style={{ marginTop: 64 }}>{children}</div>

@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Style, Link } from 'react-imvc/component';
 import { themeColor } from './../config';
-import bgimg from '../images/bgimg.jpg';
 export default ({ children }) => {
   useEffect(() => {
     window.addEventListener('resize', draw);

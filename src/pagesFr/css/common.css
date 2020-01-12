@@ -20,7 +20,7 @@
 }
 /* footer */
 .basic-footer {
-  border-top: 2px solid red;
+  /* border-top: rgb(83, 77, 77) solid 1px; */
   text-align: center;
   padding: 25px 0;
 }

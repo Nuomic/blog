@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import connect from 'react-imvc/hoc/connect';
+import { Link } from 'react-imvc/component';
 import {
   List,
   Icon,
@@ -29,8 +30,8 @@ export default withData(({ articleList }) => {
       </span>
     </span>
   );
-  const handleToDetail = e => {
-    console.log('e', e);
+  const handleToDetail = id => {
+    return `/articledetail/${id}`;
   };
   const handleAddLikeCount = e => {
     console(e);
@@ -64,28 +65,31 @@ export default withData(({ articleList }) => {
                   margin: '5px 0'
                 }}
                 title={
-                  <>
+                  <Link to={handleToDetail(item.id)}>
                     <Paragraph
                       ellipsis={{ rows: 1 }}
                       className="title-style"
-                      onClick={handleToDetail}
+                      // onClick={handleToDetail(item.id)}
                       style={{ marginBottom: 10, maxWidth: 480 }}
                     >
                       <Tag color="magenta">{item.tagInfo.name}</Tag>
                       {item.title}
                     </Paragraph>
                     <Divider className="margin-0"></Divider>
-                  </>
+                  </Link>
                 }
                 avatar={
                   //左边图片
-                  <div className="article-avatar" onClick={handleToDetail}>
-                    <img
-                      className="img-hover"
-                      alt="logo"
-                      src={item.avatar || item.categoryInfo.avatar}
-                    />
-                  </div>
+
+                  <Link to={handleToDetail(item.id)}>
+                    <div className="article-avatar">
+                      <img
+                        className="img-hover"
+                        alt="logo"
+                        src={item.avatar || item.categoryInfo.avatar}
+                      />
+                    </div>
+                  </Link>
                 }
                 description={
                   <>
@@ -120,13 +124,11 @@ export default withData(({ articleList }) => {
                           text={item.commentCount}
                           key="list-vertical-message"
                         />
-                        <Button
-                          size="small"
-                          style={{ float: 'right' }}
-                          onClick={handleToDetail}
-                        >
-                          阅读更多
-                        </Button>
+                        <Link to={handleToDetail(item.id)}>
+                          <Button size="small" style={{ float: 'right' }}>
+                            阅读更多
+                          </Button>
+                        </Link>
                       </span>
                     </div>
                   </>
