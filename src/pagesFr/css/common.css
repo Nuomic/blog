@@ -4,6 +4,9 @@
 .margin-10 {
   margin: 10px;
 }
+.align-center {
+  text-align: center;
+}
 /* header */
 .basic-header {
   position: fixed;
@@ -42,13 +45,21 @@
   font-size: 32px;
   margin: 0 10px;
 }
-
+.connect-icon:hover {
+  color: #1890ff;
+  transition: 0.5s;
+}
 .copyright-section {
-  font-size: 18px;
+  font-size: 13px;
   padding-top: 15px;
   color: #fff;
 }
-
+.copyright-section > a {
+  color: #fff;
+}
+.copyright-section > a:hover {
+  color: #1890ff;
+}
 /* 文章 article */
 .basic-layout-article-bg {
   padding: 5px 10px 15px;

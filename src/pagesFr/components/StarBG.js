@@ -120,7 +120,6 @@ export default ({ children }) => {
       drawDots();
       requestAnimationFrame(animateDots);
     }
-
     onmousemove = e => {
       mousePosition.x = e.clientX;
       mousePosition.y = e.clientY;
