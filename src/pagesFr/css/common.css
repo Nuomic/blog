@@ -71,10 +71,23 @@
   color: #1890ff;
 }
 /* 文章 article */
+.list-item-card {
+  padding: 4px 0;
+}
+.list-item-card:first {
+  padding: 0;
+}
 .basic-layout-article-bg {
-  padding: 5px 10px 15px;
-  margin: 10px 10px 10px 0;
+  padding: 2px 5px 10px;
+  margin: 5px 5px 10px 0;
   border-radius: 3px;
+}
+.basic-layout-article-bg .ant-list-sm .ant-list-item {
+  padding-top: 7px;
+  padding-bottom: 1px;
+}
+.basic-layout-article-bg .ant-list-sm .ant-list-item:last-child {
+  padding-bottom: 12px;
 }
 .article-avatar {
   overflow: hidden;
@@ -108,12 +121,54 @@
   color: #1890ff;
 }
 /* 侧边栏 */
+.hot-title-index {
+  margin: 0;
+  color: #fff;
+  margin-right: 3px;
+  padding: 0 7px;
+  background-color: #1890ff;
+}
+.article-list-item:nth-child(2n) .hot-title-index {
+  background-color: rgb(230, 230, 230);
+  color: #1890ff;
+}
+.latest-article-date {
+  margin-right: 5px;
+}
 .friend-link {
   padding: 5px 0;
 }
+.article-list-title {
+  /* max-width: 300px; */
+  overflow: hidden;
+  padding: 3px 3px;
+  /*文本不会换行*/
+  white-space: nowrap;
+  /*当文本溢出包含元素时，以省略号表示超出的文本*/
+  text-overflow: ellipsis;
+}
+.article-list-title.hot-list {
+  background-color: #fff;
+}
+.article-list-item:nth-child(2n + 1) {
+  background-color: rgba(243, 242, 243, 0.37);
+}
+.ant-list-grid .ant-col > .ant-list-item {
+  margin: 0;
+  padding: 6px 3px;
+}
+.ant-col.ant-col-12:nth-child(4n + 1) {
+  background-color: rgba(243, 242, 243, 0.37);
+}
+.ant-col.ant-col-12:nth-child(4n) {
+  background-color: rgba(243, 242, 243, 0.37);
+}
+.article-list-item.ant-list-item {
+  padding: 4px;
+}
 .basic-layout-sider-bg {
-  padding: 2px 10px 5px;
-  margin: 10px 0;
+  padding: 2px 5px 5px;
+  margin: 5px 0;
   border-radius: 3px;
 }
 .basic-sider .ant-card-head {

@@ -47,7 +47,7 @@ export default withData(({ articleList }) => {
         onChange: page => {
           console.log(page);
         },
-        pageSize: 6
+        pageSize: 5
       }}
       dataSource={articleList}
       renderItem={item => (
@@ -56,8 +56,16 @@ export default withData(({ articleList }) => {
           active
           paragraph={{ rows: 4, width: '100%' }}
         >
-          <List.Item key={item.id}>
-            <Card style={{ opacity: 0.9, margin: 0 }} size="small">
+          <List.Item
+            key={item.id}
+            className="list-item-card"
+            // style={{ padding: '4px 0' }}
+          >
+            <Card
+              style={{ opacity: 0.9, margin: 0 }}
+              size="small"
+              bordered={false}
+            >
               <List.Item.Meta
                 style={{
                   position: 'relative',

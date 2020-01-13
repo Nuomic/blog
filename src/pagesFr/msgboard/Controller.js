@@ -15,6 +15,7 @@ export default class Home extends Controller {
     };
   }
   async componentWillCreate() {
+    await super.componentWillCreate();
     await this.handleGetCommentList();
   }
   async componentDidFirstMount() {

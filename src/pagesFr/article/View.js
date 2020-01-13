@@ -1,21 +1,21 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 import BasicLayout from '../components/BasicLayout';
-import Carousel from './components/Carousel';
-import { Style } from 'react-imvc/component';
-import Sider from '../components/Sider';
 import Article from '../components/Article';
+import { Card } from 'antd';
 export default props => {
   console.log('props', props);
-  const BreadcrumbList = [{ name: 'home', href: '/home' }, { name: '博文' }];
+  const BreadcrumbList = [{ name: '首页', href: '/home' }, { name: '博文' }];
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
-      <Article
-        style={{
-          paddingLeft: 0,
-          marginTop: 10
-        }}
-      ></Article>
+      <Card
+        bordered={false}
+        size="small"
+        style={{ marginBottom: 4, padding: 0, opacity: 0.8 }}
+        className="componentWillCreate"
+      >
+        qq
+      </Card>
+      <Article></Article>
     </BasicLayout>
   );
 };
