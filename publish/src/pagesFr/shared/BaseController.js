@@ -11,6 +11,8 @@ var sharedActions = _interopRequireWildcard(require("./sharedActions"));
 
 var _antd = require("antd");
 
+var _api = _interopRequireDefault(require("../api"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -72,6 +74,32 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "SSR", _this.location.query.ssr != 0);
 
+    _defineProperty(_assertThisInitialized(_this), "getSiderDate", function _callee() {
+      return regeneratorRuntime.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].getSiderDate);
+              }, function (siderDate) {
+                console.log('siderDate', siderDate);
+
+                _this.handleChangeState({
+                  siderDate: siderDate
+                });
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    });
+
     return _this;
   }
 
@@ -121,10 +149,40 @@ function (_Controller) {
     value: function getFinalActions(actions) {
       return _objectSpread({}, sharedActions, {}, actions);
     }
-    /** 对fetch接口封装一次 方便调用*/
+  }, {
+    key: "componentWillCreate",
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return regeneratorRuntime.awrap(this.getSiderDate());
 
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    }
   }, {
     key: "postApi",
+
+    /** 对fetch接口封装一次 方便调用*/
     value: function postApi(url) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -194,82 +252,82 @@ function (_Controller) {
           ResponseStatus,
           returnStatus,
           data,
-          _args = arguments;
+          _args4 = arguments;
 
-      return regeneratorRuntime.async(function resHandler$(_context) {
+      return regeneratorRuntime.async(function resHandler$(_context4) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              options = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
+              options = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : {};
               _options$limit = options.limit, limit = _options$limit === void 0 ? 1 : _options$limit, _options$name = options.name, name = _options$name === void 0 ? '' : _options$name;
 
               if (!(limit < 1)) {
-                _context.next = 5;
+                _context4.next = 5;
                 break;
               }
 
               // this.recordLog({...options,errcode:3001},{ctripUid});
               _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
 
-              return _context.abrupt("return");
+              return _context4.abrupt("return");
 
             case 5:
-              _context.prev = 5;
-              _context.next = 8;
+              _context4.prev = 5;
+              _context4.next = 8;
               return regeneratorRuntime.awrap(func());
 
             case 8:
-              res = _context.sent;
+              res = _context4.sent;
               ResponseStatus = res.ResponseStatus, returnStatus = res.returnStatus, data = _objectWithoutProperties(res, ["ResponseStatus", "returnStatus"]);
 
               if (!(ResponseStatus.Ack == 'Success')) {
-                _context.next = 18;
+                _context4.next = 18;
                 break;
               }
 
               if (!(returnStatus.isSuccess === true)) {
-                _context.next = 15;
+                _context4.next = 15;
                 break;
               }
 
-              return _context.abrupt("return", success(data));
+              return _context4.abrupt("return", success(data));
 
             case 15:
-              return _context.abrupt("return", fail(res.returnStatus));
+              return _context4.abrupt("return", fail(res.returnStatus));
 
             case 16:
-              _context.next = 25;
+              _context4.next = 25;
               break;
 
             case 18:
               if (!(res.ResponseStatus.Errors[0].ErrorCode == 'MobileRequestFilterException')) {
-                _context.next = 21;
+                _context4.next = 21;
                 break;
               }
 
               this.login();
-              return _context.abrupt("return");
+              return _context4.abrupt("return");
 
             case 21:
               if (!(res.ResponseStatus.Errors[0].ErrorCode == '401')) {
-                _context.next = 24;
+                _context4.next = 24;
                 break;
               }
 
               redirect(this.context, '/v2/authorized/403');
-              return _context.abrupt("return");
+              return _context4.abrupt("return");
 
             case 24:
               _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
 
             case 25:
-              _context.next = 31;
+              _context4.next = 31;
               break;
 
             case 27:
-              _context.prev = 27;
-              _context.t0 = _context["catch"](5);
-              console.log(name, '***************请求异常****************', _context.t0.toString()); // this.recordLog(options,{ctripUid});
+              _context4.prev = 27;
+              _context4.t0 = _context4["catch"](5);
+              console.log(name, '***************请求异常****************', _context4.t0.toString()); // this.recordLog(options,{ctripUid});
 
               this.resHandler(func, success, fail, {
                 limit: limit - 1
@@ -277,7 +335,7 @@ function (_Controller) {
 
             case 31:
             case "end":
-              return _context.stop();
+              return _context4.stop();
           }
         }
       }, null, this, [[5, 27]]);

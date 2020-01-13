@@ -35,8 +35,10 @@ var _default = function _default(_ref) {
   }, BreadcrumbList && _react["default"].createElement(_antd.Breadcrumb, {
     separator: ">",
     className: "basic-layout-breadcrumb-bg"
-  }, BreadcrumbList.map(function (item) {
-    return _react["default"].createElement(_antd.Breadcrumb.Item, null, _react["default"].createElement(_component.Link, {
+  }, BreadcrumbList.map(function (item, index) {
+    return _react["default"].createElement(_antd.Breadcrumb.Item, {
+      key: index
+    }, _react["default"].createElement(_component.Link, {
       to: item.href
     }, item.name));
   })), _react["default"].createElement(_antd.Row, {

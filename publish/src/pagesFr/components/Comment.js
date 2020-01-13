@@ -207,7 +207,8 @@ var _default = withData(function (_ref2) {
         item: item
       }, item.subList.length > 0 && item.subList && item.subList.map(function (item) {
         return _react["default"].createElement(Comments, {
-          item: item
+          item: item,
+          key: item.id
         });
       })));
     }

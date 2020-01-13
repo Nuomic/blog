@@ -9,6 +9,8 @@ var _BaseController = _interopRequireDefault(require("../shared/BaseController")
 
 var _View = _interopRequireDefault(require("./View"));
 
+var _api = _interopRequireDefault(require("../api"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -25,9 +27,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -57,26 +63,112 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
 
+    _defineProperty(_assertThisInitialized(_this), "handleGetArticleDetail", function _callee() {
+      return regeneratorRuntime.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].getArticleDetail);
+              }, function (res) {
+                console.log('res', res);
+
+                _this.handleChangeState(res);
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleGetCommentList", function _callee2() {
+      return regeneratorRuntime.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].getCommentList);
+              }, function (res) {
+                console.log('res', res);
+
+                _this.handleChangeState(_objectSpread({}, res));
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    });
+
     return _this;
   }
 
   _createClass(Home, [{
     key: "getInitialState",
     value: function getInitialState(initialState) {
-      return regeneratorRuntime.async(function getInitialState$(_context) {
+      return regeneratorRuntime.async(function getInitialState$(_context3) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              return _context.abrupt("return", _objectSpread({}, initialState, {
+              return _context3.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: this.location.pathname
               }));
 
             case 1:
             case "end":
-              return _context.stop();
+              return _context3.stop();
           }
         }
       }, null, this);
+    }
+  }, {
+    key: "componentWillCreate",
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(_get(_getPrototypeOf(Home.prototype), "componentWillCreate", this).call(this));
+
+            case 2:
+              _context4.next = 4;
+              return regeneratorRuntime.awrap(this.handleGetArticleDetail());
+
+            case 4:
+              _context4.next = 6;
+              return regeneratorRuntime.awrap(this.handleGetCommentList());
+
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      });
     }
   }]);
 

@@ -93,7 +93,7 @@ var _default = withData(function (_ref2) {
       onChange: function onChange(page) {
         console.log(page);
       },
-      pageSize: 6
+      pageSize: 5
     },
     dataSource: articleList,
     renderItem: function renderItem(item) {
@@ -105,13 +105,16 @@ var _default = withData(function (_ref2) {
           width: '100%'
         }
       }, _react["default"].createElement(_antd.List.Item, {
-        key: item.id
+        key: item.id,
+        className: "list-item-card" // style={{ padding: '4px 0' }}
+
       }, _react["default"].createElement(_antd.Card, {
         style: {
           opacity: 0.9,
           margin: 0
         },
-        size: "small"
+        size: "small",
+        bordered: false
       }, _react["default"].createElement(_antd.List.Item.Meta, {
         style: {
           position: 'relative',
