@@ -8,9 +8,11 @@
 .ant-table {
   color: #000;
 }
-
+.ant-comment {
+  width: 100%;
+}
 .ant-form-item {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 /* antD pro  */

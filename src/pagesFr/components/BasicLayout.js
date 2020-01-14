@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-imvc/component';
-import { Breadcrumb, Row, Col, Card } from 'antd';
+import { Breadcrumb, Row, Col, BackTop } from 'antd';
 import { themeColor } from '../config';
 import StarBG from './StarBG';
 import Header from './Header';
@@ -40,6 +40,7 @@ export default ({ children, BreadcrumbList }) => {
         </Row>
       </div>
       <Footer />
+      <BackTop style={{ articleBgColor: '#fff' }} />
     </StarBG>
   );
 };

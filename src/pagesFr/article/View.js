@@ -13,7 +13,7 @@ export default props => {
         style={{ marginBottom: 4, padding: 0, opacity: 0.8 }}
         className="componentWillCreate"
       >
-        qq
+        文章默认按时间排序 可选择其他类型排序 -----待开发
       </Card>
       <Article></Article>
     </BasicLayout>

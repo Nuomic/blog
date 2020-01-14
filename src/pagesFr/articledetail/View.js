@@ -1,18 +1,19 @@
 import React from 'react';
 import BasicLayout from '../components/BasicLayout';
 import { Card, Typography, Tag } from 'antd';
-import Comment from '../components/Comment';
+import Comments from '../components/Comments';
 import { Link } from 'react-imvc/component';
 const { Title, Paragraph } = Typography;
 export default props => {
   console.log('props', props);
+
+  const { articleDetail } = props.state;
+  const { categoryInfo, next, pre, tagList } = articleDetail;
   const BreadcrumbList = [
     { name: '首页', href: '/home' },
     { name: '博文', href: '/home' },
-    { name: '博文' }
+    { name: articleDetail.title }
   ];
-  const { articleDetail } = props.state;
-  const { categoryInfo, next, pre, tagList } = articleDetail;
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
       <Card
@@ -51,7 +52,7 @@ export default props => {
             '没有了'}
         </span>
       </Card>
-      <Comment />
+      <Comments />
     </BasicLayout>
   );
 };

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import BasicLayout from '../components/BasicLayout';
-import Comment from '../components/Comment';
+import Comments from '../components/Comments';
 export default props => {
   console.log('props', props);
-  const BreadcrumbList = [{ name: 'home', href: '/home' }, { name: '留言板' }];
+  const BreadcrumbList = [{ name: '首页', href: '/home' }, { name: '留言板' }];
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
-      <Comment></Comment>
+      <Comments />
     </BasicLayout>
   );
 };

@@ -17,6 +17,7 @@ export default class Home extends Controller {
   async componentWillCreate() {
     await super.componentWillCreate();
     await this.handleGetCommentList();
+    // await this.getHitokoto();
   }
   async componentDidFirstMount() {
     // await super.componentDidFirstMount();
@@ -27,6 +28,18 @@ export default class Home extends Controller {
       res => {
         console.log('res', res);
         this.handleChangeState({ ...res });
+      },
+      res => {
+        console.log('res', res);
+      }
+    );
+  };
+  getHitokoto = async () => {
+    await this.resHandler(
+      () => this.postApi(api.getHitokoto),
+      res => {
+        console.log('res', res);
+        this.handleChangeState({ hitokoto: res });
       },
       res => {
         console.log('res', res);
