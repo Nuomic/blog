@@ -25,20 +25,24 @@
 .basic-header {
   background: #fff;
   padding: 0;
-  /* width: 100%; */
-  border-bottom: #ccc solid 1px;
+  border: none;
+  box-shadow: 0 3px 8px #d5dadf;
   top: 0;
 }
 .basic-breadcrumb {
-  padding: 12px 26px;
-  background: #f0f2f5;
+  padding: 12px 0;
+  margin: 0 26px;
+  /*  background: #f0f2f5;
+  box-shadow: 3px 0 8px #939ca5; */
 }
 .basic-sider {
   height: 100vh;
   position: fixed;
   left: 0;
+  top: 0;
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
+  box-shadow: -3px 0 8px #fafafa;
 }
 .basic-sider ::-webkit-scrollbar {
   width: 0 !important;
@@ -60,6 +64,6 @@
 }
 .basic-content {
   padding: 24px;
-  background: rgba(255, 255, 255, 0.623);
+  background: #fff;
   min-height: calc(100vh - 135px);
 }

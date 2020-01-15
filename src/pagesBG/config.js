@@ -20,7 +20,7 @@ export const menuList = [
     icon: 'upload'
   },
   {
-    key: 'msgnmg',
+    key: 'msgmng',
     name: '留言管理',
     icon: 'upload'
   }

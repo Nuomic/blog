@@ -22,7 +22,40 @@ export default withData(({ state, children, breadcrumbList, currentPath }) => {
       <Style name="customize" />
       <Style name="common" />
       <Layout>
-        <div className="overflow-hidden">
+        <div
+          className="position-fixed"
+          style={{ paddingLeft: collapsed ? 80 : 200, transition: '0.2s' }}
+        >
+          <Header className="basic-header">
+            <Icon
+              className="basic-trigger"
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={handleToggle}
+            />
+            <div className="fr" style={{paddingRight:24}}>
+              <Button>退出登录</Button>
+            </div>
+          </Header>
+          <div className="basic-breadcrumb">
+            {(breadcrumbList && (
+              <Breadcrumb separator=">" className="basic-layout-breadcrumb-bg">
+                {breadcrumbList.map(item => (
+                  <Breadcrumb.Item>
+                    <Link to={item.href}>{item.name}</Link>
+                  </Breadcrumb.Item>
+                ))}
+              </Breadcrumb>
+            )) ||
+              null}
+          </div>
+        </div>
+        <span style={{ marginTop: 66 }} />
+        <Layout
+          style={{
+            marginLeft: collapsed ? 80 : 200,
+            transition: '0.2s'
+          }}
+        >
           <Sider
             className="basic-sider overflow-hidden"
             trigger={null}
@@ -48,45 +81,11 @@ export default withData(({ state, children, breadcrumbList, currentPath }) => {
                 ))}
             </Menu>
           </Sider>
-        </div>
-        <Layout
-          style={{
-            marginLeft: collapsed ? 80 : 200,
-            transition: '0.2s',
-            width: '100%'
-          }}
-        >
-          <div className="overflow-hidden position-fixed">
-            <Header className="basic-header">
-              <Icon
-                className="basic-trigger"
-                type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={handleToggle}
-              />
-              <Button>退出登录</Button>
-            </Header>
-            <div className="basic-breadcrumb">
-              {(breadcrumbList && (
-                <Breadcrumb
-                  separator=">"
-                  className="basic-layout-breadcrumb-bg"
-                >
-                  {breadcrumbList.map(item => (
-                    <Breadcrumb.Item>
-                      <Link to={item.href}>{item.name}</Link>
-                    </Breadcrumb.Item>
-                  ))}
-                </Breadcrumb>
-              )) ||
-                null}
-            </div>
-          </div>
-          <span style={{ marginTop: 66 }} />
           <Content className="basic-content">{children}</Content>
-          <Footer className="align-center">
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
         </Layout>
+        <Footer className="align-center">
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
       </Layout>
     </>
   );

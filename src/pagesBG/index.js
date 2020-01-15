@@ -33,5 +33,10 @@ export default [
     path: '/msgmng',
     controller: () => import('./msgboard/Controller'),
     name: '留言管理'
+  },
+  {
+    path: '/resources',
+    controller: () => import('./resources/Controller'),
+    name: '资源管理'
   }
 ];
