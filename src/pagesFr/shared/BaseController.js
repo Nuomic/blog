@@ -78,8 +78,8 @@ export default class extends Controller {
   /** 对fetch接口封装一次 方便调用*/
   postApi(url, data = {}, options = {}) {
     options = {
-      method: 'POST',
       ...options,
+      method: 'POST',
       body: JSON.stringify(data)
     };
     return this.fetch(url, options);
@@ -102,7 +102,8 @@ export default class extends Controller {
   getApi(url, params, options = {}) {
     options = {
       method: 'GET',
-      ...options
+      ...options,
+      credentials: 'omit'
     };
 
     return this.fetch(
@@ -164,6 +165,10 @@ export default class extends Controller {
       this.resHandler(func, success, fail, { limit: limit - 1 });
     }
   }
+  handleSaveCommit = value => {
+    console.log('value', value);
+  };
+
   // getKeyTranlate(key, options = {}) {
   //   const language = this.store.getState().language || {};
   //   return language[key] ? language[key].replace(/\$\{\s*(\w+)\s*(([\+\-])\s*(\d+)\s*)?\}/g, (text) => options[text.substring(2, text.length - 1)]) : '';

@@ -4,11 +4,19 @@
 .margin-10 {
   margin: 10px;
 }
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
 .overflow-hidden {
   overflow: hidden;
 }
 .position-fixed {
   position: fixed;
+
+  width: 100%;
 }
 .align-center {
   text-align: center;
@@ -17,7 +25,8 @@
 .basic-header {
   background: #fff;
   padding: 0;
-  width: 100vw;
+  /* width: 100%; */
+  border-bottom: #ccc solid 1px;
   top: 0;
 }
 .basic-breadcrumb {
@@ -25,10 +34,14 @@
   background: #f0f2f5;
 }
 .basic-sider {
-  overflow: auto;
   height: 100vh;
   position: fixed;
   left: 0;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.basic-sider ::-webkit-scrollbar {
+  width: 0 !important;
 }
 .basic-trigger {
   font-size: 18px;
@@ -46,8 +59,7 @@
   margin: 16px;
 }
 .basic-content {
-  margin: 24px 16px;
   padding: 24px;
-  background: #fff;
-  min-height: calc(100vh - 200px);
+  background: rgba(255, 255, 255, 0.623);
+  min-height: calc(100vh - 135px);
 }

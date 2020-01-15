@@ -24,7 +24,7 @@ export default withData(({ children, currentPath }) => {
         <div className="logo" />
         <Menu
           mode="horizontal"
-          defaultSelectedKeys={currentPath != '/' ? currentPath : 'homes'}
+          defaultSelectedKeys={currentPath != '/' ? currentPath : 'home'}
           style={{ backgroundColor: themeColor.headBgColor, color: '#fff' }}
           className="basic-header-menu"
         >

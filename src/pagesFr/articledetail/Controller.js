@@ -18,7 +18,7 @@ export default class Home extends Controller {
     await super.componentWillCreate();
     await this.handleGetArticleDetail();
     await this.handleGetCommentList();
-    // await this.getHitokoto();
+    await this.getHitokoto();
   }
   async componentDidFirstMount() {
     // await super.componentDidFirstMount();
@@ -47,16 +47,9 @@ export default class Home extends Controller {
       }
     );
   };
+
   getHitokoto = async () => {
-    await this.resHandler(
-      () => this.postApi(api.getHitokoto),
-      res => {
-        console.log('res', res);
-        this.handleChangeState({ hitokoto: res });
-      },
-      res => {
-        console.log('res', res);
-      }
-    );
+    let res = await this.getApi(api.getHitokoto);
+    this.handleChangeState({ hitokoto: res });
   };
 }

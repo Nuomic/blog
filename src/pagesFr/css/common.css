@@ -4,6 +4,12 @@
 .margin-10 {
   margin: 10px;
 }
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
 .align-center {
   text-align: center;
 }
@@ -199,11 +205,19 @@
   border-radius: 3px;
 }
 /* 评论列表 */
+.comment-form {
+  border-radius: 25px;
+  border-top-left-radius: 0;
+  border: none;
+}
 .comment-form .ant-card-body {
   position: relative;
   padding-bottom: 0;
 }
+textarea#content {
+  margin-bottom: 0;
+}
 .comment-form-title {
   position: absolute;
-  top: -20px;
+  /* top: -20px; */
 }

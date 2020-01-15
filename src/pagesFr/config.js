@@ -5,6 +5,10 @@ export const themeColor = {
   articleBgColor: 'rgba(255,255,255,.07)',
   siderBgColor: 'rgba(255,255,255,.07)'
 };
+//评论表单主题配置
+export const comFormTheme = {
+  backgroundColor: 'rgba(255,255,255,.5)'
+};
 //目录配置
 export const menuList = [
   {
