@@ -1,7 +1,7 @@
 import React from 'react';
 import BasicLayout from '../components/BasicLayout';
 import { StickyContainer, Sticky } from 'react-sticky';
-import { Table, Tabs } from 'antd';
+import { Table, Tabs, List, Icon } from 'antd';
 const { TabPane } = Tabs;
 export default ({ state }) => {
   const bdList = [
@@ -21,19 +21,25 @@ export default ({ state }) => {
       {({ style }) => (
         <DefaultTabBar
           {...props}
-          style={{ ...style, background: '#fff', top: 65 }}
+          style={{ ...style, background: '#fff', top: 65, zIndex: 1 }}
         />
       )}
     </Sticky>
   );
-  const ArticleList = ({ status }) => {
+  const IconText = ({ type, text }) => (
+    <span style={{ padding: '0 20px 0 0' }}>
+      <Icon type={type} style={{ marginRight: 8 }} />
+      <span>{text}</span>
+    </span>
+  );
+  const ArticleList = status => {
+    console.log('status', status);
+    console.log('articleList', articleList);
     const list =
       articleList &&
-      articleList.filter(item => (status == 0 ? item : item.status == status));
+      articleList.filter(item => (status == 0 ? true : item.status == status));
     console.log('list', list);
     return list;
-    /*  console.log('list', list);
-    return list && list.map(item => <div key={item.id}>{item.title}</div>); */
   };
   return (
     <BasicLayout breadcrumbList={bdList}>
@@ -46,13 +52,60 @@ export default ({ state }) => {
           {articleStatus &&
             articleStatus.map(item => (
               <TabPane
-                tab={item.tabName + `(${ArticleList(item.key).length})`}
+                tab={item.tabName + ` (${ArticleList(item.key).length})`}
                 key={item.key}
               >
-                {ArticleList(item.key).map(item => (
-                  <div key={item.id}>{item.title}</div>
-                ))}
-                {/* <ArticleList status={item.key} /> */}
+                <List
+                  pagination={{
+                    onChange: page => {
+                      console.log(page);
+                    },
+                    pageSize: 10
+                  }}
+                  itemLayout="horizontal"
+                  dataSource={ArticleList(item.key)}
+                  renderItem={item => (
+                    <List.Item
+                      key={item.id}
+                      actions={[
+                        <a key="list-loadmore-edit">edit</a>,
+                        <a key="list-loadmore-more">more</a>
+                      ]}
+                    >
+                      <List.Item.Meta
+                        title={
+                          <span style={{ fontWeight: 600 }}>{item.title}</span>
+                        }
+                        description={
+                          <div>
+                            <IconText
+                              type="clock-circle"
+                              text={item.date}
+                              key="list-vertical-star-o"
+                            />
+                            <IconText
+                              type="eye"
+                              text={item.viewCount}
+                              key="list-vertical-eye"
+                              style
+                            ></IconText>
+                            <IconText
+                              type="like-o"
+                              text={item.likeCount}
+                              key="list-vertical-like-o"
+                            />
+
+                            <IconText
+                              type="message"
+                              text={item.commentCount}
+                              key="list-vertical-message"
+                            />
+                          </div>
+                        }
+                      />
+                    </List.Item>
+                  )}
+                />
               </TabPane>
             ))}
         </Tabs>

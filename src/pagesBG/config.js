@@ -11,7 +11,7 @@ export const menuList = [
   },
   {
     key: 'category',
-    name: '栏目管理',
+    name: '分类管理',
     icon: 'upload'
   },
   {

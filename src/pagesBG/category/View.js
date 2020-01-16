@@ -1,45 +1,9 @@
 import React from 'react';
 import BasicLayout from '../components/BasicLayout';
+import { StickyContainer, Sticky } from 'react-sticky';
+import { Table, Tabs, List, Icon } from 'antd';
+const { TabPane } = Tabs;
 export default () => {
-  const bdList = [
-    // {
-    //   name: '首页'
-    // }
-  ];
-  return (
-    <BasicLayout breadcrumbList={bdList}>
-      {`首页 // 站点监控 站点总览 站点统计`}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      dsd
-    </BasicLayout>
-  );
+  const bdList = [{ name: '首页', href: '/admin' }, { name: '分类管理' }];
+  return <BasicLayout breadcrumbList={bdList}></BasicLayout>;
 };
