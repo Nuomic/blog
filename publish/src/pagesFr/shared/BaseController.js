@@ -100,6 +100,10 @@ function (_Controller) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleSaveCommit", function (value) {
+      console.log('value', value);
+    });
+
     return _this;
   }
 
@@ -186,9 +190,8 @@ function (_Controller) {
     value: function postApi(url) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      options = _objectSpread({
-        method: 'POST'
-      }, options, {
+      options = _objectSpread({}, options, {
+        method: 'POST',
         body: JSON.stringify(data)
       });
       return this.fetch(url, options);
@@ -221,7 +224,9 @@ function (_Controller) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       options = _objectSpread({
         method: 'GET'
-      }, options);
+      }, options, {
+        credentials: 'omit'
+      });
       return this.fetch(url + (params ? "?".concat(querystring.stringify(params)) : ''), options);
     }
   }, {

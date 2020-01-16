@@ -13,9 +13,11 @@ var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
 var _reactInfiniteScroller = _interopRequireDefault(require("react-infinite-scroller"));
 
-var _antd = require("antd");
+var _ComForm = _interopRequireDefault(require("./ComForm"));
 
-var _moment = _interopRequireDefault(require("moment"));
+var _ComItem = _interopRequireDefault(require("./ComItem"));
+
+var _antd = require("antd");
 
 var _this = void 0;
 
@@ -39,7 +41,6 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var TextArea = _antd.Input.TextArea;
 var withData = (0, _connect["default"])(function (_ref) {
   var state = _ref.state,
       handlers = _ref.handlers;
@@ -54,97 +55,24 @@ var _default = withData(function (_ref2) {
   var commentList = _ref2.commentList,
       getcommentList = _ref2.getcommentList,
       total = _ref2.total;
+
+  var _useState = (0, _react.useState)(undefined),
+      _useState2 = _slicedToArray(_useState, 2),
+      comFormId = _useState2[0],
+      setComFormId = _useState2[1];
+
+  console.log('comFormId', comFormId);
   console.log('commentList', commentList);
   console.log('total', total);
 
-  var _useState = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)({
     data: commentList,
     loading: false,
     hasMore: true
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      commentData = _useState2[0],
-      setCommentData = _useState2[1];
-
-  var like = function like() {
-    setCommentData({
-      likes: 1,
-      dislikes: 0,
-      action: 'liked'
-    });
-  };
-
-  var dislike = function dislike() {
-    setCommentData({
-      likes: 0,
-      dislikes: 1,
-      action: 'disliked'
-    });
-  };
-
-  var actions = function actions() {
-    return [_react["default"].createElement("span", {
-      key: "comment-basic-like"
-    }, _react["default"].createElement(_antd.Tooltip, {
-      title: "\u8D5E"
-    }, _react["default"].createElement(_antd.Icon, {
-      type: "like",
-      theme: 'action' === 'liked' ? 'filled' : 'outlined',
-      onClick: like
-    })), _react["default"].createElement("span", {
-      style: {
-        paddingLeft: 8,
-        cursor: 'auto'
-      }
-    }, commentList.likeCount)), _react["default"].createElement("span", {
-      key: " key=\"comment-basic-dislike\""
-    }, _react["default"].createElement(_antd.Tooltip, {
-      title: "\u8E29"
-    }, _react["default"].createElement(_antd.Icon, {
-      type: "dislike",
-      theme: 'action' === 'disliked' ? 'filled' : 'outlined',
-      onClick: dislike
-    })), _react["default"].createElement("span", {
-      style: {
-        paddingLeft: 8,
-        cursor: 'auto'
-      }
-    }, commentList.dislikeCount)), _react["default"].createElement("span", {
-      key: "comment-basic-reply-to"
-    }, "Reply to")];
-  }; //评论表单
-
-
-  var CommentForm = function CommentForm(item) {
-    return _react["default"].createElement(_antd.Form, null, _react["default"].createElement(_antd.Form.Item, null, _react["default"].createElement(TextArea, {
-      rows: 5,
-      style: {
-        opacity: 0.8
-      }
-    })), _react["default"].createElement(_antd.Form.Item, null, _react["default"].createElement(_antd.Button, {
-      type: "primary",
-      style: {
-        opacity: 0.8
-      }
-    }, "\u63D0\u4EA4")));
-  };
-
-  var Comments = function Comments(_ref3) {
-    var item = _ref3.item,
-        children = _ref3.children;
-    return _react["default"].createElement(_antd.Comment, {
-      actions: actions(),
-      author: _react["default"].createElement("a", null, item.nickname),
-      avatar: _react["default"].createElement(_antd.Avatar, {
-        src: item.avatar || 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        alt: "Han Solo"
-      }),
-      content: _react["default"].createElement("p", null, item.content),
-      datetime: _react["default"].createElement(_antd.Tooltip, {
-        title: (0, _moment["default"])().format('YYYY-MM-DD HH:mm:ss')
-      }, _react["default"].createElement("span", null, (0, _moment["default"])().fromNow()))
-    }, children);
-  };
+      _useState4 = _slicedToArray(_useState3, 2),
+      commentData = _useState4[0],
+      setCommentData = _useState4[1];
 
   var handleInfiniteOnLoad = function handleInfiniteOnLoad() {
     return regeneratorRuntime.async(function handleInfiniteOnLoad$(_context) {
@@ -188,12 +116,9 @@ var _default = withData(function (_ref2) {
     });
   };
 
-  return _react["default"].createElement(_antd.Card, null, _react["default"].createElement(CommentForm, null), _react["default"].createElement(_antd.Divider, {
-    orientation: "left"
-  }, "\u8BC4\u8BBA"), _react["default"].createElement(_antd.Divider, {
+  return _react["default"].createElement(_antd.Card, null, !comFormId && _react["default"].createElement(_ComForm["default"], null), _react["default"].createElement(_antd.Divider, {
     orientation: "right"
-  }, total), _react["default"].createElement(_reactInfiniteScroller["default"] // initialLoad={false}
-  , {
+  }, "\u603B\u8BC4\u8BBA\uFF1A", total), _react["default"].createElement(_reactInfiniteScroller["default"], {
     pageStart: 0,
     loadMore: handleInfiniteOnLoad,
     hasMore: commentData.loading && commentData.hasMore,
@@ -203,16 +128,15 @@ var _default = withData(function (_ref2) {
     renderItem: function renderItem(item) {
       return _react["default"].createElement(_antd.List.Item, {
         key: item.id
-      }, _react["default"].createElement(Comments, {
-        item: item
-      }, item.subList.length > 0 && item.subList && item.subList.map(function (item) {
-        return _react["default"].createElement(Comments, {
-          item: item,
-          key: item.id
-        });
-      })));
+      }, _react["default"].createElement(_ComItem["default"], {
+        item: item,
+        comFormId: comFormId,
+        setComFormId: setComFormId
+      }));
     }
-  })));
+  }, commentData.loading && commentData.hasMore && _react["default"].createElement("div", {
+    className: "demo-loading-container"
+  }, _react["default"].createElement(_antd.Spin, null)))));
 });
 
 exports["default"] = _default;

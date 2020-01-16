@@ -43,7 +43,7 @@ var _default = withData(function (_ref2) {
     className: "logo"
   }), _react["default"].createElement(_antd.Menu, {
     mode: "horizontal",
-    defaultSelectedKeys: currentPath != '/' ? currentPath : 'homes',
+    defaultSelectedKeys: currentPath != '/' ? currentPath : 'home',
     style: {
       backgroundColor: _config.themeColor.headBgColor,
       color: '#fff'

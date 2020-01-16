@@ -15,12 +15,13 @@
     "port": 3000
   },
   "dependencies": {
+    "@antv/g2plot": "^0.11.22",
     "antd": "^3.25.1",
-    "braft-editor": "^2.3.8",
     "core-js": "^2.6.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-imvc": "^2.7.1",
-    "react-infinite-scroller": "^1.2.4"
+    "react-infinite-scroller": "^1.2.4",
+    "react-sticky": "^6.0.3"
   }
 }

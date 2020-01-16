@@ -4,11 +4,19 @@
 .margin-10 {
   margin: 10px;
 }
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
 .overflow-hidden {
   overflow: hidden;
 }
 .position-fixed {
   position: fixed;
+  z-index: 99;
+  width: 100%;
 }
 .align-center {
   text-align: center;
@@ -17,18 +25,25 @@
 .basic-header {
   background: #fff;
   padding: 0;
-  width: 100vw;
+  border: none;
+  box-shadow: 0 3px 8px #d5dadf;
   top: 0;
 }
 .basic-breadcrumb {
-  padding: 12px 26px;
-  background: #f0f2f5;
+  padding: 12px 0;
+  margin: 0 26px;
 }
 .basic-sider {
-  overflow: auto;
   height: 100vh;
   position: fixed;
   left: 0;
+  top: 0;
+  /* -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  box-shadow: -3px 0 8px #fafafa; */
+}
+.basic-sider ::-webkit-scrollbar {
+  width: 0 !important;
 }
 .basic-trigger {
   font-size: 18px;
@@ -46,8 +61,9 @@
   margin: 16px;
 }
 .basic-content {
-  margin: 24px 16px;
   padding: 24px;
   background: #fff;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 135px);
+  margin-top: 66px;
+  overflow: hidden;
 }

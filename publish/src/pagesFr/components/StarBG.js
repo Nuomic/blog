@@ -160,16 +160,12 @@ var _default = function _default(_ref) {
   return _react["default"].createElement("div", null, _react["default"].createElement("canvas", {
     style: {
       position: 'fixed',
+      width: '100vw',
+      height: '100vh',
       background: _config.themeColor.starBgColor,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
       zIndex: '-1'
     },
-    ref: canvasRef,
-    height: 1000,
-    width: 2000
+    ref: canvasRef
   }), _react["default"].createElement(_component.Style, {
     name: "antd"
   }), _react["default"].createElement(_component.Style, {

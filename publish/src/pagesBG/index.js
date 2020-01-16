@@ -17,41 +17,63 @@ var _default = [{
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./login/Controller'));
     });
-  }
+  },
+  name: '登录'
 }, {
   path: '/admin',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./home/Controller'));
     });
-  }
+  },
+  name: '首页'
 }, {
   path: '/admin/home',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./home/Controller'));
     });
-  }
+  },
+  name: '首页'
 }, {
   path: '/md',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./article/Controller'));
     });
-  }
+  },
+  name: '登录'
 }, {
   path: '/category',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./category/Controller'));
     });
-  }
+  },
+  name: '分类管理'
 }, {
-  path: '/login',
+  path: '/articlemng',
   controller: function controller() {
     return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./login/Controller'));
+      return _interopRequireWildcard(require('./articlelist/Controller'));
     });
-  }
+  },
+  name: '文章管理'
+}, {
+  path: '/msgmng',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./msgboard/Controller'));
+    });
+  },
+  name: '留言管理'
+}, {
+  path: '/resources',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./resources/Controller'));
+    });
+  },
+  name: '资源管理'
 }];
 exports["default"] = _default;

@@ -59,7 +59,15 @@ var _default = function _default(_ref) {
     style: {
       background: _config.themeColor.siderBgColor
     }
-  }, _react["default"].createElement(_Sider["default"], null))))), _react["default"].createElement(_Footer["default"], null));
+  }, _react["default"].createElement(_Sider["default"], {
+    style: {
+      width: '100%'
+    }
+  }))))), _react["default"].createElement(_Footer["default"], null), _react["default"].createElement(_antd.BackTop, {
+    style: {
+      articleBgColor: '#fff'
+    }
+  }));
 };
 
 exports["default"] = _default;

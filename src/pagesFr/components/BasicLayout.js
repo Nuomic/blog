@@ -34,7 +34,7 @@ export default ({ children, BreadcrumbList }) => {
               className="basic-layout-sider-bg"
               style={{ background: themeColor.siderBgColor }}
             >
-              <Sider />
+              <Sider style={{ width: '100%' }} />
             </div>
           </Col>
         </Row>

@@ -15,6 +15,12 @@ var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
 var _component = require("react-imvc/component");
 
+var _Header = _interopRequireDefault(require("./Header"));
+
+var _Sider = _interopRequireDefault(require("./Sider"));
+
+var _Footer = _interopRequireDefault(require("./Footer"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -29,52 +35,36 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var Header = _antd.Layout.Header,
-    Sider = _antd.Layout.Sider,
-    Content = _antd.Layout.Content,
-    Footer = _antd.Layout.Footer;
+var Content = _antd.Layout.Content;
 var withData = (0, _connect["default"])(function (_ref) {
   var state = _ref.state;
   return {
-    state: state
+    state: state,
+    currentPath: state.location.pathname
   };
 });
 
 var _default = withData(function (_ref2) {
   var state = _ref2.state,
       children = _ref2.children,
-      breadcrumbList = _ref2.breadcrumbList;
-  console.log('breadcrumbList', breadcrumbList); //目录
+      breadcrumbList = _ref2.breadcrumbList,
+      currentPath = _ref2.currentPath;
 
-  var menuList = [{
-    key: 'home',
-    name: '首页',
-    icon: 'home'
-  }, {
-    key: '2',
-    name: '文章管理',
-    icon: 'video-camera'
-  }, {
-    key: '3',
-    name: '栏目管理',
-    icon: 'upload'
-  }, {
-    key: '4',
-    name: '资源管理',
-    icon: 'upload'
-  }, {
-    key: '5',
-    name: '留言管理',
-    icon: 'upload'
-  }];
-
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(),
       _useState2 = _slicedToArray(_useState, 2),
       collapsed = _useState2[0],
       setCollapsed = _useState2[1];
 
+  console.log('state', state);
+  console.log('collapsed', collapsed);
+
   var handleToggle = function handleToggle() {
     setCollapsed(!collapsed);
+  };
+
+  var handleChangeCollapsed = function handleChangeCollapsed(collapsed) {
+    console.log('collapsed', collapsed);
+    setCollapsed(collapsed);
   };
 
   return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_component.Style, {
@@ -85,56 +75,28 @@ var _default = withData(function (_ref2) {
     name: "customize"
   }), _react["default"].createElement(_component.Style, {
     name: "common"
-  }), _react["default"].createElement(_antd.Layout, null, _react["default"].createElement(Sider, {
-    className: "basic-sider",
-    trigger: null,
-    collapsible: true,
+  }), _react["default"].createElement(_antd.Layout, null, _react["default"].createElement("div", {
+    className: "position-fixed",
+    style: {
+      paddingLeft: collapsed ? 80 : 200,
+      transition: '0.2s'
+    }
+  }, _react["default"].createElement(_Header["default"], {
     collapsed: collapsed,
-    breakpoint: "lg",
-    onCollapse: handleToggle
-  }, _react["default"].createElement("div", {
-    className: "basic-logo"
-  }), _react["default"].createElement(_antd.Menu, {
-    theme: "dark",
-    mode: "inline",
-    defaultSelectedKeys: ['1']
-  }, menuList && menuList.map(function (item) {
-    return _react["default"].createElement(_antd.Menu.Item, {
-      key: item.key
-    }, _react["default"].createElement(_antd.Icon, {
-      type: item.icon
-    }), _react["default"].createElement("span", null, item.name));
-  }))), _react["default"].createElement(_antd.Layout, {
+    handleToggle: handleToggle,
+    breadcrumbList: breadcrumbList
+  })), _react["default"].createElement(_antd.Layout, {
     style: {
       marginLeft: collapsed ? 80 : 200,
       transition: '0.2s'
     }
-  }, _react["default"].createElement("div", {
-    className: "overflow-hidden position-fixed"
-  }, _react["default"].createElement(Header, {
-    className: "basic-header"
-  }, _react["default"].createElement(_antd.Icon, {
-    className: "basic-trigger",
-    type: collapsed ? 'menu-unfold' : 'menu-fold',
-    onClick: handleToggle
-  })), _react["default"].createElement("div", {
-    className: "basic-breadcrumb"
-  }, breadcrumbList && _react["default"].createElement(_antd.Breadcrumb, {
-    separator: ">",
-    className: "basic-layout-breadcrumb-bg"
-  }, breadcrumbList.map(function (item) {
-    return _react["default"].createElement(_antd.Breadcrumb.Item, null, _react["default"].createElement(_component.Link, {
-      to: item.href
-    }, item.name));
-  })) || 's')), _react["default"].createElement("div", {
-    style: {
-      marginTop: 66
-    }
+  }, _react["default"].createElement(_Sider["default"], {
+    currentPath: currentPath,
+    collapsed: collapsed,
+    handleToggle: handleChangeCollapsed
   }), _react["default"].createElement(Content, {
     className: "basic-content"
-  }, children), _react["default"].createElement(Footer, {
-    className: "align-center"
-  }, "Ant Design \xA92018 Created by Ant UED"))));
+  }, children)), _react["default"].createElement(_Footer["default"], null)));
 });
 
 exports["default"] = _default;

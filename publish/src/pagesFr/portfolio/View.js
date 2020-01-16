@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var _default = function _default(props) {
   console.log('props', props);
   var BreadcrumbList = [{
-    name: 'home',
+    name: '首页',
     href: '/home'
   }, {
     name: '作品集'

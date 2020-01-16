@@ -1,6 +1,7 @@
 import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
+import Cookie from 'js-cookie';
 export default class extends Controller {
   SSR = this.location.query.ssr != 0;
   preload = {
@@ -13,40 +14,43 @@ export default class extends Controller {
   /**
    * 动态获取初始化状态
    */
-  // async getInitialState(initialState) {
-  //   let state = await super.getInitialState(initialState);
-  //   let { context, location } = this;
-  //   let url = context.basename + '/'
-  //   let options = {
-  //     method: 'POST',
-  //     credentials: 'include',
-  //     raw: true,
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       // cookieorigin: getCookieOriginByContext(context)
-  //     },
-  //     body: JSON.stringify({ pageName: this.modulePagename })
-  //   }
+  async getInitialState(initialState) {
+    // let state = await super.getInitialState(initialState);
+    let { context, location } = this;
+    // let url = context.basename + '/';
+    // let options = {
+    //   method: 'POST',
+    //   credentials: 'include',
+    //   raw: true,
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //     // cookieorigin: getCookieOriginByContext(context)
+    //   },
+    //   body: JSON.stringify({ pageName: this.modulePagename })
+    // };
 
-  //   if (context.isServer) {
-  //     options.headers.cookie = context.req.headers.cookie
-  //   }
-  //   try {
-  //     let response = await fetch(url, options)
-  //     let result = await response.json()
-  //     let { ResponseStatus } = result
-  //     if (ResponseStatus.Ack !== "Success" && ResponseStatus.Errors[0].ErrorCode == '401') {
-  //       redirect(this.context, '/v2/authorized/403') //11111111111111111111
-  //       return
-  //     }
-  //   } catch (error) {
-  //     console.error('getUserInfo', error)
-  //   }
-  //   return {
-  //     ...sharedInitialState,
-  //     ...state
-  //   };
-  // }
+    if (context.isClient) {
+      Cookie.set('collapsed', false);
+    }
+    // try {
+    //   let response = await fetch(url, options);
+    //   let result = await response.json();
+    //   let { ResponseStatus } = result;
+    //   if (
+    //     ResponseStatus.Ack !== 'Success' &&
+    //     ResponseStatus.Errors[0].ErrorCode == '401'
+    //   ) {
+    //     redirect(this.context, '/v2/authorized/403'); //11111111111111111111
+    //     return;
+    //   }
+    // } catch (error) {
+    //   console.error('getUserInfo', error);
+    // }
+    return {
+      ...initialState,
+      initCollapsed: Cookie.get('collapsed')
+    };
+  }
 
   /**
    * 动态获取最终的 actions 集合

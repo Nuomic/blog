@@ -34,7 +34,7 @@ var _default = function _default(props) {
       opacity: 0.8
     },
     className: "componentWillCreate"
-  }, "qq"), _react["default"].createElement(_Article["default"], null));
+  }, "\u6587\u7AE0\u9ED8\u8BA4\u6309\u65F6\u95F4\u6392\u5E8F \u53EF\u9009\u62E9\u5176\u4ED6\u7C7B\u578B\u6392\u5E8F -----\u5F85\u5F00\u53D1"), _react["default"].createElement(_Article["default"], null));
 };
 
 exports["default"] = _default;

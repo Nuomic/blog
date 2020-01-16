@@ -15,7 +15,7 @@
 }
 .position-fixed {
   position: fixed;
-
+  z-index: 99;
   width: 100%;
 }
 .align-center {
@@ -32,17 +32,15 @@
 .basic-breadcrumb {
   padding: 12px 0;
   margin: 0 26px;
-  /*  background: #f0f2f5;
-  box-shadow: 3px 0 8px #939ca5; */
 }
 .basic-sider {
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  -ms-overflow-style: none;
+  /* -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
-  box-shadow: -3px 0 8px #fafafa;
+  box-shadow: -3px 0 8px #fafafa; */
 }
 .basic-sider ::-webkit-scrollbar {
   width: 0 !important;
@@ -66,4 +64,6 @@
   padding: 24px;
   background: #fff;
   min-height: calc(100vh - 135px);
+  margin-top: 66px;
+  overflow: hidden;
 }

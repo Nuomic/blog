@@ -11,6 +11,8 @@ var sharedActions = _interopRequireWildcard(require("./sharedActions"));
 
 var _antd = require("antd");
 
+var _jsCookie = _interopRequireDefault(require("js-cookie"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -76,48 +78,65 @@ function (_Controller) {
   }
 
   _createClass(_default, [{
-    key: "getFinalActions",
+    key: "getInitialState",
 
     /**
      * 动态获取初始化状态
      */
-    // async getInitialState(initialState) {
-    //   let state = await super.getInitialState(initialState);
-    //   let { context, location } = this;
-    //   let url = context.basename + '/'
-    //   let options = {
-    //     method: 'POST',
-    //     credentials: 'include',
-    //     raw: true,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       // cookieorigin: getCookieOriginByContext(context)
-    //     },
-    //     body: JSON.stringify({ pageName: this.modulePagename })
-    //   }
-    //   if (context.isServer) {
-    //     options.headers.cookie = context.req.headers.cookie
-    //   }
-    //   try {
-    //     let response = await fetch(url, options)
-    //     let result = await response.json()
-    //     let { ResponseStatus } = result
-    //     if (ResponseStatus.Ack !== "Success" && ResponseStatus.Errors[0].ErrorCode == '401') {
-    //       redirect(this.context, '/v2/authorized/403') //11111111111111111111
-    //       return
-    //     }
-    //   } catch (error) {
-    //     console.error('getUserInfo', error)
-    //   }
-    //   return {
-    //     ...sharedInitialState,
-    //     ...state
-    //   };
-    // }
+    value: function getInitialState(initialState) {
+      var context, location;
+      return regeneratorRuntime.async(function getInitialState$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // let state = await super.getInitialState(initialState);
+              context = this.context, location = this.location; // let url = context.basename + '/';
+              // let options = {
+              //   method: 'POST',
+              //   credentials: 'include',
+              //   raw: true,
+              //   headers: {
+              //     'Content-Type': 'application/json'
+              //     // cookieorigin: getCookieOriginByContext(context)
+              //   },
+              //   body: JSON.stringify({ pageName: this.modulePagename })
+              // };
 
+              if (context.isClient) {
+                _jsCookie["default"].set('collapsed', false);
+              } // try {
+              //   let response = await fetch(url, options);
+              //   let result = await response.json();
+              //   let { ResponseStatus } = result;
+              //   if (
+              //     ResponseStatus.Ack !== 'Success' &&
+              //     ResponseStatus.Errors[0].ErrorCode == '401'
+              //   ) {
+              //     redirect(this.context, '/v2/authorized/403'); //11111111111111111111
+              //     return;
+              //   }
+              // } catch (error) {
+              //   console.error('getUserInfo', error);
+              // }
+
+
+              return _context.abrupt("return", _objectSpread({}, initialState, {
+                initCollapsed: _jsCookie["default"].get('collapsed')
+              }));
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this);
+    }
     /**
      * 动态获取最终的 actions 集合
      */
+
+  }, {
+    key: "getFinalActions",
     value: function getFinalActions(actions) {
       return _objectSpread({}, sharedActions, {}, actions);
     }
@@ -194,82 +213,82 @@ function (_Controller) {
           ResponseStatus,
           returnStatus,
           data,
-          _args = arguments;
+          _args2 = arguments;
 
-      return regeneratorRuntime.async(function resHandler$(_context) {
+      return regeneratorRuntime.async(function resHandler$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              options = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
+              options = _args2.length > 3 && _args2[3] !== undefined ? _args2[3] : {};
               _options$limit = options.limit, limit = _options$limit === void 0 ? 1 : _options$limit, _options$name = options.name, name = _options$name === void 0 ? '' : _options$name;
 
               if (!(limit < 1)) {
-                _context.next = 5;
+                _context2.next = 5;
                 break;
               }
 
               // this.recordLog({...options,errcode:3001},{ctripUid});
               _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
 
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
 
             case 5:
-              _context.prev = 5;
-              _context.next = 8;
+              _context2.prev = 5;
+              _context2.next = 8;
               return regeneratorRuntime.awrap(func());
 
             case 8:
-              res = _context.sent;
+              res = _context2.sent;
               ResponseStatus = res.ResponseStatus, returnStatus = res.returnStatus, data = _objectWithoutProperties(res, ["ResponseStatus", "returnStatus"]);
 
               if (!(ResponseStatus.Ack == 'Success')) {
-                _context.next = 18;
+                _context2.next = 18;
                 break;
               }
 
               if (!(returnStatus.isSuccess === true)) {
-                _context.next = 15;
+                _context2.next = 15;
                 break;
               }
 
-              return _context.abrupt("return", success(data));
+              return _context2.abrupt("return", success(data));
 
             case 15:
-              return _context.abrupt("return", fail(res.returnStatus));
+              return _context2.abrupt("return", fail(res.returnStatus));
 
             case 16:
-              _context.next = 25;
+              _context2.next = 25;
               break;
 
             case 18:
               if (!(res.ResponseStatus.Errors[0].ErrorCode == 'MobileRequestFilterException')) {
-                _context.next = 21;
+                _context2.next = 21;
                 break;
               }
 
               this.login();
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
 
             case 21:
               if (!(res.ResponseStatus.Errors[0].ErrorCode == '401')) {
-                _context.next = 24;
+                _context2.next = 24;
                 break;
               }
 
               redirect(this.context, '/v2/authorized/403');
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
 
             case 24:
               _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
 
             case 25:
-              _context.next = 31;
+              _context2.next = 31;
               break;
 
             case 27:
-              _context.prev = 27;
-              _context.t0 = _context["catch"](5);
-              console.log(name, '***************请求异常****************', _context.t0.toString()); // this.recordLog(options,{ctripUid});
+              _context2.prev = 27;
+              _context2.t0 = _context2["catch"](5);
+              console.log(name, '***************请求异常****************', _context2.t0.toString()); // this.recordLog(options,{ctripUid});
 
               this.resHandler(func, success, fail, {
                 limit: limit - 1
@@ -277,7 +296,7 @@ function (_Controller) {
 
             case 31:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
       }, null, this, [[5, 27]]);

@@ -63,6 +63,8 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "Model", Model);
 
+    _defineProperty(_assertThisInitialized(_this), "SSR", false);
+
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload, {
       braft: '/pagesBG/css/braft.css',
       output: '/pagesBG/css/output.css'
@@ -79,7 +81,8 @@ function (_Controller) {
           switch (_context.prev = _context.next) {
             case 0:
               return _context.abrupt("return", _objectSpread({}, initialState, {
-                currentPath: this.location.pathname
+                currentPath: this.location.pathname,
+                isClient: this.context.isClient
               }));
 
             case 1:
@@ -90,17 +93,37 @@ function (_Controller) {
       }, null, this);
     }
   }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context2) {
+    key: "componentWillCreate",
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              console.log('context.isClient', this.context.isClient); // await super.componentWillCreate();
+              // await this.getArticleList();
+
+            case 1:
             case "end":
               return _context2.stop();
           }
         }
-      });
+      }, null, this);
+    }
+  }, {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log('context.isClient', this.context.isClient);
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, null, this);
     }
   }]);
 
