@@ -17,16 +17,14 @@ export default class extends Controller {
   async getInitialState(initialState) {
     return {
       ...initialState,
-      currentPath: this.location.pathname,
-      isClient: this.context.isClient
+      currentPath: this.location.pathname
     };
   }
   async componentWillCreate() {
-    console.log('context.isClient', this.context.isClient);
-    // await super.componentWillCreate();
-    // await this.getArticleList();
+    if (this.context.isClient) {
+      let Editor = await import('braft-editor');
+      this.handleChangeState({ Editor });
+    }
   }
-  async componentDidFirstMount() {
-    console.log('context.isClient', this.context.isClient);
-  }
+  async componentDidFirstMount() {}
 }
