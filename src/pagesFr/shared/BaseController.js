@@ -4,10 +4,10 @@ import { message } from 'antd';
 import api from '../api';
 export default class extends Controller {
   preload = {
-    antd: '/pagesFr/css/antd.min.css',
-    antdPro: '/pagesFr/css/ant-design-pro.css',
-    customize: '/pagesFr/css/customize.css',
-    common: '/pagesFr/css/common.css'
+    antd: '/css/antd.min.css',
+    antdPro: '/css/ant-design-pro.css',
+    customize: '/css/customize.css',
+    commonFr: '/css/commonFr.css'
   };
   SSR = this.location.query.ssr != 0;
   /**

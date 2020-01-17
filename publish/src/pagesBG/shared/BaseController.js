@@ -68,10 +68,10 @@ function (_Controller) {
     _defineProperty(_assertThisInitialized(_this), "SSR", _this.location.query.ssr != 0);
 
     _defineProperty(_assertThisInitialized(_this), "preload", {
-      antd: '/pagesBG/css/antd.min.css',
-      antdPro: '/pagesBG/css/ant-design-pro.css',
-      customize: '/pagesBG/css/customize.css',
-      common: '/pagesBG/css/common.css'
+      antd: '/css/antd.min.css',
+      antdPro: '/css/ant-design-pro.css',
+      customize: '/css/customize.css',
+      commonBG: '/css/commonBG.css'
     });
 
     return _this;

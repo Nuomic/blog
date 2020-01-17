@@ -24,7 +24,7 @@ export default [
     controller: () => import('./msgboard/Controller')
   },
   {
-    path: '/articledetail/:articledid',
+    path: '/articledetail/:articleId',
     controller: () => import('./articledetail/Controller')
   }
 ];

@@ -36,13 +36,21 @@ var _default = [{
   },
   name: '首页'
 }, {
-  path: '/md',
+  path: '/md/add',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./article/Controller'));
     });
   },
-  name: '登录'
+  name: '富文本新增'
+}, {
+  path: '/md/edit/:articleId',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./article/Controller'));
+    });
+  },
+  name: '富文本编辑页'
 }, {
   path: '/category',
   controller: function controller() {

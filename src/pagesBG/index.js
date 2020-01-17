@@ -15,9 +15,14 @@ export default [
     name: '首页'
   },
   {
-    path: '/md',
+    path: '/md/add',
     controller: () => import('./article/Controller'),
-    name: '登录'
+    name: '富文本新增'
+  },
+  {
+    path: '/md/edit/:articleId',
+    controller: () => import('./article/Controller'),
+    name: '富文本编辑页'
   },
   {
     path: '/category',

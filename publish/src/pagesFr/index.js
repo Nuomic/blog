@@ -54,7 +54,7 @@ var _default = [{
     });
   }
 }, {
-  path: '/articledetail/:articledid',
+  path: '/articledetail/:articleId',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./articledetail/Controller'));

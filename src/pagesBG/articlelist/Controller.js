@@ -34,4 +34,23 @@ export default class extends Controller {
       }
     );
   };
+  //删除文章
+  handleDelete = async (id, status) => {
+    await this.resHandler(
+      () => this.postApi(api.deleteArticle, { status }),
+      () => {
+        const { articleList } = this.store.getState();
+        const newArticleList = articleList.filter(item => {
+          if (item.status != 4 && item.status != 3 && item.id == id) {
+            item.status = 4;
+            return true;
+          } else return item.id != id;
+        });
+        this.handleChangeState({ articleList: newArticleList });
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
+  };
 }

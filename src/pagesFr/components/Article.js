@@ -114,7 +114,7 @@ export default withData(({ articleList }) => {
                         key="list-vertical-star-o"
                       />
                       <IconText
-                        type="eye"
+                        type="read"
                         text={item.viewCount}
                         key="list-vertical-eye"
                         style

@@ -66,8 +66,8 @@ function (_Controller) {
     _defineProperty(_assertThisInitialized(_this), "SSR", false);
 
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload, {
-      braft: '/pagesBG/css/braft.css',
-      output: '/pagesBG/css/output.css'
+      braft: '/css/braft.css',
+      output: '/css/output.css'
     }));
 
     return _this;

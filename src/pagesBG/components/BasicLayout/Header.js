@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Icon, Breadcrumb, Button, Avatar } from 'antd';
+import { Layout, Icon, Breadcrumb, Button, Avatar, Badge } from 'antd';
 import connect from 'react-imvc/hoc/connect';
 import { Style, Link } from 'react-imvc/component';
-import { menuList } from '../../config';
 import Cookie from 'js-cookie';
-const { Header, Sider, Content, Footer } = Layout;
+const { Header } = Layout;
 
 export default ({ collapsed, handleToggle, breadcrumbList }) => {
   return (
@@ -26,8 +25,15 @@ export default ({ collapsed, handleToggle, breadcrumbList }) => {
         )) ||
           null}
       </div>
-      <div className="fr" style={{ paddingRight: 24 }}>
-        <Button>退出登录</Button>
+      <div className="fr " style={{ paddingRight: 24, lineHeight: '66px' }}>
+        <span>
+          <Badge count={100} style={{ margin: '0 30px' }}>
+            <Icon type="bell" style={{ fontSize: 30, margin: '0 30px' }} />
+          </Badge>
+        </span>
+
+        <Avatar></Avatar>
+        <Button type="link">退出登录</Button>
       </div>
     </Header>
   );

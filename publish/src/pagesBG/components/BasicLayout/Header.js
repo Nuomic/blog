@@ -13,10 +13,7 @@ var _component = require("react-imvc/component");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var Header = _antd.Layout.Header,
-    Sider = _antd.Layout.Sider,
-    Content = _antd.Layout.Content,
-    Footer = _antd.Layout.Footer;
+var Header = _antd.Layout.Header;
 
 var _default = function _default(_ref) {
   var collapsed = _ref.collapsed,
@@ -43,11 +40,25 @@ var _default = function _default(_ref) {
       to: item.href
     }, item.name));
   })) || null), _react["default"].createElement("div", {
-    className: "fr",
+    className: "fr ",
     style: {
-      paddingRight: 24
+      paddingRight: 24,
+      lineHeight: '66px'
     }
-  }, _react["default"].createElement(_antd.Button, null, "\u9000\u51FA\u767B\u5F55")));
+  }, _react["default"].createElement("span", null, _react["default"].createElement(_antd.Badge, {
+    count: 100,
+    style: {
+      margin: '0 30px'
+    }
+  }, _react["default"].createElement(_antd.Icon, {
+    type: "bell",
+    style: {
+      fontSize: 30,
+      margin: '0 30px'
+    }
+  }))), _react["default"].createElement(_antd.Avatar, null), _react["default"].createElement(_antd.Button, {
+    type: "link"
+  }, "\u9000\u51FA\u767B\u5F55")));
 };
 
 exports["default"] = _default;

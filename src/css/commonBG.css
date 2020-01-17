@@ -38,9 +38,6 @@
   position: fixed;
   left: 0;
   top: 0;
-  /* -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-  box-shadow: -3px 0 8px #fafafa; */
 }
 .basic-sider ::-webkit-scrollbar {
   width: 0 !important;
@@ -66,4 +63,10 @@
   min-height: calc(100vh - 135px);
   margin-top: 66px;
   overflow: hidden;
+}
+.article-status-tag {
+  margin: -2px 5px -2px 0;
+  padding: 0 3px;
+  font-size: 12px;
+  font-weight: 300;
 }

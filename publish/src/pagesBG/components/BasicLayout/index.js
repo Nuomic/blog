@@ -9,6 +9,8 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _zh_CN = _interopRequireDefault(require("antd/lib/locale-provider/zh_CN"));
+
 var _antd = require("antd");
 
 var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
@@ -67,14 +69,16 @@ var _default = withData(function (_ref2) {
     setCollapsed(collapsed);
   };
 
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_component.Style, {
+  return _react["default"].createElement(_antd.ConfigProvider, {
+    locale: _zh_CN["default"]
+  }, _react["default"].createElement(_component.Style, {
     name: "antd"
   }), _react["default"].createElement(_component.Style, {
     name: "antdPro"
   }), _react["default"].createElement(_component.Style, {
     name: "customize"
   }), _react["default"].createElement(_component.Style, {
-    name: "common"
+    name: "commonBG"
   }), _react["default"].createElement(_antd.Layout, null, _react["default"].createElement("div", {
     className: "position-fixed",
     style: {

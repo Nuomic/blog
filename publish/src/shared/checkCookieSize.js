@@ -32,7 +32,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
  * 根据输入的最大值，将白名单以外的 cookie key 从大到小依次删除
  * 直到 document.cookie 总体积小于目标值
  */
-var defaultWhiteList = ['cticket', 'ticket_ctrip', 'offlineTicket', '_bfa', '_bfi', '_bfs', '_ga'];
+var defaultWhiteList = ['_bfa', '_bfi', '_bfs', '_ga'];
 var defaultOptions = {
   maxSize: 5 * 1024,
   whiteList: [],

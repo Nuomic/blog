@@ -10,8 +10,8 @@ export default class extends Controller {
   SSR = false;
   preload = {
     ...this.preload,
-    braft: '/pagesBG/css/braft.css',
-    output: '/pagesBG/css/output.css'
+    braft: '/css/braft.css',
+    output: '/css/output.css'
   };
 
   async getInitialState(initialState) {

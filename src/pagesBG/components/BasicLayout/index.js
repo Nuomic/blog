@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Icon, Breadcrumb, Button, Avatar } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import { Layout, ConfigProvider } from 'antd';
 import connect from 'react-imvc/hoc/connect';
 import { Style, Link } from 'react-imvc/component';
 import Header from './Header';
 import Sider from './Sider';
 import Footer from './Footer';
-import Cookie from 'js-cookie';
 const { Content } = Layout;
 const withData = connect(({ state }) => {
   return {
@@ -25,11 +25,11 @@ export default withData(({ state, children, breadcrumbList, currentPath }) => {
     setCollapsed(collapsed);
   };
   return (
-    <>
+    <ConfigProvider locale={zh_CN}>
       <Style name="antd" />
       <Style name="antdPro" />
       <Style name="customize" />
-      <Style name="common" />
+      <Style name="commonBG" />
       <Layout>
         <div
           className="position-fixed"
@@ -56,6 +56,6 @@ export default withData(({ state, children, breadcrumbList, currentPath }) => {
         </Layout>
         <Footer />
       </Layout>
-    </>
+    </ConfigProvider>
   );
 });

@@ -11,18 +11,22 @@ var menuList = [{
 }, {
   key: 'articlemng',
   name: '文章管理',
-  icon: 'video-camera'
+  icon: 'read'
 }, {
   key: 'category',
-  name: '栏目管理',
-  icon: 'upload'
+  name: '分类管理',
+  icon: 'unordered-list'
 }, {
   key: 'resources',
   name: '资源管理',
-  icon: 'upload'
+  icon: 'folder-open'
 }, {
   key: 'msgmng',
   name: '留言管理',
-  icon: 'upload'
+  icon: 'message'
+}, {
+  key: 'user',
+  name: '个人中心',
+  icon: 'user'
 }];
 exports.menuList = menuList;

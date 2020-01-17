@@ -163,7 +163,7 @@ var _default = withData(function (_ref2) {
           text: item.date,
           key: "list-vertical-star-o"
         }), _react["default"].createElement(IconText, {
-          type: "eye",
+          type: "read",
           text: item.viewCount,
           key: "list-vertical-eye",
           style: true

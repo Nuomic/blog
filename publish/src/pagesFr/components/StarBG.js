@@ -173,7 +173,7 @@ var _default = function _default(_ref) {
   }), _react["default"].createElement(_component.Style, {
     name: "customize"
   }), _react["default"].createElement(_component.Style, {
-    name: "common"
+    name: "commonFr"
   }), children);
 };
 
