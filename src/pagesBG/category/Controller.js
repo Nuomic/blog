@@ -26,8 +26,37 @@ export default class extends Controller {
       res => {
         this.handleChangeState(res);
       },
-      res => {
-        console.log('res', res);
+      err => {
+        console.log('err', err);
+      }
+    );
+  };
+  //删除栏目
+  handleDeleteCategory = async categoryId => {
+    await this.resHandler(
+      () => this.postApi(api.deleteCategory, { categoryId }),
+      () => {
+        const { categoryList } = this.store.getState();
+        const newCategoryList = categoryList.filter(
+          item => item.id != categoryId
+        );
+        this.handleChangeState({ categoryList: newCategoryList });
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
+  };
+  //保存栏目
+  handleSaveCategory = async (category, handelModalStatus) => {
+    await this.resHandler(
+      () => this.postApi(api.saveCategory, category),
+      () => {
+        console.log('保存成功', '保存成功');
+        handelModalStatus();
+      },
+      err => {
+        console.log('err', err);
       }
     );
   };
@@ -38,8 +67,8 @@ export default class extends Controller {
       res => {
         this.handleChangeState(res);
       },
-      res => {
-        console.log('res', res);
+      err => {
+        console.log('err', err);
       }
     );
   };

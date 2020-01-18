@@ -76,10 +76,3 @@ export function redirect(context, targetUrl) {
     window.location.href = targetUrl;
   }
 }
-
-export function isOffline(context, location) {
-  let { query } = context.isClient ? location : context.req;
-  //query参数全部转为小写
-  let { logintype } = JSON.parse(JSON.stringify(query || '').toLowerCase());
-  return logintype == 'offline' || context.defaultNetType == 'offline';
-}

@@ -27,17 +27,17 @@ export default ({ state, handlers }) => {
     </Sticky>
   );
   //删除提示框
-  const showConfirm = (id, fun) => {
+  const showConfirm = (id, title, onOk) => {
     confirm({
-      title: '确定要删除改文章吗？',
+      title,
       onOk: async () => {
-        await handleDelete(id);
+        await onOk(id);
       },
       onCancel() {}
     });
   };
 
-  const add = (key, name, content) => {
+  const addTabs = (key, name, content) => {
     setActiveKey(key);
     if (!tabList.some(item => item.key == key))
       setTabList([...tabList, { key, name, content }]);
@@ -67,7 +67,7 @@ export default ({ state, handlers }) => {
           {tabList &&
             tabList.map((item, index) => (
               <TabPane tab={item.name} key={item.key} closable={index !== 0}>
-                <item.content add={add} showConfirm={showConfirm} />
+                <item.content addTabs={addTabs} showConfirm={showConfirm} />
               </TabPane>
             ))}
         </Tabs>

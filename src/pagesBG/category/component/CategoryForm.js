@@ -1,0 +1,46 @@
+import React from 'react';
+import { Form, Modal, Button, Input } from 'antd';
+import { useCtrl, useModelState } from 'react-imvc/hook';
+const { Item } = Form;
+export default Form.create()(
+  ({ form, categoryId, modalStatus, handelModalStatus }) => {
+    const { categoryList } = useModelState();
+    const { handleSaveCategory } = useCtrl();
+    const category =
+      (categoryList && categoryList.find(item => item.id == categoryId)) || {};
+    const { getFieldDecorator, validateFields } = form;
+    const handleSubmit = e => {
+      validateFields(async (err, fieldsValue) => {
+        e.preventDefault();
+        if (err) return;
+        await handleSaveCategory(fieldsValue, handelModalStatus);
+      });
+    };
+    return (
+      <Modal
+        title="Title"
+        visible={modalStatus}
+        onOk={handleSubmit}
+        onCancel={handelModalStatus}
+      >
+        <Form>
+          <Item label="栏目名称">
+            {getFieldDecorator('name', { initialValue: category.name })(
+              <Input />
+            )}
+          </Item>
+          <Item label="栏目简介">
+            {getFieldDecorator('summary', { initialValue: category.summary })(
+              <Input />
+            )}
+          </Item>
+          <Item label="栏目配图">
+            {getFieldDecorator('avatar', { initialValue: category.summary })(
+              <Input />
+            )}
+          </Item>
+        </Form>
+      </Modal>
+    );
+  }
+);

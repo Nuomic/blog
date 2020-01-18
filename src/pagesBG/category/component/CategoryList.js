@@ -2,15 +2,38 @@ import React, { useState } from 'react';
 import { Table, Button } from 'antd';
 import { useCtrl, useModelState } from 'react-imvc/hook';
 import ArticleList from './ArticleList';
+import CategoryForm from './CategoryForm';
 import Link from 'react-imvc/component/Link';
-export default ({ add }) => {
+export default ({ addTabs, showConfirm }) => {
   const state = useModelState();
   const handlers = useCtrl();
+  const [modalStatus, setModalStatus] = useState(false);
+  const [currentId, setCurrentId] = useState(undefined);
   const { categoryList } = state;
-  const handleDelete = id => {};
+  const { handleDeleteCategory } = handlers;
+  const handelModalStatus = id => {
+    if (id) setCurrentId(id);
+    else setCurrentId(undefined);
+    setModalStatus(!modalStatus);
+  };
   const columns = [
     {
-      title: '类别',
+      title: (
+        <div>
+          类别
+          <Button
+            ghost
+            type="primary"
+            onClick={handelModalStatus}
+            size="small"
+            icon="plus"
+            style={{ marginLeft: 10 }}
+          >
+            新增
+          </Button>
+        </div>
+      ),
+      key: 'name',
       render: text => {
         return (
           <div>
@@ -32,25 +55,28 @@ export default ({ add }) => {
     },
     {
       title: <span style={{ marginLeft: 15 }}>操作</span>,
+      key: 'action',
       render: text => {
         return (
           <>
             <Button
               type="link"
-              onClick={add.bind(this, text.id, text.name, ArticleList)}
+              onClick={addTabs.bind(this, text.id, text.name, ArticleList)}
             >
               管理
             </Button>
-            <Button
-              type="link"
-              onClick={add.bind(this, text.id, text.name, ArticleList)}
-            >
+            <Button type="link" onClick={handelModalStatus.bind(this, text.id)}>
               编辑
             </Button>
             <Button
               type="link"
               style={{ color: 'red' }}
-              onClick={handleDelete.bind(this, text.id)}
+              onClick={showConfirm.bind(
+                this,
+                text.id,
+                '是否要删除该栏目？',
+                handleDeleteCategory
+              )}
             >
               删除
             </Button>
@@ -63,44 +89,14 @@ export default ({ add }) => {
       dataIndex: 'articleCount'
     }
   ];
-  const [selectedRow, setSelectedRow] = useState({
-    selectedRowKeys: [], // Check here to configure the default column
-    loading: false
-  });
-  const start = () => {
-    setSelectedRow({ loading: true });
-    setSelectedRow({
-      selectedRowKeys: [],
-      loading: false
-    });
-  };
-  const onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    setSelectedRow({ selectedRowKeys });
-  };
-  const { loading, selectedRowKeys } = selectedRow;
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange
-  };
-  const hasSelected = selectedRowKeys.length > 0;
-
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
-        <Button type="primary" onClick={start} loading={loading}>
-          Reload
-        </Button>
-        <span style={{ marginLeft: 8 }}>
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-        </span>
-      </div>
-      <Table
-        rowKey="id"
-        rowSelection={rowSelection}
-        columns={columns}
-        dataSource={categoryList}
+      <CategoryForm
+        modalStatus={modalStatus}
+        handelModalStatus={handelModalStatus}
+        categoryId={currentId}
       />
+      <Table rowKey="id" columns={columns} dataSource={categoryList} />
     </>
   );
 };

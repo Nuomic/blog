@@ -62,8 +62,7 @@ export default ({ state, handlers }) => {
         <Tabs
           tabBarExtraContent={
             <Link to={`/md/add`}>
-              <Button type="primary" ghost>
-                <Icon type="plus" />
+              <Button type="primary" ghost icon="plus">
                 新增
               </Button>
             </Link>
