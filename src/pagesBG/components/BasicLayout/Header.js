@@ -26,9 +26,9 @@ export default ({ collapsed, handleToggle, breadcrumbList }) => {
           null}
       </div>
       <div className="fr " style={{ paddingRight: 24, lineHeight: '66px' }}>
-        <span>
-          <Badge count={100} style={{ margin: '0 30px' }}>
-            <Icon type="bell" style={{ fontSize: 30, margin: '0 30px' }} />
+        <span style={{ margin: '0 30px', position: 'relative', top: 10 }}>
+          <Badge count={100}>
+            <Icon type="bell" style={{ fontSize: 30 }} />
           </Badge>
         </span>
 

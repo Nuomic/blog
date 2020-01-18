@@ -20,7 +20,7 @@ export default [
     name: '富文本新增'
   },
   {
-    path: '/md/edit/:articleId',
+    path: `/md/edit/:articleId`,
     controller: () => import('./article/Controller'),
     name: '富文本编辑页'
   },

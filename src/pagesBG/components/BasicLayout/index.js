@@ -15,13 +15,13 @@ const withData = connect(({ state }) => {
 });
 export default withData(({ state, children, breadcrumbList, currentPath }) => {
   const [collapsed, setCollapsed] = useState();
-  console.log('state', state);
-  console.log('collapsed', collapsed);
+  // console.log('state', state);
+  // console.log('collapsed', collapsed);
   const handleToggle = () => {
     setCollapsed(!collapsed);
   };
   const handleChangeCollapsed = collapsed => {
-    console.log('collapsed', collapsed);
+    // console.log('collapsed', collapsed);
     setCollapsed(collapsed);
   };
   return (
