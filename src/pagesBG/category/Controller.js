@@ -49,10 +49,22 @@ export default class extends Controller {
   };
   //保存栏目
   handleSaveCategory = async (category, handelModalStatus) => {
+    console.log('category', category);
     await this.resHandler(
       () => this.postApi(api.saveCategory, category),
-      () => {
-        console.log('保存成功', '保存成功');
+      res => {
+        const { categoryList } = this.store.getState();
+        let newCategoryList = categoryList;
+        if (category.id) {
+          newCategoryList = categoryList.map(item => {
+            if (item.id == category.id) item = category;
+            return item;
+          });
+        } else {
+          newCategoryList.unshift({ ...category, ...res, articleCount: 0 });
+        }
+        console.log(categoryList);
+        this.handleChangeState({ categoryList: newCategoryList });
         handelModalStatus();
       },
       err => {

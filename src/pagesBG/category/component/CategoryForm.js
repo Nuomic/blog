@@ -4,21 +4,28 @@ import { useCtrl, useModelState } from 'react-imvc/hook';
 const { Item } = Form;
 export default Form.create()(
   ({ form, categoryId, modalStatus, handelModalStatus }) => {
+    console.log('categoryId', categoryId);
     const { categoryList } = useModelState();
     const { handleSaveCategory } = useCtrl();
     const category =
       (categoryList && categoryList.find(item => item.id == categoryId)) || {};
-    const { getFieldDecorator, validateFields } = form;
+    const { getFieldDecorator, validateFields, resetFields } = form;
+
     const handleSubmit = e => {
       validateFields(async (err, fieldsValue) => {
         e.preventDefault();
         if (err) return;
-        await handleSaveCategory(fieldsValue, handelModalStatus);
+        // console.log('object', { id: categoryId, ...fieldsValue });
+        await handleSaveCategory(
+          { ...category, ...fieldsValue },
+          handelModalStatus
+        );
+        resetFields();
       });
     };
     return (
       <Modal
-        title="Title"
+        title={categoryId ? '编辑' : '新增'}
         visible={modalStatus}
         onOk={handleSubmit}
         onCancel={handelModalStatus}
@@ -35,7 +42,7 @@ export default Form.create()(
             )}
           </Item>
           <Item label="栏目配图">
-            {getFieldDecorator('avatar', { initialValue: category.summary })(
+            {getFieldDecorator('avatar', { initialValue: category.avatar })(
               <Input />
             )}
           </Item>

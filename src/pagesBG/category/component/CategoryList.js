@@ -12,8 +12,7 @@ export default ({ addTabs, showConfirm }) => {
   const { categoryList } = state;
   const { handleDeleteCategory } = handlers;
   const handelModalStatus = id => {
-    if (id) setCurrentId(id);
-    else setCurrentId(undefined);
+    setCurrentId(id);
     setModalStatus(!modalStatus);
   };
   const columns = [
@@ -24,7 +23,7 @@ export default ({ addTabs, showConfirm }) => {
           <Button
             ghost
             type="primary"
-            onClick={handelModalStatus}
+            onClick={handelModalStatus.bind(this, undefined)}
             size="small"
             icon="plus"
             style={{ marginLeft: 10 }}
