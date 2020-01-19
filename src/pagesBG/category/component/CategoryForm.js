@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Modal, Button, Input } from 'antd';
 import { useCtrl, useModelState } from 'react-imvc/hook';
+import Upload from './Upload';
 const { Item } = Form;
+
 export default Form.create()(
   ({ form, categoryId, modalStatus, handelModalStatus }) => {
     console.log('categoryId', categoryId);
@@ -15,6 +17,7 @@ export default Form.create()(
       validateFields(async (err, fieldsValue) => {
         e.preventDefault();
         if (err) return;
+        console.log('fieldsValue', fieldsValue);
         // console.log('object', { id: categoryId, ...fieldsValue });
         await handleSaveCategory(
           { ...category, ...fieldsValue },
@@ -42,9 +45,7 @@ export default Form.create()(
             )}
           </Item>
           <Item label="栏目配图">
-            {getFieldDecorator('avatar', { initialValue: category.avatar })(
-              <Input />
-            )}
+            <Upload form={form} url={category.avatar}></Upload>
           </Item>
         </Form>
       </Modal>

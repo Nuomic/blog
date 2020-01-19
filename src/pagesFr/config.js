@@ -44,12 +44,12 @@ export const footerDate = {
     },
     {
       type: 'qq',
-      qrCode: 'https://www.zwq666.top/myWorkspace/images/qq_qrcode.png',
+      qrCode: '/static/images/qq_qrcode.png',
       alt: 'QQ 972618478'
     },
     {
       type: 'wechat',
-      qrCode: 'https://www.zwq666.top/myWorkspace/images/mm_qrcode.png',
+      qrCode: '/static/images/mm_qrcode.png',
       alt: 'weChat zwq972618478'
     },
     {
