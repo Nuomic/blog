@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
 import ComForm from './ComForm';
 import { Comment, Tooltip, Icon, Avatar, Button } from 'antd';
 import moment from 'moment';
+import 'moment/locale/zh-cn';
 import { OuterClickWrapper } from 'react-imvc/component';
 
 export default function ComItem({ item, comFormId, setComFormId }) {

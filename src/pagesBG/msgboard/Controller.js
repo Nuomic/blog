@@ -19,7 +19,7 @@ export default class extends Controller {
   async componentDidFirstMount() {
     // await super.componentDidFirstMount();
   }
-  //获取文章列表
+  //获取评论列表
   getCommentList = async () => {
     await this.resHandler(
       () => this.postApi(api.getCommentList),
@@ -31,28 +31,7 @@ export default class extends Controller {
       }
     );
   };
-  //改变文章状态
-  handleChangeArticleStatus = async (articleId, status) => {
-    console.log('articleId', articleId);
-    console.log('status', status);
-    //参数为文章的id  改变之后的状态
-    await this.resHandler(
-      () => this.postApi(api.changeArticleStatus),
-      () => {
-        const { articleList } = this.store.getState();
-        const newArticleList = articleList.map(item => {
-          if (item.id == articleId) item.status = status;
-          return item;
-        });
-        this.handleChangeState({ articleList: newArticleList });
-        message.success('成功');
-      },
-      err => {
-        console.log('err', err);
-      }
-    );
-  };
-  //删除文章
+  //删除评论
   handleDelete = async (id, status) => {
     await this.resHandler(
       () => this.postApi(api.deleteArticle, { status }),
