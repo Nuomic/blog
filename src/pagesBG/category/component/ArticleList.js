@@ -1,106 +1,110 @@
-import React, { useState } from 'react';
-import { Table, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Table, Button, Form, Input, Select, Modal } from 'antd';
 import { useCtrl, useModelState } from 'react-imvc/hook';
-import ArticleList from './ArticleList';
-export default ({ id, name }) => {
-  const state = useModelState();
-  const handlers = useCtrl();
-  const { categoryList } = state;
-  const handleDelete = id => {};
-  const columns = [
-    {
-      title: '类别',
-      render: text => {
-        return (
-          <div>
-            <span
-              style={{
-                display: 'inline-block',
-                width: 48,
-                height: 48,
-                verticalAlign: 'middle',
-                background: `no-repeat center/100% url(${text.avatar})`
-              }}
-            />
-            <span style={{ verticalAlign: 'middle', marginLeft: 10 }}>
-              {text.name}
-            </span>
-          </div>
+import { Link } from 'react-imvc/component';
+const { confirm } = Modal;
+const { Item } = Form;
+const { Option } = Select;
+export default ({ id }) => {
+  const { categoryList } = useModelState();
+  const {
+    handleGetArticleList,
+    handleChangeArticleListFromCategory
+  } = useCtrl();
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [articleList, setArticleList] = useState([]);
+  useEffect(() => {
+    return setSelectedRowKeys([]);
+  }, [articleList]);
+  useEffect(() => {
+    handleGetArticleList(id, setArticleList);
+  }, []);
+  const hasSelected = selectedRowKeys.length > 0;
+  const showConfirm = tocategoryId => {
+    confirm({
+      title: '是否将所选的文章移动到其他栏目',
+      onOk: async () => {
+        await handleChangeArticleListFromCategory(
+          selectedRowKeys,
+          id,
+          tocategoryId,
+          articleList,
+          setArticleList
         );
-      }
-    },
-    {
-      title: <span style={{ marginLeft: 15 }}>操作</span>,
-      render: text => {
-        return (
-          <>
-            <Button
-              type="link"
-              onClick={add.bind(this, text.id, text.name, ArticleList)}
-            >
-              管理
-            </Button>
-            <Button
-              type="link"
-              onClick={add.bind(this, text.id, text.name, ArticleList)}
-            >
-              编辑
-            </Button>
-            <Button
-              type="link"
-              style={{ color: 'red' }}
-              onClick={handleDelete.bind(this, text.id)}
-            >
-              删除
-            </Button>
-          </>
-        );
-      }
-    },
-    {
-      title: '文章数',
-      dataIndex: 'articleCount'
-    }
-  ];
-  const [selectedRow, setSelectedRow] = useState({
-    selectedRowKeys: [], // Check here to configure the default column
-    loading: false
-  });
-  const start = () => {
-    setSelectedRow({ loading: true });
-    setSelectedRow({
-      selectedRowKeys: [],
-      loading: false
+      },
+      onCancel() {}
     });
   };
+  const ActionForm = Form.create()(({ form }) => {
+    const { getFieldDecorator, validateFields } = form;
+    const handleSubmit = e => {
+      e.preventDefault();
+      validateFields((err, values) => {
+        if (!err) {
+          showConfirm(values.categoryId);
+        }
+      });
+    };
+    return (
+      <Form layout="inline" onSubmit={handleSubmit}>
+        <Item>
+          <span style={{ marginLeft: 8 }}>
+            {hasSelected ? `将这 ${selectedRowKeys.length} 项移动到` : ''}
+          </span>
+          {getFieldDecorator('categoryId', {
+            rules: [{ required: true, message: '请选择要移动到的栏目' }]
+          })(
+            <Select placeholder="选择要移动到的栏目" style={{ width: 200 }}>
+              {categoryList &&
+                categoryList
+                  .filter(item => item.id != id)
+                  .map(item => <Option key={item.id}>{item.name}</Option>)}
+            </Select>
+          )}
+        </Item>
+        <Item>
+          <Button type="primary" htmlType="submit">
+            应用
+          </Button>
+        </Item>
+      </Form>
+    );
+  });
+
+  const columns = [
+    {
+      title: <ActionForm />,
+      colSpan: 2,
+      align: 'left',
+      dataIndex: 'title',
+      width: '70%'
+    },
+    {
+      title: '',
+      colSpan: 0,
+      render: text => {
+        return (
+          <Link to={`/articledetail/${text.id}`} target="blank">
+            查看
+          </Link>
+        );
+      }
+    }
+  ];
   const onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    setSelectedRow({ selectedRowKeys });
+    setSelectedRowKeys(selectedRowKeys);
   };
-  const { loading, selectedRowKeys } = selectedRow;
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange
   };
-  const hasSelected = selectedRowKeys.length > 0;
 
   return (
-    <>
-      <div>11111</div>
-      {/* <div style={{ marginBottom: 16 }}>
-        <Button type="primary" onClick={start} loading={loading}>
-          Reload
-        </Button>
-        <span style={{ marginLeft: 8 }}>
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-        </span>
-      </div>
-      <Table
-        rowKey="id"
-        rowSelection={rowSelection}
-        columns={columns}
-        dataSource={categoryList}
-      /> */}
-    </>
+    <Table
+      rowKey="id"
+      rowSelection={rowSelection}
+      columns={columns}
+      dataSource={articleList}
+    />
   );
 };

@@ -3,10 +3,12 @@ import BasicLayout from '../components/BasicLayout';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { Table, Tabs, List, Icon, Button, Tag, Modal, Divider } from 'antd';
 import CategoryList from './component/CategoryList';
+import StickyTabs from '../components/StickyTabs';
 import { Link } from 'react-imvc/component';
 const { confirm } = Modal;
 const { TabPane } = Tabs;
-export default ({ state, handlers }) => {
+export default ({ state }) => {
+  console.log('state', state);
   const bdList = [
     { name: '首页', href: '/admin' },
     { name: '文章管理', href: '/articlemng' }
@@ -15,17 +17,6 @@ export default ({ state, handlers }) => {
   const [tabList, setTabList] = useState([
     { key: '0', name: '栏目', content: CategoryList }
   ]);
-  //粘性定位元素
-  const renderTabBar = (props, DefaultTabBar) => (
-    <Sticky topOffset={-80}>
-      {({ style }) => (
-        <DefaultTabBar
-          {...props}
-          style={{ ...style, background: '#fff', top: 68, zIndex: 1 }}
-        />
-      )}
-    </Sticky>
-  );
   //删除提示框
   const showConfirm = (id, title, onOk) => {
     confirm({
@@ -39,8 +30,9 @@ export default ({ state, handlers }) => {
 
   const addTabs = (key, name, content) => {
     setActiveKey(key);
-    if (!tabList.some(item => item.key == key))
+    if (!tabList.some(item => item.key == key)) {
       setTabList([...tabList, { key, name, content }]);
+    }
   };
   const onChange = activeKey => {
     setActiveKey(activeKey);
@@ -55,23 +47,24 @@ export default ({ state, handlers }) => {
   };
   return (
     <BasicLayout breadcrumbList={bdList}>
-      <StickyContainer>
-        <Tabs
-          hideAdd
-          onChange={onChange}
-          type="editable-card"
-          renderTabBar={renderTabBar}
-          onEdit={onEdit}
-          activeKey={activeKey}
-        >
-          {tabList &&
-            tabList.map((item, index) => (
-              <TabPane tab={item.name} key={item.key} closable={index !== 0}>
-                <item.content addTabs={addTabs} showConfirm={showConfirm} />
-              </TabPane>
-            ))}
-        </Tabs>
-      </StickyContainer>
+      <StickyTabs
+        hideAdd
+        onChange={onChange}
+        onEdit={onEdit}
+        activeKey={activeKey}
+        type="editable-card"
+      >
+        {tabList &&
+          tabList.map((item, index) => (
+            <TabPane tab={item.name} key={item.key} closable={index !== 0}>
+              <item.content
+                addTabs={addTabs}
+                showConfirm={showConfirm}
+                id={item.key}
+              />
+            </TabPane>
+          ))}
+      </StickyTabs>
     </BasicLayout>
   );
 };

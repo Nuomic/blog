@@ -73,16 +73,53 @@ export default class extends Controller {
     );
   };
   //获取文章列表
-  getArticleList = async categoryId => {
+  handleGetArticleList = async (categoryId, setArticleList) => {
     await this.resHandler(
       () => this.postApi(api.getArticleList, { categoryId }),
       res => {
-        this.handleChangeState(res);
+        setArticleList(res.articleList);
       },
       err => {
         console.log('err', err);
       }
     );
+  };
+  //改变文章所属栏目
+  handleChangeArticleListFromCategory = async (
+    articleIds,
+    currentCategoryId,
+    tocategoryId,
+    articleList,
+    setArticleList
+  ) => {
+    await this.resHandler(
+      () =>
+        this.postApi(api.changeArticleCategory, {
+          articleIds,
+          tocategoryId
+        }),
+      () => {
+        const { categoryList } = this.store.getState();
+        let newCategoryList = categoryList.map(item => {
+          if (item.id === currentCategoryId)
+            item.articleCount = item.articleCount - articleIds.length;
+          else if (item.id === tocategoryId)
+            item.articleCount = item.articleCount + articleIds.length;
+          return item;
+        });
+        this.handleChangeState({ categoryList: newCategoryList });
+        let newArticleList = articleList;
+        articleIds.forEach(item => {
+          newArticleList = newArticleList.filter(i => i.id != item);
+        });
+        setArticleList(newArticleList);
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
+
+    return;
   };
   //删除文章
   handleDelete = async (id, status) => {

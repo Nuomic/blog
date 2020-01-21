@@ -18,5 +18,7 @@ export default {
   uploadFile:
     'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/uploadFile',
   getCommentList:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/getCommentList'
+    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/getCommentList',
+  changeArticleCategory:
+    ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory'
 };

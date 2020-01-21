@@ -1,7 +1,7 @@
 import React from 'react';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { Tabs } from 'antd';
-export default ({ children, tabBarExtraContent }) => {
+export default props => {
   const renderTabBar = (props, DefaultTabBar) => (
     <Sticky topOffset={-80}>
       {({ style }) => (
@@ -14,12 +14,8 @@ export default ({ children, tabBarExtraContent }) => {
   );
   return (
     <StickyContainer>
-      <Tabs
-        tabBarExtraContent={tabBarExtraContent}
-        defaultActiveKey="0"
-        renderTabBar={renderTabBar}
-      >
-        {children}
+      <Tabs {...props} renderTabBar={renderTabBar}>
+        {props.children}
       </Tabs>
     </StickyContainer>
   );
