@@ -32,18 +32,13 @@ export default class extends Controller {
     );
   };
   //删除评论
-  handleDelete = async (id, status) => {
+  handleDeleteComment = async id => {
     await this.resHandler(
-      () => this.postApi(api.deleteArticle, { status }),
+      () => this.postApi(api.deleteComment, { id }),
       () => {
-        const { articleList } = this.store.getState();
-        const newArticleList = articleList.filter(item => {
-          if (item.status != 4 && item.status != 3 && item.id == id) {
-            item.status = 4;
-            return true;
-          } else return item.id != id;
-        });
-        this.handleChangeState({ articleList: newArticleList });
+        const { commentList } = this.store.getState();
+        const newCommentList = commentList.filter(item => item.id != id);
+        this.handleChangeState({ commentList: newCommentList });
       },
       err => {
         console.log('err', err);
