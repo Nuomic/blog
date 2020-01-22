@@ -1,8 +1,83 @@
-import React from 'react'
-
-function View(props) {
-  console.log('props', props)
+import React from 'react';
+import { Style } from 'react-imvc/component';
+import { Form, Input, Card, Icon, Checkbox, Button } from 'antd';
+const { Item } = Form;
+export default Form.create()(({ state, form }) => {
+  const { getFieldDecorator, resetFields, validateFields } = form;
+  const handleSubmit = e => {
+    e.preventDefault();
+    validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
   return (
-      <h1>Hello React-IMVC 我是后台</h1>
-  )}
-  export default View
+    <>
+      <Style name="antd" />
+      <Style name="antdPro" />
+      <Style name="customize" />
+      <Style name="commonBG" />
+      <Style name="login" />
+      <div className="login-bgimage">
+        <Card className="login-box">
+          <Form onSubmit={handleSubmit} className="login-form">
+            <Item>
+              {getFieldDecorator('username', {
+                rules: [
+                  { required: true, message: 'Please input your username!' }
+                ]
+              })(
+                <Input
+                  prefix={
+                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  }
+                  placeholder="Username"
+                />
+              )}
+            </Item>
+            <Item>
+              {getFieldDecorator('password', {
+                rules: [
+                  { required: true, message: 'Please input your Password!' }
+                ]
+              })(
+                <Input
+                  prefix={
+                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  }
+                  type="password"
+                  placeholder="Password"
+                />
+              )}
+            </Item>
+            <Item>
+              {getFieldDecorator('yanzheng', {
+                rules: [
+                  { required: true, message: 'Please input your Password!' }
+                ]
+              })(
+                <Input
+                  prefix={
+                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  }
+                  type="password"
+                  placeholder="Password"
+                />
+              )}
+            </Item>
+            <Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                登录
+              </Button>
+            </Item>
+          </Form>
+        </Card>
+      </div>
+    </>
+  );
+});
