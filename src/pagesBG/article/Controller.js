@@ -14,12 +14,12 @@ export default class extends Controller {
     output: '/css/output.css'
   };
 
-  async getInitialState(initialState) {
-    return {
-      ...initialState,
-      currentPath: this.location.pathname
-    };
-  }
+  // async getInitialState(initialState) {
+  //   return {
+  //     ...initialState,
+  //     currentPath: this.location.pathname
+  //   };
+  // }
   async componentWillCreate() {
     if (this.context.isClient) {
       let Editor = await import('braft-editor');

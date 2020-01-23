@@ -8,12 +8,13 @@ export default class extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
   Model = Model;
-  async getInitialState(initialState) {
-    return {
-      ...initialState,
-      currentPath: this.location.pathname
-    };
-  }
+  // async getInitialState(initialState) {
+  //   await super.getInitialState();
+  //   return {
+  //     ...initialState,
+  //     currentPath: this.location.pathname
+  //   };
+  // }
   async componentWillCreate() {
     // await super.componentWillCreate();
     await this.getArticleList();

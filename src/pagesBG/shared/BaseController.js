@@ -29,9 +29,9 @@ export default class extends Controller {
     //   body: JSON.stringify({ pageName: this.modulePagename })
     // };
 
-    if (context.isClient) {
-      Cookie.set('collapsed', false);
-    }
+    // if (context.isClient) {
+    if (!Cookie.get('collapsed')) Cookie.set('collapsed', false);
+    // }
     // try {
     //   let response = await fetch(url, options);
     //   let result = await response.json();
@@ -48,7 +48,8 @@ export default class extends Controller {
     // }
     return {
       ...initialState,
-      initCollapsed: Cookie.get('collapsed')
+      currentPath: location.pathname,
+      initCollapsed: Cookie.get('collapsed') == 'false' ? false : true
     };
   }
 

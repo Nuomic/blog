@@ -55,16 +55,16 @@ export default withData(
     };
     return (
       <Row>
-        <Col span={2}>
+        <Col span={1}>
           <Avatar
             style={{ backgroundColor: 'rgb(230, 230, 230)' }}
             shape="square"
             icon="user"
-            size={60}
+            size={40}
             className="fr"
           />
         </Col>
-        <Col span={22}>
+        <Col span={23}>
           <span style={{ marginLeft: 10 }}>畅所欲言吧</span>
           <Card
             size="small"

@@ -6,7 +6,7 @@ const { Item } = Form;
 
 export default Form.create()(
   ({ form, categoryId, modalStatus, handelModalStatus }) => {
-    console.log('categoryId', categoryId);
+    // console.log('categoryId', categoryId);
     const { categoryList } = useModelState();
     const { handleSaveCategory } = useCtrl();
     const category =

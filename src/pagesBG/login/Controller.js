@@ -10,4 +10,11 @@ export default class Home extends Controller {
     ...this.preload,
     login: '/css/login.css'
   };
+  // async getInitialState(initialState) {
+  //   await super.getInitialState();
+  //   return {
+  //     ...initialState,
+  //     currentPath: this.location.pathname
+  //   };
+  // }
 }

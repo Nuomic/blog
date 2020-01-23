@@ -12,7 +12,6 @@ export default ({ currentPath, collapsed, handleToggle }) => {
       collapsible
       collapsed={collapsed}
       breakpoint="lg"
-      onCollapse={handleToggle}
     >
       <div className="basic-logo" />
       <Menu
