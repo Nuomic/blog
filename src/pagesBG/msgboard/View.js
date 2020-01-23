@@ -10,18 +10,21 @@ const { confirm } = Modal;
 const { TabPane } = Tabs;
 export default ({ state, handlers }) => {
   const { commentList } = state;
-  const { handleDeleteComment } = handlers;
+  const { handleDeleteComment, handleSaveComment } = handlers;
   const bdList = [{ name: '首页', href: '/admin' }, { name: '留言管理' }];
   const articleStatus = [
     { tabName: '评论管理', key: '0' },
-    { tabName: '留言管理', key: '1' }
+    { tabName: '留言管理', key: '1' },
+    { tabName: '我的回复', key: '2' }
   ];
   const [comFormId, setComFormId] = useState(undefined);
   const commentType = type =>
     type === '0'
-      ? commentList.filter(item => !!item.articleInfo)
+      ? commentList.filter(item => !!item.articleInfo && !item.isMine)
       : type === '1'
-      ? commentList.filter(item => !item.articleInfo)
+      ? commentList.filter(item => !item.articleInfo && !item.isMine)
+      : type === '2'
+      ? commentList.filter(item => !item.articleInfo && item.isMine)
       : [];
   const CommentForm = Form.create()(({ form }) => {
     const { getFieldDecorator, validateFields, getFieldValue } = form;
@@ -29,7 +32,7 @@ export default ({ state, handlers }) => {
       e.preventDefault();
       validateFields((err, values) => {
         if (!err) {
-          showConfirm(values.categoryId);
+          handleSaveComment({ ...values, parentId: comFormId });
         }
       });
     };
