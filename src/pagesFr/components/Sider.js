@@ -86,7 +86,10 @@ const Sider = ({ siderDate }) => {
               {item.name}
             </Link>
             <span style={{ float: 'right' }}>
-              {item.articleCount} <i>篇</i>
+              <span style={{ fontWeight: 600, fontSize: 16 }}>
+                {item.articleCount}
+              </span>{' '}
+              <i>篇</i>
             </span>
           </div>
         )}

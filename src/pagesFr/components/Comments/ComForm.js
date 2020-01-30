@@ -12,7 +12,7 @@ const withData = connect(({ state, handlers }) => {
 });
 export default withData(
   Form.create()(({ parentId, articleId, form, hitokoto, saveCommit }) => {
-    console.log(parentId, articleId);
+    // console.log(parentId, articleId);
     let initRandomNum = [
       Math.floor(Math.random() * 20),
       Math.floor(Math.random() * 20)
@@ -25,14 +25,11 @@ export default withData(
     //刷新验证
     const handleRefreshRandomNum = () => {
       resetFields();
-      console.log('1111', 1);
       setRandomNum([
         Math.floor(Math.random() * 10),
         Math.floor(Math.random() * 10)
       ]);
     };
-    console.log(randomNum);
-    console.log(randomNum[0] + randomNum[1]);
     const { getFieldDecorator, resetFields, validateFields } = form;
     // 保存评论
     const handleSubmit = e => {
@@ -48,7 +45,7 @@ export default withData(
     };
     //验证码校验
     const handleverCodeCheck = (rule, value, callback) => {
-      if (value && value != randomNum[0] + randomNum[1]) {
+      if (value != randomNum[0] + randomNum[1]) {
         callback('验证码错误');
       }
       callback();
@@ -74,7 +71,7 @@ export default withData(
             <Form>
               <Form.Item>
                 <Row gutter={8}>
-                  <Col span={10}>
+                  <Col span={9}>
                     <Form.Item>
                       {getFieldDecorator('nickname', {
                         validateTrigger: 'onBlur',
@@ -103,7 +100,7 @@ export default withData(
                       })(<Input placeholder="邮箱" />)}
                     </Form.Item>
                   </Col>
-                  <Col span={4}>
+                  <Col span={5}>
                     <Form.Item>
                       {getFieldDecorator('verCode', {
                         validateTrigger: 'onBlur',
@@ -131,7 +128,7 @@ export default withData(
                       )}
                     </Form.Item>
                   </Col>
-                  <Col span={20}>
+                  <Col span={19}>
                     <Form.Item>
                       {getFieldDecorator('content')(
                         <TextArea
@@ -143,7 +140,7 @@ export default withData(
                       )}
                     </Form.Item>
                   </Col>
-                  <Col span={4}>
+                  <Col span={5}>
                     <Form.Item className="margin-0">
                       <Button
                         ghost

@@ -14,9 +14,9 @@ const withData = connect(({ state, handlers }) => {
 
 export default withData(({ commentList, getcommentList, total }) => {
   const [comFormId, setComFormId] = useState(undefined);
-  console.log('comFormId', comFormId);
-  console.log('commentList', commentList);
-  console.log('total', total);
+  // console.log('comFormId', comFormId);
+  // console.log('commentList', commentList);
+  // console.log('total', total);
   const [commentData, setCommentData] = useState({
     data: commentList,
     loading: false,
