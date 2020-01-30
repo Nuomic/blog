@@ -49,7 +49,7 @@ export default ({ id }) => {
       <Form layout="inline" onSubmit={handleSubmit}>
         <Item>
           <span style={{ marginLeft: 8 }}>
-            {hasSelected ? `将这 ${selectedRowKeys.length} 项移动到` : ''}
+            {hasSelected ? `将这 ${selectedRowKeys.length} 项移动到   ` : ''}
           </span>
           {getFieldDecorator('categoryId', {
             rules: [{ required: true, message: '请选择要移动到的栏目' }]
@@ -63,7 +63,7 @@ export default ({ id }) => {
           )}
         </Item>
         <Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={!hasSelected}>
             应用
           </Button>
         </Item>
