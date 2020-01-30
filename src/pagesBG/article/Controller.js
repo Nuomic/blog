@@ -8,11 +8,6 @@ export default class extends Controller {
   View = View; // 将 react 组件赋值给控制器的 View 属性
   Model = Model;
   SSR = false;
-  preload = {
-    ...this.preload,
-    braft: '/css/braft.css',
-    output: '/css/output.css'
-  };
 
   // async getInitialState(initialState) {
   //   return {
@@ -22,7 +17,7 @@ export default class extends Controller {
   // }
   async componentWillCreate() {
     if (this.context.isClient) {
-      let Editor = await import('braft-editor');
+      let Editor = await import('for-editor');
       this.handleChangeState({ Editor });
     }
   }
