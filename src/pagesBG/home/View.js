@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import BasicLayout from '../components/BasicLayout';
-// import { Line } from '@antv/g2plot';
 export default ({ state }) => {
   const { g2plot } = state;
   const { Line } = g2plot;
