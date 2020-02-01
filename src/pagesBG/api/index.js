@@ -24,5 +24,6 @@ export default {
   deleteComment:
     'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/deleteComment',
   changeArticleCategory:
-    ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory'
+    ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
+  postlogin: '/server/bg/login'
 };

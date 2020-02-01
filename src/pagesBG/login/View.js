@@ -2,13 +2,15 @@ import React from 'react';
 import { Style } from 'react-imvc/component';
 import { Form, Input, Card, Icon, Checkbox, Button } from 'antd';
 const { Item } = Form;
-export default Form.create()(({ state, form }) => {
+export default Form.create()(({ state, form, handlers }) => {
   const { getFieldDecorator, resetFields, validateFields } = form;
+  const { handleLogin } = handlers;
   const handleSubmit = e => {
     e.preventDefault();
-    validateFields((err, values) => {
+    validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        await handleLogin(values);
       }
     });
   };

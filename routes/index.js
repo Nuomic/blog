@@ -1,2 +1,2 @@
-export ServerBg from './server-bg';
-export ServerFr from './server-fr';
+export * from './server-bg';
+export * from './server-fr';
