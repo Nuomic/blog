@@ -10,3 +10,5 @@ export const resTemp = {
     isSuccess: true
   }
 };
+export const restapi = '/server';
+export const dbUrl = 'mongodb://zwq:zwq997957@zwq666.top:27017/blogDB';

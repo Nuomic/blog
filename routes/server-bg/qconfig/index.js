@@ -6,13 +6,6 @@ import { Router } from 'express';
 // 创建 router
 const router = Router();
 export default router;
-// export default function(app, server) {
-//   app.use('/server', router); // 将 router 挂载到 express app 里
-//   server.on('error', error => {
-//     // 对 server 进行一些处理
-//     console.log('error', error);
-//   });
-// }
 router.post('/', function(req, res) {
   console.dir(66666);
   res.json({

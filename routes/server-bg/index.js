@@ -1,8 +1,8 @@
 import qconfig from './qconfig';
 import login from './login';
+import { restapi } from '../config';
 
 //后端路由扁平化
-const restapi = '/server';
 export const serverBg = function(app, server) {
   app.use(`${restapi}/bg/login`, login);
   app.use(`${restapi}/bg/qconfig`, qconfig);
