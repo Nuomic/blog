@@ -4,7 +4,6 @@ import { resTemp } from '../../config';
 const router = Router();
 const filter = { password: 0, _v: 0 };
 export default router;
-console.log('UserModel', UserModel);
 router.post('/', function(req, res) {
   const { username, password, userid } = req.body;
   if (userid) {

@@ -8,5 +8,6 @@ export default {
     'https://www.fastmock.site/mock/6ad2ad855a912695c791915f72c60238/api/getSiderDate',
   getArticleDetail:
     'https://www.fastmock.site/mock/6ad2ad855a912695c791915f72c60238/api/getArticleDetail',
-  getHitokoto: 'https://v1.hitokoto.cn/' /* 一言接口 */
+  getHitokoto: 'https://v1.hitokoto.cn/' /* 一言接口 */,
+  getBlogDesc: '/server/fr/getBlogDesc'
 };
