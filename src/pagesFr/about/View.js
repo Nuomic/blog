@@ -6,16 +6,34 @@ export default ({ state }) => {
   const { blogdesc } = state;
   console.log('blogdesc', blogdesc);
   const BreadcrumbList = [{ name: '首页', href: '/home' }, { name: '关于我' }];
+  const cardSetting = {
+    size: 'small',
+    bordered: false
+  };
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
       <Style name="about" />
-      <Card title={'个人介绍'} size="small" bordered={false}>
-        {blogdesc.userDesc}
+      <Card title={'个人介绍'} {...cardSetting}>
+        <p
+          style={{
+            lineHeight: 2,
+            whiteSpace: 'pre-wrap'
+          }}
+        >
+          {blogdesc.userDesc}
+        </p>
       </Card>
-      <Card title={'博客介绍'} size="small" bordered={false}>
-        {blogdesc.blogDesc}
+      <Card title={'博客介绍'} {...cardSetting}>
+        <p
+          style={{
+            lineHeight: 2,
+            whiteSpace: 'pre-wrap'
+          }}
+        >
+          {blogdesc.blogDesc}
+        </p>
       </Card>
-      <Card title={'友情赞助'} size="small" bordered={false}>
+      <Card title={'友情赞助'} {...cardSetting}>
         <div
           style={{
             width: 200,
@@ -26,7 +44,7 @@ export default ({ state }) => {
         >
           <img src={blogdesc.weChat} alt="" width="100%" />
           <span style={{ fontSize: 20 }}>微信</span>
-        </div>{' '}
+        </div>
         <div
           style={{
             width: 200,

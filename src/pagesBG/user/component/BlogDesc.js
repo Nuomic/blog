@@ -20,34 +20,51 @@ export default Form.create()(({ form }) => {
       handleSaveSetting('about', { ...values, id: data.id });
     });
   };
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 4 }
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 }
+    }
+  };
   return (
-    <Form>
-      <Item>
+    <Form {...formItemLayout}>
+      <Item label="个人简介">
         {getFieldDecorator('userDesc', {
           initialValue: data.userDesc,
           rules: [{ required: true, message: '必填' }]
-        })(<TextArea />)}
+        })(<TextArea rows={10} />)}
       </Item>
-      <Item>
+      <Item label="博客简介">
         {getFieldDecorator('blogDesc', {
           initialValue: data.blogDesc,
           rules: [{ required: true, message: '必填' }]
-        })(<TextArea />)}
+        })(<TextArea rows={10} />)}
       </Item>
-      <Item>
+      <Item label="支付宝Url">
         {getFieldDecorator('alipay', {
           initialValue: data.alipay,
           rules: [{ required: true, message: '必填' }]
         })(<Input />)}
       </Item>
-      <Item>
+      <Item label="微信Url">
         {getFieldDecorator('weChat', {
           initialValue: data.weChat,
           rules: [{ required: true, message: '必填' }]
         })(<Input />)}
       </Item>
-      <Item>
-        <Button onClick={handleSubmit}>提交</Button>
+      <Item colon={false} label=" ">
+        <Button onClick={() => {}}>重置</Button>
+        <Button
+          onClick={handleSubmit}
+          type="primary"
+          style={{ marginLeft: 20 }}
+        >
+          提交
+        </Button>
       </Item>
     </Form>
   );
