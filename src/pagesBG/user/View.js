@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import BasicLayout from '../components/BasicLayout';
 import { Tabs, Modal } from 'antd';
 import CategoryList from './component/CategoryList';
+import ActionList from './component/ActionList';
 import StickyTabs from '../components/StickyTabs';
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 export default ({ state }) => {
   console.log('state', state);
-  const bdList = [{ name: '首页', href: '/admin' }, { name: '栏目管理' }];
+  const bdList = [{ name: '首页', href: '/admin' }, { name: '个人中心' }];
   const [activeKey, setActiveKey] = useState('0');
   const [tabList, setTabList] = useState([
-    { key: '0', name: '栏目', content: CategoryList }
+    { key: '0', name: '栏目', content: ActionList }
   ]);
   //删除提示框
   const showConfirm = (id, title, onOk) => {

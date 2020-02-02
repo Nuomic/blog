@@ -14,10 +14,10 @@ export default class Home extends Controller {
   }
   getBlogDesc = async () => {
     await this.resHandler(
-      () => this.getApi(api.getBlogDesc),
+      () => this.getApi(api.getSetting + '/about'),
       res => {
         console.log('res', res);
-        this.handleChangeState(res);
+        this.handleChangeState({ blogdesc: res.about });
       },
       err => {
         console.log('err', err);

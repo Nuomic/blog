@@ -5,7 +5,7 @@ import categoryModel from './categoryModel';
 import friendModel from './friendModel';
 import commentModel from './commentModel';
 import tagModel from './tagModel';
-import blogdescModel from './blogdescModel';
+import settingModel from './settingModel';
 import { dbUrl } from '../config';
 // 1.1 连接数据库
 mongoose.connect(dbUrl);
@@ -22,4 +22,4 @@ export const CategoryModel = categoryModel;
 export const FriendModel = friendModel;
 export const CommentModel = commentModel;
 export const TagModel = tagModel;
-export const BlogdescModel = blogdescModel;
+export const SettingModel = settingModel;

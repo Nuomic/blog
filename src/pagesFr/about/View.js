@@ -9,21 +9,34 @@ export default ({ state }) => {
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
       <Style name="about" />
-      <Card style={{ height: '100vh' }} title={'关于我'}>
-        <div>
-          关于我
-          <div>{blogdesc.userDesc}</div>
-        </div>
-        <div>
-          博客介绍
-          <div>{blogdesc.blogDesc}</div>
-        </div>
-        <div>
-          友情赞助
-          <div>
-            <img src={blogdesc.weChat} alt="" style={{ width: 200 }} />
-            <img src={blogdesc.alipay} style={{ width: 200 }} alt="" />
-          </div>
+      <Card title={'个人介绍'} size="small" bordered={false}>
+        {blogdesc.userDesc}
+      </Card>
+      <Card title={'博客介绍'} size="small" bordered={false}>
+        {blogdesc.blogDesc}
+      </Card>
+      <Card title={'友情赞助'} size="small" bordered={false}>
+        <div
+          style={{
+            width: 200,
+            margin: '0 20px',
+            display: 'inline-block',
+            textAlign: 'center'
+          }}
+        >
+          <img src={blogdesc.weChat} alt="" width="100%" />
+          <span style={{ fontSize: 20 }}>微信</span>
+        </div>{' '}
+        <div
+          style={{
+            width: 200,
+            margin: '0 20px',
+            display: 'inline-block',
+            textAlign: 'center'
+          }}
+        >
+          <img src={blogdesc.alipay} alt="" width="100%" />
+          <span style={{ fontSize: 20 }}>支付宝</span>
         </div>
       </Card>
     </BasicLayout>

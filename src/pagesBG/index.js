@@ -43,5 +43,10 @@ export default [
     path: '/resources',
     controller: () => import('./resources/Controller'),
     name: '资源管理'
+  },
+  {
+    path: '/user',
+    controller: () => import('./user/Controller'),
+    name: '个人中心'
   }
 ];

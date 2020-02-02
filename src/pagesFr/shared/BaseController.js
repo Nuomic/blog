@@ -2,6 +2,7 @@ import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
 import api from '../api';
+const querystring = require('querystring');
 export default class extends Controller {
   preload = {
     antd: '/css/antd.min.css',
