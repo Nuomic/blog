@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 //定义描述文档结构
-const categorySchema = mongoose.Schema({
-  category_id: { type: String, required: true },
-  tag_id: { type: String },
-  date: { type: Date, required: true },
-  view_count: { type: Number },
-  like_count: { type: Number },
-  comment_count: { type: Number },
-  title: { type: String, required: true },
-  content: { type: String, required: true }
-});
+const categorySchema = mongoose.Schema(
+  {
+    id: mongoose.Schema.Types.ObjectId,
+    name: { type: String, required: true },
+    summary: String,
+    avatar: String,
+    articleCount: Number
+  },
+  { timestamps: true }
+);
 //定义Model
 export default mongoose.model('category', categorySchema);

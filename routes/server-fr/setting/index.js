@@ -19,7 +19,7 @@ router.get('/get/:type', (req, res) => {
 router.post('/save', (req, res) => {
   const { type, id, ...value } = req.body;
 
-  SettingModel.findByIdAndUpdate(id, { [type]: value }, (err, setting) => {
+  SettingModel.findByIdAndUpdate(id, { [type]: value }, err => {
     if (err) {
       console.log('更新失败');
     } else {

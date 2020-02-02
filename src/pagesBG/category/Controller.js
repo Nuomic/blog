@@ -24,7 +24,7 @@ export default class extends Controller {
   //获取栏目列表
   getCategory = async () => {
     await this.resHandler(
-      () => this.postApi(api.getCategory),
+      () => this.getApi(api.getCategory),
       res => {
         this.handleChangeState(res);
       },
@@ -63,7 +63,7 @@ export default class extends Controller {
             return item;
           });
         } else {
-          newCategoryList.unshift({ ...category, ...res, articleCount: 0 });
+          newCategoryList.unshift({ ...res, articleCount: 0 });
         }
         console.log(categoryList);
         this.handleChangeState({ categoryList: newCategoryList });

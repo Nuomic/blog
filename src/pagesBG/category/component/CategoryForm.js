@@ -12,13 +12,12 @@ export default Form.create()(
     const category =
       (categoryList && categoryList.find(item => item.id == categoryId)) || {};
     const { getFieldDecorator, validateFields, resetFields } = form;
-
+    getFieldDecorator('avatar', { initialValue: category.avatar });
     const handleSubmit = e => {
       validateFields(async (err, fieldsValue) => {
         e.preventDefault();
         if (err) return;
         console.log('fieldsValue', fieldsValue);
-        // console.log('object', { id: categoryId, ...fieldsValue });
         await handleSaveCategory(
           { ...category, ...fieldsValue },
           handelModalStatus

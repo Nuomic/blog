@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import getCategory from './getCategory';
+import saveCategory from './saveCategory';
+import deleteCategory from './deleteCategory';
+const router = Router();
+// const filter = { password: 0, _v: 0 };
+export default router;
+router.get('/list', (req, res) => getCategory(req, res));
+router.post('/save', (req, res) => saveCategory(req, res));
+router.post('/delete', (req, res) => deleteCategory(req, res));

@@ -4,7 +4,8 @@ import api from '../../api';
 export default ({ url, form }) => {
   const [state, setState] = useState({ loading: false });
   const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
-  getFieldDecorator('avatar');
+  // getFieldDecorator('avatar');
+
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
