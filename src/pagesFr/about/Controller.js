@@ -8,6 +8,12 @@ export default class Home extends Controller {
   preload = {
     ...this.preload
   };
+  async getInitialState(initialState) {
+    return {
+      ...initialState,
+      currentPath: this.location.pathname
+    };
+  }
   async componentWillCreate() {
     await super.componentWillCreate();
     await this.getBlogDesc();
