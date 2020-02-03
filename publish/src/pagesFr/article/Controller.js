@@ -69,8 +69,6 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "Model", Model);
 
-    _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
-
     _defineProperty(_assertThisInitialized(_this), "getArticleList", function _callee() {
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {

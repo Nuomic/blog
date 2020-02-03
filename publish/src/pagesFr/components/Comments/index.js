@@ -59,11 +59,10 @@ var _default = withData(function (_ref2) {
   var _useState = (0, _react.useState)(undefined),
       _useState2 = _slicedToArray(_useState, 2),
       comFormId = _useState2[0],
-      setComFormId = _useState2[1];
+      setComFormId = _useState2[1]; // console.log('comFormId', comFormId);
+  // console.log('commentList', commentList);
+  // console.log('total', total);
 
-  console.log('comFormId', comFormId);
-  console.log('commentList', commentList);
-  console.log('total', total);
 
   var _useState3 = (0, _react.useState)({
     data: commentList,

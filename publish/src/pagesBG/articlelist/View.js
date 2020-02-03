@@ -9,23 +9,15 @@ var _react = _interopRequireDefault(require("react"));
 
 var _BasicLayout = _interopRequireDefault(require("../components/BasicLayout"));
 
-var _reactSticky = require("react-sticky");
-
 var _antd = require("antd");
 
 var _component = require("react-imvc/component");
 
+var _StickyTabs = _interopRequireDefault(require("../components/StickyTabs"));
+
 var _this = void 0;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var confirm = _antd.Modal.confirm;
 var TabPane = _antd.Tabs.TabPane;
@@ -41,7 +33,8 @@ var _default = function _default(_ref) {
     href: '/articlemng'
   }];
   var articleList = state.articleList;
-  var handleDelete = handlers.handleDelete;
+  var handleDelete = handlers.handleDelete,
+      handleChangeArticleStatus = handlers.handleChangeArticleStatus;
   var articleStatus = [{
     tabName: '全部',
     key: '0'
@@ -57,26 +50,11 @@ var _default = function _default(_ref) {
   }, {
     tabName: '回收站',
     key: '4'
-  }]; //粘性定位元素
+  }];
 
-  var renderTabBar = function renderTabBar(props, DefaultTabBar) {
-    return _react["default"].createElement(_reactSticky.Sticky, {
-      topOffset: -80
-    }, function (_ref2) {
-      var style = _ref2.style;
-      return _react["default"].createElement(DefaultTabBar, _extends({}, props, {
-        style: _objectSpread({}, style, {
-          background: '#fff',
-          top: 68,
-          zIndex: 1
-        })
-      }));
-    });
-  };
-
-  var IconText = function IconText(_ref3) {
-    var type = _ref3.type,
-        text = _ref3.text;
+  var IconText = function IconText(_ref2) {
+    var type = _ref2.type,
+        text = _ref2.text;
     return _react["default"].createElement("span", {
       style: {
         padding: '0 20px 0 0'
@@ -122,18 +100,14 @@ var _default = function _default(_ref) {
 
   return _react["default"].createElement(_BasicLayout["default"], {
     breadcrumbList: bdList
-  }, _react["default"].createElement(_reactSticky.StickyContainer, null, _react["default"].createElement(_antd.Tabs, {
+  }, _react["default"].createElement(_StickyTabs["default"], {
     tabBarExtraContent: _react["default"].createElement(_component.Link, {
       to: "/md/add"
     }, _react["default"].createElement(_antd.Button, {
       type: "primary",
-      ghost: true
-    }, _react["default"].createElement(_antd.Icon, {
-      type: "plus"
-    }), "\u65B0\u589E")),
-    defaultActiveKey: "0",
-    renderTabBar: renderTabBar // style={{ position: 'relative', top: '-20px' }}
-
+      ghost: true,
+      icon: "plus"
+    }, "\u65B0\u589E"))
   }, articleStatus && articleStatus.map(function (item) {
     return _react["default"].createElement(TabPane, {
       tab: item.tabName + " (".concat(ArticleList(item.key).length, ")"),
@@ -150,10 +124,18 @@ var _default = function _default(_ref) {
       renderItem: function renderItem(item) {
         return _react["default"].createElement(_antd.List.Item, {
           key: item.id,
-          actions: [_react["default"].createElement(_component.Link, {
-            to: "/md/edit/".concat(item.id)
+          actions: [item.status == '4' && _react["default"].createElement(_antd.Button, {
+            type: "link",
+            style: {
+              padding: 0
+            },
+            onClick: handleChangeArticleStatus.bind(_this, item.id, 3)
+          }, "\u56DE\u6536\u81F3\u8349\u7A3F\u7BB1") || _react["default"].createElement(_component.Link, {
+            to: "/md/edit/".concat(item.id),
+            target: "blank"
           }, "\u7F16\u8F91"), _react["default"].createElement(_component.Link, {
-            to: "/articledetail/".concat(item.id)
+            to: "/articledetail/".concat(item.id),
+            target: "blank"
           }, "\u67E5\u770B"), _react["default"].createElement(_antd.Button, {
             type: "link",
             style: {
@@ -190,7 +172,7 @@ var _default = function _default(_ref) {
         }));
       }
     }));
-  }))));
+  })));
 };
 
 exports["default"] = _default;

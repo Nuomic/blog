@@ -11,6 +11,8 @@ var _View = _interopRequireDefault(require("./View"));
 
 var Model = _interopRequireWildcard(require("./Model"));
 
+var _api = _interopRequireDefault(require("../api"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -19,7 +21,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -55,8 +65,255 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "Model", Model);
 
+    _defineProperty(_assertThisInitialized(_this), "getCategory", function _callee() {
+      return regeneratorRuntime.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.getApi(_api["default"].getCategory);
+              }, function (res) {
+                _this.handleChangeState(res);
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteCategory", function _callee2(categoryId) {
+      return regeneratorRuntime.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].deleteCategory, {
+                  categoryId: categoryId
+                });
+              }, function () {
+                var _this$store$getState = _this.store.getState(),
+                    categoryList = _this$store$getState.categoryList;
+
+                var newCategoryList = categoryList.filter(function (item) {
+                  return item.id != categoryId;
+                });
+
+                _this.handleChangeState({
+                  categoryList: newCategoryList
+                });
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSaveCategory", function _callee3(category, handelModalStatus) {
+      return regeneratorRuntime.async(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log('category', category);
+              _context3.next = 3;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].saveCategory, category);
+              }, function (res) {
+                var _this$store$getState2 = _this.store.getState(),
+                    categoryList = _this$store$getState2.categoryList;
+
+                var newCategoryList = categoryList;
+
+                if (category.id) {
+                  newCategoryList = categoryList.map(function (item) {
+                    if (item.id == category.id) item = category;
+                    return item;
+                  });
+                } else {
+                  newCategoryList.unshift(_objectSpread({}, res, {
+                    articleCount: 0
+                  }));
+                }
+
+                console.log(categoryList);
+
+                _this.handleChangeState({
+                  categoryList: newCategoryList
+                });
+
+                handelModalStatus();
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleGetArticleList", function _callee4(categoryId, setArticleList) {
+      return regeneratorRuntime.async(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].getArticleList, {
+                  categoryId: categoryId
+                });
+              }, function (res) {
+                setArticleList(res.articleList);
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChangeArticleListFromCategory", function _callee5(articleIds, currentCategoryId, tocategoryId, articleList, setArticleList) {
+      return regeneratorRuntime.async(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].changeArticleCategory, {
+                  articleIds: articleIds,
+                  tocategoryId: tocategoryId
+                });
+              }, function () {
+                var _this$store$getState3 = _this.store.getState(),
+                    categoryList = _this$store$getState3.categoryList;
+
+                var newCategoryList = categoryList.map(function (item) {
+                  if (item.id === currentCategoryId) item.articleCount = item.articleCount - articleIds.length;else if (item.id === tocategoryId) item.articleCount = item.articleCount + articleIds.length;
+                  return item;
+                });
+
+                _this.handleChangeState({
+                  categoryList: newCategoryList
+                });
+
+                var newArticleList = articleList;
+                articleIds.forEach(function (item) {
+                  newArticleList = newArticleList.filter(function (i) {
+                    return i.id != item;
+                  });
+                });
+                setArticleList(newArticleList);
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+              return _context5.abrupt("return");
+
+            case 3:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDelete", function _callee6(id, status) {
+      return regeneratorRuntime.async(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].deleteArticle, {
+                  id: id,
+                  status: status
+                });
+              }, function () {
+                var _this$store$getState4 = _this.store.getState(),
+                    articleList = _this$store$getState4.articleList;
+
+                var newArticleList = articleList.filter(function (item) {
+                  if (item.status != 4 && item.status != 3 && item.id == id) {
+                    item.status = 4;
+                    return true;
+                  } else return item.id != id;
+                });
+
+                _this.handleChangeState({
+                  articleList: newArticleList
+                });
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      });
+    });
+
     return _this;
   }
+
+  _createClass(_default, [{
+    key: "componentWillCreate",
+    // async getInitialState(initialState) {
+    //   const state = await super.getInitialState(initialState);
+    //   console.log('state', state);
+    //   return {
+    //     ...state,
+    //     currentPath: this.location.pathname
+    //   };
+    // }
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.next = 2;
+              return regeneratorRuntime.awrap(this.getCategory());
+
+            case 2:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      });
+    }
+  }]);
 
   return _default;
 }(_BaseController["default"]);

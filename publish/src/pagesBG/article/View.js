@@ -9,7 +9,11 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _antd = require("antd");
+
 var _component = require("react-imvc/component");
+
+var _this = void 0;
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -26,41 +30,92 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var _default = function _default(_ref) {
   var state = _ref.state;
   console.log('state', state);
-  var BraftEditor = state.Editor["default"];
+  var Editor = state.Editor["default"];
 
-  var _useState = (0, _react.useState)(BraftEditor.createEditorState(null)),
+  var _useState = (0, _react.useState)(),
       _useState2 = _slicedToArray(_useState, 2),
-      editorState = _useState2[0],
-      setEditorState = _useState2[1];
+      value = _useState2[0],
+      setValue = _useState2[1];
 
-  var submitContent = function submitContent() {
-    var htmlContent;
-    return regeneratorRuntime.async(function submitContent$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            htmlContent = editorState.toHTML(); // const result = await saveEditorContent(htmlContent)
+  var handleChange = function handleChange(value) {
+    setValue(value);
+  };
 
-          case 1:
-          case "end":
-            return _context.stop();
+  var EditForm = _antd.Form.create()(function (_ref2) {
+    var form = _ref2.form;
+    var getFieldDecorator = form.getFieldDecorator,
+        getFieldsError = form.getFieldsError,
+        getFieldError = form.getFieldError,
+        isFieldTouched = form.isFieldTouched;
+
+    var handleSubmit = function handleSubmit(type, e) {
+      e.preventDefault();
+
+      _this.props.form.validateFields(function (err, values) {
+        if (!err) {
+          console.log('Received values of form: ', values);
         }
+      });
+    }; // Only show error after a field is touched.
+
+
+    var usernameError = isFieldTouched('username') && getFieldError('username');
+    var passwordError = isFieldTouched('password') && getFieldError('password');
+    return _react["default"].createElement(_antd.Form, {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between'
       }
-    });
-  };
+    }, _react["default"].createElement(_antd.Form.Item, {
+      style: {
+        flex: 10
+      }
+    }, getFieldDecorator('title', {
+      rules: [{
+        required: true,
+        message: 'Please input your username!'
+      }]
+    })(_react["default"].createElement(_antd.Input, {
+      size: "large",
+      placeholder: "\u8BF7\u8F93\u5165\u6807\u9898"
+    }))), _react["default"].createElement(_antd.Form.Item, {
+      style: {
+        flex: 1
+      }
+    }, _react["default"].createElement(_antd.Button, {
+      size: "large",
+      className: "fr"
+    }, "\u4FDD\u5B58\u8349\u7A3F")), _react["default"].createElement(_antd.Form.Item, {
+      style: {
+        flex: 1
+      }
+    }, _react["default"].createElement(_antd.Button, {
+      size: "large",
+      type: "primary",
+      className: "fr"
+    }, "\u53D1\u8868\u6587\u7AE0")));
+  });
 
-  var handleEditorChange = function handleEditorChange(editorState) {
-    setEditorState(editorState);
-  };
-
-  return _react["default"].createElement("div", null, _react["default"].createElement(_component.Style, {
-    name: "braft"
+  return _react["default"].createElement("div", {
+    style: {
+      padding: 10,
+      backgroundColor: '#f8f8f8'
+    }
+  }, _react["default"].createElement(_component.Style, {
+    name: "antd"
   }), _react["default"].createElement(_component.Style, {
-    name: "output"
-  }), _react["default"].createElement(BraftEditor, {
-    value: editorState,
-    onChange: handleEditorChange,
-    onSave: submitContent
+    name: "antdPro"
+  }), _react["default"].createElement(_component.Style, {
+    name: "customize"
+  }), _react["default"].createElement(_component.Style, {
+    name: "commonBG"
+  }), _react["default"].createElement(EditForm, null), _react["default"].createElement(Editor, {
+    value: value,
+    onChange: function onChange(value) {
+      return handleChange(value);
+    },
+    subfield: true,
+    preview: true
   }));
 };
 

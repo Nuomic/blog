@@ -13,7 +13,6 @@ exports.getCurrentDate = getCurrentDate;
 exports.getNextMonthDate = getNextMonthDate;
 exports.getUrl = getUrl;
 exports.redirect = redirect;
-exports.isOffline = isOffline;
 
 var _querystring = _interopRequireDefault(require("querystring"));
 
@@ -93,15 +92,4 @@ function redirect(context, targetUrl) {
   } else {
     window.location.href = targetUrl;
   }
-}
-
-function isOffline(context, location) {
-  var _ref = context.isClient ? location : context.req,
-      query = _ref.query; //query参数全部转为小写
-
-
-  var _JSON$parse = JSON.parse(JSON.stringify(query || '').toLowerCase()),
-      logintype = _JSON$parse.logintype;
-
-  return logintype == 'offline' || context.defaultNetType == 'offline';
 }

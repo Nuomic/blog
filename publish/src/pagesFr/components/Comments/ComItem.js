@@ -15,6 +15,8 @@ var _antd = require("antd");
 
 var _moment = _interopRequireDefault(require("moment"));
 
+require("moment/locale/zh-cn");
+
 var _component = require("react-imvc/component");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

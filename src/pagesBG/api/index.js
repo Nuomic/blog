@@ -8,10 +8,10 @@ export default {
   changeArticleStatus:
     'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleStatus',
   /* 获取栏目 */
-  getCategory: '/server/bg/category/list',
+  getCategory: '/category/list',
   /* 删除栏目 */
-  deleteCategory: '/server/bg/category/delete',
-  saveCategory: '/server/bg/category/save',
+  deleteCategory: '/category/delete',
+  saveCategory: '/category/save',
   uploadFile:
     'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/uploadFile',
   getCommentList:
@@ -22,7 +22,7 @@ export default {
     'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/deleteComment',
   changeArticleCategory:
     ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
-  postlogin: '/server/bg/login',
-  getSetting: '/server/fr/setting/get',
-  saveSetting: '/server/fr/setting/save'
+  postlogin: '/login',
+  getSetting: '/setting/get',
+  saveSetting: '/setting/save'
 };

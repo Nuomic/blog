@@ -26,8 +26,7 @@ var _default = function _default(_ref) {
     trigger: null,
     collapsible: true,
     collapsed: collapsed,
-    breakpoint: "lg",
-    onCollapse: handleToggle
+    breakpoint: "lg"
   }, _react["default"].createElement("div", {
     className: "basic-logo"
   }), _react["default"].createElement(_antd.Menu, {

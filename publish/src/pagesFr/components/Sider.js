@@ -113,7 +113,12 @@ var Sider = function Sider(_ref2) {
         style: {
           "float": 'right'
         }
-      }, item.articleCount, " ", _react["default"].createElement("i", null, "\u7BC7")));
+      }, _react["default"].createElement("span", {
+        style: {
+          fontWeight: 600,
+          fontSize: 16
+        }
+      }, item.articleCount), ' ', _react["default"].createElement("i", null, "\u7BC7")));
     }
   }), _react["default"].createElement(SiderItem, {
     name: "\u53CB\u60C5\u94FE\u63A5",

@@ -53,7 +53,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
       form = _ref2.form,
       hitokoto = _ref2.hitokoto,
       saveCommit = _ref2.saveCommit;
-  console.log(parentId, articleId);
+  // console.log(parentId, articleId);
   var initRandomNum = [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)];
 
   var _useState = (0, _react.useState)(false),
@@ -67,12 +67,9 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
 
   var handleRefreshRandomNum = function handleRefreshRandomNum() {
     resetFields();
-    console.log('1111', 1);
     setRandomNum([Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]);
   };
 
-  console.log(randomNum);
-  console.log(randomNum[0] + randomNum[1]);
   var getFieldDecorator = form.getFieldDecorator,
       resetFields = form.resetFields,
       validateFields = form.validateFields; // 保存评论
@@ -121,7 +118,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
 
 
   var handleverCodeCheck = function handleverCodeCheck(rule, value, callback) {
-    if (value && value != randomNum[0] + randomNum[1]) {
+    if (value != randomNum[0] + randomNum[1]) {
       callback('验证码错误');
     }
 
@@ -129,17 +126,17 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
   };
 
   return _react["default"].createElement(_antd.Row, null, _react["default"].createElement(_antd.Col, {
-    span: 2
+    span: 1
   }, _react["default"].createElement(_antd.Avatar, {
     style: {
       backgroundColor: 'rgb(230, 230, 230)'
     },
     shape: "square",
     icon: "user",
-    size: 60,
+    size: 40,
     className: "fr"
   })), _react["default"].createElement(_antd.Col, {
-    span: 22
+    span: 23
   }, _react["default"].createElement("span", {
     style: {
       marginLeft: 10
@@ -153,7 +150,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
   }, _react["default"].createElement(_antd.Form, null, _react["default"].createElement(_antd.Form.Item, null, _react["default"].createElement(_antd.Row, {
     gutter: 8
   }, _react["default"].createElement(_antd.Col, {
-    span: 10
+    span: 9
   }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('nickname', {
     validateTrigger: 'onBlur',
     rules: [{
@@ -176,7 +173,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
   })(_react["default"].createElement(_antd.Input, {
     placeholder: "\u90AE\u7BB1"
   })))), _react["default"].createElement(_antd.Col, {
-    span: 4
+    span: 5
   }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('verCode', {
     validateTrigger: 'onBlur',
     rules: [{
@@ -193,7 +190,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
     }),
     placeholder: randomNum && "".concat(randomNum[0], " + ").concat(randomNum[1], " = ?") || undefined
   })))), _react["default"].createElement(_antd.Col, {
-    span: 20
+    span: 19
   }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('content')(_react["default"].createElement(TextArea, {
     autoSize: {
       minRows: 2,
@@ -201,7 +198,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
     },
     placeholder: hitokoto.hitokoto && "\u4E00\u8A00\uFF1A".concat(hitokoto.hitokoto)
   })))), _react["default"].createElement(_antd.Col, {
-    span: 4
+    span: 5
   }, _react["default"].createElement(_antd.Form.Item, {
     className: "margin-0"
   }, _react["default"].createElement(_antd.Button, {

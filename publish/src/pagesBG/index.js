@@ -44,7 +44,7 @@ var _default = [{
   },
   name: '富文本新增'
 }, {
-  path: '/md/edit/:articleId',
+  path: "/md/edit/:articleId",
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./article/Controller'));
@@ -83,5 +83,13 @@ var _default = [{
     });
   },
   name: '资源管理'
+}, {
+  path: '/user',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./user/Controller'));
+    });
+  },
+  name: '个人中心'
 }];
 exports["default"] = _default;

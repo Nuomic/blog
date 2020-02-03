@@ -45,16 +45,18 @@ var _default = function _default(_ref) {
       paddingRight: 24,
       lineHeight: '66px'
     }
-  }, _react["default"].createElement("span", null, _react["default"].createElement(_antd.Badge, {
-    count: 100,
+  }, _react["default"].createElement("span", {
     style: {
-      margin: '0 30px'
+      margin: '0 30px',
+      position: 'relative',
+      top: 10
     }
+  }, _react["default"].createElement(_antd.Badge, {
+    count: 100
   }, _react["default"].createElement(_antd.Icon, {
     type: "bell",
     style: {
-      fontSize: 30,
-      margin: '0 30px'
+      fontSize: 30
     }
   }))), _react["default"].createElement(_antd.Avatar, null), _react["default"].createElement(_antd.Button, {
     type: "link"

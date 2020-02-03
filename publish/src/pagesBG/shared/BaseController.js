@@ -101,10 +101,10 @@ function (_Controller) {
               //   },
               //   body: JSON.stringify({ pageName: this.modulePagename })
               // };
+              // if (context.isClient) {
 
-              if (context.isClient) {
-                _jsCookie["default"].set('collapsed', false);
-              } // try {
+              if (!_jsCookie["default"].get('collapsed')) _jsCookie["default"].set('collapsed', false); // }
+              // try {
               //   let response = await fetch(url, options);
               //   let result = await response.json();
               //   let { ResponseStatus } = result;
@@ -119,9 +119,9 @@ function (_Controller) {
               //   console.error('getUserInfo', error);
               // }
 
-
               return _context.abrupt("return", _objectSpread({}, initialState, {
-                initCollapsed: _jsCookie["default"].get('collapsed')
+                currentPath: location.pathname,
+                initCollapsed: _jsCookie["default"].get('collapsed') == 'false' ? false : true
               }));
 
             case 3:

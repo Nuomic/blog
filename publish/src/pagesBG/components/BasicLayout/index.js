@@ -17,6 +17,8 @@ var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
 var _component = require("react-imvc/component");
 
+var _jsCookie = _interopRequireDefault(require("js-cookie"));
+
 var _Header = _interopRequireDefault(require("./Header"));
 
 var _Sider = _interopRequireDefault(require("./Sider"));
@@ -41,32 +43,32 @@ var Content = _antd.Layout.Content;
 var withData = (0, _connect["default"])(function (_ref) {
   var state = _ref.state;
   return {
-    state: state,
-    currentPath: state.location.pathname
+    currentPath: state.location.pathname,
+    initCollapsed: state.initCollapsed
   };
 });
 
 var _default = withData(function (_ref2) {
-  var state = _ref2.state,
-      children = _ref2.children,
+  var children = _ref2.children,
       breadcrumbList = _ref2.breadcrumbList,
-      currentPath = _ref2.currentPath;
+      currentPath = _ref2.currentPath,
+      initCollapsed = _ref2.initCollapsed;
 
-  var _useState = (0, _react.useState)(),
+  var _useState = (0, _react.useState)(initCollapsed),
       _useState2 = _slicedToArray(_useState, 2),
       collapsed = _useState2[0],
       setCollapsed = _useState2[1];
 
-  console.log('state', state);
-  console.log('collapsed', collapsed);
-
   var handleToggle = function handleToggle() {
-    setCollapsed(!collapsed);
+    _jsCookie["default"].get('collapsed') == 'false' && _jsCookie["default"].set('collapsed', true) || _jsCookie["default"].set('collapsed', false);
+    setCollapsed(_jsCookie["default"].get('collapsed') == 'false' ? false : true);
   };
 
   var handleChangeCollapsed = function handleChangeCollapsed(collapsed) {
-    console.log('collapsed', collapsed);
-    setCollapsed(collapsed);
+    // console.log('collapsed', collapsed);
+    _jsCookie["default"].set('collapsed', collapsed);
+
+    setCollapsed(_jsCookie["default"].get('collapsed') == 'false' ? false : true);
   };
 
   return _react["default"].createElement(_antd.ConfigProvider, {

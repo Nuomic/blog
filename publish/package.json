@@ -17,8 +17,9 @@
   "dependencies": {
     "@antv/g2plot": "^0.11.22",
     "antd": "^3.25.1",
-    "braft-editor": "^2.3.8",
     "core-js": "^2.6.5",
+    "for-editor": "^0.3.5",
+    "mongoose": "^5.8.10",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-imvc": "^2.7.1",

@@ -21,10 +21,6 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -95,17 +91,37 @@ function (_Controller) {
   }
 
   _createClass(_default, [{
-    key: "getInitialState",
-    value: function getInitialState(initialState) {
-      return regeneratorRuntime.async(function getInitialState$(_context2) {
+    key: "componentWillCreate",
+    // async getInitialState(initialState) {
+    //   const state = await super.getInitialState(initialState);
+    //   return {
+    //     ...state,
+    //     currentPath: this.location.pathname
+    //   };
+    // }
+    value: function componentWillCreate() {
+      var g2plot;
+      return regeneratorRuntime.async(function componentWillCreate$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", _objectSpread({}, initialState, {
-                currentPath: this.location.pathname
+              if (!this.context.isClient) {
+                _context2.next = 5;
+                break;
+              }
+
+              _context2.next = 3;
+              return regeneratorRuntime.awrap(Promise.resolve().then(function () {
+                return _interopRequireWildcard(require('@antv/g2plot'));
               }));
 
-            case 1:
+            case 3:
+              g2plot = _context2.sent;
+              this.handleChangeState({
+                g2plot: g2plot
+              });
+
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -113,45 +129,14 @@ function (_Controller) {
       }, null, this);
     }
   }, {
-    key: "componentWillCreate",
-    value: function componentWillCreate() {
-      var g2plot;
-      return regeneratorRuntime.async(function componentWillCreate$(_context3) {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              if (!this.context.isClient) {
-                _context3.next = 5;
-                break;
-              }
-
-              _context3.next = 3;
-              return regeneratorRuntime.awrap(Promise.resolve().then(function () {
-                return _interopRequireWildcard(require('@antv/g2plot'));
-              }));
-
-            case 3:
-              g2plot = _context3.sent;
-              this.handleChangeState({
-                g2plot: g2plot
-              });
-
-            case 5:
             case "end":
               return _context3.stop();
-          }
-        }
-      }, null, this);
-    }
-  }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-            case "end":
-              return _context4.stop();
           }
         }
       });

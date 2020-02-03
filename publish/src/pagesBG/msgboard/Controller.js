@@ -11,6 +11,10 @@ var _View = _interopRequireDefault(require("./View"));
 
 var Model = _interopRequireWildcard(require("./Model"));
 
+var _api = _interopRequireDefault(require("../api"));
+
+var _antd = require("antd");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -20,6 +24,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -55,8 +63,126 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "Model", Model);
 
+    _defineProperty(_assertThisInitialized(_this), "getCommentList", function _callee() {
+      return regeneratorRuntime.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].getCommentList);
+              }, function (res) {
+                _this.handleChangeState(res);
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSaveComment", function _callee2(value) {
+      return regeneratorRuntime.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].saveComment, value);
+              }, function (res) {
+                console.log('res', res);
+
+                _antd.message.success('回复成功');
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteComment", function _callee3(id) {
+      return regeneratorRuntime.async(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].deleteComment, {
+                  id: id
+                });
+              }, function () {
+                var _this$store$getState = _this.store.getState(),
+                    commentList = _this$store$getState.commentList;
+
+                var newCommentList = commentList.filter(function (item) {
+                  return item.id != id;
+                });
+
+                _this.handleChangeState({
+                  commentList: newCommentList
+                });
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    });
+
     return _this;
   }
+
+  _createClass(_default, [{
+    key: "componentWillCreate",
+    // async getInitialState(initialState) {
+    //   const state = await super.getInitialState(initialState);
+    //   return {
+    //     ...state,
+    //     currentPath: this.location.pathname
+    //   };
+    // }
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(this.getCommentList());
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      });
+    }
+  }]);
 
   return _default;
 }(_BaseController["default"]);
