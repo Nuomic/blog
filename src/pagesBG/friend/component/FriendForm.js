@@ -16,6 +16,7 @@ export default Form.create()(
         if (!!currentValue.id) fieldsValue.friendId = currentValue.id;
         await handleSaveFriend(fieldsValue);
       });
+      resetFields();
       changModalStatus({});
     };
     const formItemLayout = {
