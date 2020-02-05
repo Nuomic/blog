@@ -25,7 +25,7 @@ export default class extends Controller {
   }
   getArticleList = async () => {
     await this.resHandler(
-      () => this.postApi(api.getArticleList),
+      () => this.getApi(api.getArticleList),
       res => {
         console.log('res', res);
         this.handleChangeState(res);

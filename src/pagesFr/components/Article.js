@@ -80,7 +80,7 @@ export default withData(({ articleList }) => {
                       // onClick={handleToDetail(item.id)}
                       style={{ marginBottom: 10, maxWidth: 480 }}
                     >
-                      <Tag color="magenta">{item.tagInfo.name}</Tag>
+                      <Tag color="magenta">{item.categoryInfo.name}</Tag>
                       {item.title}
                     </Paragraph>
                     <Divider className="margin-0"></Divider>
