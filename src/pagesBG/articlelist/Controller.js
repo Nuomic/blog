@@ -62,7 +62,7 @@ export default class extends Controller {
       await this.handleChangeArticleStatus(articleId, 4);
     else
       await this.resHandler(
-        () => this.postApi(api.deleteArticle, { articleId, status }),
+        () => this.postApi(api.deleteArticle, { articleId }),
         () => {
           this.getArticleList();
         },
