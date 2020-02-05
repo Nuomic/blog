@@ -70,3 +70,6 @@
   font-size: 12px;
   font-weight: 300;
 }
+.friend-item-card .ant-card-body {
+  padding: 0;
+}
