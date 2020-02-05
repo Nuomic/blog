@@ -45,6 +45,11 @@ export default [
     name: '资源管理'
   },
   {
+    path: '/friend',
+    controller: () => import('./friend/Controller'),
+    name: '友情链接'
+  },
+  {
     path: '/user',
     controller: () => import('./user/Controller'),
     name: '个人中心'

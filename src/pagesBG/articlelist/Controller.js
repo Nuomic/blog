@@ -26,7 +26,7 @@ export default class extends Controller {
   //获取文章列表
   getArticleList = async () => {
     await this.resHandler(
-      () => this.postApi(api.getArticleList),
+      () => this.getApi(api.getArticleList),
       res => {
         this.handleChangeState(res);
       },
@@ -41,7 +41,7 @@ export default class extends Controller {
     console.log('status', status);
     //参数为文章的id  改变之后的状态
     await this.resHandler(
-      () => this.postApi(api.changeArticleStatus),
+      () => this.postApi(api.changeArticleStatus, { articleId, status }),
       () => {
         const { articleList } = this.store.getState();
         const newArticleList = articleList.map(item => {
@@ -57,22 +57,18 @@ export default class extends Controller {
     );
   };
   //删除文章
-  handleDelete = async (id, status) => {
-    await this.resHandler(
-      () => this.postApi(api.deleteArticle, { status }),
-      () => {
-        const { articleList } = this.store.getState();
-        const newArticleList = articleList.filter(item => {
-          if (item.status != 4 && item.status != 3 && item.id == id) {
-            item.status = 4;
-            return true;
-          } else return item.id != id;
-        });
-        this.handleChangeState({ articleList: newArticleList });
-      },
-      err => {
-        console.log('err', err);
-      }
-    );
+  handleDelete = async (articleId, status) => {
+    if (status != 4 && status != 3)
+      await this.handleChangeArticleStatus(articleId, 4);
+    else
+      await this.resHandler(
+        () => this.postApi(api.deleteArticle, { articleId, status }),
+        () => {
+          this.getArticleList();
+        },
+        err => {
+          console.log('err', err);
+        }
+      );
   };
 }

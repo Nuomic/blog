@@ -25,6 +25,11 @@ export const menuList = [
     icon: 'message'
   },
   {
+    key: 'friend',
+    name: '友情链接',
+    icon: 'heart'
+  },
+  {
     key: 'user',
     name: '个人中心',
     icon: 'user'

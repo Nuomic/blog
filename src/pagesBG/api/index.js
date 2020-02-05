@@ -1,12 +1,9 @@
 export default {
-  getArticleList:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/getMngArticleList',
+  getArticleList: '/article/list',
   // 删除文章
-  deleteArticle:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/deleteArticle',
+  deleteArticle: '/article/delete',
   // 改变文章状态
-  changeArticleStatus:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleStatus',
+  changeArticleStatus: '/article/changeStatus',
   /* 获取栏目 */
   getCategory: '/category/list',
   /* 删除栏目 */

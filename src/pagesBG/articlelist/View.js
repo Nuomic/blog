@@ -3,6 +3,7 @@ import BasicLayout from '../components/BasicLayout';
 import { Tabs, List, Icon, Button, Tag, Modal } from 'antd';
 import { Link } from 'react-imvc/component';
 import StickyTabs from '../components/StickyTabs';
+import moment from 'moment';
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 export default ({ state, handlers }) => {
@@ -60,7 +61,10 @@ export default ({ state, handlers }) => {
         {articleStatus &&
           articleStatus.map(item => (
             <TabPane
-              tab={item.tabName + ` (${ArticleList(item.key).length})`}
+              tab={
+                item.tabName +
+                ` (${ArticleList(item.key) && ArticleList(item.key).length})`
+              }
               key={item.key}
             >
               <List
@@ -124,7 +128,12 @@ export default ({ state, handlers }) => {
                       }
                       description={
                         <div>
-                          <IconText type="clock-circle" text={item.date} />
+                          <IconText
+                            type="clock-circle"
+                            text={moment(item.createdAt).format(
+                              'YYYY/MM/DD/hh:mm:ss'
+                            )}
+                          />
                           <IconText type="read" text={item.viewCount} />
                           <IconText type="like-o" text={item.likeCount} />
                           <IconText type="message" text={item.commentCount} />

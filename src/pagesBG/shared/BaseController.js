@@ -67,7 +67,7 @@ export default class extends Controller {
   postApi(url, data = {}, options = {}) {
     options = {
       method: 'POST',
-      // credentials: 'true',
+      credentials: 'include',
       ...options,
       body: JSON.stringify(data)
     };
@@ -83,6 +83,7 @@ export default class extends Controller {
     }
     const options = {
       method: 'POST',
+      credentials: 'include',
       ...option,
       body: data
     };
@@ -91,7 +92,7 @@ export default class extends Controller {
   getApi(url, params, options = {}) {
     options = {
       method: 'GET',
-      // credentials: 'include',
+      credentials: 'include',
       ...options
     };
 

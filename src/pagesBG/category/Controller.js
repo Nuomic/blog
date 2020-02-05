@@ -54,19 +54,8 @@ export default class extends Controller {
     console.log('category', category);
     await this.resHandler(
       () => this.postApi(api.saveCategory, category),
-      res => {
-        const { categoryList } = this.store.getState();
-        let newCategoryList = categoryList;
-        if (category.id) {
-          newCategoryList = categoryList.map(item => {
-            if (item.id == category.id) item = category;
-            return item;
-          });
-        } else {
-          newCategoryList.unshift({ ...res, articleCount: 0 });
-        }
-        console.log(categoryList);
-        this.handleChangeState({ categoryList: newCategoryList });
+      () => {
+        this.getCategory();
         handelModalStatus();
       },
       err => {
