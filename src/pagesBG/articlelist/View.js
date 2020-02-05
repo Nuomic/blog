@@ -12,6 +12,7 @@ export default ({ state, handlers }) => {
     { name: '文章管理', href: '/articlemng' }
   ];
   const { articleList } = state;
+  console.log('articleList', articleList);
   const { handleDelete, handleChangeArticleStatus } = handlers;
   const articleStatus = [
     { tabName: '全部', key: '0' },

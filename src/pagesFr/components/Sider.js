@@ -2,12 +2,13 @@ import React from 'react';
 import { Card, Tag, List } from 'antd';
 import { Link } from 'react-imvc/component';
 import connect from 'react-imvc/hoc/connect';
+import moment from 'moment';
 const withData = connect(({ state }) => {
   return {
-    siderDate: state.siderDate
+    siderData: state.siderData
   };
 });
-const Sider = ({ siderDate }) => {
+const Sider = ({ siderData }) => {
   const handleToDetail = id => {
     return `/articledetail/${id}`;
   };
@@ -39,12 +40,12 @@ const Sider = ({ siderDate }) => {
     <div className="basic-sider">
       <SiderItem
         name="热门文章"
-        dataSource={siderDate.hotList}
+        dataSource={siderData.hotList}
         Item={item => (
           <div className="article-list-title">
             <Tag className="hot-title-index">
-              {siderDate.hotList &&
-                siderDate.hotList.findIndex(i => item.id == i.id) + 1}
+              {siderData.hotList &&
+                siderData.hotList.findIndex(i => item.id == i.id) + 1}
             </Tag>
             <Link to={handleToDetail(item.id)} className="link-color">
               {item.title}
@@ -57,8 +58,8 @@ const Sider = ({ siderDate }) => {
         size="small"
         bordered={false}
       >
-        {siderDate.tagList &&
-          siderDate.tagList.map(item => (
+        {siderData.tagList &&
+          siderData.tagList.map(item => (
             <Tag color={item.color} key={item.id} style={{ cursor: 'pointer' }}>
               {item.name}
             </Tag>
@@ -67,10 +68,12 @@ const Sider = ({ siderDate }) => {
 
       <SiderItem
         name="最新文章"
-        dataSource={siderDate.latestList}
+        dataSource={siderData.latestList}
         Item={item => (
           <div className="article-list-title">
-            <span className="latest-article-date">[ {item.date} ]</span>
+            <span className="latest-article-date">
+              [ {moment(item.createdAt).format('YYYY-MM-DD')} ]
+            </span>
             <Link to={handleToDetail(item.id)} className="link-color ">
               {item.title}
             </Link>
@@ -79,7 +82,7 @@ const Sider = ({ siderDate }) => {
       />
       <SiderItem
         name="分类专栏"
-        dataSource={siderDate.categoryList}
+        dataSource={siderData.categoryList}
         Item={item => (
           <div style={{ width: '100%' }}>
             <Link to={handleToDetail(item.id)} className="link-color">
@@ -88,7 +91,7 @@ const Sider = ({ siderDate }) => {
             <span style={{ float: 'right' }}>
               <span style={{ fontWeight: 600, fontSize: 16 }}>
                 {item.articleCount}
-              </span>{' '}
+              </span>
               <i>篇</i>
             </span>
           </div>
@@ -97,10 +100,14 @@ const Sider = ({ siderDate }) => {
       <SiderItem
         name="友情链接"
         grid={{ column: 2 }}
-        dataSource={siderDate.links}
+        dataSource={siderData.links}
         Item={item => (
-          <a href={item.url} className="link-color">
-            {item.name}
+          <a
+            href={'http://' + item.siteUrl}
+            className="link-color"
+            target="blank"
+          >
+            {item.siteName}
           </a>
         )}
       />

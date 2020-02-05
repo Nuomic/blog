@@ -66,10 +66,11 @@ export default class extends Controller {
   }
   getSiderDate = async () => {
     await this.resHandler(
-      () => this.postApi(api.getSiderDate),
-      siderDate => {
-        console.log('siderDate', siderDate);
-        this.handleChangeState({ siderDate });
+      () => this.getApi(api.getSiderDate),
+      res => {
+        const { siderData } = res;
+        console.log('siderData', siderData);
+        this.handleChangeState(res);
       },
       err => {
         console.log('err', err);
