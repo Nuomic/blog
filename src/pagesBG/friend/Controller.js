@@ -17,7 +17,7 @@ export default class extends Controller {
   handleSaveFriend = async value => {
     console.log('value', value);
     await this.resHandler(
-      () => this.postApi(api.saveFriend, value),
+      () => this.postApi(api.saveFriend, { ...value, status: '0' }),
       res => {
         this.getFriendList(res);
         message.success('保存成功');
