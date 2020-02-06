@@ -70,7 +70,7 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getArticleList);
+                return _this.getApi(_api["default"].getArticleList);
               }, function (res) {
                 _this.handleChangeState(res);
               }, function (err) {
@@ -95,7 +95,10 @@ function (_Controller) {
 
               _context2.next = 4;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].changeArticleStatus);
+                return _this.postApi(_api["default"].changeArticleStatus, {
+                  articleId: articleId,
+                  status: status
+                });
               }, function () {
                 var _this$store$getState = _this.store.getState(),
                     articleList = _this$store$getState.articleList;
@@ -122,35 +125,36 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDelete", function _callee3(id, status) {
+    _defineProperty(_assertThisInitialized(_this), "handleDelete", function _callee3(articleId, status) {
       return regeneratorRuntime.async(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
+              if (!(status != 4 && status != 3)) {
+                _context3.next = 5;
+                break;
+              }
+
+              _context3.next = 3;
+              return regeneratorRuntime.awrap(_this.handleChangeArticleStatus(articleId, 4));
+
+            case 3:
+              _context3.next = 7;
+              break;
+
+            case 5:
+              _context3.next = 7;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.postApi(_api["default"].deleteArticle, {
-                  status: status
+                  articleId: articleId
                 });
               }, function () {
-                var _this$store$getState2 = _this.store.getState(),
-                    articleList = _this$store$getState2.articleList;
-
-                var newArticleList = articleList.filter(function (item) {
-                  if (item.status != 4 && item.status != 3 && item.id == id) {
-                    item.status = 4;
-                    return true;
-                  } else return item.id != id;
-                });
-
-                _this.handleChangeState({
-                  articleList: newArticleList
-                });
+                _this.getArticleList();
               }, function (err) {
                 console.log('err', err);
               }));
 
-            case 2:
+            case 7:
             case "end":
               return _context3.stop();
           }

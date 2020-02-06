@@ -148,7 +148,8 @@ function (_Controller) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       options = _objectSpread({
-        method: 'POST'
+        method: 'POST',
+        credentials: 'include'
       }, options, {
         body: JSON.stringify(data)
       });
@@ -169,7 +170,8 @@ function (_Controller) {
       }
 
       var options = _objectSpread({
-        method: 'POST'
+        method: 'POST',
+        credentials: 'include'
       }, option, {
         body: data
       });
@@ -181,7 +183,8 @@ function (_Controller) {
     value: function getApi(url, params) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       options = _objectSpread({
-        method: 'GET'
+        method: 'GET',
+        credentials: 'include'
       }, options);
       return this.fetch(url + (params ? "?".concat(querystring.stringify(params)) : ''), options);
     }

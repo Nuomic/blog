@@ -13,17 +13,19 @@ var _component = require("react-imvc/component");
 
 var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var withData = (0, _connect["default"])(function (_ref) {
   var state = _ref.state;
   return {
-    siderDate: state.siderDate
+    siderData: state.siderData
   };
 });
 
 var Sider = function Sider(_ref2) {
-  var siderDate = _ref2.siderDate;
+  var siderData = _ref2.siderData;
 
   var handleToDetail = function handleToDetail(id) {
     return "/articledetail/".concat(id);
@@ -58,13 +60,13 @@ var Sider = function Sider(_ref2) {
     className: "basic-sider"
   }, _react["default"].createElement(SiderItem, {
     name: "\u70ED\u95E8\u6587\u7AE0",
-    dataSource: siderDate.hotList,
+    dataSource: siderData.hotList,
     Item: function Item(item) {
       return _react["default"].createElement("div", {
         className: "article-list-title"
       }, _react["default"].createElement(_antd.Tag, {
         className: "hot-title-index"
-      }, siderDate.hotList && siderDate.hotList.findIndex(function (i) {
+      }, siderData.hotList && siderData.hotList.findIndex(function (i) {
         return item.id == i.id;
       }) + 1), _react["default"].createElement(_component.Link, {
         to: handleToDetail(item.id),
@@ -77,7 +79,7 @@ var Sider = function Sider(_ref2) {
     }, "\u6807\u7B7E\u4E91\u96C6"),
     size: "small",
     bordered: false
-  }, siderDate.tagList && siderDate.tagList.map(function (item) {
+  }, siderData.tagList && siderData.tagList.map(function (item) {
     return _react["default"].createElement(_antd.Tag, {
       color: item.color,
       key: item.id,
@@ -87,20 +89,20 @@ var Sider = function Sider(_ref2) {
     }, item.name);
   })), _react["default"].createElement(SiderItem, {
     name: "\u6700\u65B0\u6587\u7AE0",
-    dataSource: siderDate.latestList,
+    dataSource: siderData.latestList,
     Item: function Item(item) {
       return _react["default"].createElement("div", {
         className: "article-list-title"
       }, _react["default"].createElement("span", {
         className: "latest-article-date"
-      }, "[ ", item.date, " ]"), _react["default"].createElement(_component.Link, {
+      }, "[ ", (0, _moment["default"])(item.createdAt).format('YYYY-MM-DD'), " ]"), _react["default"].createElement(_component.Link, {
         to: handleToDetail(item.id),
         className: "link-color "
       }, item.title));
     }
   }), _react["default"].createElement(SiderItem, {
     name: "\u5206\u7C7B\u4E13\u680F",
-    dataSource: siderDate.categoryList,
+    dataSource: siderData.categoryList,
     Item: function Item(item) {
       return _react["default"].createElement("div", {
         style: {
@@ -118,19 +120,20 @@ var Sider = function Sider(_ref2) {
           fontWeight: 600,
           fontSize: 16
         }
-      }, item.articleCount), ' ', _react["default"].createElement("i", null, "\u7BC7")));
+      }, item.articleCount), _react["default"].createElement("i", null, "\u7BC7")));
     }
   }), _react["default"].createElement(SiderItem, {
     name: "\u53CB\u60C5\u94FE\u63A5",
     grid: {
       column: 2
     },
-    dataSource: siderDate.links,
+    dataSource: siderData.links,
     Item: function Item(item) {
       return _react["default"].createElement("a", {
-        href: item.url,
-        className: "link-color"
-      }, item.name);
+        href: 'http://' + item.siteUrl,
+        className: "link-color",
+        target: "blank"
+      }, item.siteName);
     }
   }));
 };

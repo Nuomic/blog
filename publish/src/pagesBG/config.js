@@ -25,6 +25,10 @@ var menuList = [{
   name: '留言管理',
   icon: 'message'
 }, {
+  key: 'friend',
+  name: '友情链接',
+  icon: 'heart'
+}, {
   key: 'user',
   name: '个人中心',
   icon: 'user'

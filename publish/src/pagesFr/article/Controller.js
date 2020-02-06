@@ -76,10 +76,12 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getArticleList);
+                return _this.getApi(_api["default"].getArticleList, {
+                  status: 1
+                });
               }, function (res) {
-                var updateMergeState = _this.store.actions.updateMergeState;
-                updateMergeState(res);
+                _this.handleChangeState(res);
+
                 console.log('res', res);
               }, function (res) {
                 console.log('res', res);

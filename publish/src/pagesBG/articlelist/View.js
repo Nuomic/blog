@@ -15,6 +15,8 @@ var _component = require("react-imvc/component");
 
 var _StickyTabs = _interopRequireDefault(require("../components/StickyTabs"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _this = void 0;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -33,6 +35,7 @@ var _default = function _default(_ref) {
     href: '/articlemng'
   }];
   var articleList = state.articleList;
+  console.log('articleList', articleList);
   var handleDelete = handlers.handleDelete,
       handleChangeArticleStatus = handlers.handleChangeArticleStatus;
   var articleStatus = [{
@@ -110,7 +113,7 @@ var _default = function _default(_ref) {
     }, "\u65B0\u589E"))
   }, articleStatus && articleStatus.map(function (item) {
     return _react["default"].createElement(TabPane, {
-      tab: item.tabName + " (".concat(ArticleList(item.key).length, ")"),
+      tab: item.tabName + " (".concat(ArticleList(item.key) && ArticleList(item.key).length, ")"),
       key: item.key
     }, _react["default"].createElement(_antd.List, {
       pagination: {
@@ -158,7 +161,7 @@ var _default = function _default(_ref) {
           }, "\u56DE\u6536") : '', item.title),
           description: _react["default"].createElement("div", null, _react["default"].createElement(IconText, {
             type: "clock-circle",
-            text: item.date
+            text: (0, _moment["default"])(item.createdAt).format('YYYY/MM/DD/hh:mm:ss')
           }), _react["default"].createElement(IconText, {
             type: "read",
             text: item.viewCount

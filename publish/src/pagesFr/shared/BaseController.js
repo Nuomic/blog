@@ -83,13 +83,12 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getSiderDate);
-              }, function (siderDate) {
-                console.log('siderDate', siderDate);
+                return _this.getApi(_api["default"].getSiderDate);
+              }, function (res) {
+                var siderData = res.siderData;
+                console.log('siderData', siderData);
 
-                _this.handleChangeState({
-                  siderDate: siderDate
-                });
+                _this.handleChangeState(res);
               }, function (err) {
                 console.log('err', err);
               }));

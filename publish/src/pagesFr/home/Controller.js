@@ -78,7 +78,9 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getArticleList);
+                return _this.getApi(_api["default"].getArticleList, {
+                  status: 1
+                });
               }, function (res) {
                 console.log('res', res);
 

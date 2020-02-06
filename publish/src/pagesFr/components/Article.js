@@ -135,7 +135,7 @@ var _default = withData(function (_ref2) {
           }
         }, _react["default"].createElement(_antd.Tag, {
           color: "magenta"
-        }, item.tagInfo.name), item.title), _react["default"].createElement(_antd.Divider, {
+        }, item.categoryInfo.name), item.title), _react["default"].createElement(_antd.Divider, {
           className: "margin-0"
         })),
         avatar: //左边图片

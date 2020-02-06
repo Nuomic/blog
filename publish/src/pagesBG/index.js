@@ -84,6 +84,14 @@ var _default = [{
   },
   name: '资源管理'
 }, {
+  path: '/friend',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./friend/Controller'));
+    });
+  },
+  name: '友情链接'
+}, {
   path: '/user',
   controller: function controller() {
     return Promise.resolve().then(function () {

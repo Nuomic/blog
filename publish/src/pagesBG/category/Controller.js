@@ -21,10 +21,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -129,28 +125,8 @@ function (_Controller) {
               _context3.next = 3;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.postApi(_api["default"].saveCategory, category);
-              }, function (res) {
-                var _this$store$getState2 = _this.store.getState(),
-                    categoryList = _this$store$getState2.categoryList;
-
-                var newCategoryList = categoryList;
-
-                if (category.id) {
-                  newCategoryList = categoryList.map(function (item) {
-                    if (item.id == category.id) item = category;
-                    return item;
-                  });
-                } else {
-                  newCategoryList.unshift(_objectSpread({}, res, {
-                    articleCount: 0
-                  }));
-                }
-
-                console.log(categoryList);
-
-                _this.handleChangeState({
-                  categoryList: newCategoryList
-                });
+              }, function () {
+                _this.getCategory();
 
                 handelModalStatus();
               }, function (err) {
@@ -201,8 +177,8 @@ function (_Controller) {
                   tocategoryId: tocategoryId
                 });
               }, function () {
-                var _this$store$getState3 = _this.store.getState(),
-                    categoryList = _this$store$getState3.categoryList;
+                var _this$store$getState2 = _this.store.getState(),
+                    categoryList = _this$store$getState2.categoryList;
 
                 var newCategoryList = categoryList.map(function (item) {
                   if (item.id === currentCategoryId) item.articleCount = item.articleCount - articleIds.length;else if (item.id === tocategoryId) item.articleCount = item.articleCount + articleIds.length;
@@ -247,8 +223,8 @@ function (_Controller) {
                   status: status
                 });
               }, function () {
-                var _this$store$getState4 = _this.store.getState(),
-                    articleList = _this$store$getState4.articleList;
+                var _this$store$getState3 = _this.store.getState(),
+                    articleList = _this$store$getState3.articleList;
 
                 var newArticleList = articleList.filter(function (item) {
                   if (item.status != 4 && item.status != 3 && item.id == id) {
