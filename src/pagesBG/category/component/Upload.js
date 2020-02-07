@@ -1,11 +1,12 @@
 import { Upload, Icon, message } from 'antd';
 import React, { useState } from 'react';
 import api from '../../api';
+import { useModelState } from 'react-imvc/hook';
 export default ({ url, form }) => {
   const [state, setState] = useState({ loading: false });
   const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
   // getFieldDecorator('avatar');
-
+  const { restapi } = useModelState();
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -50,10 +51,10 @@ export default ({ url, form }) => {
       listType="picture-card"
       className="avatar-uploader"
       showUploadList={false}
-      action={api.uploadFile}
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
-      fileList={getFieldValue('avatar')}
+      action={restapi + api.uploadFile}
+      // beforeUpload={beforeUpload}
+      // onChange={handleChange}
+      // fileList={getFieldValue('avatar')}
     >
       {getFieldValue('avatar') ? (
         <img

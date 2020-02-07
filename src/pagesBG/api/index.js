@@ -3,6 +3,7 @@ export default {
   getArticleList: '/article/list',
   // 删除文章
   deleteArticle: '/article/delete',
+  saveArticle: '/article/save',
   // 改变文章状态
   changeArticleStatus: '/article/changeStatus',
 
@@ -12,8 +13,7 @@ export default {
   deleteCategory: '/category/delete',
   saveCategory: '/category/save',
 
-  uploadFile:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/uploadFile',
+  uploadFile: '/resource/save',
 
   getCommentList:
     'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/getCommentList',

@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import BraftEditor from 'braft-editor';
-import { Style } from 'react-imvc/component';
-export default () => {
-  const [editorState, setEditorState] = useState(
-    BraftEditor.createEditorState(null)
-  );
-  const handleChange = editorState => {
-    setEditorState(editorState);
+import React from 'react';
+import { useModelState } from 'react-imvc/hook';
+export default ({ form }) => {
+  const { getFieldDecorator, getFieldValue, setFieldsValue } = form;
+  getFieldDecorator('content', {
+    rules: [{ required: true, message: '文章内容不能为空!' }]
+  });
+  const { Editor } = useModelState();
+  const handleChange = content => {
+    setFieldsValue({ content });
   };
-
   return (
-    <div>
-      <Style name="braft" />
-      <Style name="output" />
-      sdddd
-      <BraftEditor value={editorState} onChange={handleChange} />
-    </div>
+    <Editor.default
+      value={getFieldValue('content')}
+      onChange={content => handleChange(content)}
+      subfield
+      preview
+    />
   );
 };
