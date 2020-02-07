@@ -24,8 +24,12 @@ export default class Home extends Controller {
     // await super.componentDidFirstMount();
   }
   handleGetArticleDetail = async () => {
+    const { location } = this.store.getState();
     await this.resHandler(
-      () => this.postApi(api.getArticleDetail),
+      () =>
+        this.getApi(api.getArticleDetail, {
+          articleId: location.params.articleId
+        }),
       res => {
         console.log('res', res);
         this.handleChangeState(res);
