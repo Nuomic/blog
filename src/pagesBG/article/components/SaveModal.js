@@ -4,17 +4,20 @@ import { useCtrl, useModelState } from 'react-imvc/hook';
 const { Item } = Form;
 const { Option } = Select;
 export default ({ form, modalStatus }) => {
-  const { handleChangeModalStatus, handleSaveArticle } = useCtrl();
-  const { article } = useModelState();
+  const {
+    handleChangeModalStatus,
+    handleSaveArticle,
+    handleSaveTag
+  } = useCtrl();
+  const { article, formData } = useModelState();
+  const { categoryList, tagList } = formData;
   const { getFieldDecorator, validateFields, resetFields } = form;
   const handleSubmit = e => {
     validateFields(async (err, fieldsValue) => {
       e.preventDefault();
       if (err) return;
-      // if (!!currentValue.id) fieldsValue.friendId = currentValue.id;
       await handleSaveArticle(fieldsValue);
     });
-    // resetFields();
   };
   const formItemLayout = {
     labelCol: {
@@ -30,17 +33,12 @@ export default ({ form, modalStatus }) => {
     { key: '1', name: '已发布' },
     { key: '2', name: '私密' }
   ];
-  const tagList = [
-    { key: '1', name: '已发布' },
-    { key: '2', name: '私密' }
-  ];
-  const categoryList = [
-    { key: '5e3bd9cff7cb7e21689c156b', name: '已发布' },
-    { key: '2', name: '私密' }
-  ];
+  const addTag = value => {
+    if (!tagList.some(item => item.name == value)) handleSaveTag(value);
+  };
   return (
     <Modal
-      title={/* currentValue.id ? '编辑' : */ '新增'}
+      title={article.id ? '编辑' : '新增'}
       visible={modalStatus}
       onOk={handleSubmit}
       onCancel={handleChangeModalStatus}
@@ -48,7 +46,8 @@ export default ({ form, modalStatus }) => {
       <Form {...formItemLayout}>
         <Item label="所属栏目">
           {getFieldDecorator('categoryId', {
-            initialValue: undefined
+            initialValue: article.categoryId,
+            rules: [{ required: true, message: '所属栏目不能为空' }]
           })(
             <Select>
               {categoryList &&
@@ -59,14 +58,15 @@ export default ({ form, modalStatus }) => {
           )}
         </Item>
         <Item label="标签">
-          {getFieldDecorator('tagIds', {
-            initialValue: []
+          {getFieldDecorator('tags', {
+            initialValue: article.tags
           })(
-            // <Select mode="tags" style={{ width: '100%' }} onChange={handleChange} tokenSeparators={[',']}>
-            <Select mode="tags" tokenSeparators={[',']}>
+            <Select mode="tags" tokenSeparators={[',']} onSelect={addTag}>
               {tagList &&
                 tagList.map(item => (
-                  <Option key={item.key}>{item.name}</Option>
+                  <Option key={item.key} value={item.name}>
+                    {item.name}
+                  </Option>
                 ))}
             </Select>
           )}
@@ -74,7 +74,7 @@ export default ({ form, modalStatus }) => {
 
         <Item label="发布形式">
           {getFieldDecorator('status', {
-            // initialValue: currentValue.siteUrl
+            initialValue: article.status
           })(
             <Radio.Group>
               {statusList.map(item => (
@@ -87,7 +87,7 @@ export default ({ form, modalStatus }) => {
         </Item>
         <Item label="摘要">
           {getFieldDecorator('summary', {
-            // initialValue: currentValue.description
+            initialValue: article.summary
           })(<Input.TextArea rows={4} />)}
         </Item>
       </Form>

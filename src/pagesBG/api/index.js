@@ -26,10 +26,14 @@ export default {
     ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
   postlogin: '/login',
   getSetting: '/setting/get',
+  getFormData: '/setting/getFormData',
   saveSetting: '/setting/save',
 
   //有情链接
   getFriend: '/friend/list',
   deleteFriend: '/friend/delete',
-  saveFriend: '/friend/save'
+  saveFriend: '/friend/save',
+
+  //标签
+  saveTag: '/tag/save'
 };

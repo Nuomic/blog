@@ -3,5 +3,7 @@ export const initialState = {
   //     title: '',
   //     description: ''
   // },
-  modalStatus: false
+  modalStatus: false,
+  article: {},
+  formData: {}
 };

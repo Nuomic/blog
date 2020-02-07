@@ -1,6 +1,7 @@
 import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
+import querystring from 'querystring';
 import Cookie from 'js-cookie';
 export default class extends Controller {
   SSR = this.location.query.ssr != 0;

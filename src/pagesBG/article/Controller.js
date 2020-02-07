@@ -12,25 +12,54 @@ export default class extends Controller {
   async componentWillCreate() {
     if (this.context.isClient) {
       let Editor = await import('for-editor');
-      console.log('Editor', Editor);
       this.handleChangeState({ Editor });
     }
   }
-  async componentDidFirstMount() {}
+  async componentDidFirstMount() {
+    await this.getFormData('1,2');
+  }
 
   handleChangeModalStatus = () => {
     const { modalStatus } = this.store.getState();
     this.handleChangeState({ modalStatus: !modalStatus });
   };
+  getFormData = async type => {
+    await this.resHandler(
+      () => this.getApi(api.getFormData, { type }),
+      res => {
+        this.handleChangeState(res);
+      },
+      err => {
+        message.error('获取表单值失败');
+      }
+    );
+  };
   handleSaveArticle = async value => {
+    const { article, modalStatus } = this.store.getState();
+    value = (!!article && { ...article, ...value }) || value;
     await this.resHandler(
       () => this.postApi(api.saveArticle, value),
-      () => {
-        message.success('保存成功');
-        this.handleChangeModalStatus();
+      res => {
+        message.success(
+          (value.status == '3' && '成功保存到草稿箱') || '保存成功'
+        );
+        this.handleChangeState(res);
+        modalStatus && this.handleChangeModalStatus();
       },
       err => {
         message.error('保存失败');
+      }
+    );
+  };
+  handleSaveTag = async value => {
+    await this.resHandler(
+      () => this.postApi(api.saveTag, { name: value }),
+      res => {
+        message.success('新增标签成功');
+        this.getFormData('1,2');
+      },
+      err => {
+        message.error('新增标签失败');
       }
     );
   };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import connect from 'react-imvc/hoc/connect';
 import { Link } from 'react-imvc/component';
+import moment from 'moment';
 import {
   List,
   Icon,
@@ -110,7 +111,7 @@ export default withData(({ articleList }) => {
                     >
                       <IconText
                         type="clock-circle"
-                        text={item.date}
+                        text={moment(item.date).format('YYYY-MM-DD hh:mm:ss')}
                         key="list-vertical-star-o"
                       />
                       <IconText

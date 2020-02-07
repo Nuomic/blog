@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, Input, message } from 'antd';
 import { useCtrl } from 'react-imvc/hook';
 export default ({ form }) => {
-  const { handleChangeModalStatus } = useCtrl();
+  const { handleChangeModalStatus, handleSaveArticle } = useCtrl();
   const { getFieldDecorator, setFieldsValue, validateFields } = form;
 
   const saveArticle = (status, e) => {
@@ -14,9 +14,9 @@ export default ({ form }) => {
         return;
       }
       console.log('values', values);
-
       setFieldsValue({ status });
-      handleChangeModalStatus();
+      (status == '3' && handleSaveArticle({ ...values, status })) ||
+        handleChangeModalStatus();
     });
   };
 
