@@ -17,6 +17,19 @@ export default function ComItem({ item, comFormId, setComFormId }) {
   const handleChangeComFormStatus = id => {
     setComFormId(id);
   };
+  const childrenCount = item => {
+    var length = item.children.length;
+    const count = children => {
+      children.forEach(item => {
+        if (item.children) {
+          length += item.children.length;
+          count(item.children);
+        }
+      });
+    };
+    count(item.children);
+    return length;
+  };
   const actions = item => [
     <span key="comment-basic-like">
       <Tooltip title="赞">
@@ -55,7 +68,7 @@ export default function ComItem({ item, comFormId, setComFormId }) {
           setOpenState({ ...openState, [item.id]: !openState[item.id] });
         }}
       >
-        {openState[item.id] ? '收起回复' : `全部回复(${item.children.length})`}
+        {openState[item.id] ? '收起回复' : `全部回复(${childrenCount(item)})`}
       </Button>
     )
   ];
