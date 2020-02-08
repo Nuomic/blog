@@ -24,13 +24,27 @@ export default class Home extends Controller {
   }
   handleGetCommentList = async () => {
     await this.resHandler(
-      () => this.postApi(api.getCommentList),
+      () => this.getApi(api.getCommentList),
       res => {
         console.log('res', res);
-        this.handleChangeState({ ...res });
+        this.handleChangeState(res);
       },
       res => {
         console.log('res', res);
+      }
+    );
+  };
+  handleSaveCommit = async value => {
+    console.log('value', value);
+    await this.resHandler(
+      () => this.post(api.saveComment, value),
+      res => {
+        console.log('res', res);
+        this.handleChangeState(res);
+        this.handleGetCommentList();
+      },
+      err => {
+        message.error('保存失败');
       }
     );
   };

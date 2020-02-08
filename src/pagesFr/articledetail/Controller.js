@@ -22,7 +22,7 @@ export default class Home extends Controller {
     const articleId = this.location.params.articleId;
     console.log('this.localhost', this.location);
     await this.handleGetArticleDetail(articleId);
-    await this.handleGetCommentList(articleId);
+    await this.handleGetCommentList();
     await this.getHitokoto();
   }
   async componentDidFirstMount() {
@@ -40,9 +40,12 @@ export default class Home extends Controller {
       }
     );
   };
-  handleGetCommentList = async articleId => {
+  handleGetCommentList = async () => {
     await this.resHandler(
-      () => this.getApi(api.getCommentList, { articleId }),
+      () =>
+        this.getApi(api.getCommentList, {
+          articleId: this.location.params.articleId
+        }),
       res => {
         console.log('res', res);
         this.handleChangeState(res);
@@ -59,7 +62,7 @@ export default class Home extends Controller {
       res => {
         console.log('res', res);
         this.handleChangeState(res);
-        this.handleGetCommentList(value.articleId);
+        this.handleGetCommentList();
       },
       err => {
         message.error('保存失败');
