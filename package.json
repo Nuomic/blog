@@ -15,15 +15,20 @@
     "port": 3000
   },
   "dependencies": {
+    "@ant-design/dark-theme": "^1.0.3",
     "@antv/g2plot": "^0.11.22",
     "antd": "^3.25.1",
     "core-js": "^2.6.5",
     "for-editor": "^0.3.5",
+    "github-markdown-css": "^3.0.1",
+    "highlight.js": "^9.18.1",
     "mongoose": "^5.8.10",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-highlight": "^0.12.0",
     "react-imvc": "^2.7.1",
     "react-infinite-scroller": "^1.2.4",
+    "react-markdown": "^4.3.1",
     "react-sticky": "^6.0.3"
   }
 }

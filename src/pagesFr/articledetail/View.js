@@ -1,8 +1,10 @@
 import React from 'react';
 import BasicLayout from '../components/BasicLayout';
 import { Card, Typography, Tag } from 'antd';
+import ReactMarkdown from 'react-markdown';
 import Comments from '../components/Comments';
-import { Link } from 'react-imvc/component';
+import { Link, Style } from 'react-imvc/component';
+import CodeBlock from './component/CodeBlock';
 const { Title, Paragraph } = Typography;
 export default props => {
   console.log('props', props);
@@ -36,7 +38,15 @@ export default props => {
           </div>
         }
       >
-        <Paragraph>{articleDetail.content}</Paragraph>
+        <Style name="markdown" />
+        <ReactMarkdown
+          className="for-markdown-preview"
+          source={articleDetail.content}
+          escapeHtml={false}
+          renderers={{
+            code: CodeBlock
+          }}
+        />
       </Card>
       <Card size="small">
         <span>

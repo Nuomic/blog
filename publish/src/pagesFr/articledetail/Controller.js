@@ -61,16 +61,24 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "View", _View["default"]);
 
-    _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
+    _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload, {
+      markdown: '/css/markdown-preview.css',
+      codeStyle: '/css/markdown-code.css'
+    }));
 
     _defineProperty(_assertThisInitialized(_this), "handleGetArticleDetail", function _callee() {
+      var _this$store$getState, location;
+
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _this$store$getState = _this.store.getState(), location = _this$store$getState.location;
+              _context.next = 3;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getArticleDetail);
+                return _this.getApi(_api["default"].getArticleDetail, {
+                  articleId: location.params.articleId
+                });
               }, function (res) {
                 console.log('res', res);
 
@@ -79,7 +87,7 @@ function (_Controller) {
                 console.log('err', err);
               }));
 
-            case 2:
+            case 3:
             case "end":
               return _context.stop();
           }

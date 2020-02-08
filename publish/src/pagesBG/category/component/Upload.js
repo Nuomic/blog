@@ -13,6 +13,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _api = _interopRequireDefault(require("../../api"));
 
+var _hook = require("react-imvc/hook");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -41,6 +43,9 @@ var _default = function _default(_ref) {
   var getFieldDecorator = form.getFieldDecorator,
       setFieldsValue = form.setFieldsValue,
       getFieldValue = form.getFieldValue; // getFieldDecorator('avatar');
+
+  var _useModelState = (0, _hook.useModelState)(),
+      restapi = _useModelState.restapi;
 
   var getBase64 = function getBase64(img, callback) {
     var reader = new FileReader();
@@ -98,10 +103,10 @@ var _default = function _default(_ref) {
     listType: "picture-card",
     className: "avatar-uploader",
     showUploadList: false,
-    action: _api["default"].uploadFile,
-    beforeUpload: beforeUpload,
-    onChange: handleChange,
-    fileList: getFieldValue('avatar')
+    action: restapi + _api["default"].uploadFile // beforeUpload={beforeUpload}
+    // onChange={handleChange}
+    // fileList={getFieldValue('avatar')}
+
   }, getFieldValue('avatar') ? _react["default"].createElement("img", {
     src: getFieldValue('avatar'),
     alt: "avatar",

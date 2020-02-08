@@ -4,16 +4,10 @@ import InfiniteScroll from 'react-infinite-scroller';
 import ComForm from './ComForm';
 import ComItem from './ComItem';
 import { List, message, Spin, Divider, Card } from 'antd';
-const withData = connect(({ state, handlers }) => {
-  return {
-    commentList: state.commentList,
-    total: state.total,
-    getcommentList: handlers.handleGetCommentList
-  };
-});
-
-export default withData(({ commentList, getcommentList, total }) => {
-  const [comFormId, setComFormId] = useState(undefined);
+import { useModelState } from 'react-imvc/hook';
+export default () => {
+  const { commentList, getcommentList, total, location } = useModelState();
+  const [comFormId, setComFormId] = useState(null);
   // console.log('comFormId', comFormId);
   // console.log('commentList', commentList);
   // console.log('total', total);
@@ -44,7 +38,12 @@ export default withData(({ commentList, getcommentList, total }) => {
   };
   return (
     <Card>
-      {!comFormId && <ComForm />}
+      {!comFormId && (
+        <ComForm
+          parentId={null}
+          articleId={location.params.articleId || null}
+        />
+      )}
       <Divider orientation="right">总评论：{total}</Divider>
       <InfiniteScroll
         pageStart={0}
@@ -73,4 +72,4 @@ export default withData(({ commentList, getcommentList, total }) => {
       </InfiniteScroll>
     </Card>
   );
-});
+};

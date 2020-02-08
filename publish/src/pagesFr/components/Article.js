@@ -13,6 +13,8 @@ var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
 var _component = require("react-imvc/component");
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _antd = require("antd");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -41,15 +43,14 @@ var withData = (0, _connect["default"])(function (_ref) {
 
 var _default = withData(function (_ref2) {
   var articleList = _ref2.articleList;
+  (0, _react.useEffect)(function () {
+    return setLoading(false);
+  }, []);
 
   var _useState = (0, _react.useState)(true),
       _useState2 = _slicedToArray(_useState, 2),
       loading = _useState2[0],
       setLoading = _useState2[1];
-
-  setTimeout(function () {
-    return setLoading(false);
-  }, 0);
 
   var _useState3 = (0, _react.useState)(articleList.likeCount),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -160,7 +161,7 @@ var _default = withData(function (_ref2) {
           }
         }, _react["default"].createElement(IconText, {
           type: "clock-circle",
-          text: item.date,
+          text: (0, _moment["default"])(item.date).format('YYYY-MM-DD hh:mm:ss'),
           key: "list-vertical-star-o"
         }), _react["default"].createElement(IconText, {
           type: "read",

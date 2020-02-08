@@ -11,6 +11,8 @@ var sharedActions = _interopRequireWildcard(require("./sharedActions"));
 
 var _antd = require("antd");
 
+var _querystring = _interopRequireDefault(require("querystring"));
+
 var _jsCookie = _interopRequireDefault(require("js-cookie"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -186,7 +188,7 @@ function (_Controller) {
         method: 'GET',
         credentials: 'include'
       }, options);
-      return this.fetch(url + (params ? "?".concat(querystring.stringify(params)) : ''), options);
+      return this.fetch(url + (params ? "?".concat(_querystring["default"].stringify(params)) : ''), options);
     }
   }, {
     key: "handleChangeState",

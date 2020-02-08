@@ -19,10 +19,9 @@ const withData = connect(({ state }) => {
   };
 });
 export default withData(({ articleList }) => {
+  useEffect(() => setLoading(false), []);
   const [loading, setLoading] = useState(true);
-  setTimeout(() => setLoading(false), 0);
   const [likeCount, setLikeCount] = useState(articleList.likeCount);
-
   const IconText = ({ type, text }) => (
     <span style={{ padding: '0 20px 0 0' }}>
       <Icon type={type} style={{ marginRight: 8 }} />

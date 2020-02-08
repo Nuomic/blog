@@ -14,10 +14,25 @@ export default class extends Controller {
       let Editor = await import('for-editor');
       this.handleChangeState({ Editor });
     }
+    const articleId = this.location.params.articleId;
+    if (articleId) {
+      await this.getArticle(articleId);
+    }
   }
   async componentDidFirstMount() {
     await this.getFormData('1,2');
   }
+  getArticle = async articleId => {
+    await this.resHandler(
+      () => this.getApi(api.getArticleList, { articleId }),
+      res => {
+        this.handleChangeState(res);
+      },
+      err => {
+        message.error('获取文章详情值失败');
+      }
+    );
+  };
 
   handleChangeModalStatus = () => {
     const { modalStatus } = this.store.getState();

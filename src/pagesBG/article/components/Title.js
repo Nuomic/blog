@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Input, message } from 'antd';
 import { useCtrl } from 'react-imvc/hook';
-export default ({ form }) => {
+export default ({ form, title }) => {
   const { handleChangeModalStatus, handleSaveArticle } = useCtrl();
   const { getFieldDecorator, setFieldsValue, validateFields } = form;
 
@@ -29,7 +29,8 @@ export default ({ form }) => {
     >
       <Form.Item style={{ flex: 10 }}>
         {getFieldDecorator('title', {
-          rules: [{ required: true, message: '文章标题不能为空!' }]
+          rules: [{ required: true, message: '文章标题不能为空!' }],
+          initialValue: title
         })(<Input size="large" placeholder="请输入标题" />)}
       </Form.Item>
       <Form.Item style={{ flex: 1 }}>

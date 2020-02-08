@@ -6,8 +6,7 @@ import 'moment/locale/zh-cn';
 import { OuterClickWrapper } from 'react-imvc/component';
 
 export default function ComItem({ item, comFormId, setComFormId }) {
-  const [openState, setOpenState] = useState(false);
-  console.log('comFormId', comFormId);
+  const [openState, setOpenState] = useState({});
   const [isLike, setIsLike] = useState({});
   const like = a => {
     console.log('a', a);
@@ -47,14 +46,16 @@ export default function ComItem({ item, comFormId, setComFormId }) {
     >
       回复
     </span>,
-    item.subList && item.subList.length > 0 && (
+    item.children && item.children.length > 0 && (
       <Button
         size="small"
         style={{ fontSize: 12 }}
         type="link"
-        onClick={() => setOpenState(!openState)}
+        onClick={() => {
+          setOpenState({ ...openState, [item.id]: !openState[item.id] });
+        }}
       >
-        {openState ? '收起回复' : `全部回复(${item.subList.length})`}
+        {openState[item.id] ? '收起回复' : `全部回复(${item.children.length})`}
       </Button>
     )
   ];
@@ -81,13 +82,13 @@ export default function ComItem({ item, comFormId, setComFormId }) {
       >
         {item.id == comFormId && (
           <OuterClickWrapper onClick={() => setComFormId(undefined)}>
-            {<ComForm parentId={item.parentId} articleId={item.articleId} />}
+            <ComForm parentId={item.id} articleId={item.articleId} />
           </OuterClickWrapper>
         )}
-        {item.subList &&
-          item.subList.length > 0 &&
-          openState &&
-          item.subList.map(item => <Comments item={item} key={item.id} />)}
+        {item.children &&
+          item.children.length > 0 &&
+          openState[item.id] &&
+          item.children.map(item => <Comments item={item} key={item.id} />)}
       </Comment>
     );
   };

@@ -167,9 +167,6 @@ export default class extends Controller {
       this.resHandler(func, success, fail, { limit: limit - 1 });
     }
   }
-  handleSaveCommit = value => {
-    console.log('value', value);
-  };
 
   // getKeyTranlate(key, options = {}) {
   //   const language = this.store.getState().language || {};

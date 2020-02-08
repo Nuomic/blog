@@ -8,21 +8,21 @@ export default ({ form }) => {
     setFieldsValue,
     validateFields
   } = form;
+  const { Editor, article } = useModelState();
   getFieldDecorator('content', {
-    rules: [{ required: true, message: '文章内容不能为空!' }]
+    rules: [{ required: true, message: '文章内容不能为空!' }],
+    initialValue: article.content
   });
-  const { Editor } = useModelState();
+
   const handleChange = content => {
     setFieldsValue({ content });
   };
   const saveArticle = e => {
-    setFieldsValue({ status: '3' });
+    setFieldsValue({ status: article.id ? article.status : '3' });
     validateFields(async (err, fieldsValue) => {
-      // e.preventDefault();
       if (err) return;
       await handleSaveArticle(fieldsValue);
     });
-    resetFields();
   };
   const addImg = () => {};
   return (

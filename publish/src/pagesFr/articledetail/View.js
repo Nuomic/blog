@@ -11,9 +11,13 @@ var _BasicLayout = _interopRequireDefault(require("../components/BasicLayout"));
 
 var _antd = require("antd");
 
+var _reactMarkdown = _interopRequireDefault(require("react-markdown"));
+
 var _Comments = _interopRequireDefault(require("../components/Comments"));
 
 var _component = require("react-imvc/component");
+
+var _CodeBlock = _interopRequireDefault(require("./component/CodeBlock"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -52,7 +56,16 @@ var _default = function _default(props) {
         color: item.color
       }, item.name);
     })))
-  }, _react["default"].createElement(Paragraph, null, articleDetail.content)), _react["default"].createElement(_antd.Card, {
+  }, _react["default"].createElement(_component.Style, {
+    name: "markdown"
+  }), _react["default"].createElement(_reactMarkdown["default"], {
+    className: "for-markdown-preview",
+    source: articleDetail.content,
+    escapeHtml: false,
+    renderers: {
+      code: _CodeBlock["default"]
+    }
+  })), _react["default"].createElement(_antd.Card, {
     size: "small"
   }, _react["default"].createElement("span", null, "\u4E0A\u4E00\u7BC7:", pre && _react["default"].createElement(_component.Link, {
     to: "/articledetail/".concat(pre.id)

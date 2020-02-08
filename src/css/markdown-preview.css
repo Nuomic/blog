@@ -1,0 +1,185 @@
+textarea {
+  font-family: 'Consolas', 'Source Sans Pro', 'Helvetica Neue', Arial,
+    sans-serif;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 8px 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  line-height: inherit;
+}
+
+.for-markdown-preview {
+  line-height: 2;
+}
+
+.for-markdown-preview p,
+.for-markdown-preview blockquote,
+.for-markdown-preview ul,
+.for-markdown-preview ol,
+.for-markdown-preview dl,
+.for-markdown-preview pre {
+  margin-top: 0;
+  margin-bottom: 0.6em;
+}
+
+.for-markdown-preview h1,
+.for-markdown-preview h2 {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.for-markdown-preview h1,
+.for-markdown-preview h2,
+.for-markdown-preview h3,
+.for-markdown-preview h4,
+.for-markdown-preview h5,
+.for-markdown-preview h6 {
+  padding: 0;
+  margin: 0 0 0.6em;
+  font-weight: 600;
+  text-indent: 0;
+}
+
+.for-markdown-preview h1:target,
+.for-markdown-preview h2:target,
+.for-markdown-preview h3:target,
+.for-markdown-preview h4:target,
+.for-markdown-preview h5:target,
+.for-markdown-preview h6:target {
+  padding-top: 4.5rem;
+}
+
+.for-markdown-preview a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.for-markdown-preview a:hover {
+  text-decoration: underline;
+}
+
+.for-markdown-preview ul,
+.for-markdown-preview ol {
+  padding: 0.2em 0.8em;
+}
+
+.for-markdown-preview ul > li,
+.for-markdown-preview ol > li {
+  line-height: 2;
+  padding-left: 0.2em;
+  margin-left: 0.2em;
+  list-style-type: disc;
+}
+
+.for-markdown-preview ul > li > p,
+.for-markdown-preview ol > li > p {
+  text-indent: 0;
+}
+
+.for-markdown-preview ul > li > ul:last-child,
+.for-markdown-preview ol > li > ul:last-child {
+  margin-bottom: 0;
+}
+
+.for-markdown-preview ul > li > ul li,
+.for-markdown-preview ol > li > ul li {
+  list-style-type: circle;
+}
+
+.for-markdown-preview ul > li > ul li > ul li,
+.for-markdown-preview ol > li > ul li > ul li {
+  list-style-type: square;
+}
+
+.for-markdown-preview > ul,
+.for-markdown-preview ol {
+  padding: 0 20px;
+}
+
+.for-markdown-preview ol > li {
+  list-style-type: decimal;
+}
+
+.for-markdown-preview blockquote {
+  margin: 0;
+  margin-bottom: 0.6em;
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+}
+
+.for-markdown-preview blockquote p {
+  text-indent: 0;
+}
+
+.for-markdown-preview blockquote p:first-child {
+  margin-top: 0;
+}
+
+.for-markdown-preview blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.for-markdown-preview pre {
+  padding: 0.6em;
+  overflow: auto;
+  line-height: 1.6;
+  background-color: rgba(0, 0, 0, 0.808);
+  border-radius: 3px;
+}
+
+.for-markdown-preview pre code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  background: transparent;
+}
+
+.for-markdown-preview code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+
+.for-markdown-preview hr {
+  margin-bottom: 0.6em;
+  height: 1px;
+  background: #dadada;
+  border: none;
+}
+
+.for-markdown-preview table {
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-bottom: 0.6em;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.for-markdown-preview table thead {
+  background: #eee;
+}
+
+.for-markdown-preview table th,
+.for-markdown-preview table td {
+  padding: 0.1em 0.4em;
+  border: 1px solid #ddd;
+}
+
+.for-markdown-preview img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  margin-bottom: 0.6em;
+}
