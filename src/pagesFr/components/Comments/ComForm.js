@@ -136,7 +136,14 @@ export default Form.create()(({ parentId, articleId, form }) => {
                 </Col>
                 <Col span={19}>
                   <Form.Item>
-                    {getFieldDecorator('content')(
+                    {getFieldDecorator('content', {
+                      rules: [
+                        {
+                          required: true,
+                          message: '说点啥吧'
+                        }
+                      ]
+                    })(
                       <TextArea
                         autoSize={{ minRows: 2, maxRows: 3 }}
                         placeholder={
