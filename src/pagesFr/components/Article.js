@@ -42,19 +42,26 @@ export default () => {
     const articleLikeStatus =
       JSON.parse(window.localStorage.getItem('articleLikeStatus')) || {};
     if (articleLikeStatus[id]) {
-      delete articleLikeStatus[id];
-      setLikeStatus(articleLikeStatus);
-      current[id]--;
+      // delete articleLikeStatus[id];
+      // setLikeStatus(articleLikeStatus);
+      // current[id]--;
     } else {
       (articleLikeStatus[id] = true), setLikeStatus(articleLikeStatus);
       current[id]++;
+
+      const callback = () => {
+        setLikeCount({ ...likeCount, ...current });
+        let finalValue = JSON.stringify(articleLikeStatus);
+        window.localStorage.setItem('articleLikeStatus', finalValue);
+      };
+      handleChangeLikeCount({ id, likeCount: current[id] }, callback);
     }
-    const callback = () => {
-      setLikeCount({ ...likeCount, ...current });
-      let finalValue = JSON.stringify(articleLikeStatus);
-      window.localStorage.setItem('articleLikeStatus', finalValue);
-    };
-    handleChangeLikeCount({ id, likeCount: current[id] }, callback);
+    // const callback = () => {
+    //   setLikeCount({ ...likeCount, ...current });
+    //   let finalValue = JSON.stringify(articleLikeStatus);
+    //   window.localStorage.setItem('articleLikeStatus', finalValue);
+    // };
+    // handleChangeLikeCount({ id, likeCount: current[id] }, callback);
   };
   const IconText = ({ type, text, style, onClick }) => {
     if (!style) style = {};
