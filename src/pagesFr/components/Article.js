@@ -18,8 +18,8 @@ export default () => {
   const { handleChangeLikeCount } = useCtrl();
   console.log('handleChangeLikeCount', handleChangeLikeCount);
   const { articleList } = useModelState();
-  useEffect(() => setLoading(false), []);
   useEffect(() => {
+    setLoading(false);
     const articleLikeStatus =
       JSON.parse(window.localStorage.getItem('articleLikeStatus')) || {};
     setLikeStatus(articleLikeStatus);
@@ -49,14 +49,12 @@ export default () => {
       (articleLikeStatus[id] = true), setLikeStatus(articleLikeStatus);
       current[id]++;
     }
-    handleChangeLikeCount(
-      { id, likeCount: current[id] },
-      { ...likeCount, ...current },
-      setLikeCount
-    );
-    let finalValue = JSON.stringify(articleLikeStatus);
-
-    window.localStorage.setItem('articleLikeStatus', finalValue);
+    const callback = () => {
+      setLikeCount({ ...likeCount, ...current });
+      let finalValue = JSON.stringify(articleLikeStatus);
+      window.localStorage.setItem('articleLikeStatus', finalValue);
+    };
+    handleChangeLikeCount({ id, likeCount: current[id] }, callback);
   };
   const IconText = ({ type, text, style, onClick }) => {
     if (!style) style = {};
