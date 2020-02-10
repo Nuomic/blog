@@ -69,12 +69,25 @@ export default class Home extends Controller {
       }
     );
   };
-  handleChangeLikeCount = async (value, total, callback) => {
+
+  handleChangeLikeCount = async (value, callback) => {
     await this.resHandler(
       () => this.postApi(api.saveArticle, value),
       res => {
         console.log('res', res);
-        callback(total);
+        callback();
+      },
+      res => {
+        console.log('res', res);
+      }
+    );
+  };
+  handleCommentLikeCount = async (value, callback) => {
+    await this.resHandler(
+      () => this.postApi(api.saveComment, value),
+      res => {
+        console.log('res', res);
+        callback();
       },
       res => {
         console.log('res', res);

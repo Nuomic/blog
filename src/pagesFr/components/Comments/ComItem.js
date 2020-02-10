@@ -1,18 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ComForm from './ComForm';
 import { Comment, Tooltip, Icon, Avatar, Button } from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import { OuterClickWrapper } from 'react-imvc/component';
-
+import { useCtrl } from 'react-imvc/hook';
 export default function ComItem({ item, comFormId, setComFormId }) {
+  const { handleCommentLikeCount } = useCtrl();
   const [openState, setOpenState] = useState({});
-  const [isLike, setIsLike] = useState({});
-  const like = a => {
-    console.log('a', a);
-  };
-  const dislike = a => {
-    console.log('object', a);
+  useEffect(() => {
+    const commentLikeStatus =
+      JSON.parse(window.localStorage.getItem('commentLikeStatus')) || {};
+    setIsLike(commentLikeStatus[item.id]);
+  }, []);
+  const [isLike, setIsLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(item.likeCount);
+  const like = () => {
+    const { id } = item;
+    let currentCount = likeCount;
+    const commentLikeStatus =
+      JSON.parse(window.localStorage.getItem('commentLikeStatus')) || {};
+    if (isLike) {
+      // delete commentLikeStatus[id];
+      // currentCount --;
+    } else {
+      commentLikeStatus[id] = true;
+      currentCount++;
+
+      const callback = () => {
+        setIsLike(commentLikeStatus[id]);
+        setLikeCount(currentCount);
+        let finalValue = JSON.stringify(commentLikeStatus);
+        window.localStorage.setItem('commentLikeStatus', finalValue);
+      };
+      handleCommentLikeCount(
+        { commentId: id, likeCount: currentCount },
+        callback
+      );
+    }
   };
   const handleChangeComFormStatus = id => {
     setComFormId(id);
@@ -32,27 +57,16 @@ export default function ComItem({ item, comFormId, setComFormId }) {
   };
   const actions = item => [
     <span key="comment-basic-like">
-      <Tooltip title="赞">
+      <Tooltip title={(isLike ? '已' : '') + '赞'}>
         <Icon
           type="like"
-          theme={'action' === 'liked' ? 'filled' : 'outlined'}
+          theme={isLike ? 'filled' : 'outlined'}
+          style={{ color: isLike ? 'red' : '' }}
           onClick={like}
         />
       </Tooltip>
       <span style={{ paddingLeft: 8, cursor: 'auto' }}>{item.likeCount}</span>
     </span>,
-    // <span key=' key="comment-basic-dislike"'>
-    //   <Tooltip title="踩">
-    //     <Icon
-    //       type="dislike"
-    //       theme={'action' === 'disliked' ? 'filled' : 'outlined'}
-    //       onClick={dislike}
-    //     />
-    //   </Tooltip>
-    //   <span style={{ paddingLeft: 8, cursor: 'auto' }}>
-    //     {item.dislikeCount}
-    //   </span>
-    // </span>,
     <span
       key="comment-basic-reply-to"
       onClick={handleChangeComFormStatus.bind(this, item.id)}

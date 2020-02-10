@@ -16,7 +16,6 @@ import {
 const { Paragraph } = Typography;
 export default () => {
   const { handleChangeLikeCount } = useCtrl();
-  console.log('handleChangeLikeCount', handleChangeLikeCount);
   const { articleList } = useModelState();
   useEffect(() => {
     setLoading(false);
@@ -29,7 +28,6 @@ export default () => {
   const initLikeCount = {};
   articleList &&
     articleList.forEach(item => {
-      console.log('item', item);
       initLikeCount[item.id] = item.likeCount;
     });
   const [likeCount, setLikeCount] = useState(initLikeCount);
@@ -46,10 +44,12 @@ export default () => {
       // setLikeStatus(articleLikeStatus);
       // current[id]--;
     } else {
-      (articleLikeStatus[id] = true), setLikeStatus(articleLikeStatus);
+      articleLikeStatus[id] = true;
+      setLikeStatus(articleLikeStatus);
       current[id]++;
 
       const callback = () => {
+        current[id]--;
         setLikeCount({ ...likeCount, ...current });
         let finalValue = JSON.stringify(articleLikeStatus);
         window.localStorage.setItem('articleLikeStatus', finalValue);
@@ -114,7 +114,6 @@ export default () => {
                     <Paragraph
                       ellipsis={{ rows: 1 }}
                       className="title-style"
-                      // onClick={handleToDetail(item.id)}
                       style={{ marginBottom: 10, maxWidth: 480 }}
                     >
                       <Tag color="magenta">{item.categoryInfo.name}</Tag>
