@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import connect from 'react-imvc/hoc/connect';
 import { Link } from 'react-imvc/component';
+import { useModelState, useCtrl } from 'react-imvc/hook';
 import moment from 'moment';
 import {
   List,
@@ -13,29 +14,60 @@ import {
   Tag
 } from 'antd';
 const { Paragraph } = Typography;
-const withData = connect(({ state }) => {
-  return {
-    articleList: state.articleList
-  };
-});
-export default withData(({ articleList }) => {
+export default () => {
+  const { handleChangeLikeCount } = useCtrl();
+  console.log('handleChangeLikeCount', handleChangeLikeCount);
+  const { articleList } = useModelState();
   useEffect(() => setLoading(false), []);
+  useEffect(() => {
+    const articleLikeStatus =
+      JSON.parse(window.localStorage.getItem('articleLikeStatus')) || {};
+    setLikeStatus(articleLikeStatus);
+  }, []);
   const [loading, setLoading] = useState(true);
-  const [likeCount, setLikeCount] = useState(articleList.likeCount);
-  const IconText = ({ type, text }) => (
-    <span style={{ padding: '0 20px 0 0' }}>
-      <Icon type={type} style={{ marginRight: 8 }} />
-      <span style={{ color: !(type == 'clock-circle') && '#3399ea' }}>
-        {text}
-      </span>
-    </span>
-  );
+  const [likeStatus, setLikeStatus] = useState({});
+  const initLikeCount = {};
+  articleList &&
+    articleList.forEach(item => {
+      console.log('item', item);
+      initLikeCount[item.id] = item.likeCount;
+    });
+  const [likeCount, setLikeCount] = useState(initLikeCount);
+  console.log('likeCount', likeCount);
   const handleToDetail = id => {
     return `/articledetail/${id}`;
   };
-  const handleAddLikeCount = e => {
-    console(e);
-    setLikeCount(likeCount++);
+  const changeLikeCount = id => {
+    let current = { [id]: likeCount[id] };
+    const articleLikeStatus =
+      JSON.parse(window.localStorage.getItem('articleLikeStatus')) || {};
+    if (articleLikeStatus[id]) {
+      delete articleLikeStatus[id];
+      setLikeStatus(articleLikeStatus);
+      current[id]--;
+    } else {
+      (articleLikeStatus[id] = true), setLikeStatus(articleLikeStatus);
+      current[id]++;
+    }
+    handleChangeLikeCount(
+      { id, likeCount: current[id] },
+      { ...likeCount, ...current },
+      setLikeCount
+    );
+    let finalValue = JSON.stringify(articleLikeStatus);
+
+    window.localStorage.setItem('articleLikeStatus', finalValue);
+  };
+  const IconText = ({ type, text, style, onClick }) => {
+    if (!style) style = {};
+    return (
+      <span style={{ padding: '0 20px 0 0' }} onClick={onClick}>
+        <Icon type={type} style={{ marginRight: 8, ...style }} />
+        <span style={{ color: !(type == 'clock-circle') && '#3399ea' }}>
+          {text}
+        </span>
+      </span>
+    );
   };
   return (
     <List
@@ -111,32 +143,20 @@ export default withData(({ articleList }) => {
                       <IconText
                         type="clock-circle"
                         text={moment(item.date).format('YYYY-MM-DD hh:mm:ss')}
-                        key="list-vertical-star-o"
                       />
+                      <IconText type="read" text={item.viewCount} />
                       <IconText
-                        type="read"
-                        text={item.viewCount}
-                        key="list-vertical-eye"
-                        style
-                      ></IconText>
-                      <IconText
-                        type="like-o"
-                        text={item.likeCount}
-                        onClick={handleAddLikeCount}
-                        key="list-vertical-like-o"
+                        onClick={changeLikeCount.bind(this, item.id)}
+                        type="like"
+                        style={{ color: likeStatus[item.id] ? 'red' : 'block' }}
+                        text={likeCount[item.id]}
                       />
-                      <span>
-                        <IconText
-                          type="message"
-                          text={item.commentCount}
-                          key="list-vertical-message"
-                        />
-                        <Link to={handleToDetail(item.id)}>
-                          <Button size="small" style={{ float: 'right' }}>
-                            阅读更多
-                          </Button>
-                        </Link>
-                      </span>
+                      <IconText type="message" text={item.commentCount} />
+                      <Link to={handleToDetail(item.id)}>
+                        <Button size="small" style={{ float: 'right' }}>
+                          阅读更多
+                        </Button>
+                      </Link>
                     </div>
                   </>
                 }
@@ -147,4 +167,4 @@ export default withData(({ articleList }) => {
       )}
     />
   );
-});
+};

@@ -69,6 +69,18 @@ export default class Home extends Controller {
       }
     );
   };
+  handleChangeLikeCount = async (value, total, callback) => {
+    await this.resHandler(
+      () => this.postApi(api.saveArticle, value),
+      res => {
+        console.log('res', res);
+        callback(total);
+      },
+      res => {
+        console.log('res', res);
+      }
+    );
+  };
   getHitokoto = async () => {
     let res = await this.getApi(api.getHitokoto);
     this.handleChangeState({ hitokoto: res });

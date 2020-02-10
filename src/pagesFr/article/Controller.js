@@ -32,4 +32,17 @@ export default class extends Controller {
       }
     );
   };
+  handleChangeLikeCount = async (value, total, callback) => {
+    await this.resHandler(
+      () => this.postApi(api.saveArticle, value),
+      res => {
+        console.log('res', res);
+        callback(total);
+        // this.handleChangeState(res);
+      },
+      res => {
+        console.log('res', res);
+      }
+    );
+  };
 }
