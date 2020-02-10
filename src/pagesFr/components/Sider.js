@@ -1,14 +1,10 @@
 import React from 'react';
 import { Card, Tag, List } from 'antd';
 import { Link } from 'react-imvc/component';
-import connect from 'react-imvc/hoc/connect';
 import moment from 'moment';
-const withData = connect(({ state }) => {
-  return {
-    siderData: state.siderData
-  };
-});
-const Sider = ({ siderData }) => {
+import { useModelState } from 'react-imvc/hook';
+export default () => {
+  const { siderData } = useModelState() || {};
   const handleToDetail = id => {
     return `/articledetail/${id}`;
   };
@@ -114,4 +110,3 @@ const Sider = ({ siderData }) => {
     </div>
   );
 };
-export default withData(Sider);
