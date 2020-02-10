@@ -3,7 +3,6 @@ import { Table, Button } from 'antd';
 import { useCtrl, useModelState } from 'react-imvc/hook';
 import ArticleList from './ArticleList';
 import CategoryForm from './CategoryForm';
-import Link from 'react-imvc/component/Link';
 export default ({ addTabs, showConfirm }) => {
   const state = useModelState();
   const handlers = useCtrl();
@@ -72,7 +71,7 @@ export default ({ addTabs, showConfirm }) => {
               style={{ color: 'red' }}
               onClick={showConfirm.bind(
                 this,
-                text.id,
+                text,
                 '是否要删除该栏目？',
                 handleDeleteCategory
               )}

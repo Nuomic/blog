@@ -2,6 +2,7 @@ import Controller from '../shared/BaseController'; // 加载 react-imvc controll
 import View from './View';
 import * as Model from './Model';
 import api from '../api';
+import { message } from 'antd';
 export default class extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
@@ -34,18 +35,18 @@ export default class extends Controller {
     );
   };
   //删除栏目
-  handleDeleteCategory = async categoryId => {
+  handleDeleteCategory = async ({ id, articleCount }) => {
+    console.log(id, articleCount);
     await this.resHandler(
-      () => this.postApi(api.deleteCategory, { categoryId }),
+      () => this.postApi(api.deleteCategory, { categoryId: id, articleCount }),
       () => {
         const { categoryList } = this.store.getState();
-        const newCategoryList = categoryList.filter(
-          item => item.id != categoryId
-        );
+        const newCategoryList = categoryList.filter(item => item.id != id);
         this.handleChangeState({ categoryList: newCategoryList });
+        message.success('删除成功！');
       },
       err => {
-        console.log('err', err);
+        message.error(err.customerErrorMessage);
       }
     );
   };

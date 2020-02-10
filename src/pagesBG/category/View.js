@@ -13,11 +13,11 @@ export default ({ state }) => {
     { key: '0', name: '栏目', content: CategoryList }
   ]);
   //删除提示框
-  const showConfirm = (id, title, onOk) => {
+  const showConfirm = (text, title, onOk) => {
     confirm({
       title,
       onOk: async () => {
-        await onOk(id);
+        await onOk(text);
       },
       onCancel() {}
     });
