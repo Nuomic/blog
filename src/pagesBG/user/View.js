@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import BasicLayout from '../components/BasicLayout';
 import { Tabs, Modal } from 'antd';
-import CategoryList from './component/CategoryList';
 import ActionList from './component/ActionList';
 import StickyTabs from '../components/StickyTabs';
 const { confirm } = Modal;

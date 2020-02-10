@@ -17,12 +17,16 @@ export function getCookieOriginByContext(context) {
 }
 
 export function getStorageItem(key) {
-  return window.localStorage.getItem(key);
+  const value = window.localStorage.getItem(key);
+  if (value && new Date(value.timeout) < new Date()) {
+    removeStorageItem(key);
+    return;
+  }
+  return value;
 }
 
 export function setStorageItem(key, value) {
   let finalValue = {
-    tag: '',
     value: value,
     timeout: getNextMonthDate(),
     savedate: getCurrentDate()
@@ -51,28 +55,29 @@ export function getCurrentDate() {
 }
 
 export function getNextMonthDate() {
+  //有效期
   return formatDate(new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000));
 }
 
-export function getUrl(context) {
-  if (context.isServer) {
-    let req = context.req;
-    let host = req.hostname || req.host;
-    let protocol =
-      Number(req.headers['x-ctrip-isssl']) === 1 ? 'https:' : 'http:';
-    let url = `${protocol}//${host + req.originalUrl}?${querystring.stringify(
-      req.query
-    )}`;
-    return url;
-  } else {
-    return window.location.href;
-  }
-}
+// export function getUrl(context) {
+//   if (context.isServer) {
+//     let req = context.req;
+//     let host = req.hostname || req.host;
+//     let protocol =
+//       Number(req.headers['x-ctrip-isssl']) === 1 ? 'https:' : 'http:';
+//     let url = `${protocol}//${host + req.originalUrl}?${querystring.stringify(
+//       req.query
+//     )}`;
+//     return url;
+//   } else {
+//     return window.location.href;
+//   }
+// }
 
-export function redirect(context, targetUrl) {
-  if (context.isServer) {
-    context.res.redirect(targetUrl);
-  } else {
-    window.location.href = targetUrl;
-  }
-}
+// export function redirect(context, targetUrl) {
+//   if (context.isServer) {
+//     context.res.redirect(targetUrl);
+//   } else {
+//     window.location.href = targetUrl;
+//   }
+// }

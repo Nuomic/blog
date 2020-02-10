@@ -75,7 +75,7 @@ export default ({ dataSource, changModalStatus }) => {
                     </a>
                   </Descriptions.Item>
                   <Descriptions.Item label="描述">
-                    {item.description}
+                    <div style={{ minHeight: 150 }}>{item.description}</div>
                   </Descriptions.Item>
                 </Descriptions>
               }

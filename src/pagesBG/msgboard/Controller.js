@@ -24,20 +24,22 @@ export default class extends Controller {
   //获取评论列表
   getCommentList = async () => {
     await this.resHandler(
-      () => this.postApi(api.getCommentList),
+      () => this.getApi(api.getCommentList, { all: true }),
       res => {
         this.handleChangeState(res);
       },
       err => {
-        console.log('err', err);
+        message.error('ssssssssssss');
       }
     );
   };
+
   handleSaveComment = async value => {
     await this.resHandler(
       () => this.postApi(api.saveComment, value),
       res => {
         console.log('res', res);
+        this.getCommentList();
         message.success('回复成功');
       },
       err => {
@@ -46,16 +48,14 @@ export default class extends Controller {
     );
   };
   //删除评论
-  handleDeleteComment = async id => {
+  handleDeleteComment = async commentId => {
     await this.resHandler(
-      () => this.postApi(api.deleteComment, { id }),
+      () => this.postApi(api.deleteComment, { commentId }),
       () => {
-        const { commentList } = this.store.getState();
-        const newCommentList = commentList.filter(item => item.id != id);
-        this.handleChangeState({ commentList: newCommentList });
+        this.getCommentList();
       },
       err => {
-        console.log('err', err);
+        message.error('删除评论失败');
       }
     );
   };

@@ -1,30 +1,32 @@
 export default {
-  // 文章
+  // 文章// 改变文章状态 // 删除文章
   getArticleList: '/article/list',
-  // 删除文章
   deleteArticle: '/article/delete',
   saveArticle: '/article/save',
-  // 改变文章状态
   changeArticleStatus: '/article/changeStatus',
+  changeArticleCategory:
+    ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
 
-  /* 获取栏目 */
+  /* 栏目 */
   getCategory: '/category/list',
-  /* 删除栏目 */
   deleteCategory: '/category/delete',
   saveCategory: '/category/save',
 
+  // 上传文件
   uploadFile: '/resource/save',
 
-  getCommentList:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/getCommentList',
-  saveComment:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/saveComment',
-  deleteComment:
-    'https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/deleteComment',
+  //评论
+  getCommentList: '/comment/list',
+  saveComment: '/comment/save',
+  deleteComment: '/comment/delete',
 
-  changeArticleCategory:
-    ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
-  postlogin: '/login',
+  //用户
+  userLogin: '/user/login',
+  userLogout: '/user/logout',
+  userCheck: '/user/login',
+  userRegister: '/user/register',
+
+  // 其他设置
   getSetting: '/setting/get',
   getFormData: '/setting/getFormData',
   saveSetting: '/setting/save',

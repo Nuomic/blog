@@ -3,6 +3,7 @@ import Controller from '../shared/BaseController'; // 加载 react-imvc controll
 import View from './View';
 import Model from './Model';
 import api from '../api';
+import { message } from 'antd';
 export default class Home extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
@@ -27,10 +28,15 @@ export default class Home extends Controller {
   }
   handleLogin = async info => {
     this.resHandler(
-      () => this.postApi(api.postlogin, info),
+      () => this.postApi(api.userLogin, info),
       res => {
-        this.handleChangeState(res);
-        this.redirect('/admin');
+        if (res.success) {
+          this.handleChangeState(res);
+          this.redirect('/admin');
+          window.localStorage.setItem('TOKEN', res.TOKEN);
+        } else {
+          message.error(res.error);
+        }
       },
       err => {
         console.log('err', err);

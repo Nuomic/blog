@@ -41,18 +41,18 @@ export default function ComItem({ item, comFormId, setComFormId }) {
       </Tooltip>
       <span style={{ paddingLeft: 8, cursor: 'auto' }}>{item.likeCount}</span>
     </span>,
-    <span key=' key="comment-basic-dislike"'>
-      <Tooltip title="踩">
-        <Icon
-          type="dislike"
-          theme={'action' === 'disliked' ? 'filled' : 'outlined'}
-          onClick={dislike}
-        />
-      </Tooltip>
-      <span style={{ paddingLeft: 8, cursor: 'auto' }}>
-        {item.dislikeCount}
-      </span>
-    </span>,
+    // <span key=' key="comment-basic-dislike"'>
+    //   <Tooltip title="踩">
+    //     <Icon
+    //       type="dislike"
+    //       theme={'action' === 'disliked' ? 'filled' : 'outlined'}
+    //       onClick={dislike}
+    //     />
+    //   </Tooltip>
+    //   <span style={{ paddingLeft: 8, cursor: 'auto' }}>
+    //     {item.dislikeCount}
+    //   </span>
+    // </span>,
     <span
       key="comment-basic-reply-to"
       onClick={handleChangeComFormStatus.bind(this, item.id)}
@@ -77,15 +77,7 @@ export default function ComItem({ item, comFormId, setComFormId }) {
       <Comment
         actions={actions(item)}
         author={<a>{item.nickname}</a>}
-        avatar={
-          <Avatar
-            src={
-              item.avatar ||
-              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-            }
-            alt="Han Solo"
-          />
-        }
+        avatar={<Avatar src={item.avatar} alt="Han Solo" />}
         content={<p>{item.content}</p>}
         datetime={
           <Tooltip title={moment(item.date).format('YYYY-MM-DD HH:mm:ss')}>

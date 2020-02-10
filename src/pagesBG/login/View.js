@@ -1,6 +1,7 @@
 import React from 'react';
 import { Style } from 'react-imvc/component';
 import { Form, Input, Card, Icon, Checkbox, Button } from 'antd';
+import md5 from 'blueimp-md5';
 const { Item } = Form;
 export default Form.create()(({ state, form, handlers }) => {
   const { getFieldDecorator, resetFields, validateFields } = form;
@@ -8,9 +9,10 @@ export default Form.create()(({ state, form, handlers }) => {
   const handleSubmit = e => {
     e.preventDefault();
     validateFields(async (err, values) => {
+      const { username, password } = values;
       if (!err) {
         console.log('Received values of form: ', values);
-        await handleLogin(values);
+        await handleLogin({ username, password: md5(password) });
       }
     });
   };

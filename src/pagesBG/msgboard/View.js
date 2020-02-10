@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BasicLayout from '../components/BasicLayout';
 import StickyTabs from '../components/StickyTabs';
-import { Tabs, Modal, List, Button, Avatar, Form, Input } from 'antd';
+import { Tabs, Modal, List, Button, Avatar, Form, Input, Tooltip } from 'antd';
 import { Link } from 'react-imvc/component';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -9,7 +9,7 @@ const { Item } = Form;
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 export default ({ state, handlers }) => {
-  const { commentList } = state;
+  const { commentList, userInfo } = state;
   const { handleDeleteComment, handleSaveComment } = handlers;
   const bdList = [{ name: '首页', href: '/admin' }, { name: '留言管理' }];
   const articleStatus = [
@@ -17,14 +17,14 @@ export default ({ state, handlers }) => {
     { tabName: '留言管理', key: '1' },
     { tabName: '我的回复', key: '2' }
   ];
-  const [comFormId, setComFormId] = useState(undefined);
+  const [comForm, setComForm] = useState({});
   const commentType = type =>
-    type === '0'
-      ? commentList.filter(item => !!item.articleInfo && !item.isMine)
+    commentList && type === '0'
+      ? commentList.filter(item => !!item.articleInfo.id && !item.isMine)
       : type === '1'
-      ? commentList.filter(item => !item.articleInfo && !item.isMine)
+      ? commentList.filter(item => !item.articleInfo.id && !item.isMine)
       : type === '2'
-      ? commentList.filter(item => !item.articleInfo && item.isMine)
+      ? commentList.filter(item => item.isMine)
       : [];
   const CommentForm = Form.create()(({ form }) => {
     const { getFieldDecorator, validateFields, getFieldValue } = form;
@@ -32,7 +32,12 @@ export default ({ state, handlers }) => {
       e.preventDefault();
       validateFields((err, values) => {
         if (!err) {
-          handleSaveComment({ ...values, parentId: comFormId });
+          handleSaveComment({
+            ...values,
+            ...comForm,
+            ...userInfo,
+            isMine: true
+          });
         }
       });
     };
@@ -43,12 +48,8 @@ export default ({ state, handlers }) => {
         wrapperCol={{ span: 15 }}
         colon={false}
       >
-        <Item
-          label={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          }
-        >
-          {getFieldDecorator('comment')(
+        <Item label={<Avatar src={userInfo.avatar} />}>
+          {getFieldDecorator('content')(
             <Input
               placeholder="发表你的评论"
               style={{
@@ -61,7 +62,7 @@ export default ({ state, handlers }) => {
                   type="primary"
                   htmlType="submit"
                   style={{ position: 'relative', right: '-12px' }}
-                  disabled={!getFieldValue('comment')}
+                  disabled={!getFieldValue('content')}
                 >
                   发表评论
                 </Button>
@@ -104,7 +105,15 @@ export default ({ state, handlers }) => {
                   <List.Item
                     key={item.id}
                     actions={[
-                      <Button type="link" onClick={() => setComFormId(item.id)}>
+                      <Button
+                        type="link"
+                        onClick={() =>
+                          setComForm({
+                            parentId: item.id,
+                            articleId: item.articleInfo.id
+                          })
+                        }
+                      >
                         快速回复
                       </Button>,
                       <Button
@@ -121,18 +130,30 @@ export default ({ state, handlers }) => {
                         avatar={<Avatar src={item.avatar} />}
                         title={
                           <span>
-                            {`${item.nickname}  ${moment(
-                              item.date
-                            ).fromNow()} `}
-                            {item.articleInfo ? (
+                            <Tooltip title={item.email} trigger="click">
+                              {item.nickname}
+                            </Tooltip>
+                            {'  '}
+                            <Tooltip
+                              trigger="click"
+                              title={moment(item.date).format(
+                                'YYYY-MM-DD HH:mm:ss'
+                              )}
+                            >
+                              {moment(item.date).fromNow()}
+                            </Tooltip>
+                            {'  '}
+                            {!!item.articleInfo.id ? (
                               <span>
-                                回复了你的文章{' '}
+                                {item.isMine ? '回复的文章' : '回复了你的文章'}{' '}
                                 <Link
                                   to={'/articledetail/' + item.articleInfo.id}
                                 >
                                   {item.articleInfo.title}
                                 </Link>
                               </span>
+                            ) : item.isMine ? (
+                              '回复了留言'
                             ) : (
                               '给你留言'
                             )}
@@ -140,7 +161,7 @@ export default ({ state, handlers }) => {
                         }
                         description={item.content}
                       />
-                      {comFormId == item.id && <CommentForm />}
+                      {comForm.parentId == item.id && <CommentForm />}
                     </div>
                   </List.Item>
                 )}

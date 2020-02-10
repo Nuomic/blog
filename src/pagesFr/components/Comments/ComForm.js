@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import connect from 'react-imvc/hoc/connect';
 import { comFormTheme } from '../../config';
-import {
-  Input,
-  Form,
-  Button,
-  Col,
-  Row,
-  Card,
-  Icon,
-  Avatar,
-  message
-} from 'antd';
-import Cookies from 'js-cookie';
+import { Input, Form, Button, Col, Row, Card, Icon, Avatar } from 'antd';
 import { useModelState, useCtrl } from 'react-imvc/hook';
 const { TextArea } = Input;
 export default Form.create()(({ parentId, articleId, form }) => {
   const { handleSaveCommit } = useCtrl();
   const { hitokoto } = useModelState();
+  const [userInfo, setUserInfo] = useState({});
   console.log(parentId, articleId);
   let initRandomNum = [
     Math.floor(Math.random() * 20),
@@ -26,6 +16,10 @@ export default Form.create()(({ parentId, articleId, form }) => {
   const [randomNum, setRandomNum] = useState(false);
   useEffect(() => {
     setRandomNum(initRandomNum);
+    setUserInfo({
+      nickname: window.localStorage.getItem('nickname'),
+      email: window.localStorage.getItem('email')
+    });
   }, []);
 
   //刷新验证
@@ -42,8 +36,8 @@ export default Form.create()(({ parentId, articleId, form }) => {
     validateFields(async (err, fieldsValue) => {
       e.preventDefault();
       if (err) return;
-      Cookies.set('nickname', fieldsValue.nickname, { expires: 30 });
-      Cookies.set('email', fieldsValue.email, { expires: 30 });
+      window.localStorage.setItem('nickname', fieldsValue.nickname);
+      window.localStorage.setItem('email', fieldsValue.email);
       console.log('fieldsValue', fieldsValue);
       await handleSaveCommit({ parentId, articleId, ...fieldsValue });
       handleRefreshRandomNum();
@@ -87,7 +81,7 @@ export default Form.create()(({ parentId, articleId, form }) => {
                           message: '请输入昵称'
                         }
                       ],
-                      initialValue: Cookies.get('nickname')
+                      initialValue: userInfo.nickname
                     })(<Input placeholder="昵称" />)}
                   </Form.Item>
                 </Col>
@@ -102,7 +96,7 @@ export default Form.create()(({ parentId, articleId, form }) => {
                           message: '邮箱格式不正确!'
                         }
                       ],
-                      initialValue: Cookies.get('email')
+                      initialValue: userInfo.email
                     })(<Input placeholder="邮箱" />)}
                   </Form.Item>
                 </Col>

@@ -18,7 +18,7 @@ export default () => {
       <List
         dataSource={commentList}
         renderItem={item => (
-          <List.Item key={item.id}>
+          <List.Item key={item.id} style={{ padding: 0 }}>
             <ComItem
               item={item}
               comFormId={comFormId}

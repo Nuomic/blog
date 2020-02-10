@@ -16,7 +16,6 @@ export default class extends Controller {
    * 动态获取初始化状态
    */
   async getInitialState(initialState) {
-    // let state = await super.getInitialState(initialState);
     let { context, location } = this;
     // let url = context.basename + '/';
     // let options = {
@@ -50,7 +49,14 @@ export default class extends Controller {
     return {
       ...initialState,
       currentPath: location.pathname,
-      initCollapsed: Cookie.get('collapsed') == 'false' ? false : true
+      initCollapsed: Cookie.get('collapsed') == 'false' ? false : true,
+      userInfo: {
+        username: 'zwq',
+        email: '972618478@qq.com',
+        nickname: 'zzzzz',
+        phone_number: '15170816377',
+        avatar: ''
+      }
     };
   }
 
@@ -156,6 +162,7 @@ export default class extends Controller {
       this.resHandler(func, success, fail, { limit: limit - 1 });
     }
   }
+
   // getKeyTranlate(key, options = {}) {
   //   const language = this.store.getState().language || {};
   //   return language[key] ? language[key].replace(/\$\{\s*(\w+)\s*(([\+\-])\s*(\d+)\s*)?\}/g, (text) => options[text.substring(2, text.length - 1)]) : '';
