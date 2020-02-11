@@ -49,7 +49,7 @@ export default ({ form, modalStatus }) => {
             initialValue: article.categoryId,
             rules: [{ required: true, message: '所属栏目不能为空' }]
           })(
-            <Select>
+            <Select placeholder={'请选择所选栏目'}>
               {categoryList &&
                 categoryList.map(item => (
                   <Option key={item.key}>{item.name}</Option>
@@ -61,7 +61,12 @@ export default ({ form, modalStatus }) => {
           {getFieldDecorator('tags', {
             initialValue: article.tags
           })(
-            <Select mode="tags" tokenSeparators={[',']} onSelect={addTag}>
+            <Select
+              placeholder={'可选择多个,不存在可添加'}
+              mode="tags"
+              tokenSeparators={[',']}
+              onSelect={addTag}
+            >
               {tagList &&
                 tagList.map(item => (
                   <Option key={item.key} value={item.name}>
