@@ -13,9 +13,9 @@ export default ({ form, title }) => {
         console.log('err', err);
         return;
       }
-      console.log('values', values);
-      setFieldsValue({ status });
-      (status == '3' && handleSaveArticle({ ...values, status })) ||
+      // setFieldsValue({ status });
+      // console.log('values', values);
+      (status == '3' && handleSaveArticle({ ...values, status: '3' })) ||
         handleChangeModalStatus();
     });
   };
@@ -47,7 +47,7 @@ export default ({ form, title }) => {
           size="large"
           type="primary"
           className="fr"
-          onClick={saveArticle.bind(this, '1')}
+          onClick={saveArticle.bind(this, null)}
         >
           发表文章
         </Button>

@@ -51,7 +51,10 @@ export default class extends Controller {
   };
   handleSaveArticle = async value => {
     const { article, modalStatus } = this.store.getState();
-    value = (!!article && { ...article, ...value }) || value;
+
+    value =
+      (!!article && { id: article.id, status: article.status, ...value }) ||
+      value;
     await this.resHandler(
       () => this.postApi(api.saveArticle, value),
       res => {
