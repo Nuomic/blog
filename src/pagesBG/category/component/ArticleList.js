@@ -16,8 +16,9 @@ export default ({ id }) => {
   useEffect(() => {
     return setSelectedRowKeys([]);
   }, [articleList]);
+  const getArticleList = () => handleGetArticleList(id, setArticleList);
   useEffect(() => {
-    handleGetArticleList(id, setArticleList);
+    getArticleList();
   }, []);
   const hasSelected = selectedRowKeys.length > 0;
   const showConfirm = tocategoryId => {
@@ -26,10 +27,8 @@ export default ({ id }) => {
       onOk: async () => {
         await handleChangeArticleListFromCategory(
           selectedRowKeys,
-          id,
           tocategoryId,
-          articleList,
-          setArticleList
+          getArticleList
         );
       },
       onCancel() {}
