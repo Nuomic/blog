@@ -19,7 +19,7 @@ export default ({ form }) => {
   };
   const saveArticle = e => {
     setFieldsValue({ status: article.id ? article.status : '3' });
-    validateFields(async (err, fieldsValue) => {
+    validateFields(['title', 'content'], async (err, fieldsValue) => {
       if (err) return;
       await handleSaveArticle(fieldsValue);
     });
