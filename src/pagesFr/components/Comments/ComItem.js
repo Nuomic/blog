@@ -24,9 +24,8 @@ export default function ComItem({ item, comFormId, setComFormId }) {
       // delete commentLikeStatus[id];
       // currentCount --;
     } else {
-      commentLikeStatus[id] = true;
       currentCount++;
-
+      commentLikeStatus[id] = true;
       const callback = () => {
         setIsLike(commentLikeStatus[id]);
         setLikeCount(currentCount);
@@ -65,7 +64,7 @@ export default function ComItem({ item, comFormId, setComFormId }) {
           onClick={like}
         />
       </Tooltip>
-      <span style={{ paddingLeft: 8, cursor: 'auto' }}>{item.likeCount}</span>
+      <span style={{ paddingLeft: 8, cursor: 'auto' }}>{likeCount}</span>
     </span>,
     <span
       key="comment-basic-reply-to"

@@ -49,7 +49,6 @@ export default () => {
       current[id]++;
 
       const callback = () => {
-        current[id]--;
         setLikeCount({ ...likeCount, ...current });
         let finalValue = JSON.stringify(articleLikeStatus);
         window.localStorage.setItem('articleLikeStatus', finalValue);
