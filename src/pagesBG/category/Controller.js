@@ -67,7 +67,7 @@ export default class extends Controller {
   //获取文章列表
   handleGetArticleList = async (categoryId, setArticleList) => {
     await this.resHandler(
-      () => this.postApi(api.getArticleList, { categoryId }),
+      () => this.getApi(api.getArticleList, { categoryId }),
       res => {
         setArticleList(res.articleList);
       },

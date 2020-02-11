@@ -47,7 +47,39 @@ export default ({ state, handlers }) => {
       onCancel() {}
     });
   }
-
+  const actions = item => {
+    const View = (
+      <Link to={`/articledetail/${item.id}`} target="blank">
+        查看
+      </Link>
+    );
+    const Recycle = (
+      <Button
+        type="link"
+        style={{ padding: 0 }}
+        onClick={handleChangeArticleStatus.bind(this, item.id, 3)}
+      >
+        回收至草稿箱
+      </Button>
+    );
+    const Edit = (
+      <Link to={`/md/edit/${item.id}`} target="blank">
+        编辑
+      </Link>
+    );
+    const Delete = (
+      <Button
+        type="link"
+        style={{ color: 'red', padding: 0 }}
+        onClick={showConfirm.bind(this, item.id, item.status)}
+      >
+        删除
+      </Button>
+    );
+    const action = [(item.status == '4' && Recycle) || Edit, Delete];
+    item.status != 3 && action.unshift(View);
+    return action;
+  };
   return (
     <BasicLayout breadcrumbList={bdList}>
       <StickyTabs
@@ -78,38 +110,7 @@ export default ({ state, handlers }) => {
                 itemLayout="horizontal"
                 dataSource={ArticleList(item.key)}
                 renderItem={item => (
-                  <List.Item
-                    key={item.id}
-                    actions={[
-                      (item.status == '4' && (
-                        <Button
-                          type="link"
-                          style={{ padding: 0 }}
-                          onClick={handleChangeArticleStatus.bind(
-                            this,
-                            item.id,
-                            3
-                          )}
-                        >
-                          回收至草稿箱
-                        </Button>
-                      )) || (
-                        <Link to={`/md/edit/${item.id}`} target="blank">
-                          编辑
-                        </Link>
-                      ),
-                      <Link to={`/articledetail/${item.id}`} target="blank">
-                        查看
-                      </Link>,
-                      <Button
-                        type="link"
-                        style={{ color: 'red', padding: 0 }}
-                        onClick={showConfirm.bind(this, item.id, item.status)}
-                      >
-                        删除
-                      </Button>
-                    ]}
-                  >
+                  <List.Item key={item.id} actions={actions(item)}>
                     <List.Item.Meta
                       title={
                         <span style={{ fontWeight: 600 }}>
