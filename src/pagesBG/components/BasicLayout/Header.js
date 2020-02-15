@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Layout, Icon, Breadcrumb, Button, Avatar, Badge } from 'antd';
 import connect from 'react-imvc/hoc/connect';
 import { Style, Link } from 'react-imvc/component';
-import Cookie from 'js-cookie';
+import { useCtrl } from 'react-imvc/hook';
 const { Header } = Layout;
 
 export default ({ collapsed, handleToggle, breadcrumbList }) => {
+  const { handleLogout } = useCtrl();
   return (
     <Header className="basic-header">
       <Icon
@@ -33,7 +34,9 @@ export default ({ collapsed, handleToggle, breadcrumbList }) => {
         </span>
 
         <Avatar></Avatar>
-        <Button type="link">退出登录</Button>
+        <Button type="link" onClick={handleLogout}>
+          退出登录
+        </Button>
       </div>
     </Header>
   );
