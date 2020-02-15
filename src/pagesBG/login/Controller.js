@@ -12,13 +12,12 @@ export default class Home extends Controller {
     ...this.preload,
     login: '/css/login.css'
   };
-  // async getInitialState(initialState) {
-  //   await super.getInitialState();
-  //   return {
-  //     ...initialState,
-  //     currentPath: this.location.pathname
-  //   };
-  // }
+  async getInitialState(initialState) {
+    return {
+      ...initialState,
+      currentPath: this.location.pathname
+    };
+  }
   async componentWillCreate() {
     // await super.componentWillCreate();
     // await this.getCommentList();

@@ -1,6 +1,6 @@
 export const menuList = [
   {
-    key: 'admin',
+    key: 'home',
     name: '站点总览',
     icon: 'home'
   },

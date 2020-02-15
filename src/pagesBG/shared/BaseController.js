@@ -1,6 +1,7 @@
 import Controller from 'react-imvc/controller';
 import * as sharedActions from './sharedActions';
 import { message } from 'antd';
+import api from '../api';
 import querystring from 'querystring';
 import Cookie from 'js-cookie';
 export default class extends Controller {
@@ -17,47 +18,40 @@ export default class extends Controller {
    */
   async getInitialState(initialState) {
     let { context, location } = this;
-    // let url = context.basename + '/';
-    // let options = {
-    //   method: 'POST',
-    //   credentials: 'include',
-    //   raw: true,
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //     // cookieorigin: getCookieOriginByContext(context)
-    //   },
-    //   body: JSON.stringify({ pageName: this.modulePagename })
-    // };
-
-    // if (context.isClient) {
+    let userInfo = await this.getUserInfo();
     if (!Cookie.get('collapsed')) Cookie.set('collapsed', false);
-    // }
-    // try {
-    //   let response = await fetch(url, options);
-    //   let result = await response.json();
-    //   let { ResponseStatus } = result;
-    //   if (
-    //     ResponseStatus.Ack !== 'Success' &&
-    //     ResponseStatus.Errors[0].ErrorCode == '401'
-    //   ) {
-    //     redirect(this.context, '/v2/authorized/403'); //11111111111111111111
-    //     return;
-    //   }
-    // } catch (error) {
-    //   console.error('getUserInfo', error);
-    // }
     return {
       ...initialState,
       currentPath: location.pathname,
       initCollapsed: Cookie.get('collapsed') == 'false' ? false : true,
-      userInfo: {
-        username: 'zwq',
-        email: '972618478@qq.com',
-        nickname: 'zzzzz',
-        phone_number: '15170816377',
-        avatar: ''
-      }
+      ...userInfo
     };
+  }
+
+  async getUserInfo() {
+    let { context } = this;
+    // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
+    let userInfo = null;
+    try {
+      if (context.hasOwnProperty('userInfo')) {
+        userInfo = context.userInfo;
+      } else {
+        await await this.resHandler(
+          () => this.getApi(api.userCheck),
+          userInfo => {
+            console.log('userInfo', userInfo);
+            context.userInfo = userInfo;
+          },
+          () => {
+            context.userInfo = null;
+            message.error('登录过期');
+          }
+        );
+      }
+    } catch (_) {
+      console.log('_', _);
+    }
+    return userInfo;
   }
 
   /**
@@ -139,17 +133,14 @@ export default class extends Controller {
           return fail(res.returnStatus);
         }
       } else {
-        if (
-          res.ResponseStatus.Errors[0].ErrorCode ==
-          'MobileRequestFilterException'
-        ) {
-          this.login();
+        if (res.ResponseStatus.ErrorCode == '401') {
+          this.redirect('/login');
           return;
         }
-        if (res.ResponseStatus.Errors[0].ErrorCode == '401') {
-          redirect(this.context, '/v2/authorized/403');
-          return;
-        }
+        // if (res.ResponseStatus.Errors[0].ErrorCode == '401') {
+        //   redirect(this.context, '/v2/authorized/403');
+        //   return;
+        // }
         message.error(`网络出错，请再试试吧。`);
       }
     } catch (e) {

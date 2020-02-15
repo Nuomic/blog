@@ -63,7 +63,7 @@ export default ({ state, handlers }) => {
       </Button>
     );
     const Edit = (
-      <Link to={`/md/edit/${item.id}`} target="blank">
+      <Link to={`/admin/md/edit/${item.id}`} target="blank">
         编辑
       </Link>
     );

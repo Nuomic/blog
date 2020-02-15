@@ -17,7 +17,7 @@ export default ({ currentPath, collapsed, handleToggle }) => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={currentPath != '/' ? currentPath : 'home'}
+        defaultSelectedKeys={currentPath != '/admin' ? currentPath : 'home'}
       >
         {menuList &&
           menuList.map(item => (
