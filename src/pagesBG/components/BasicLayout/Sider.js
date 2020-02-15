@@ -22,7 +22,7 @@ export default ({ currentPath, collapsed, handleToggle }) => {
         {menuList &&
           menuList.map(item => (
             <Menu.Item key={item.key}>
-              <Link to={`/${item.key}`}>
+              <Link to={`/admin/${item.key}`}>
                 <Icon type={item.icon} />
                 <span>{item.name}</span>
               </Link>

@@ -23,7 +23,7 @@ export default {
   //用户
   userLogin: '/user/login',
   userLogout: '/user/logout',
-  userCheck: '/user/login',
+  userCheck: '/user/check',
   userRegister: '/user/register',
 
   // 其他设置
