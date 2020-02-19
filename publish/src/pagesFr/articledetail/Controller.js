@@ -11,6 +11,8 @@ var _View = _interopRequireDefault(require("./View"));
 
 var _api = _interopRequireDefault(require("../api"));
 
+var _antd = require("antd");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -66,18 +68,15 @@ function (_Controller) {
       codeStyle: '/css/markdown-code.css'
     }));
 
-    _defineProperty(_assertThisInitialized(_this), "handleGetArticleDetail", function _callee() {
-      var _this$store$getState, location;
-
+    _defineProperty(_assertThisInitialized(_this), "handleGetArticleDetail", function _callee(articleId) {
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this$store$getState = _this.store.getState(), location = _this$store$getState.location;
-              _context.next = 3;
+              _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.getApi(_api["default"].getArticleDetail, {
-                  articleId: location.params.articleId
+                  articleId: articleId
                 });
               }, function (res) {
                 console.log('res', res);
@@ -87,7 +86,7 @@ function (_Controller) {
                 console.log('err', err);
               }));
 
-            case 3:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -102,11 +101,13 @@ function (_Controller) {
             case 0:
               _context2.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getCommentList);
+                return _this.getApi(_api["default"].getCommentList, {
+                  articleId: _this.location.params.articleId
+                });
               }, function (res) {
                 console.log('res', res);
 
-                _this.handleChangeState(_objectSpread({}, res));
+                _this.handleChangeState(res);
               }, function (err) {
                 console.log('err', err);
               }));
@@ -119,17 +120,90 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getHitokoto", function _callee3() {
-      var res;
+    _defineProperty(_assertThisInitialized(_this), "handleSaveCommit", function _callee3(value) {
       return regeneratorRuntime.async(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
+              console.log('value', value);
+              _context3.next = 3;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.post(_api["default"].saveComment, value);
+              }, function (res) {
+                console.log('res', res);
+
+                _this.handleChangeState(res);
+
+                _this.handleGetCommentList();
+              }, function (err) {
+                _antd.message.error('保存失败');
+              }));
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChangeLikeCount", function _callee4(value, callback) {
+      return regeneratorRuntime.async(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].saveArticle, value);
+              }, function (res) {
+                console.log('res', res);
+                callback();
+              }, function (res) {
+                console.log('res', res);
+              }));
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCommentLikeCount", function _callee5(value, callback) {
+      return regeneratorRuntime.async(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].saveComment, value);
+              }, function (res) {
+                console.log('res', res);
+                callback();
+              }, function (res) {
+                console.log('res', res);
+              }));
+
+            case 2:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getHitokoto", function _callee6() {
+      var res;
+      return regeneratorRuntime.async(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
               return regeneratorRuntime.awrap(_this.getApi(_api["default"].getHitokoto));
 
             case 2:
-              res = _context3.sent;
+              res = _context6.sent;
 
               _this.handleChangeState({
                 hitokoto: res
@@ -137,7 +211,7 @@ function (_Controller) {
 
             case 4:
             case "end":
-              return _context3.stop();
+              return _context6.stop();
           }
         }
       });
@@ -149,17 +223,17 @@ function (_Controller) {
   _createClass(Home, [{
     key: "getInitialState",
     value: function getInitialState(initialState) {
-      return regeneratorRuntime.async(function getInitialState$(_context4) {
+      return regeneratorRuntime.async(function getInitialState$(_context7) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
-              return _context4.abrupt("return", _objectSpread({}, initialState, {
+              return _context7.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: this.location.pathname
               }));
 
             case 1:
             case "end":
-              return _context4.stop();
+              return _context7.stop();
           }
         }
       }, null, this);
@@ -167,28 +241,31 @@ function (_Controller) {
   }, {
     key: "componentWillCreate",
     value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context5) {
+      var articleId;
+      return regeneratorRuntime.async(function componentWillCreate$(_context8) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
-              _context5.next = 2;
+              _context8.next = 2;
               return regeneratorRuntime.awrap(_get(_getPrototypeOf(Home.prototype), "componentWillCreate", this).call(this));
 
             case 2:
-              _context5.next = 4;
-              return regeneratorRuntime.awrap(this.handleGetArticleDetail());
-
-            case 4:
-              _context5.next = 6;
-              return regeneratorRuntime.awrap(this.handleGetCommentList());
+              articleId = this.location.params.articleId;
+              console.log('this.localhost', this.location);
+              _context8.next = 6;
+              return regeneratorRuntime.awrap(this.handleGetArticleDetail(articleId));
 
             case 6:
-              _context5.next = 8;
-              return regeneratorRuntime.awrap(this.getHitokoto());
+              _context8.next = 8;
+              return regeneratorRuntime.awrap(this.handleGetCommentList());
 
             case 8:
+              _context8.next = 10;
+              return regeneratorRuntime.awrap(this.getHitokoto());
+
+            case 10:
             case "end":
-              return _context5.stop();
+              return _context8.stop();
           }
         }
       }, null, this);
@@ -196,12 +273,12 @@ function (_Controller) {
   }, {
     key: "componentDidFirstMount",
     value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context6) {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context9) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
             case "end":
-              return _context6.stop();
+              return _context9.stop();
           }
         }
       });

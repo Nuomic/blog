@@ -95,42 +95,44 @@ function (_Controller) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleChangeLikeCount", function _callee2(value, callback) {
+      return regeneratorRuntime.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].saveArticle, value);
+              }, function (res) {
+                console.log('res', res);
+                callback(); // this.handleChangeState(res);
+              }, function (res) {
+                console.log('res', res);
+              }));
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    });
+
     return _this;
   }
 
   _createClass(_default, [{
     key: "getInitialState",
     value: function getInitialState(initialState) {
-      return regeneratorRuntime.async(function getInitialState$(_context2) {
+      return regeneratorRuntime.async(function getInitialState$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              return _context2.abrupt("return", _objectSpread({}, initialState, {
+              return _context3.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: this.location.pathname
               }));
 
             case 1:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, null, this);
-    }
-  }, {
-    key: "componentWillCreate",
-    value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return regeneratorRuntime.awrap(_get(_getPrototypeOf(_default.prototype), "componentWillCreate", this).call(this));
-
-            case 2:
-              _context3.next = 4;
-              return regeneratorRuntime.awrap(this.getArticleList());
-
-            case 4:
             case "end":
               return _context3.stop();
           }
@@ -138,14 +140,35 @@ function (_Controller) {
       }, null, this);
     }
   }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context4) {
+    key: "componentWillCreate",
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(_get(_getPrototypeOf(_default.prototype), "componentWillCreate", this).call(this));
+
+            case 2:
+              _context4.next = 4;
+              return regeneratorRuntime.awrap(this.getArticleList());
+
+            case 4:
             case "end":
               return _context4.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "componentDidFirstMount",
+    value: function componentDidFirstMount() {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+            case "end":
+              return _context5.stop();
           }
         }
       });

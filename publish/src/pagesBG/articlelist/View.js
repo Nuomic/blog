@@ -101,6 +101,39 @@ var _default = function _default(_ref) {
     });
   }
 
+  var actions = function actions(item) {
+    var View = _react["default"].createElement(_component.Link, {
+      to: "/articledetail/".concat(item.id),
+      target: "blank"
+    }, "\u67E5\u770B");
+
+    var Recycle = _react["default"].createElement(_antd.Button, {
+      type: "link",
+      style: {
+        padding: 0
+      },
+      onClick: handleChangeArticleStatus.bind(_this, item.id, 3)
+    }, "\u56DE\u6536\u81F3\u8349\u7A3F\u7BB1");
+
+    var Edit = _react["default"].createElement(_component.Link, {
+      to: "/admin/md/edit/".concat(item.id),
+      target: "blank"
+    }, "\u7F16\u8F91");
+
+    var Delete = _react["default"].createElement(_antd.Button, {
+      type: "link",
+      style: {
+        color: 'red',
+        padding: 0
+      },
+      onClick: showConfirm.bind(_this, item.id, item.status)
+    }, "\u5220\u9664");
+
+    var action = [item.status == '4' && Recycle || Edit, Delete];
+    item.status != 3 && action.unshift(View);
+    return action;
+  };
+
   return _react["default"].createElement(_BasicLayout["default"], {
     breadcrumbList: bdList
   }, _react["default"].createElement(_StickyTabs["default"], {
@@ -127,26 +160,7 @@ var _default = function _default(_ref) {
       renderItem: function renderItem(item) {
         return _react["default"].createElement(_antd.List.Item, {
           key: item.id,
-          actions: [item.status == '4' && _react["default"].createElement(_antd.Button, {
-            type: "link",
-            style: {
-              padding: 0
-            },
-            onClick: handleChangeArticleStatus.bind(_this, item.id, 3)
-          }, "\u56DE\u6536\u81F3\u8349\u7A3F\u7BB1") || _react["default"].createElement(_component.Link, {
-            to: "/md/edit/".concat(item.id),
-            target: "blank"
-          }, "\u7F16\u8F91"), _react["default"].createElement(_component.Link, {
-            to: "/articledetail/".concat(item.id),
-            target: "blank"
-          }, "\u67E5\u770B"), _react["default"].createElement(_antd.Button, {
-            type: "link",
-            style: {
-              color: 'red',
-              padding: 0
-            },
-            onClick: showConfirm.bind(_this, item.id, item.status)
-          }, "\u5220\u9664")]
+          actions: actions(item)
         }, _react["default"].createElement(_antd.List.Item.Meta, {
           title: _react["default"].createElement("span", {
             style: {

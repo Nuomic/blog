@@ -36,7 +36,7 @@ var _default = [{
   },
   name: '首页'
 }, {
-  path: '/md/add',
+  path: '/admin/md/add',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./article/Controller'));
@@ -44,7 +44,7 @@ var _default = [{
   },
   name: '富文本新增'
 }, {
-  path: "/md/edit/:articleId",
+  path: "/admin/md/edit/:articleId",
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./article/Controller'));
@@ -52,7 +52,7 @@ var _default = [{
   },
   name: '富文本编辑页'
 }, {
-  path: '/category',
+  path: '/admin/category',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./category/Controller'));
@@ -60,7 +60,7 @@ var _default = [{
   },
   name: '分类管理'
 }, {
-  path: '/articlemng',
+  path: '/admin/articlemng',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./articlelist/Controller'));
@@ -68,7 +68,7 @@ var _default = [{
   },
   name: '文章管理'
 }, {
-  path: '/msgmng',
+  path: '/admin/msgmng',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./msgboard/Controller'));
@@ -76,7 +76,7 @@ var _default = [{
   },
   name: '留言管理'
 }, {
-  path: '/resources',
+  path: '/admin/resources',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./resources/Controller'));
@@ -84,7 +84,7 @@ var _default = [{
   },
   name: '资源管理'
 }, {
-  path: '/friend',
+  path: '/admin/friend',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./friend/Controller'));
@@ -92,7 +92,7 @@ var _default = [{
   },
   name: '友情链接'
 }, {
-  path: '/user',
+  path: '/admin/user',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./user/Controller'));

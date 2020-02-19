@@ -107,7 +107,7 @@ module.exports = {
    * 默认为空
    * 如果配置了这个属性，controller.fetch 方法将为非绝对路径 url 参数，补上 restapi 作为前缀。
    */
-  restapi: 'http://localhost:4000/v1/api',
+  restapi: 'http://127.0.0.1:4000/api/v1',
 
   /**
    * webpack 资源表所在的路径，相对于 webpack 的 output.path

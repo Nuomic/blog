@@ -54,8 +54,13 @@ var _default = function _default(_ref) {
   (0, _react.useEffect)(function () {
     return setSelectedRowKeys([]);
   }, [articleList]);
+
+  var getArticleList = function getArticleList() {
+    return handleGetArticleList(id, setArticleList);
+  };
+
   (0, _react.useEffect)(function () {
-    handleGetArticleList(id, setArticleList);
+    getArticleList();
   }, []);
   var hasSelected = selectedRowKeys.length > 0;
 
@@ -68,7 +73,7 @@ var _default = function _default(_ref) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return regeneratorRuntime.awrap(handleChangeArticleListFromCategory(selectedRowKeys, id, tocategoryId, articleList, setArticleList));
+                return regeneratorRuntime.awrap(handleChangeArticleListFromCategory(selectedRowKeys, tocategoryId, getArticleList));
 
               case 2:
               case "end":

@@ -44,7 +44,7 @@ var _default = function _default(_ref) {
     setFieldsValue({
       status: article.id ? article.status : '3'
     });
-    validateFields(function _callee(err, fieldsValue) {
+    validateFields(['title', 'content'], function _callee(err, fieldsValue) {
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {

@@ -101,10 +101,6 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleSaveCommit", function (value) {
-      console.log('value', value);
-    });
-
     return _this;
   }
 

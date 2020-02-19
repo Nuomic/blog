@@ -11,6 +11,8 @@ var _component = require("react-imvc/component");
 
 var _antd = require("antd");
 
+var _blueimpMd = _interopRequireDefault(require("blueimp-md5"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Item = _antd.Form.Item;
@@ -27,20 +29,26 @@ var _default = _antd.Form.create()(function (_ref) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     validateFields(function _callee(err, values) {
+      var username, password;
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              username = values.username, password = values.password;
+
               if (err) {
-                _context.next = 4;
+                _context.next = 5;
                 break;
               }
 
               console.log('Received values of form: ', values);
-              _context.next = 4;
-              return regeneratorRuntime.awrap(handleLogin(values));
+              _context.next = 5;
+              return regeneratorRuntime.awrap(handleLogin({
+                username: username,
+                password: (0, _blueimpMd["default"])(password)
+              }));
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }

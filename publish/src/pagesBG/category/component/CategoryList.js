@@ -104,7 +104,7 @@ var _default = function _default(_ref) {
         style: {
           color: 'red'
         },
-        onClick: showConfirm.bind(_this, text.id, '是否要删除该栏目？', handleDeleteCategory)
+        onClick: showConfirm.bind(_this, text, '是否要删除该栏目？', handleDeleteCategory)
       }, "\u5220\u9664"));
     }
   }, {

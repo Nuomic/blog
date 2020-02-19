@@ -11,6 +11,8 @@ var _antd = require("antd");
 
 var _component = require("react-imvc/component");
 
+var _hook = require("react-imvc/hook");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Header = _antd.Layout.Header;
@@ -19,6 +21,10 @@ var _default = function _default(_ref) {
   var collapsed = _ref.collapsed,
       handleToggle = _ref.handleToggle,
       breadcrumbList = _ref.breadcrumbList;
+
+  var _useCtrl = (0, _hook.useCtrl)(),
+      handleLogout = _useCtrl.handleLogout;
+
   return _react["default"].createElement(Header, {
     className: "basic-header"
   }, _react["default"].createElement(_antd.Icon, {
@@ -59,7 +65,8 @@ var _default = function _default(_ref) {
       fontSize: 30
     }
   }))), _react["default"].createElement(_antd.Avatar, null), _react["default"].createElement(_antd.Button, {
-    type: "link"
+    type: "link",
+    onClick: handleLogout
   }, "\u9000\u51FA\u767B\u5F55")));
 };
 

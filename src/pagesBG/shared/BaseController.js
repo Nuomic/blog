@@ -53,7 +53,7 @@ export default class extends Controller {
     }
     return userInfo;
   }
-  handleLogout = async () => {
+  async handleLogout() {
     await this.resHandler(
       () => this.post(api.userLogout),
       () => {},
@@ -61,7 +61,7 @@ export default class extends Controller {
         message.error(err.customerErrorMessage);
       }
     );
-  };
+  }
   /**
    * 动态获取最终的 actions 集合
    */

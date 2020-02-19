@@ -13,6 +13,8 @@ var Model = _interopRequireWildcard(require("./Model"));
 
 var _api = _interopRequireDefault(require("../api"));
 
+var _antd = require("antd");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -83,32 +85,38 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDeleteCategory", function _callee2(categoryId) {
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteCategory", function _callee2(_ref) {
+      var id, articleCount;
       return regeneratorRuntime.async(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              id = _ref.id, articleCount = _ref.articleCount;
+              console.log(id, articleCount);
+              _context2.next = 4;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.postApi(_api["default"].deleteCategory, {
-                  categoryId: categoryId
+                  categoryId: id,
+                  articleCount: articleCount
                 });
               }, function () {
                 var _this$store$getState = _this.store.getState(),
                     categoryList = _this$store$getState.categoryList;
 
                 var newCategoryList = categoryList.filter(function (item) {
-                  return item.id != categoryId;
+                  return item.id != id;
                 });
 
                 _this.handleChangeState({
                   categoryList: newCategoryList
                 });
+
+                _antd.message.success('删除成功！');
               }, function (err) {
-                console.log('err', err);
+                _antd.message.error(err.customerErrorMessage);
               }));
 
-            case 2:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -148,7 +156,7 @@ function (_Controller) {
             case 0:
               _context4.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getArticleList, {
+                return _this.getApi(_api["default"].getArticleList, {
                   categoryId: categoryId
                 });
               }, function (res) {
@@ -165,45 +173,30 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleChangeArticleListFromCategory", function _callee5(articleIds, currentCategoryId, tocategoryId, articleList, setArticleList) {
+    _defineProperty(_assertThisInitialized(_this), "handleChangeArticleListFromCategory", function _callee5(articleIds, toCategoryId, callback) {
       return regeneratorRuntime.async(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              _context5.next = 2;
+              articleIds = articleIds.join(',');
+              console.log('articleIds', articleIds);
+              _context5.next = 4;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].changeArticleCategory, {
+                return _this.postApi(_api["default"].changeArticleStatus, {
                   articleIds: articleIds,
-                  tocategoryId: tocategoryId
+                  toCategoryId: toCategoryId
                 });
               }, function () {
-                var _this$store$getState2 = _this.store.getState(),
-                    categoryList = _this$store$getState2.categoryList;
+                _antd.message.success('成功');
 
-                var newCategoryList = categoryList.map(function (item) {
-                  if (item.id === currentCategoryId) item.articleCount = item.articleCount - articleIds.length;else if (item.id === tocategoryId) item.articleCount = item.articleCount + articleIds.length;
-                  return item;
-                });
+                callback();
 
-                _this.handleChangeState({
-                  categoryList: newCategoryList
-                });
-
-                var newArticleList = articleList;
-                articleIds.forEach(function (item) {
-                  newArticleList = newArticleList.filter(function (i) {
-                    return i.id != item;
-                  });
-                });
-                setArticleList(newArticleList);
+                _this.getCategory();
               }, function (err) {
-                console.log('err', err);
+                _antd.message.error(err.customerErrorMessage);
               }));
 
-            case 2:
-              return _context5.abrupt("return");
-
-            case 3:
+            case 4:
             case "end":
               return _context5.stop();
           }
@@ -223,8 +216,8 @@ function (_Controller) {
                   status: status
                 });
               }, function () {
-                var _this$store$getState3 = _this.store.getState(),
-                    articleList = _this$store$getState3.articleList;
+                var _this$store$getState2 = _this.store.getState(),
+                    articleList = _this$store$getState2.articleList;
 
                 var newArticleList = articleList.filter(function (item) {
                   if (item.status != 4 && item.status != 3 && item.id == id) {

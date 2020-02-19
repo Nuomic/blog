@@ -32,12 +32,12 @@ var _default = function _default(_ref) {
   }), _react["default"].createElement(_antd.Menu, {
     theme: "dark",
     mode: "inline",
-    defaultSelectedKeys: currentPath != '/' ? currentPath : 'home'
+    defaultSelectedKeys: currentPath != '/admin' ? currentPath : 'home'
   }, _config.menuList && _config.menuList.map(function (item) {
     return _react["default"].createElement(_antd.Menu.Item, {
       key: item.key
     }, _react["default"].createElement(_component.Link, {
-      to: "/".concat(item.key)
+      to: "/admin/".concat(item.key)
     }, _react["default"].createElement(_antd.Icon, {
       type: item.icon
     }), _react["default"].createElement("span", null, item.name)));

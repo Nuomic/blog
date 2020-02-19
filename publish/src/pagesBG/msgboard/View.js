@@ -50,7 +50,8 @@ var TabPane = _antd.Tabs.TabPane;
 var _default = function _default(_ref) {
   var state = _ref.state,
       handlers = _ref.handlers;
-  var commentList = state.commentList;
+  var commentList = state.commentList,
+      userInfo = state.userInfo;
   var handleDeleteComment = handlers.handleDeleteComment,
       handleSaveComment = handlers.handleSaveComment;
   var bdList = [{
@@ -70,18 +71,18 @@ var _default = function _default(_ref) {
     key: '2'
   }];
 
-  var _useState = (0, _react.useState)(undefined),
+  var _useState = (0, _react.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      comFormId = _useState2[0],
-      setComFormId = _useState2[1];
+      comForm = _useState2[0],
+      setComForm = _useState2[1];
 
   var commentType = function commentType(type) {
-    return type === '0' ? commentList.filter(function (item) {
-      return !!item.articleInfo && !item.isMine;
+    return commentList && type === '0' ? commentList.filter(function (item) {
+      return !!item.articleInfo.id && !item.isMine;
     }) : type === '1' ? commentList.filter(function (item) {
-      return !item.articleInfo && !item.isMine;
+      return !item.articleInfo.id && !item.isMine;
     }) : type === '2' ? commentList.filter(function (item) {
-      return !item.articleInfo && item.isMine;
+      return item.isMine;
     }) : [];
   };
 
@@ -95,8 +96,8 @@ var _default = function _default(_ref) {
       e.preventDefault();
       validateFields(function (err, values) {
         if (!err) {
-          handleSaveComment(_objectSpread({}, values, {
-            parentId: comFormId
+          handleSaveComment(_objectSpread({}, values, {}, comForm, {}, userInfo, {
+            isMine: true
           }));
         }
       });
@@ -113,9 +114,9 @@ var _default = function _default(_ref) {
       colon: false
     }, _react["default"].createElement(Item, {
       label: _react["default"].createElement(_antd.Avatar, {
-        src: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        src: userInfo.avatar
       })
-    }, getFieldDecorator('comment')(_react["default"].createElement(_antd.Input, {
+    }, getFieldDecorator('content')(_react["default"].createElement(_antd.Input, {
       placeholder: "\u53D1\u8868\u4F60\u7684\u8BC4\u8BBA",
       style: {
         width: '100%',
@@ -129,7 +130,7 @@ var _default = function _default(_ref) {
           position: 'relative',
           right: '-12px'
         },
-        disabled: !getFieldValue('comment')
+        disabled: !getFieldValue('content')
       }, "\u53D1\u8868\u8BC4\u8BBA")
     }))));
   }); //删除提示框
@@ -178,7 +179,10 @@ var _default = function _default(_ref) {
           actions: [_react["default"].createElement(_antd.Button, {
             type: "link",
             onClick: function onClick() {
-              return setComFormId(item.id);
+              return setComForm({
+                parentId: item.id,
+                articleId: item.articleInfo.id
+              });
             }
           }, "\u5FEB\u901F\u56DE\u590D"), _react["default"].createElement(_antd.Button, {
             type: "link",
@@ -195,11 +199,17 @@ var _default = function _default(_ref) {
           avatar: _react["default"].createElement(_antd.Avatar, {
             src: item.avatar
           }),
-          title: _react["default"].createElement("span", null, "".concat(item.nickname, "  ").concat((0, _moment["default"])(item.date).fromNow(), " "), item.articleInfo ? _react["default"].createElement("span", null, "\u56DE\u590D\u4E86\u4F60\u7684\u6587\u7AE0", ' ', _react["default"].createElement(_component.Link, {
+          title: _react["default"].createElement("span", null, _react["default"].createElement(_antd.Tooltip, {
+            title: item.email,
+            trigger: "click"
+          }, item.nickname), '  ', _react["default"].createElement(_antd.Tooltip, {
+            trigger: "click",
+            title: (0, _moment["default"])(item.date).format('YYYY-MM-DD HH:mm:ss')
+          }, (0, _moment["default"])(item.date).fromNow()), '  ', !!item.articleInfo.id ? _react["default"].createElement("span", null, item.isMine ? '回复的文章' : '回复了你的文章', ' ', _react["default"].createElement(_component.Link, {
             to: '/articledetail/' + item.articleInfo.id
-          }, item.articleInfo.title)) : '给你留言'),
+          }, item.articleInfo.title)) : item.isMine ? '回复了留言' : '给你留言'),
           description: item.content
-        }), comFormId == item.id && _react["default"].createElement(CommentForm, null)));
+        }), comForm.parentId == item.id && _react["default"].createElement(CommentForm, null)));
       }
     }));
   })));

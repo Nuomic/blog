@@ -13,6 +13,8 @@ var _Model = _interopRequireDefault(require("./Model"));
 
 var _api = _interopRequireDefault(require("../api"));
 
+var _antd = require("antd");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -71,11 +73,17 @@ function (_Controller) {
           switch (_context.prev = _context.next) {
             case 0:
               _this.resHandler(function () {
-                return _this.postApi(_api["default"].postlogin, info);
+                return _this.postApi(_api["default"].userLogin, info);
               }, function (res) {
-                _this.handleChangeState(res);
+                if (res.success) {
+                  _this.handleChangeState(res);
 
-                _this.redirect('/admin');
+                  _this.redirect('/admin');
+
+                  window.localStorage.setItem('TOKEN', res.TOKEN);
+                } else {
+                  _antd.message.error(res.error);
+                }
               }, function (err) {
                 console.log('err', err);
               });
@@ -92,21 +100,32 @@ function (_Controller) {
   }
 
   _createClass(Home, [{
-    key: "componentWillCreate",
-    // async getInitialState(initialState) {
-    //   await super.getInitialState();
-    //   return {
-    //     ...initialState,
-    //     currentPath: this.location.pathname
-    //   };
-    // }
-    value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context2) {
+    key: "getInitialState",
+    value: function getInitialState(initialState) {
+      return regeneratorRuntime.async(function getInitialState$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              return _context2.abrupt("return", _objectSpread({}, initialState, {
+                currentPath: this.location.pathname
+              }));
+
+            case 1:
             case "end":
               return _context2.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "componentWillCreate",
+    value: function componentWillCreate() {
+      return regeneratorRuntime.async(function componentWillCreate$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+            case "end":
+              return _context3.stop();
           }
         }
       });
@@ -114,12 +133,12 @@ function (_Controller) {
   }, {
     key: "componentDidFirstMount",
     value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context3) {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
       });

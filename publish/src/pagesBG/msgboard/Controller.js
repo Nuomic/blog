@@ -70,11 +70,13 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getCommentList);
+                return _this.getApi(_api["default"].getCommentList, {
+                  all: true
+                });
               }, function (res) {
                 _this.handleChangeState(res);
               }, function (err) {
-                console.log('err', err);
+                _antd.message.error('ssssssssssss');
               }));
 
             case 2:
@@ -96,6 +98,8 @@ function (_Controller) {
               }, function (res) {
                 console.log('res', res);
 
+                _this.getCommentList();
+
                 _antd.message.success('回复成功');
               }, function (err) {
                 console.log('err', err);
@@ -109,7 +113,7 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDeleteComment", function _callee3(id) {
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteComment", function _callee3(commentId) {
       return regeneratorRuntime.async(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -117,21 +121,12 @@ function (_Controller) {
               _context3.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.postApi(_api["default"].deleteComment, {
-                  id: id
+                  commentId: commentId
                 });
               }, function () {
-                var _this$store$getState = _this.store.getState(),
-                    commentList = _this$store$getState.commentList;
-
-                var newCommentList = commentList.filter(function (item) {
-                  return item.id != id;
-                });
-
-                _this.handleChangeState({
-                  commentList: newCommentList
-                });
+                _this.getCommentList();
               }, function (err) {
-                console.log('err', err);
+                _antd.message.error('删除评论失败');
               }));
 
             case 2:

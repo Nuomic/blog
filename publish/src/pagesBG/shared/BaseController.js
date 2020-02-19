@@ -11,6 +11,8 @@ var sharedActions = _interopRequireWildcard(require("./sharedActions"));
 
 var _antd = require("antd");
 
+var _api = _interopRequireDefault(require("../api"));
+
 var _querystring = _interopRequireDefault(require("querystring"));
 
 var _jsCookie = _interopRequireDefault(require("js-cookie"));
@@ -86,49 +88,111 @@ function (_Controller) {
      * 动态获取初始化状态
      */
     value: function getInitialState(initialState) {
-      var context, location;
+      var context, location, userInfo;
       return regeneratorRuntime.async(function getInitialState$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              // let state = await super.getInitialState(initialState);
-              context = this.context, location = this.location; // let url = context.basename + '/';
-              // let options = {
-              //   method: 'POST',
-              //   credentials: 'include',
-              //   raw: true,
-              //   headers: {
-              //     'Content-Type': 'application/json'
-              //     // cookieorigin: getCookieOriginByContext(context)
-              //   },
-              //   body: JSON.stringify({ pageName: this.modulePagename })
-              // };
-              // if (context.isClient) {
+              context = this.context, location = this.location;
+              _context.next = 3;
+              return regeneratorRuntime.awrap(this.getUserInfo());
 
-              if (!_jsCookie["default"].get('collapsed')) _jsCookie["default"].set('collapsed', false); // }
-              // try {
-              //   let response = await fetch(url, options);
-              //   let result = await response.json();
-              //   let { ResponseStatus } = result;
-              //   if (
-              //     ResponseStatus.Ack !== 'Success' &&
-              //     ResponseStatus.Errors[0].ErrorCode == '401'
-              //   ) {
-              //     redirect(this.context, '/v2/authorized/403'); //11111111111111111111
-              //     return;
-              //   }
-              // } catch (error) {
-              //   console.error('getUserInfo', error);
-              // }
-
+            case 3:
+              userInfo = _context.sent;
+              if (!_jsCookie["default"].get('collapsed')) _jsCookie["default"].set('collapsed', false);
               return _context.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: location.pathname,
                 initCollapsed: _jsCookie["default"].get('collapsed') == 'false' ? false : true
-              }));
+              }, userInfo));
 
-            case 3:
+            case 6:
             case "end":
               return _context.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: "getUserInfo",
+    value: function getUserInfo() {
+      var _this2 = this;
+
+      var context, userInfo;
+      return regeneratorRuntime.async(function getUserInfo$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              context = this.context; // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
+
+              userInfo = null;
+              _context2.prev = 2;
+
+              if (!context.hasOwnProperty('userInfo')) {
+                _context2.next = 7;
+                break;
+              }
+
+              userInfo = context.userInfo;
+              _context2.next = 13;
+              break;
+
+            case 7:
+              _context2.t0 = regeneratorRuntime;
+              _context2.next = 10;
+              return regeneratorRuntime.awrap(this.resHandler(function () {
+                return _this2.getApi(_api["default"].userCheck);
+              }, function (userInfo) {
+                console.log('userInfo', userInfo);
+                context.userInfo = userInfo;
+              }, function () {
+                context.userInfo = null;
+
+                _antd.message.error('登录过期');
+              }));
+
+            case 10:
+              _context2.t1 = _context2.sent;
+              _context2.next = 13;
+              return _context2.t0.awrap.call(_context2.t0, _context2.t1);
+
+            case 13:
+              _context2.next = 18;
+              break;
+
+            case 15:
+              _context2.prev = 15;
+              _context2.t2 = _context2["catch"](2);
+              console.log('_', _context2.t2);
+
+            case 18:
+              return _context2.abrupt("return", userInfo);
+
+            case 19:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, null, this, [[2, 15]]);
+    }
+  }, {
+    key: "handleLogout",
+    value: function handleLogout() {
+      var _this3 = this;
+
+      return regeneratorRuntime.async(function handleLogout$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return regeneratorRuntime.awrap(this.resHandler(function () {
+                return _this3.post(_api["default"].userLogout);
+              }, function () {}, function (err) {
+                _antd.message.error(err.customerErrorMessage);
+              }));
+
+            case 2:
+            case "end":
+              return _context3.stop();
           }
         }
       }, null, this);
@@ -218,93 +282,88 @@ function (_Controller) {
           ResponseStatus,
           returnStatus,
           data,
-          _args2 = arguments;
+          _args4 = arguments;
 
-      return regeneratorRuntime.async(function resHandler$(_context2) {
+      return regeneratorRuntime.async(function resHandler$(_context4) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              options = _args2.length > 3 && _args2[3] !== undefined ? _args2[3] : {};
+              options = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : {};
               _options$limit = options.limit, limit = _options$limit === void 0 ? 1 : _options$limit, _options$name = options.name, name = _options$name === void 0 ? '' : _options$name;
 
               if (!(limit < 1)) {
-                _context2.next = 5;
+                _context4.next = 5;
                 break;
               }
 
               // this.recordLog({...options,errcode:3001},{ctripUid});
               _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
 
-              return _context2.abrupt("return");
+              return _context4.abrupt("return");
 
             case 5:
-              _context2.prev = 5;
-              _context2.next = 8;
+              _context4.prev = 5;
+              _context4.next = 8;
               return regeneratorRuntime.awrap(func());
 
             case 8:
-              res = _context2.sent;
+              res = _context4.sent;
               ResponseStatus = res.ResponseStatus, returnStatus = res.returnStatus, data = _objectWithoutProperties(res, ["ResponseStatus", "returnStatus"]);
 
               if (!(ResponseStatus.Ack == 'Success')) {
-                _context2.next = 18;
+                _context4.next = 18;
                 break;
               }
 
               if (!(returnStatus.isSuccess === true)) {
-                _context2.next = 15;
+                _context4.next = 15;
                 break;
               }
 
-              return _context2.abrupt("return", success(data));
+              return _context4.abrupt("return", success(data));
 
             case 15:
-              return _context2.abrupt("return", fail(res.returnStatus));
+              return _context4.abrupt("return", fail(res.returnStatus));
 
             case 16:
-              _context2.next = 25;
+              _context4.next = 22;
               break;
 
             case 18:
-              if (!(res.ResponseStatus.Errors[0].ErrorCode == 'MobileRequestFilterException')) {
-                _context2.next = 21;
+              if (!(res.ResponseStatus.ErrorCode == '401')) {
+                _context4.next = 21;
                 break;
               }
 
-              this.login();
-              return _context2.abrupt("return");
+              this.redirect('/login');
+              return _context4.abrupt("return");
 
             case 21:
-              if (!(res.ResponseStatus.Errors[0].ErrorCode == '401')) {
-                _context2.next = 24;
-                break;
-              }
-
-              redirect(this.context, '/v2/authorized/403');
-              return _context2.abrupt("return");
-
-            case 24:
+              // if (res.ResponseStatus.Errors[0].ErrorCode == '401') {
+              //   redirect(this.context, '/v2/authorized/403');
+              //   return;
+              // }
               _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
 
-            case 25:
-              _context2.next = 31;
+            case 22:
+              _context4.next = 28;
               break;
 
-            case 27:
-              _context2.prev = 27;
-              _context2.t0 = _context2["catch"](5);
-              console.log(name, '***************请求异常****************', _context2.t0.toString()); // this.recordLog(options,{ctripUid});
+            case 24:
+              _context4.prev = 24;
+              _context4.t0 = _context4["catch"](5);
+              console.log(name, '***************请求异常****************', _context4.t0.toString()); // this.recordLog(options,{ctripUid});
 
               this.resHandler(func, success, fail, {
                 limit: limit - 1
               });
 
-            case 31:
+            case 28:
             case "end":
-              return _context2.stop();
+              return _context4.stop();
           }
         }
-      }, null, this, [[5, 27]]);
+      }, null, this, [[5, 24]]);
     } // getKeyTranlate(key, options = {}) {
     //   const language = this.store.getState().language || {};
     //   return language[key] ? language[key].replace(/\$\{\s*(\w+)\s*(([\+\-])\s*(\d+)\s*)?\}/g, (text) => options[text.substring(2, text.length - 1)]) : '';

@@ -9,15 +9,11 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
-
 var _config = require("../../config");
 
 var _antd = require("antd");
 
-var _jsCookie = _interopRequireDefault(require("js-cookie"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _hook = require("react-imvc/hook");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -38,31 +34,37 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var TextArea = _antd.Input.TextArea;
-var withData = (0, _connect["default"])(function (_ref) {
-  var state = _ref.state,
-      handlers = _ref.handlers;
-  return {
-    hitokoto: state.hitokoto,
-    saveCommit: handlers.handleSaveCommit
-  };
-});
 
-var _default = withData(_antd.Form.create()(function (_ref2) {
-  var parentId = _ref2.parentId,
-      articleId = _ref2.articleId,
-      form = _ref2.form,
-      hitokoto = _ref2.hitokoto,
-      saveCommit = _ref2.saveCommit;
-  // console.log(parentId, articleId);
+var _default = _antd.Form.create()(function (_ref) {
+  var parentId = _ref.parentId,
+      articleId = _ref.articleId,
+      form = _ref.form;
+
+  var _useCtrl = (0, _hook.useCtrl)(),
+      handleSaveCommit = _useCtrl.handleSaveCommit;
+
+  var _useModelState = (0, _hook.useModelState)(),
+      hitokoto = _useModelState.hitokoto;
+
+  var _useState = (0, _react.useState)({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      userInfo = _useState2[0],
+      setUserInfo = _useState2[1];
+
+  console.log(parentId, articleId);
   var initRandomNum = [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)];
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      randomNum = _useState2[0],
-      setRandomNum = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      randomNum = _useState4[0],
+      setRandomNum = _useState4[1];
 
   (0, _react.useEffect)(function () {
     setRandomNum(initRandomNum);
+    setUserInfo({
+      nickname: window.localStorage.getItem('nickname'),
+      email: window.localStorage.getItem('email')
+    });
   }, []); //刷新验证
 
   var handleRefreshRandomNum = function handleRefreshRandomNum() {
@@ -90,24 +92,19 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
               return _context.abrupt("return");
 
             case 3:
-              _jsCookie["default"].set('nickname', fieldsValue.nickname, {
-                expires: 30
-              });
-
-              _jsCookie["default"].set('email', fieldsValue.email, {
-                expires: 30
-              });
-
-              _context.next = 7;
-              return regeneratorRuntime.awrap(saveCommit(_objectSpread({
+              window.localStorage.setItem('nickname', fieldsValue.nickname);
+              window.localStorage.setItem('email', fieldsValue.email);
+              console.log('fieldsValue', fieldsValue);
+              _context.next = 8;
+              return regeneratorRuntime.awrap(handleSaveCommit(_objectSpread({
                 parentId: parentId,
                 articleId: articleId
               }, fieldsValue)));
 
-            case 7:
+            case 8:
               handleRefreshRandomNum();
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -157,7 +154,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
       required: true,
       message: '请输入昵称'
     }],
-    initialValue: _jsCookie["default"].get('nickname')
+    initialValue: userInfo.nickname
   })(_react["default"].createElement(_antd.Input, {
     placeholder: "\u6635\u79F0"
   })))), _react["default"].createElement(_antd.Col, {
@@ -169,7 +166,7 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
       pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
       message: '邮箱格式不正确!'
     }],
-    initialValue: _jsCookie["default"].get('email')
+    initialValue: userInfo.email
   })(_react["default"].createElement(_antd.Input, {
     placeholder: "\u90AE\u7BB1"
   })))), _react["default"].createElement(_antd.Col, {
@@ -191,7 +188,12 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
     placeholder: randomNum && "".concat(randomNum[0], " + ").concat(randomNum[1], " = ?") || undefined
   })))), _react["default"].createElement(_antd.Col, {
     span: 19
-  }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('content')(_react["default"].createElement(TextArea, {
+  }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('content', {
+    rules: [{
+      required: true,
+      message: '说点啥吧'
+    }]
+  })(_react["default"].createElement(TextArea, {
     autoSize: {
       minRows: 2,
       maxRows: 3
@@ -210,6 +212,6 @@ var _default = withData(_antd.Form.create()(function (_ref2) {
     },
     onClick: handleSubmit
   }, "\u63D0\u4EA4\u8BC4\u8BBA")))))))));
-}));
+});
 
 exports["default"] = _default;

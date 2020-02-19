@@ -11,31 +11,25 @@ var _antd = require("antd");
 
 var _component = require("react-imvc/component");
 
-var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
-
 var _moment = _interopRequireDefault(require("moment"));
+
+var _hook = require("react-imvc/hook");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var withData = (0, _connect["default"])(function (_ref) {
-  var state = _ref.state;
-  return {
-    siderData: state.siderData
-  };
-});
-
-var Sider = function Sider(_ref2) {
-  var siderData = _ref2.siderData;
+var _default = function _default() {
+  var _ref = (0, _hook.useModelState)() || {},
+      siderData = _ref.siderData;
 
   var handleToDetail = function handleToDetail(id) {
     return "/articledetail/".concat(id);
   };
 
-  var SiderItem = function SiderItem(_ref3) {
-    var name = _ref3.name,
-        dataSource = _ref3.dataSource,
-        grid = _ref3.grid,
-        Item = _ref3.Item;
+  var SiderItem = function SiderItem(_ref2) {
+    var name = _ref2.name,
+        dataSource = _ref2.dataSource,
+        grid = _ref2.grid,
+        Item = _ref2.Item;
     return _react["default"].createElement(_antd.Card, {
       title: _react["default"].createElement("span", {
         className: "font-bold"
@@ -137,7 +131,5 @@ var Sider = function Sider(_ref2) {
     }
   }));
 };
-
-var _default = withData(Sider);
 
 exports["default"] = _default;

@@ -134,7 +134,10 @@ function (_Controller) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _this$store$getState2 = _this.store.getState(), article = _this$store$getState2.article, modalStatus = _this$store$getState2.modalStatus;
-              value = !!article && _objectSpread({}, article, {}, value) || value;
+              value = !!article && _objectSpread({
+                id: article.id,
+                status: article.status
+              }, value) || value;
               _context3.next = 4;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.postApi(_api["default"].saveArticle, value);

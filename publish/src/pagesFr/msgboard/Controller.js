@@ -70,11 +70,11 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getCommentList);
+                return _this.getApi(_api["default"].getCommentList);
               }, function (res) {
                 console.log('res', res);
 
-                _this.handleChangeState(_objectSpread({}, res));
+                _this.handleChangeState(res);
               }, function (res) {
                 console.log('res', res);
               }));
@@ -87,17 +87,67 @@ function (_Controller) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "getHitokoto", function _callee2() {
-      var res;
+    _defineProperty(_assertThisInitialized(_this), "handleSaveCommit", function _callee2(value) {
       return regeneratorRuntime.async(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              console.log('value', value);
+              _context2.next = 3;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.post(_api["default"].saveComment, value);
+              }, function (res) {
+                console.log('res', res);
+
+                _this.handleChangeState(res);
+
+                _this.handleGetCommentList();
+              }, function (err) {
+                message.error('保存失败');
+              }));
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCommentLikeCount", function _callee3(value, callback) {
+      return regeneratorRuntime.async(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].saveComment, value);
+              }, function (res) {
+                console.log('res', res);
+                callback();
+              }, function (res) {
+                console.log('res', res);
+              }));
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getHitokoto", function _callee4() {
+      var res;
+      return regeneratorRuntime.async(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
               return regeneratorRuntime.awrap(_this.getApi(_api["default"].getHitokoto));
 
             case 2:
-              res = _context2.sent;
+              res = _context4.sent;
 
               _this.handleChangeState({
                 hitokoto: res
@@ -105,7 +155,7 @@ function (_Controller) {
 
             case 4:
             case "end":
-              return _context2.stop();
+              return _context4.stop();
           }
         }
       });
@@ -117,17 +167,17 @@ function (_Controller) {
   _createClass(Home, [{
     key: "getInitialState",
     value: function getInitialState(initialState) {
-      return regeneratorRuntime.async(function getInitialState$(_context3) {
+      return regeneratorRuntime.async(function getInitialState$(_context5) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              return _context3.abrupt("return", _objectSpread({}, initialState, {
+              return _context5.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: this.location.pathname
               }));
 
             case 1:
             case "end":
-              return _context3.stop();
+              return _context5.stop();
           }
         }
       }, null, this);
@@ -135,24 +185,24 @@ function (_Controller) {
   }, {
     key: "componentWillCreate",
     value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context4) {
+      return regeneratorRuntime.async(function componentWillCreate$(_context6) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
-              _context4.next = 2;
+              _context6.next = 2;
               return regeneratorRuntime.awrap(_get(_getPrototypeOf(Home.prototype), "componentWillCreate", this).call(this));
 
             case 2:
-              _context4.next = 4;
+              _context6.next = 4;
               return regeneratorRuntime.awrap(this.handleGetCommentList());
 
             case 4:
-              _context4.next = 6;
+              _context6.next = 6;
               return regeneratorRuntime.awrap(this.getHitokoto());
 
             case 6:
             case "end":
-              return _context4.stop();
+              return _context6.stop();
           }
         }
       }, null, this);
@@ -160,12 +210,12 @@ function (_Controller) {
   }, {
     key: "componentDidFirstMount",
     value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context7) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
             case "end":
-              return _context5.stop();
+              return _context7.stop();
           }
         }
       });

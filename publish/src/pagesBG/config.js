@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.menuList = void 0;
 var menuList = [{
-  key: 'admin',
+  key: 'home',
   name: '站点总览',
   icon: 'home'
 }, {

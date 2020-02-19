@@ -67,7 +67,7 @@ var _default = function _default(_ref) {
       setTabList = _useState4[1]; //删除提示框
 
 
-  var showConfirm = function showConfirm(id, title, _onOk) {
+  var showConfirm = function showConfirm(text, title, _onOk) {
     confirm({
       title: title,
       onOk: function onOk() {
@@ -76,7 +76,7 @@ var _default = function _default(_ref) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return regeneratorRuntime.awrap(_onOk(id));
+                return regeneratorRuntime.awrap(_onOk(text));
 
               case 2:
               case "end":
