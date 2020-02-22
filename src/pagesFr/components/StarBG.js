@@ -85,71 +85,73 @@ export default ({ children }) => {
           dot.y += dot.vy;
         });
       }
-      function connectDots() {
-        dots.array.forEach(i_dot => {
-          dots.array.forEach(j_dot => {
-            if (
-              i_dot.x - j_dot.x < dots.distance &&
-              i_dot.y - j_dot.y < dots.distance &&
-              i_dot.x - j_dot.x > -dots.distance &&
-              i_dot.y - j_dot.y > -dots.distance
-            ) {
-              if (
-                i_dot.x - mousePosition.x < dots.d_radius &&
-                i_dot.y - mousePosition.y < dots.d_radius &&
-                i_dot.x - mousePosition.x > -dots.d_radius &&
-                i_dot.y - mousePosition.y > -dots.d_radius
-              ) {
-                ctx.beginPath();
-                ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
-                ctx.moveTo(i_dot.x, i_dot.y);
-                ctx.lineTo(j_dot.x, j_dot.y);
-                ctx.stroke();
-                ctx.closePath();
-              }
-            }
-          });
-        });
-      }
+      // function connectDots() {
+      //   dots.array.forEach(i_dot => {
+      //     dots.array.forEach(j_dot => {
+      //       if (
+      //         i_dot.x - j_dot.x < dots.distance &&
+      //         i_dot.y - j_dot.y < dots.distance &&
+      //         i_dot.x - j_dot.x > -dots.distance &&
+      //         i_dot.y - j_dot.y > -dots.distance
+      //       ) {
+      //         if (
+      //           i_dot.x - mousePosition.x < dots.d_radius &&
+      //           i_dot.y - mousePosition.y < dots.d_radius &&
+      //           i_dot.x - mousePosition.x > -dots.d_radius &&
+      //           i_dot.y - mousePosition.y > -dots.d_radius
+      //         ) {
+      //           ctx.beginPath();
+      //           ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
+      //           ctx.moveTo(i_dot.x, i_dot.y);
+      //           ctx.lineTo(j_dot.x, j_dot.y);
+      //           ctx.stroke();
+      //           ctx.closePath();
+      //         }
+      //       }
+      //     });
+      //   });
+      // }
       function drawDots() {
         dots.array.forEach(item => item.draw());
       }
       function animateDots() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         moveDots();
-        connectDots();
+        // connectDots();
         drawDots();
         requestAnimationFrame(animateDots);
       }
-      onmousemove = e => {
-        mousePosition.x = e.clientX;
-        mousePosition.y = e.clientY;
-      };
-      onmouseleave = () => {
-        mousePosition.x = canvas.width / 2;
-        mousePosition.y = canvas.height / 2;
-      };
+      // onmousemove = e => {
+      //   mousePosition.x = e.clientX;
+      //   mousePosition.y = e.clientY;
+      // };
+      // onmouseleave = () => {
+      //   mousePosition.x = canvas.width / 2;
+      //   mousePosition.y = canvas.height / 2;
+      // };
       createDots();
       requestAnimationFrame(animateDots);
     }
   };
   return (
-    <div>
-      <canvas
-        style={{
-          position: 'fixed',
-          width: '100vw',
-          height: '100vh',
-          background: themeColor.starBgColor,
-          zIndex: '-1'
-        }}
-        ref={canvasRef}
-      ></canvas>
+    <>
       <Style name="antd" />
       <Style name="antdPro" />
       <Style name="customize" />
       <Style name="commonFr" />
-      {children}
-    </div>
+      <div className="fr-bg">
+        <canvas
+          style={{
+            position: 'fixed',
+            width: '100vw',
+            height: '100vh',
+            // background: themeColor.starBgColor,
+            zIndex: '-1'
+          }}
+          ref={canvasRef}
+        ></canvas>
+        {children}
+      </div>
+    </>
   );
 };

@@ -13,6 +13,27 @@
 .align-center {
   text-align: center;
 }
+body,
+html {
+  margin: 0;
+}
+.fr-bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.fr-bg:after {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  background: center/100% url('/static/images/background.png');
+  opacity: 0.9;
+}
 .link-color {
   color: #555;
 }
