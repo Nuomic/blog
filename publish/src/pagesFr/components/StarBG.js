@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _component = require("react-imvc/component");
 
-var _config = require("./../config");
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -21,7 +19,7 @@ var _default = function _default(_ref) {
   var children = _ref.children;
   var canvasRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
-    canvasRef.current && window.addEventListener('resize', draw);
+    // canvasRef.current && window.addEventListener('resize', draw);
     return draw();
   }, []);
 
@@ -36,20 +34,18 @@ var _default = function _default(_ref) {
 
       var createColorStyle = function createColorStyle(r, g, b) {
         return 'rgba(' + r + ',' + g + ',' + b + ', 0.8)';
-      };
+      }; // function mixComponents(comp1, weight1, comp2, weight2) {
+      //   return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
+      // }
+      // function averageColorStyles(dot1, dot2) {
+      //   let color1 = dot1.color,
+      //     color2 = dot2.color;
+      //   let r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
+      //     g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
+      //     b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
+      //   return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
+      // }
 
-      var mixComponents = function mixComponents(comp1, weight1, comp2, weight2) {
-        return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
-      };
-
-      var averageColorStyles = function averageColorStyles(dot1, dot2) {
-        var color1 = dot1.color,
-            color2 = dot2.color;
-        var r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
-            g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
-            b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
-        return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
-      };
 
       var Color = function Color(min) {
         min = min || 0;
@@ -87,24 +83,33 @@ var _default = function _default(_ref) {
           dot.x += dot.vx;
           dot.y += dot.vy;
         });
-      };
+      }; // function connectDots() {
+      //   dots.array.forEach(i_dot => {
+      //     dots.array.forEach(j_dot => {
+      //       if (
+      //         i_dot.x - j_dot.x < dots.distance &&
+      //         i_dot.y - j_dot.y < dots.distance &&
+      //         i_dot.x - j_dot.x > -dots.distance &&
+      //         i_dot.y - j_dot.y > -dots.distance
+      //       ) {
+      //         if (
+      //           i_dot.x - mousePosition.x < dots.d_radius &&
+      //           i_dot.y - mousePosition.y < dots.d_radius &&
+      //           i_dot.x - mousePosition.x > -dots.d_radius &&
+      //           i_dot.y - mousePosition.y > -dots.d_radius
+      //         ) {
+      //           ctx.beginPath();
+      //           ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
+      //           ctx.moveTo(i_dot.x, i_dot.y);
+      //           ctx.lineTo(j_dot.x, j_dot.y);
+      //           ctx.stroke();
+      //           ctx.closePath();
+      //         }
+      //       }
+      //     });
+      //   });
+      // }
 
-      var connectDots = function connectDots() {
-        dots.array.forEach(function (i_dot) {
-          dots.array.forEach(function (j_dot) {
-            if (i_dot.x - j_dot.x < dots.distance && i_dot.y - j_dot.y < dots.distance && i_dot.x - j_dot.x > -dots.distance && i_dot.y - j_dot.y > -dots.distance) {
-              if (i_dot.x - mousePosition.x < dots.d_radius && i_dot.y - mousePosition.y < dots.d_radius && i_dot.x - mousePosition.x > -dots.d_radius && i_dot.y - mousePosition.y > -dots.d_radius) {
-                ctx.beginPath();
-                ctx.strokeStyle = averageColorStyles(i_dot, j_dot);
-                ctx.moveTo(i_dot.x, i_dot.y);
-                ctx.lineTo(j_dot.x, j_dot.y);
-                ctx.stroke();
-                ctx.closePath();
-              }
-            }
-          });
-        });
-      };
 
       var drawDots = function drawDots() {
         dots.array.forEach(function (item) {
@@ -114,11 +119,19 @@ var _default = function _default(_ref) {
 
       var animateDots = function animateDots() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        moveDots();
-        connectDots();
+        moveDots(); // connectDots();
+
         drawDots();
         requestAnimationFrame(animateDots);
-      };
+      }; // onmousemove = e => {
+      //   mousePosition.x = e.clientX;
+      //   mousePosition.y = e.clientY;
+      // };
+      // onmouseleave = () => {
+      //   mousePosition.x = canvas.width / 2;
+      //   mousePosition.y = canvas.height / 2;
+      // };
+
 
       // implement draw on ctx here
       canvas.width = window.innerWidth;
@@ -143,32 +156,12 @@ var _default = function _default(_ref) {
           ctx.fill();
         }
       };
-
-      onmousemove = function onmousemove(e) {
-        mousePosition.x = e.clientX;
-        mousePosition.y = e.clientY;
-      };
-
-      onmouseleave = function onmouseleave() {
-        mousePosition.x = canvas.width / 2;
-        mousePosition.y = canvas.height / 2;
-      };
-
       createDots();
       requestAnimationFrame(animateDots);
     }
   };
 
-  return _react["default"].createElement("div", null, _react["default"].createElement("canvas", {
-    style: {
-      position: 'fixed',
-      width: '100vw',
-      height: '100vh',
-      background: _config.themeColor.starBgColor,
-      zIndex: '-1'
-    },
-    ref: canvasRef
-  }), _react["default"].createElement(_component.Style, {
+  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_component.Style, {
     name: "antd"
   }), _react["default"].createElement(_component.Style, {
     name: "antdPro"
@@ -176,7 +169,18 @@ var _default = function _default(_ref) {
     name: "customize"
   }), _react["default"].createElement(_component.Style, {
     name: "commonFr"
-  }), children);
+  }), _react["default"].createElement("div", {
+    className: "fr-bg"
+  }, _react["default"].createElement("canvas", {
+    style: {
+      position: 'fixed',
+      width: '100vw',
+      height: '100vh',
+      // background: themeColor.starBgColor,
+      zIndex: '-1'
+    },
+    ref: canvasRef
+  }), children));
 };
 
 exports["default"] = _default;

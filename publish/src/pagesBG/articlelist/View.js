@@ -138,7 +138,7 @@ var _default = function _default(_ref) {
     breadcrumbList: bdList
   }, _react["default"].createElement(_StickyTabs["default"], {
     tabBarExtraContent: _react["default"].createElement(_component.Link, {
-      to: "/md/add"
+      to: "/admin/md/add"
     }, _react["default"].createElement(_antd.Button, {
       type: "primary",
       ghost: true,

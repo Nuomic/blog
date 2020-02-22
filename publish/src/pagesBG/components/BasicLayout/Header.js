@@ -9,22 +9,29 @@ var _react = _interopRequireDefault(require("react"));
 
 var _antd = require("antd");
 
-var _component = require("react-imvc/component");
+var _connect = _interopRequireDefault(require("react-imvc/hoc/connect"));
 
-var _hook = require("react-imvc/hook");
+var _component = require("react-imvc/component");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Header = _antd.Layout.Header;
+var withData = (0, _connect["default"])(function (_ref) {
+  var state = _ref.state,
+      handlers = _ref.handlers;
+  console.log('handlers', handlers);
+  return {
+    handleLogout: handlers.loadingText
+  };
+}); // export default withData(Loading)
 
-var _default = function _default(_ref) {
-  var collapsed = _ref.collapsed,
-      handleToggle = _ref.handleToggle,
-      breadcrumbList = _ref.breadcrumbList;
-
-  var _useCtrl = (0, _hook.useCtrl)(),
-      handleLogout = _useCtrl.handleLogout;
-
+var _default = withData(function (_ref2) {
+  var collapsed = _ref2.collapsed,
+      handleToggle = _ref2.handleToggle,
+      breadcrumbList = _ref2.breadcrumbList,
+      handleLogout = _ref2.handleLogout;
+  // const { handleLogout } = useCtrl();
+  console.log('handleLogout', handleLogout);
   return _react["default"].createElement(Header, {
     className: "basic-header"
   }, _react["default"].createElement(_antd.Icon, {
@@ -68,6 +75,6 @@ var _default = function _default(_ref) {
     type: "link",
     onClick: handleLogout
   }, "\u9000\u51FA\u767B\u5F55")));
-};
+});
 
 exports["default"] = _default;

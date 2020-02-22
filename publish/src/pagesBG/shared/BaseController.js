@@ -117,7 +117,7 @@ function (_Controller) {
     value: function getUserInfo() {
       var _this2 = this;
 
-      var context, userInfo;
+      var context, userInfo, TOKEN;
       return regeneratorRuntime.async(function getUserInfo$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -125,20 +125,21 @@ function (_Controller) {
               context = this.context; // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
 
               userInfo = null;
-              _context2.prev = 2;
+              TOKEN = this.cookie('TOKEN');
+              if (!TOKEN) delete context.userInfo;
+              _context2.prev = 4;
 
               if (!context.hasOwnProperty('userInfo')) {
-                _context2.next = 7;
+                _context2.next = 9;
                 break;
               }
 
               userInfo = context.userInfo;
-              _context2.next = 13;
+              _context2.next = 11;
               break;
 
-            case 7:
-              _context2.t0 = regeneratorRuntime;
-              _context2.next = 10;
+            case 9:
+              _context2.next = 11;
               return regeneratorRuntime.awrap(this.resHandler(function () {
                 return _this2.getApi(_api["default"].userCheck);
               }, function (userInfo) {
@@ -150,29 +151,24 @@ function (_Controller) {
                 _antd.message.error('登录过期');
               }));
 
-            case 10:
-              _context2.t1 = _context2.sent;
-              _context2.next = 13;
-              return _context2.t0.awrap.call(_context2.t0, _context2.t1);
-
-            case 13:
-              _context2.next = 18;
+            case 11:
+              _context2.next = 16;
               break;
 
-            case 15:
-              _context2.prev = 15;
-              _context2.t2 = _context2["catch"](2);
-              console.log('_', _context2.t2);
+            case 13:
+              _context2.prev = 13;
+              _context2.t0 = _context2["catch"](4);
+              console.log('_', _context2.t0);
 
-            case 18:
+            case 16:
               return _context2.abrupt("return", userInfo);
 
-            case 19:
+            case 17:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[2, 15]]);
+      }, null, this, [[4, 13]]);
     }
   }, {
     key: "handleLogout",
@@ -183,19 +179,34 @@ function (_Controller) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
+              _context3.prev = 0;
+              _context3.next = 3;
               return regeneratorRuntime.awrap(this.resHandler(function () {
-                return _this3.post(_api["default"].userLogout);
-              }, function () {}, function (err) {
+                return _this3.postApi(_api["default"].userLogout);
+              }, function (res) {
+                console.log('object', res);
+              }, function (err) {
                 _antd.message.error(err.customerErrorMessage);
               }));
 
-            case 2:
+            case 3:
+              _context3.next = 8;
+              break;
+
+            case 5:
+              _context3.prev = 5;
+              _context3.t0 = _context3["catch"](0);
+              console.log('_', _context3.t0);
+
+            case 8:
+              this.context.handleLogout = this.handleLogout;
+
+            case 9:
             case "end":
               return _context3.stop();
           }
         }
-      }, null, this);
+      }, null, this, [[0, 5]]);
     }
     /**
      * 动态获取最终的 actions 集合
@@ -364,19 +375,7 @@ function (_Controller) {
           }
         }
       }, null, this, [[5, 24]]);
-    } // getKeyTranlate(key, options = {}) {
-    //   const language = this.store.getState().language || {};
-    //   return language[key] ? language[key].replace(/\$\{\s*(\w+)\s*(([\+\-])\s*(\d+)\s*)?\}/g, (text) => options[text.substring(2, text.length - 1)]) : '';
-    // }
-    // logout() {
-    //   let logoutTips = '确定退出系统？';
-    //   try {
-    //     logoutTips = this.store.getState().language.logoutTips || '确定退出系统？';
-    //   } catch (error) {
-    //   }
-    //   Modal.confirm({ content: logoutTips, onOk: () => super.logout() });
-    // }
-
+    }
   }]);
 
   return _default;

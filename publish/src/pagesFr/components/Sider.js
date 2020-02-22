@@ -18,18 +18,26 @@ var _hook = require("react-imvc/hook");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _default = function _default() {
-  var _ref = (0, _hook.useModelState)() || {},
-      siderData = _ref.siderData;
+  var _useModelState = (0, _hook.useModelState)(),
+      siderData = _useModelState.siderData;
+
+  siderData = siderData ? siderData : {};
+  var _siderData = siderData,
+      hotList = _siderData.hotList,
+      tagList = _siderData.tagList,
+      latestList = _siderData.latestList,
+      categoryList = _siderData.categoryList,
+      links = _siderData.links;
 
   var handleToDetail = function handleToDetail(id) {
     return "/articledetail/".concat(id);
   };
 
-  var SiderItem = function SiderItem(_ref2) {
-    var name = _ref2.name,
-        dataSource = _ref2.dataSource,
-        grid = _ref2.grid,
-        Item = _ref2.Item;
+  var SiderItem = function SiderItem(_ref) {
+    var name = _ref.name,
+        dataSource = _ref.dataSource,
+        grid = _ref.grid,
+        Item = _ref.Item;
     return _react["default"].createElement(_antd.Card, {
       title: _react["default"].createElement("span", {
         className: "font-bold"
@@ -54,13 +62,13 @@ var _default = function _default() {
     className: "basic-sider"
   }, _react["default"].createElement(SiderItem, {
     name: "\u70ED\u95E8\u6587\u7AE0",
-    dataSource: siderData.hotList,
+    dataSource: hotList,
     Item: function Item(item) {
       return _react["default"].createElement("div", {
         className: "article-list-title"
       }, _react["default"].createElement(_antd.Tag, {
         className: "hot-title-index"
-      }, siderData.hotList && siderData.hotList.findIndex(function (i) {
+      }, hotList && hotList.findIndex(function (i) {
         return item.id == i.id;
       }) + 1), _react["default"].createElement(_component.Link, {
         to: handleToDetail(item.id),
@@ -73,7 +81,7 @@ var _default = function _default() {
     }, "\u6807\u7B7E\u4E91\u96C6"),
     size: "small",
     bordered: false
-  }, siderData.tagList && siderData.tagList.map(function (item) {
+  }, tagList && tagList.map(function (item) {
     return _react["default"].createElement(_antd.Tag, {
       color: item.color,
       key: item.id,
@@ -83,7 +91,7 @@ var _default = function _default() {
     }, item.name);
   })), _react["default"].createElement(SiderItem, {
     name: "\u6700\u65B0\u6587\u7AE0",
-    dataSource: siderData.latestList,
+    dataSource: latestList,
     Item: function Item(item) {
       return _react["default"].createElement("div", {
         className: "article-list-title"
@@ -96,7 +104,7 @@ var _default = function _default() {
     }
   }), _react["default"].createElement(SiderItem, {
     name: "\u5206\u7C7B\u4E13\u680F",
-    dataSource: siderData.categoryList,
+    dataSource: categoryList,
     Item: function Item(item) {
       return _react["default"].createElement("div", {
         style: {
@@ -121,7 +129,7 @@ var _default = function _default() {
     grid: {
       column: 2
     },
-    dataSource: siderData.links,
+    dataSource: links,
     Item: function Item(item) {
       return _react["default"].createElement("a", {
         href: 'http://' + item.siteUrl,

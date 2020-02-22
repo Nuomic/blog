@@ -13,6 +13,31 @@
 .align-center {
   text-align: center;
 }
+body,
+html {
+  margin: 0;
+  color: #fff;
+}
+.fr-bg {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.fr-bg:after {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  background: center/100% url('/static/images/background.png');
+  opacity: 0.9;
+}
+.ant-card {
+  background-color: rgba(155, 155, 155, 0.657);
+}
 .link-color {
   color: #555;
 }
