@@ -16,6 +16,7 @@
 body,
 html {
   margin: 0;
+  color: #fff;
 }
 .fr-bg {
   position: relative;
@@ -33,6 +34,9 @@ html {
   z-index: -2;
   background: center/100% url('/static/images/background.png');
   opacity: 0.9;
+}
+.ant-card {
+  background-color: rgba(155, 155, 155, 0.657);
 }
 .link-color {
   color: #555;

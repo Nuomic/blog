@@ -4,7 +4,7 @@ import { themeColor } from './../config';
 export default ({ children }) => {
   const canvasRef = useRef(null);
   useEffect(() => {
-    canvasRef.current && window.addEventListener('resize', draw);
+    // canvasRef.current && window.addEventListener('resize', draw);
     return draw();
   }, []);
   const draw = () => {
@@ -32,17 +32,17 @@ export default ({ children }) => {
       function createColorStyle(r, g, b) {
         return 'rgba(' + r + ',' + g + ',' + b + ', 0.8)';
       }
-      function mixComponents(comp1, weight1, comp2, weight2) {
-        return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
-      }
-      function averageColorStyles(dot1, dot2) {
-        let color1 = dot1.color,
-          color2 = dot2.color;
-        let r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
-          g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
-          b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
-        return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
-      }
+      // function mixComponents(comp1, weight1, comp2, weight2) {
+      //   return (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
+      // }
+      // function averageColorStyles(dot1, dot2) {
+      //   let color1 = dot1.color,
+      //     color2 = dot2.color;
+      //   let r = mixComponents(color1.r, dot1.radius, color2.r, dot2.radius),
+      //     g = mixComponents(color1.g, dot1.radius, color2.g, dot2.radius),
+      //     b = mixComponents(color1.b, dot1.radius, color2.b, dot2.radius);
+      //   return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
+      // }
       function Color(min) {
         min = min || 0;
         this.r = colorValue(min);
