@@ -32,11 +32,13 @@ export default class extends Controller {
     let { context } = this;
     // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
     let userInfo = null;
+    const TOKEN = this.cookie('TOKEN');
+    if (!TOKEN) delete context.userInfo;
     try {
       if (context.hasOwnProperty('userInfo')) {
         userInfo = context.userInfo;
       } else {
-        await await this.resHandler(
+        await this.resHandler(
           () => this.getApi(api.userCheck),
           userInfo => {
             console.log('userInfo', userInfo);
@@ -54,13 +56,20 @@ export default class extends Controller {
     return userInfo;
   }
   async handleLogout() {
-    await this.resHandler(
-      () => this.post(api.userLogout),
-      () => {},
-      err => {
-        message.error(err.customerErrorMessage);
-      }
-    );
+    try {
+      await this.resHandler(
+        () => this.postApi(api.userLogout),
+        res => {
+          console.log('object', res);
+        },
+        err => {
+          message.error(err.customerErrorMessage);
+        }
+      );
+    } catch (_) {
+      console.log('_', _);
+    }
+    this.context.handleLogout = this.handleLogout;
   }
   /**
    * 动态获取最终的 actions 集合
@@ -161,18 +170,4 @@ export default class extends Controller {
       this.resHandler(func, success, fail, { limit: limit - 1 });
     }
   }
-
-  // getKeyTranlate(key, options = {}) {
-  //   const language = this.store.getState().language || {};
-  //   return language[key] ? language[key].replace(/\$\{\s*(\w+)\s*(([\+\-])\s*(\d+)\s*)?\}/g, (text) => options[text.substring(2, text.length - 1)]) : '';
-  // }
-  // logout() {
-  //   let logoutTips = '确定退出系统？';
-  //   try {
-  //     logoutTips = this.store.getState().language.logoutTips || '确定退出系统？';
-  //   } catch (error) {
-
-  //   }
-  //   Modal.confirm({ content: logoutTips, onOk: () => super.logout() });
-  // }
 }
