@@ -4,7 +4,9 @@ import { Link } from 'react-imvc/component';
 import moment from 'moment';
 import { useModelState } from 'react-imvc/hook';
 export default () => {
-  const { siderData } = useModelState() || {};
+  let { siderData } = useModelState();
+  siderData = siderData ? siderData : {};
+  const { hotList, tagList, latestList, categoryList, links } = siderData;
   const handleToDetail = id => {
     return `/articledetail/${id}`;
   };
@@ -36,12 +38,11 @@ export default () => {
     <div className="basic-sider">
       <SiderItem
         name="热门文章"
-        dataSource={siderData.hotList}
+        dataSource={hotList}
         Item={item => (
           <div className="article-list-title">
             <Tag className="hot-title-index">
-              {siderData.hotList &&
-                siderData.hotList.findIndex(i => item.id == i.id) + 1}
+              {hotList && hotList.findIndex(i => item.id == i.id) + 1}
             </Tag>
             <Link to={handleToDetail(item.id)} className="link-color">
               {item.title}
@@ -54,8 +55,8 @@ export default () => {
         size="small"
         bordered={false}
       >
-        {siderData.tagList &&
-          siderData.tagList.map(item => (
+        {tagList &&
+          tagList.map(item => (
             <Tag color={item.color} key={item.id} style={{ cursor: 'pointer' }}>
               {item.name}
             </Tag>
@@ -64,7 +65,7 @@ export default () => {
 
       <SiderItem
         name="最新文章"
-        dataSource={siderData.latestList}
+        dataSource={latestList}
         Item={item => (
           <div className="article-list-title">
             <span className="latest-article-date">
@@ -78,7 +79,7 @@ export default () => {
       />
       <SiderItem
         name="分类专栏"
-        dataSource={siderData.categoryList}
+        dataSource={categoryList}
         Item={item => (
           <div style={{ width: '100%' }}>
             <Link to={handleToDetail(item.id)} className="link-color">
@@ -96,7 +97,7 @@ export default () => {
       <SiderItem
         name="友情链接"
         grid={{ column: 2 }}
-        dataSource={siderData.links}
+        dataSource={links}
         Item={item => (
           <a
             href={'http://' + item.siteUrl}

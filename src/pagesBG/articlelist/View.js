@@ -84,7 +84,7 @@ export default ({ state, handlers }) => {
     <BasicLayout breadcrumbList={bdList}>
       <StickyTabs
         tabBarExtraContent={
-          <Link to={`/md/add`}>
+          <Link to="/admin/md/add">
             <Button type="primary" ghost icon="plus">
               新增
             </Button>
