@@ -55,7 +55,7 @@ export default class extends Controller {
     }
     return userInfo;
   }
-  async handleLogout() {
+  handleLogout = async () => {
     try {
       await this.resHandler(
         () => this.postApi(api.userLogout),
@@ -69,8 +69,7 @@ export default class extends Controller {
     } catch (_) {
       console.log('_', _);
     }
-    this.context.handleLogout = this.handleLogout;
-  }
+  };
   /**
    * 动态获取最终的 actions 集合
    */
