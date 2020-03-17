@@ -8,13 +8,16 @@ import { useCtrl } from 'react-imvc/hook';
 export default function ComItem({ item, comFormId, setComFormId }) {
   const { handleCommentLikeCount } = useCtrl();
   const [openState, setOpenState] = useState({});
+
   useEffect(() => {
+    setLikeCount(item.likeCount);
     const commentLikeStatus =
       JSON.parse(window.localStorage.getItem('commentLikeStatus')) || {};
     setIsLike(commentLikeStatus[item.id]);
-  }, []);
+  }, [item.id]);
   const [isLike, setIsLike] = useState(false);
   const [likeCount, setLikeCount] = useState(item.likeCount);
+  // console.log('likeCount', likeCount);
   const like = () => {
     const { id } = item;
     let currentCount = likeCount;
