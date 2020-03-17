@@ -78,6 +78,38 @@ function (_Controller) {
       commonBG: '/css/commonBG.css'
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleLogout", function _callee() {
+      return regeneratorRuntime.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].userLogout);
+              }, function (res) {
+                console.log('object', res);
+              }, function (err) {
+                _antd.message.error(err.customerErrorMessage);
+              }));
+
+            case 3:
+              _context.next = 8;
+              break;
+
+            case 5:
+              _context.prev = 5;
+              _context.t0 = _context["catch"](0);
+              console.log('_', _context.t0);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, null, [[0, 5]]);
+    });
+
     return _this;
   }
 
@@ -89,25 +121,25 @@ function (_Controller) {
      */
     value: function getInitialState(initialState) {
       var context, location, userInfo;
-      return regeneratorRuntime.async(function getInitialState$(_context) {
+      return regeneratorRuntime.async(function getInitialState$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               context = this.context, location = this.location;
-              _context.next = 3;
+              _context2.next = 3;
               return regeneratorRuntime.awrap(this.getUserInfo());
 
             case 3:
-              userInfo = _context.sent;
+              userInfo = _context2.sent;
               if (!_jsCookie["default"].get('collapsed')) _jsCookie["default"].set('collapsed', false);
-              return _context.abrupt("return", _objectSpread({}, initialState, {
+              return _context2.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: location.pathname,
                 initCollapsed: _jsCookie["default"].get('collapsed') == 'false' ? false : true
               }, userInfo));
 
             case 6:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
       }, null, this);
@@ -118,28 +150,28 @@ function (_Controller) {
       var _this2 = this;
 
       var context, userInfo, TOKEN;
-      return regeneratorRuntime.async(function getUserInfo$(_context2) {
+      return regeneratorRuntime.async(function getUserInfo$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               context = this.context; // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
 
               userInfo = null;
               TOKEN = this.cookie('TOKEN');
               if (!TOKEN) delete context.userInfo;
-              _context2.prev = 4;
+              _context3.prev = 4;
 
               if (!context.hasOwnProperty('userInfo')) {
-                _context2.next = 9;
+                _context3.next = 9;
                 break;
               }
 
               userInfo = context.userInfo;
-              _context2.next = 11;
+              _context3.next = 11;
               break;
 
             case 9:
-              _context2.next = 11;
+              _context3.next = 11;
               return regeneratorRuntime.awrap(this.resHandler(function () {
                 return _this2.getApi(_api["default"].userCheck);
               }, function (userInfo) {
@@ -152,68 +184,30 @@ function (_Controller) {
               }));
 
             case 11:
-              _context2.next = 16;
+              _context3.next = 16;
               break;
 
             case 13:
-              _context2.prev = 13;
-              _context2.t0 = _context2["catch"](4);
-              console.log('_', _context2.t0);
+              _context3.prev = 13;
+              _context3.t0 = _context3["catch"](4);
+              console.log('_', _context3.t0);
 
             case 16:
-              return _context2.abrupt("return", userInfo);
+              return _context3.abrupt("return", userInfo);
 
             case 17:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
       }, null, this, [[4, 13]]);
     }
   }, {
-    key: "handleLogout",
-    value: function handleLogout() {
-      var _this3 = this;
+    key: "getFinalActions",
 
-      return regeneratorRuntime.async(function handleLogout$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
-              return regeneratorRuntime.awrap(this.resHandler(function () {
-                return _this3.postApi(_api["default"].userLogout);
-              }, function (res) {
-                console.log('object', res);
-              }, function (err) {
-                _antd.message.error(err.customerErrorMessage);
-              }));
-
-            case 3:
-              _context3.next = 8;
-              break;
-
-            case 5:
-              _context3.prev = 5;
-              _context3.t0 = _context3["catch"](0);
-              console.log('_', _context3.t0);
-
-            case 8:
-              this.context.handleLogout = this.handleLogout;
-
-            case 9:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, null, this, [[0, 5]]);
-    }
     /**
      * 动态获取最终的 actions 集合
      */
-
-  }, {
-    key: "getFinalActions",
     value: function getFinalActions(actions) {
       return _objectSpread({}, sharedActions, {}, actions);
     }

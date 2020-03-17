@@ -57,9 +57,10 @@ function ComItem(_ref) {
       setOpenState = _useState2[1];
 
   (0, _react.useEffect)(function () {
+    setLikeCount(item.likeCount);
     var commentLikeStatus = JSON.parse(window.localStorage.getItem('commentLikeStatus')) || {};
     setIsLike(commentLikeStatus[item.id]);
-  }, []);
+  }, [item.id]);
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -69,7 +70,8 @@ function ComItem(_ref) {
   var _useState5 = (0, _react.useState)(item.likeCount),
       _useState6 = _slicedToArray(_useState5, 2),
       likeCount = _useState6[0],
-      setLikeCount = _useState6[1];
+      setLikeCount = _useState6[1]; // console.log('likeCount', likeCount);
+
 
   var like = function like() {
     var id = item.id;

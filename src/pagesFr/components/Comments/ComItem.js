@@ -8,7 +8,6 @@ import { useCtrl } from 'react-imvc/hook';
 export default function ComItem({ item, comFormId, setComFormId }) {
   const { handleCommentLikeCount } = useCtrl();
   const [openState, setOpenState] = useState({});
-
   useEffect(() => {
     setLikeCount(item.likeCount);
     const commentLikeStatus =
