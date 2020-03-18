@@ -20,29 +20,33 @@ export default class extends Controller {
     let { context, location } = this;
     let userInfo = await this.getUserInfo();
     if (!Cookie.get('collapsed')) Cookie.set('collapsed', false);
+    console.log('Cookie.get(collapsed)', Cookie.get('collapsed'));
     return {
       ...initialState,
       currentPath: location.pathname,
       initCollapsed: Cookie.get('collapsed') == 'false' ? false : true,
-      ...userInfo
+      userInfo
     };
   }
 
   async getUserInfo() {
     let { context } = this;
     // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
+    console.log('context', context);
     let userInfo = null;
-    const TOKEN = this.cookie('TOKEN');
-    if (!TOKEN) delete context.userInfo;
+    // const TOKEN = Cookie.get('TOKEN');
+    // console.log('TOKEN', TOKEN);
+    // if (!TOKEN) delete context.userInfo;
     try {
       if (context.hasOwnProperty('userInfo')) {
         userInfo = context.userInfo;
+        console.log('userInfo', userInfo);
       } else {
         await this.resHandler(
           () => this.getApi(api.userCheck),
-          userInfo => {
-            console.log('userInfo', userInfo);
-            context.userInfo = userInfo;
+          res => {
+            context.userInfo = res.userInfo;
+            userInfo = res.userInfo;
           },
           () => {
             context.userInfo = null;
