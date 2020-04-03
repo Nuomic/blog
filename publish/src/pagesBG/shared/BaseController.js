@@ -132,12 +132,14 @@ function (_Controller) {
             case 3:
               userInfo = _context2.sent;
               if (!_jsCookie["default"].get('collapsed')) _jsCookie["default"].set('collapsed', false);
+              console.log('Cookie.get(collapsed)', _jsCookie["default"].get('collapsed'));
               return _context2.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: location.pathname,
-                initCollapsed: _jsCookie["default"].get('collapsed') == 'false' ? false : true
-              }, userInfo));
+                initCollapsed: _jsCookie["default"].get('collapsed') == 'false' ? false : true,
+                userInfo: userInfo
+              }));
 
-            case 6:
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -149,17 +151,19 @@ function (_Controller) {
     value: function getUserInfo() {
       var _this2 = this;
 
-      var context, userInfo, TOKEN;
+      var context, userInfo;
       return regeneratorRuntime.async(function getUserInfo$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               context = this.context; // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
 
-              userInfo = null;
-              TOKEN = this.cookie('TOKEN');
-              if (!TOKEN) delete context.userInfo;
-              _context3.prev = 4;
+              console.log('context', context);
+              userInfo = null; // const TOKEN = Cookie.get('TOKEN');
+              // console.log('TOKEN', TOKEN);
+              // if (!TOKEN) delete context.userInfo;
+
+              _context3.prev = 3;
 
               if (!context.hasOwnProperty('userInfo')) {
                 _context3.next = 9;
@@ -167,6 +171,7 @@ function (_Controller) {
               }
 
               userInfo = context.userInfo;
+              console.log('userInfo', userInfo);
               _context3.next = 11;
               break;
 
@@ -174,9 +179,9 @@ function (_Controller) {
               _context3.next = 11;
               return regeneratorRuntime.awrap(this.resHandler(function () {
                 return _this2.getApi(_api["default"].userCheck);
-              }, function (userInfo) {
-                console.log('userInfo', userInfo);
-                context.userInfo = userInfo;
+              }, function (res) {
+                context.userInfo = res.userInfo;
+                userInfo = res.userInfo;
               }, function () {
                 context.userInfo = null;
 
@@ -189,7 +194,7 @@ function (_Controller) {
 
             case 13:
               _context3.prev = 13;
-              _context3.t0 = _context3["catch"](4);
+              _context3.t0 = _context3["catch"](3);
               console.log('_', _context3.t0);
 
             case 16:
@@ -200,7 +205,7 @@ function (_Controller) {
               return _context3.stop();
           }
         }
-      }, null, this, [[4, 13]]);
+      }, null, this, [[3, 13]]);
     }
   }, {
     key: "getFinalActions",

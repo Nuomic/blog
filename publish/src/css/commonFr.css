@@ -32,7 +32,8 @@ html {
   bottom: 0;
   left: 0;
   z-index: -2;
-  background: center/100% url('/static/images/background.png');
+  background: top/100% url('/static/images/background.png');
+  background-size: cover;
   opacity: 0.9;
 }
 .ant-card {

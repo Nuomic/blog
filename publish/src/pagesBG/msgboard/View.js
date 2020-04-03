@@ -52,6 +52,8 @@ var _default = function _default(_ref) {
       handlers = _ref.handlers;
   var commentList = state.commentList,
       userInfo = state.userInfo;
+  console.log('state', state);
+  console.log('userInfo+++++++++', userInfo);
   var handleDeleteComment = handlers.handleDeleteComment,
       handleSaveComment = handlers.handleSaveComment;
   var bdList = [{

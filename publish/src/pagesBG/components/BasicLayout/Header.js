@@ -26,7 +26,6 @@ var _default = function _default(_ref) {
   var _useCtrl = (0, _hook.useCtrl)(),
       handleLogout = _useCtrl.handleLogout;
 
-  console.log('handleLogout', handleLogout);
   return _react["default"].createElement(Header, {
     className: "basic-header"
   }, _react["default"].createElement(_antd.Icon, {

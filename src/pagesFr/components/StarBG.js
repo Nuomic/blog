@@ -1,12 +1,21 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Style, Link } from 'react-imvc/component';
 import { themeColor } from './../config';
+import _ from 'lodash';
 export default ({ children }) => {
   const canvasRef = useRef(null);
   useEffect(() => {
-    // canvasRef.current && window.addEventListener('resize', draw);
+    canvasRef.current &&
+      window.addEventListener(
+        'resize',
+        _.throttle(() => {
+          draw();
+        }, 400)
+      );
     return draw();
   }, []);
+  const [widthHeight, setWidthHeight] = useState({});
+  console.log('widthHeight', widthHeight);
   const draw = () => {
     const canvas = canvasRef.current;
     const ctx = canvas && canvas.getContext('2d');
@@ -16,10 +25,10 @@ export default ({ children }) => {
       canvas.height = window.innerHeight;
       ctx.lineWidth = 0.3;
       ctx.strokeStyle = new Color(250).style;
-      let mousePosition = {
-        x: (30 * canvas.width) / 100,
-        y: (30 * canvas.height) / 100
-      };
+      // let mousePosition = {
+      //   x: (30 * canvas.width) / 100,
+      //   y: (30 * canvas.height) / 100
+      // };
       let dots = {
         nb: canvas.height / 3,
         distance: canvas.height / 10,

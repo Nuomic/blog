@@ -10,6 +10,8 @@ const { confirm } = Modal;
 const { TabPane } = Tabs;
 export default ({ state, handlers }) => {
   const { commentList, userInfo } = state;
+  console.log('state', state);
+  console.log('userInfo+++++++++', userInfo);
   const { handleDeleteComment, handleSaveComment } = handlers;
   const bdList = [{ name: '首页', href: '/admin' }, { name: '留言管理' }];
   const articleStatus = [
