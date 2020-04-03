@@ -16,6 +16,10 @@ export default [
     controller: () => import('./article/Controller')
   },
   {
+    path: '/article/:type/:id',
+    controller: () => import('./article/Controller')
+  },
+  {
     path: '/portfolio',
     controller: () => import('./portfolio/Controller')
   },

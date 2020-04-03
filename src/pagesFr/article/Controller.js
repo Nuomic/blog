@@ -21,8 +21,12 @@ export default class extends Controller {
     // await super.componentDidFirstMount();
   }
   getArticleList = async () => {
+    const { params } = this.location;
+    const search = { status: 1 };
+    if (params.type == 'tag') search.tagId = params.id;
+    if (params.type == 'category') search.categoryId = params.id;
     await this.resHandler(
-      () => this.getApi(api.getArticleList, { status: 1 }),
+      () => this.getApi(api.getArticleList, search),
       res => {
         this.handleChangeState(res);
         console.log('res', res);

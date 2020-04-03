@@ -10,6 +10,9 @@ export default () => {
   const handleToDetail = id => {
     return `/articledetail/${id}`;
   };
+  const handleToSearch = (type, id) => {
+    return `/article/${type}/${id}`;
+  };
   const SiderItem = ({ name, dataSource, grid, Item }) => {
     return (
       <Card
@@ -58,7 +61,7 @@ export default () => {
         {tagList &&
           tagList.map(item => (
             <Tag color={item.color} key={item.id} style={{ cursor: 'pointer' }}>
-              {item.name}
+              <Link to={handleToSearch('tag', item.id)}>{item.name}</Link>
             </Tag>
           ))}
       </Card>
@@ -82,7 +85,10 @@ export default () => {
         dataSource={categoryList}
         Item={item => (
           <div style={{ width: '100%' }}>
-            <Link to={handleToDetail(item.id)} className="link-color">
+            <Link
+              to={handleToSearch('category', item.id)}
+              className="link-color"
+            >
               {item.name}
             </Link>
             <span style={{ float: 'right' }}>
