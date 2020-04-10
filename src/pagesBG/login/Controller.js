@@ -10,25 +10,26 @@ export default class Home extends Controller {
   Model = Model;
   preload = {
     ...this.preload,
-    login: '/css/login.css'
+    login: '/css/login.css',
   };
   async getInitialState(initialState) {
     return {
       ...initialState,
-      currentPath: this.location.pathname
+      currentPath: this.location.pathname,
     };
   }
   async componentWillCreate() {
     // await super.componentWillCreate();
     // await this.getCommentList();
+    await this.handleGetCaptcha();
   }
   async componentDidFirstMount() {
     // await super.componentDidFirstMount();
   }
-  handleLogin = async info => {
-    this.resHandler(
+  handleLogin = async (info) => {
+    await this.resHandler(
       () => this.postApi(api.userLogin, info),
-      res => {
+      (res) => {
         if (res.success) {
           this.handleChangeState(res);
           this.redirect('/admin');
@@ -37,7 +38,19 @@ export default class Home extends Controller {
           message.error(res.error);
         }
       },
-      err => {
+      (err) => {
+        console.log('err', err);
+      }
+    );
+  };
+
+  handleGetCaptcha = async () => {
+    await this.resHandler(
+      () => this.getApi(api.getCaptcha),
+      (res) => {
+        this.handleChangeState(res);
+      },
+      (err) => {
         console.log('err', err);
       }
     );

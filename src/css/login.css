@@ -21,6 +21,7 @@ html {
 }
 .login-box {
   width: 30vw;
+  min-width: 450px;
   height: 300px;
   position: absolute;
   bottom: 0;

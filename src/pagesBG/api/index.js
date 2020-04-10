@@ -37,5 +37,8 @@ export default {
   saveFriend: '/friend/save',
 
   //标签
-  saveTag: '/tag/save'
+  saveTag: '/tag/save',
+
+  //验证码
+  getCaptcha: '/user/captcha',
 };
