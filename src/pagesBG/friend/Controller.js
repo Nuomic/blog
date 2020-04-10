@@ -14,27 +14,27 @@ export default class extends Controller {
   async componentDidFirstMount() {
     // await super.componentDidFirstMount();
   }
-  handleSaveFriend = async value => {
+  handleSaveFriend = async (value) => {
     console.log('value', value);
     await this.resHandler(
-      () => this.postApi(api.saveFriend, { ...value, status: '0' }),
-      res => {
+      () => this.postApi(api.saveFriend, value),
+      (res) => {
         this.getFriendList(res);
         message.success('保存成功');
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );
   };
-  handleDeleteFriend = async friendId => {
+  handleDeleteFriend = async (friendId) => {
     await this.resHandler(
       () => this.postApi(api.deleteFriend, { friendId }),
-      res => {
+      (res) => {
         this.getFriendList(res);
         message.success('删除成功');
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );
@@ -43,10 +43,10 @@ export default class extends Controller {
   getFriendList = async () => {
     await this.resHandler(
       () => this.getApi(api.getFriend),
-      res => {
+      (res) => {
         this.handleChangeState(res);
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );

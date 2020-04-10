@@ -3,34 +3,38 @@ export const themeColor = {
   footerBgColor: 'rgba(70,70,70,.7)',
   starBgColor: '#222',
   articleBgColor: 'rgba(255,255,255,.07)',
-  siderBgColor: 'rgba(255,255,255,.07)'
+  siderBgColor: 'rgba(255,255,255,.07)',
 };
 //评论表单主题配置
 export const comFormTheme = {
-  backgroundColor: 'rgba(255,255,255,.5)'
+  backgroundColor: 'rgba(255,255,255,.5)',
 };
 //目录配置
 export const menuList = [
   {
     key: 'home',
-    name: '首页'
+    name: '首页',
   },
   {
     key: 'about',
-    name: '关于'
+    name: '关于',
   },
   {
     key: 'article',
-    name: '博文'
+    name: '博文',
   },
   {
     key: 'portfolio',
-    name: '作品集'
+    name: '作品集',
+  },
+  {
+    key: 'friend',
+    name: '邻居',
   },
   {
     key: 'msgboard',
-    name: '留言板'
-  }
+    name: '留言板',
+  },
 ];
 export const footerDate = {
   record: '赣ICP备 19004224 号', //备案号
@@ -40,21 +44,21 @@ export const footerDate = {
   connectWay: [
     {
       type: 'github',
-      href: 'https://github.com/zhangweiqiang666'
+      href: 'https://github.com/zhangweiqiang666',
     },
     {
       type: 'qq',
       qrCode: '/static/images/qq_qrcode.png',
-      alt: 'QQ 972618478'
+      alt: 'QQ 972618478',
     },
     {
       type: 'wechat',
       qrCode: '/static/images/mm_qrcode.png',
-      alt: 'weChat zwq972618478'
+      alt: 'weChat zwq972618478',
     },
     {
       type: 'weibo',
-      href: ' '
-    }
-  ]
+      href: ' ',
+    },
+  ],
 };

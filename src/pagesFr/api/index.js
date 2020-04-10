@@ -7,5 +7,6 @@ export default {
   getSiderDate: '/setting/sider',
   getArticleDetail: '/article/detail',
   getHitokoto: 'https://v1.hitokoto.cn/' /* 一言接口 */,
-  getSetting: '/setting/get'
+  getSetting: '/setting/get',
+  saveFriend: '/friend/save',
 };

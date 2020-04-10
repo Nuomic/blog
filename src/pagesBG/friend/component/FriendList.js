@@ -5,22 +5,23 @@ const { confirm } = Modal;
 export default ({ dataSource, changModalStatus }) => {
   const { handleSaveFriend, handleDeleteFriend } = useCtrl();
   //删除提示框
-  const deleteConfirm = id => {
+  const deleteConfirm = (id) => {
     confirm({
       title: '确定要删除该友链吗？',
       onOk: async () => {
         await handleDeleteFriend(id);
       },
-      onCancel() {}
+      onCancel() {},
     });
   };
-  const changeStatusConfirm = value => {
+  const changeStatusConfirm = (value) => {
+    console.log('value', value);
     confirm({
       title: `是否将该友链移动到  ${value.status == '0' ? '已审核' : '待审核'}`,
       onOk: async () => {
         await handleSaveFriend(value);
       },
-      onCancel() {}
+      onCancel() {},
     });
   };
   return (
@@ -30,10 +31,10 @@ export default ({ dataSource, changModalStatus }) => {
         xs: 1,
         sm: 2,
         lg: 3,
-        xl: 4
+        xl: 4,
       }}
       dataSource={dataSource}
-      renderItem={item => (
+      renderItem={(item) => (
         <List.Item key={item.id}>
           <Card
             className="friend-item-card"
@@ -45,7 +46,7 @@ export default ({ dataSource, changModalStatus }) => {
                 onClick={() =>
                   changeStatusConfirm({
                     friendId: item.id,
-                    status: item.status == '0' ? '1' : '0'
+                    status: item.status == '0' ? '1' : '0',
                   })
                 }
               />,
@@ -54,7 +55,7 @@ export default ({ dataSource, changModalStatus }) => {
                 type="delete"
                 style={{ color: 'red' }}
                 onClick={() => deleteConfirm(item.id)}
-              />
+              />,
             ]}
           >
             <Card.Meta

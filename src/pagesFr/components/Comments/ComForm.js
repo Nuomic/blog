@@ -11,14 +11,14 @@ export default Form.create()(({ parentId, articleId, form }) => {
   console.log(parentId, articleId);
   let initRandomNum = [
     Math.floor(Math.random() * 20),
-    Math.floor(Math.random() * 20)
+    Math.floor(Math.random() * 20),
   ];
   const [randomNum, setRandomNum] = useState(false);
   useEffect(() => {
     setRandomNum(initRandomNum);
     setUserInfo({
       nickname: window.localStorage.getItem('nickname'),
-      email: window.localStorage.getItem('email')
+      email: window.localStorage.getItem('email'),
     });
   }, []);
 
@@ -27,12 +27,12 @@ export default Form.create()(({ parentId, articleId, form }) => {
     resetFields();
     setRandomNum([
       Math.floor(Math.random() * 10),
-      Math.floor(Math.random() * 10)
+      Math.floor(Math.random() * 10),
     ]);
   };
   const { getFieldDecorator, resetFields, validateFields } = form;
   // 保存评论
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     validateFields(async (err, fieldsValue) => {
       e.preventDefault();
       if (err) return;
@@ -78,10 +78,10 @@ export default Form.create()(({ parentId, articleId, form }) => {
                       rules: [
                         {
                           required: true,
-                          message: '请输入昵称'
-                        }
+                          message: '请输入昵称',
+                        },
                       ],
-                      initialValue: userInfo.nickname
+                      initialValue: userInfo.nickname,
                     })(<Input placeholder="昵称" />)}
                   </Form.Item>
                 </Col>
@@ -93,10 +93,10 @@ export default Form.create()(({ parentId, articleId, form }) => {
                         {
                           required: true,
                           pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
-                          message: '邮箱格式不正确!'
-                        }
+                          message: '邮箱格式不正确!',
+                        },
                       ],
-                      initialValue: userInfo.email
+                      initialValue: userInfo.email,
                     })(<Input placeholder="邮箱" />)}
                   </Form.Item>
                 </Col>
@@ -106,9 +106,9 @@ export default Form.create()(({ parentId, articleId, form }) => {
                       validateTrigger: 'onBlur',
                       rules: [
                         {
-                          validator: handleverCodeCheck
-                        }
-                      ]
+                          validator: handleverCodeCheck,
+                        },
+                      ],
                     })(
                       <Input
                         onFocus={() => resetFields('verCode')}
@@ -134,9 +134,9 @@ export default Form.create()(({ parentId, articleId, form }) => {
                       rules: [
                         {
                           required: true,
-                          message: '说点啥吧'
-                        }
-                      ]
+                          message: '说点啥吧',
+                        },
+                      ],
                     })(
                       <TextArea
                         autoSize={{ minRows: 2, maxRows: 3 }}
