@@ -17,7 +17,7 @@ export default (props) => {
   );
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
-      <Card size="small">
+      <Card>
         <Template title="所有链接" icon="paper-clip">
           <Links />
         </Template>

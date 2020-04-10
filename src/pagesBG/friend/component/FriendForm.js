@@ -43,8 +43,15 @@ export default Form.create()(
           </Item>
           <Item /* label="邮箱" */>
             {getFieldDecorator('email', {
+              validateTrigger: 'onBlur',
               initialValue: currentValue.email,
-              rules: [{ required: true, message: '请输入邮箱！' }],
+              rules: [
+                { required: true, message: '请输入邮箱！' },
+                {
+                  pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+                  message: '请输入正确的邮箱格式',
+                },
+              ],
             })(
               <Input
                 prefix={
@@ -59,7 +66,7 @@ export default Form.create()(
               rules: [
                 {
                   required: true,
-                  message: '请输入网站地址',
+                  message: '请输入网站名称',
                 },
               ],
               initialValue: currentValue.siteName,
@@ -76,6 +83,14 @@ export default Form.create()(
             {getFieldDecorator('siteUrl', {
               rules: [{ required: true, message: '请输入网站地址！' }],
               initialValue: currentValue.siteUrl,
+              validateTrigger: 'onBlur',
+              rules: [
+                { required: true, message: '请输入网站地址！' },
+                {
+                  pattern: /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*([\?&]\w+=\w*)*$/,
+                  message: '请输入正确的网站地址！',
+                },
+              ],
             })(
               <Input
                 prefix={
