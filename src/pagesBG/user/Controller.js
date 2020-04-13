@@ -3,6 +3,7 @@ import View from './View';
 import * as Model from './Model';
 import api from '../api';
 import { message } from 'antd';
+import md5 from 'blueimp-md5';
 export default class extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
@@ -16,11 +17,11 @@ export default class extends Controller {
   handelGetSetting = async (type, fun) => {
     await this.resHandler(
       () => this.get(api.getSetting + '/' + type),
-      res => {
+      (res) => {
         fun(res[type]);
         // this.handleChangeState({ [type]: res.data });
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );
@@ -33,6 +34,29 @@ export default class extends Controller {
       },
       () => {
         message.success('保存失败');
+        // console.log('err', err);
+      }
+    );
+  };
+  handleChangePwd = async (oldPwd, newPwd) => {
+    const { userInfo = {} } = this.store.getState();
+    const value = {
+      userId: userInfo.id,
+      oldPassword: md5(oldPwd),
+      newPassword: md5(newPwd),
+    };
+    console.log('value', value);
+    await this.resHandler(
+      () => this.postApi(api.changePwd, value),
+      (res) => {
+        console.log('res', res);
+        message.success(res.msg);
+        setTimeout(() => {
+          this.handleLogout();
+        }, 1000);
+      },
+      (err) => {
+        message.error(err.customerErrorMessage);
         // console.log('err', err);
       }
     );
