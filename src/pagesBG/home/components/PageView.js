@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useModelState } from 'react-imvc/hook';
 export default () => {
-  const { g2plot, pageList } = useModelState();
+  const { g2plot, pageList = [], pvTotal } = useModelState();
   const { Line } = g2plot;
   const data = pageList.reverse().map((item, index) => {
     if (!index) item.date = item.date.slice(0, 7);

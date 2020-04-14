@@ -23,12 +23,26 @@ export default class extends Controller {
       this.handleChangeState({ g2plot });
     }
     await this.getpageList();
+    await this.getArticleCount();
   }
   // async componentDidFirstMount() {}
   //获取文章列表
   getpageList = async () => {
     await this.resHandler(
       () => this.getApi(api.getPageView),
+      (res) => {
+        console.log('res', res);
+        this.handleChangeState(res);
+      },
+      (res) => {
+        console.log('res', res);
+      }
+    );
+  };
+  //获取文章统计
+  getArticleCount = async () => {
+    await this.resHandler(
+      () => this.getApi(api.getArticleCount),
       (res) => {
         console.log('res', res);
         this.handleChangeState(res);

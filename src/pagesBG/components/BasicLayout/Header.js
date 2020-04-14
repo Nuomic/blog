@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Layout, Icon, Breadcrumb, Button, Avatar, Badge } from 'antd';
 // import connect from 'react-imvc/hoc/connect';
 import { Style, Link } from 'react-imvc/component';
-import { useCtrl } from 'react-imvc/hook';
+import { useCtrl, useModelState } from 'react-imvc/hook';
 const { Header } = Layout;
 // export default withData(Loading)
 export default ({ collapsed, handleToggle, breadcrumbList }) => {
   const { handleLogout } = useCtrl();
+  const { userInfo = {} } = useModelState();
   return (
     <Header className="basic-header">
       <Icon
@@ -33,7 +34,7 @@ export default ({ collapsed, handleToggle, breadcrumbList }) => {
           </Badge>
         </span>
 
-        <Avatar></Avatar>
+        <Avatar src={userInfo.avatar} />
         <Button type="link" onClick={handleLogout}>
           退出登录
         </Button>

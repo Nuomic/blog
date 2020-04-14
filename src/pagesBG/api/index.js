@@ -45,4 +45,5 @@ export default {
 
   //站点 统计
   getPageView: '/overview/pageview',
+  getArticleCount: '/overview/articlecount',
 };
