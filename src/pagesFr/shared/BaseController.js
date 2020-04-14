@@ -8,71 +8,30 @@ export default class extends Controller {
     antd: '/css/antd.min.css',
     antdPro: '/css/ant-design-pro.css',
     customize: '/css/customize.css',
-    commonFr: '/css/commonFr.css'
+    commonFr: '/css/commonFr.css',
   };
   SSR = this.location.query.ssr != 0;
-  /**
-   * 动态获取初始化状态
-   */
-  // async getInitialState(initialState) {
-  //   let state = await super.getInitialState(initialState);
-  //   let { context, location } = this;
-  //   let url = context.basename + '/'
-  //   let options = {
-  //     method: 'POST',
-  //     credentials: 'include',
-  //     raw: true,
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       // cookieorigin: getCookieOriginByContext(context)
-  //     },
-  //     body: JSON.stringify({ pageName: this.modulePagename })
-  //   }
-
-  //   if (context.isServer) {
-  //     options.headers.cookie = context.req.headers.cookie
-  //   }
-  //   try {
-  //     let response = await fetch(url, options)
-  //     let result = await response.json()
-  //     let { ResponseStatus } = result
-  //     if (ResponseStatus.Ack !== "Success" && ResponseStatus.Errors[0].ErrorCode == '401') {
-  //       redirect(this.context, '/v2/authorized/403') //11111111111111111111
-  //       return
-  //     }
-  //   } catch (error) {
-  //     console.error('getUserInfo', error)
-  //   }
-  //   return {
-  //     ...sharedInitialState,
-  //     ...state
-  //   };
-  // }
-
-  /**
-   * 动态获取最终的 actions 集合
-   */
   getFinalActions(actions) {
     return {
       ...sharedActions,
-      ...actions
+      ...actions,
     };
   }
   async componentWillCreate() {
     await this.getSiderDate();
   }
   async componentDidFirstMount() {
-    // await super.componentDidFirstMount();
+    console.log('this.pageName', this.pageName);
   }
   getSiderDate = async () => {
     await this.resHandler(
-      () => this.getApi(api.getSiderDate),
-      res => {
+      () => this.getApi(api.getSiderDate, { pageName: this.pageName }),
+      (res) => {
         const { siderData } = res;
         console.log('siderData', siderData);
         this.handleChangeState(res);
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );
@@ -82,7 +41,7 @@ export default class extends Controller {
     options = {
       ...options,
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     };
     return this.fetch(url, options);
   }
@@ -97,7 +56,7 @@ export default class extends Controller {
     const options = {
       method: 'POST',
       ...option,
-      body: data
+      body: data,
     };
     return fetch(url, options);
   }
@@ -105,7 +64,7 @@ export default class extends Controller {
     options = {
       method: 'GET',
       ...options,
-      credentials: 'omit'
+      credentials: 'omit',
     };
 
     return this.fetch(

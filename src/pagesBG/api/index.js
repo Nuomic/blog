@@ -42,4 +42,7 @@ export default {
 
   //验证码
   getCaptcha: '/user/captcha',
+
+  //站点 统计
+  getPageView: '/overview/pageview',
 };

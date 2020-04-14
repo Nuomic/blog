@@ -3,12 +3,12 @@ import BasicLayout from '../components/BasicLayout';
 import { Card } from 'antd';
 import { Style } from 'react-imvc/component';
 export default ({ state }) => {
-  const { blogdesc } = state;
+  const { blogdesc = {} } = state;
   console.log('blogdesc', blogdesc);
   const BreadcrumbList = [{ name: '首页', href: '/home' }, { name: '关于我' }];
   const cardSetting = {
     size: 'small',
-    bordered: false
+    bordered: false,
   };
   return (
     <BasicLayout BreadcrumbList={BreadcrumbList}>
@@ -17,7 +17,7 @@ export default ({ state }) => {
         <p
           style={{
             lineHeight: 2,
-            whiteSpace: 'pre-wrap'
+            whiteSpace: 'pre-wrap',
           }}
         >
           {blogdesc.userDesc}
@@ -27,7 +27,7 @@ export default ({ state }) => {
         <p
           style={{
             lineHeight: 2,
-            whiteSpace: 'pre-wrap'
+            whiteSpace: 'pre-wrap',
           }}
         >
           {blogdesc.blogDesc}
@@ -39,7 +39,7 @@ export default ({ state }) => {
             width: 200,
             margin: '0 20px',
             display: 'inline-block',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           <img src={blogdesc.weChat} alt="" width="100%" />
@@ -50,7 +50,7 @@ export default ({ state }) => {
             width: 200,
             margin: '0 20px',
             display: 'inline-block',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           <img src={blogdesc.alipay} alt="" width="100%" />

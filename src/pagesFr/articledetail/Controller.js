@@ -6,15 +6,16 @@ import { message } from 'antd';
 export default class Home extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
+  pageName = 'articledetail';
   preload = {
     ...this.preload,
     markdown: '/css/markdown-preview.css',
-    codeStyle: '/css/markdown-code.css'
+    codeStyle: '/css/markdown-code.css',
   };
   async getInitialState(initialState) {
     return {
       ...initialState,
-      currentPath: this.location.pathname
+      currentPath: this.location.pathname,
     };
   }
   async componentWillCreate() {
@@ -25,17 +26,14 @@ export default class Home extends Controller {
     await this.handleGetCommentList();
     await this.getHitokoto();
   }
-  async componentDidFirstMount() {
-    // await super.componentDidFirstMount();
-  }
-  handleGetArticleDetail = async articleId => {
+  handleGetArticleDetail = async (articleId) => {
     await this.resHandler(
       () => this.getApi(api.getArticleDetail, { articleId }),
-      res => {
+      (res) => {
         console.log('res', res);
         this.handleChangeState(res);
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );
@@ -44,27 +42,27 @@ export default class Home extends Controller {
     await this.resHandler(
       () =>
         this.getApi(api.getCommentList, {
-          articleId: this.location.params.articleId
+          articleId: this.location.params.articleId,
         }),
-      res => {
+      (res) => {
         console.log('res', res);
         this.handleChangeState(res);
       },
-      err => {
+      (err) => {
         console.log('err', err);
       }
     );
   };
-  handleSaveCommit = async value => {
+  handleSaveCommit = async (value) => {
     console.log('value', value);
     await this.resHandler(
       () => this.post(api.saveComment, value),
-      res => {
+      (res) => {
         console.log('res', res);
         this.handleChangeState(res);
         this.handleGetCommentList();
       },
-      err => {
+      (err) => {
         message.error('保存失败');
       }
     );
@@ -73,11 +71,11 @@ export default class Home extends Controller {
   handleChangeLikeCount = async (value, callback) => {
     await this.resHandler(
       () => this.postApi(api.saveArticle, value),
-      res => {
+      (res) => {
         console.log('res', res);
         callback();
       },
-      res => {
+      (res) => {
         console.log('res', res);
       }
     );
@@ -85,11 +83,11 @@ export default class Home extends Controller {
   handleCommentLikeCount = async (value, callback) => {
     await this.resHandler(
       () => this.postApi(api.saveComment, value),
-      res => {
+      (res) => {
         console.log('res', res);
         callback();
       },
-      res => {
+      (res) => {
         console.log('res', res);
       }
     );
