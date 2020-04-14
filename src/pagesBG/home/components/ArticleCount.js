@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useModelState } from 'react-imvc/hook';
+import { Card } from 'antd';
 export default () => {
   const { g2plot, categoryList = [] } = useModelState();
   const { Ring } = g2plot;
@@ -17,7 +18,10 @@ export default () => {
         text: '文章栏目统计',
       },
       radius: 0.8,
-      // padding: 'auto',
+      padding: 'auto',
+      legend: {
+        position: 'bottom-center',
+      },
       data: categoryList,
       angleField: 'count',
       colorField: 'name',
@@ -25,5 +29,9 @@ export default () => {
     return bar.render();
   }, []);
 
-  return <div ref={container} />;
+  return (
+    <Card className="home-card">
+      <div ref={container} />
+    </Card>
+  );
 };

@@ -11,7 +11,7 @@ const { Content } = Layout;
 const withData = connect(({ state }) => {
   return {
     currentPath: state.location.pathname,
-    initCollapsed: state.initCollapsed
+    initCollapsed: state.initCollapsed,
   };
 });
 export default withData(
@@ -22,7 +22,7 @@ export default withData(
         Cookie.set('collapsed', false);
       setCollapsed(Cookie.get('collapsed') == 'false' ? false : true);
     };
-    const handleChangeCollapsed = collapsed => {
+    const handleChangeCollapsed = (collapsed) => {
       // console.log('collapsed', collapsed);
       Cookie.set('collapsed', collapsed);
       setCollapsed(Cookie.get('collapsed') == 'false' ? false : true);
@@ -33,7 +33,7 @@ export default withData(
         <Style name="antdPro" />
         <Style name="customize" />
         <Style name="commonBG" />
-        <Layout>
+        <Layout style={{ minWidth: 600 }}>
           <div
             className="position-fixed"
             style={{ paddingLeft: collapsed ? 80 : 200, transition: '0.2s' }}
@@ -47,7 +47,7 @@ export default withData(
           <Layout
             style={{
               marginLeft: collapsed ? 80 : 200,
-              transition: '0.2s'
+              transition: '0.2s',
             }}
           >
             <Sider

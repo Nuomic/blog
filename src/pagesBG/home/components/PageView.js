@@ -64,9 +64,9 @@ export default () => {
             `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
         },
       },
-      // legend: {
-      //   position: 'right-top',
-      // },
+      legend: {
+        position: 'right-top',
+      },
       seriesField: 'type',
       xAxis: {
         tickCount: 6,
@@ -78,11 +78,12 @@ export default () => {
             `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
         },
       },
-      meta: {
-        type: {
-          alias: '访问数',
+      animation: {
+        appear: {
+          animation: 'clipingWithData',
         },
       },
+      smooth: true,
     });
     return bar.render();
   }, []);

@@ -22,27 +22,13 @@ export default class extends Controller {
       let g2plot = await import('@antv/g2plot');
       this.handleChangeState({ g2plot });
     }
-    await this.getpageList();
-    await this.getArticleCount();
+    await this.getOverview();
   }
   // async componentDidFirstMount() {}
   //获取文章列表
-  getpageList = async () => {
+  getOverview = async () => {
     await this.resHandler(
-      () => this.getApi(api.getPageView),
-      (res) => {
-        console.log('res', res);
-        this.handleChangeState(res);
-      },
-      (res) => {
-        console.log('res', res);
-      }
-    );
-  };
-  //获取文章统计
-  getArticleCount = async () => {
-    await this.resHandler(
-      () => this.getApi(api.getArticleCount),
+      () => this.getApi(api.getOverview),
       (res) => {
         console.log('res', res);
         this.handleChangeState(res);

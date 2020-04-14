@@ -28,6 +28,7 @@
   border: none;
   box-shadow: 0 3px 8px #d5dadf;
   top: 0;
+  min-width: 400px;
 }
 .basic-breadcrumb {
   padding: 12px 0;
@@ -38,6 +39,7 @@
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 100;
 }
 .basic-sider ::-webkit-scrollbar {
   width: 0 !important;
@@ -71,5 +73,11 @@
   font-weight: 300;
 }
 .friend-item-card .ant-card-body {
+  padding: 0;
+}
+.home-card {
+  margin-bottom: 12px;
+}
+.home-card .ant-card-body {
   padding: 0;
 }
