@@ -9,7 +9,7 @@ const { Item } = Form;
 const { confirm } = Modal;
 const { TabPane } = Tabs;
 export default ({ state, handlers }) => {
-  const { commentList, userInfo } = state;
+  const { commentList = [], userInfo } = state;
   console.log('state', state);
   console.log('userInfo+++++++++', userInfo);
   const { handleDeleteComment, handleSaveComment } = handlers;
@@ -17,20 +17,20 @@ export default ({ state, handlers }) => {
   const articleStatus = [
     { tabName: '评论管理', key: '0' },
     { tabName: '留言管理', key: '1' },
-    { tabName: '我的回复', key: '2' }
+    { tabName: '我的回复', key: '2' },
   ];
   const [comForm, setComForm] = useState({});
-  const commentType = type =>
+  const commentType = (type) =>
     commentList && type === '0'
-      ? commentList.filter(item => !!item.articleInfo.id && !item.isMine)
+      ? commentList.filter((item) => !!item.articleInfo.id && !item.isMine)
       : type === '1'
-      ? commentList.filter(item => !item.articleInfo.id && !item.isMine)
+      ? commentList.filter((item) => !item.articleInfo.id && !item.isMine)
       : type === '2'
-      ? commentList.filter(item => item.isMine)
+      ? commentList.filter((item) => item.isMine)
       : [];
   const CommentForm = Form.create()(({ form }) => {
     const { getFieldDecorator, validateFields, getFieldValue } = form;
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
       e.preventDefault();
       validateFields((err, values) => {
         if (!err) {
@@ -38,7 +38,7 @@ export default ({ state, handlers }) => {
             ...values,
             ...comForm,
             ...userInfo,
-            isMine: true
+            isMine: true,
           });
         }
       });
@@ -57,7 +57,7 @@ export default ({ state, handlers }) => {
               style={{
                 width: '100%',
                 position: 'relative',
-                top: 5
+                top: 5,
               }}
               suffix={
                 <Button
@@ -76,34 +76,34 @@ export default ({ state, handlers }) => {
     );
   });
   //删除提示框
-  const showConfirm = id => {
+  const showConfirm = (id) => {
     confirm({
       title: '是否要删除这条评论',
       onOk: async () => {
         await handleDeleteComment(id);
       },
-      onCancel() {}
+      onCancel() {},
     });
   };
   return (
     <BasicLayout breadcrumbList={bdList}>
       <StickyTabs>
         {articleStatus &&
-          articleStatus.map(item => (
+          articleStatus.map((item) => (
             <TabPane
               tab={item.tabName + ` (${commentType(item.key).length})`}
               key={item.key}
             >
               <List
                 pagination={{
-                  onChange: page => {
+                  onChange: (page) => {
                     console.log(page);
                   },
-                  pageSize: 10
+                  pageSize: 10,
                 }}
                 itemLayout="horizontal"
                 dataSource={commentType(item.key)}
-                renderItem={item => (
+                renderItem={(item) => (
                   <List.Item
                     key={item.id}
                     actions={[
@@ -112,7 +112,7 @@ export default ({ state, handlers }) => {
                         onClick={() =>
                           setComForm({
                             parentId: item.id,
-                            articleId: item.articleInfo.id
+                            articleId: item.articleInfo.id,
                           })
                         }
                       >
@@ -124,7 +124,7 @@ export default ({ state, handlers }) => {
                         onClick={showConfirm.bind(this, item.id)}
                       >
                         删除
-                      </Button>
+                      </Button>,
                     ]}
                   >
                     <div style={{ width: '100%' }}>

@@ -7,7 +7,8 @@ const { Header } = Layout;
 // export default withData(Loading)
 export default ({ collapsed, handleToggle, breadcrumbList }) => {
   const { handleLogout } = useCtrl();
-  const { userInfo = {} } = useModelState();
+  const { userInfo } = useModelState();
+
   return (
     <Header className="basic-header">
       <Icon

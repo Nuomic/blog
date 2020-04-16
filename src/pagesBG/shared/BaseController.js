@@ -10,7 +10,7 @@ export default class extends Controller {
     antd: '/css/antd.min.css',
     antdPro: '/css/ant-design-pro.css',
     customize: '/css/customize.css',
-    commonBG: '/css/commonBG.css'
+    commonBG: '/css/commonBG.css',
   };
 
   /**
@@ -25,7 +25,7 @@ export default class extends Controller {
       ...initialState,
       currentPath: location.pathname,
       initCollapsed: Cookie.get('collapsed') == 'false' ? false : true,
-      userInfo
+      userInfo: userInfo || {},
     };
   }
 
@@ -44,7 +44,7 @@ export default class extends Controller {
       } else {
         await this.resHandler(
           () => this.getApi(api.userCheck),
-          res => {
+          (res) => {
             context.userInfo = res.userInfo;
             userInfo = res.userInfo;
           },
@@ -57,21 +57,23 @@ export default class extends Controller {
     } catch (_) {
       console.log('_', _);
     }
+
     return userInfo;
   }
   handleLogout = async () => {
     try {
       await this.resHandler(
         () => this.postApi(api.userLogout),
-        res => {
+        (res) => {
           console.log('object', res);
         },
-        err => {
+        (err) => {
           message.error(err.customerErrorMessage);
         }
       );
     } catch (_) {
       console.log('_', _);
+      this.redirect('/login');
     }
   };
   /**
@@ -80,7 +82,7 @@ export default class extends Controller {
   getFinalActions(actions) {
     return {
       ...sharedActions,
-      ...actions
+      ...actions,
     };
   }
 
@@ -90,7 +92,7 @@ export default class extends Controller {
       method: 'POST',
       credentials: 'include',
       ...options,
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     };
     return this.fetch(url, options);
   }
@@ -106,7 +108,7 @@ export default class extends Controller {
       method: 'POST',
       credentials: 'include',
       ...option,
-      body: data
+      body: data,
     };
     return fetch(url, options);
   }
@@ -114,7 +116,7 @@ export default class extends Controller {
     options = {
       method: 'GET',
       credentials: 'include',
-      ...options
+      ...options,
     };
 
     return this.fetch(

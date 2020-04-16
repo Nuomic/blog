@@ -9,9 +9,9 @@ const { TabPane } = Tabs;
 export default ({ state, handlers }) => {
   const bdList = [
     { name: '首页', href: '/admin' },
-    { name: '文章管理', href: '/articlemng' }
+    { name: '文章管理', href: '/articlemng' },
   ];
-  const { articleList } = state;
+  const { articleList = [] } = state;
   console.log('articleList', articleList);
   const { handleDelete, handleChangeArticleStatus } = handlers;
   const articleStatus = [
@@ -19,7 +19,7 @@ export default ({ state, handlers }) => {
     { tabName: '公开', key: '1' },
     { tabName: '私密', key: '2' },
     { tabName: '草稿箱', key: '3' },
-    { tabName: '回收站', key: '4' }
+    { tabName: '回收站', key: '4' },
   ];
 
   const IconText = ({ type, text }) => (
@@ -29,9 +29,9 @@ export default ({ state, handlers }) => {
     </span>
   );
   // 文章分类处理
-  const ArticleList = status =>
+  const ArticleList = (status) =>
     articleList &&
-    articleList.filter(item => (status == 0 ? true : item.status == status));
+    articleList.filter((item) => (status == 0 ? true : item.status == status));
 
   //删除提示框
   function showConfirm(id, status) {
@@ -44,10 +44,10 @@ export default ({ state, handlers }) => {
       onOk: async () => {
         await handleDelete(id, status);
       },
-      onCancel() {}
+      onCancel() {},
     });
   }
-  const actions = item => {
+  const actions = (item) => {
     const View = (
       <Link to={`/articledetail/${item.id}`} target="blank">
         查看
@@ -92,7 +92,7 @@ export default ({ state, handlers }) => {
         }
       >
         {articleStatus &&
-          articleStatus.map(item => (
+          articleStatus.map((item) => (
             <TabPane
               tab={
                 item.tabName +
@@ -102,14 +102,14 @@ export default ({ state, handlers }) => {
             >
               <List
                 pagination={{
-                  onChange: page => {
+                  onChange: (page) => {
                     console.log(page);
                   },
-                  pageSize: 10
+                  pageSize: 10,
                 }}
                 itemLayout="horizontal"
                 dataSource={ArticleList(item.key)}
-                renderItem={item => (
+                renderItem={(item) => (
                   <List.Item key={item.id} actions={actions(item)}>
                     <List.Item.Meta
                       title={
