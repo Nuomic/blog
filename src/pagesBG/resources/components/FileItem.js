@@ -1,37 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Menu, Card, Dropdown, Typography, Icon } from 'antd';
+import { useCtrl } from 'react-imvc/hook';
 const { Paragraph } = Typography;
 export default ({ item }) => {
   const menuConfig = [
     {
-      key: 1,
       icon: 'edit',
       title: '重命名',
       color: 'green',
     },
     {
-      key: 2,
       icon: 'download',
       title: '下载',
       color: 'blue',
     },
     {
-      key: 3,
+      icon: 'eye',
+      title: '预览',
+    },
+    {
       icon: 'delete',
       title: '删除',
       color: 'red',
     },
-    {
-      key: 4,
-      icon: 'eye',
-      title: '预览',
-      // color: 'green',
-    },
   ];
+  if (item.isTrash)
+    menuConfig.splice(3, 0, { icon: 'undo', title: '恢复', color: 'purple' });
+  const { handleDeleteResource, handleChangeResourceStatus } = useCtrl();
+  const handleAction = (key) => {
+    console.log('key', key);
+    switch (key) {
+      // case 0:
+      //   handleChangeResourceStatus(item.id, !item.isTrash);
+      //   break;
+      // case 1:
+      //   handleDeleteResource(item.id);
+      // case 2:
+      //   handleChangeResourceStatus(item.id, !item.isTrash);
+      //   break;
+      case 3:
+        handleChangeResourceStatus({
+          resourceId: item.id,
+          isTrash: !item.isTrash,
+        });
+        break;
+      case 4:
+        handleDeleteResource(item.id);
+      default:
+        break;
+    }
+  };
+
   const menu = (
     <Menu>
-      {menuConfig.map((item) => (
-        <Menu.Item key={item.key} style={{ color: item.color }}>
+      {menuConfig.map((item, index) => (
+        <Menu.Item
+          key={index}
+          style={{ color: item.color }}
+          onClick={handleAction.bind(this, index)}
+        >
           <Icon type={item.icon} />
           {item.title}
         </Menu.Item>
@@ -52,7 +79,7 @@ export default ({ item }) => {
               width="100%"
             />
           </div>
-          <Paragraph ellipsis={{ rows: 3 }} /* editable */>
+          <Paragraph ellipsis={{ rows: 3 }} editable>
             {item.originalname}
           </Paragraph>
         </Card>

@@ -2,7 +2,7 @@ import React from 'react';
 import BasicLayout from '../components/BasicLayout';
 import StickyTabs from '../components/StickyTabs';
 import { useModelState } from 'react-imvc/hook';
-import { Tabs, Modal, Menu, Dropdown, Card } from 'antd';
+import { Tabs, Modal, Menu, Dropdown, Card, Icon } from 'antd';
 import FileUpload from './components/FileUpload';
 import FileItem from './components/FileItem';
 const { confirm } = Modal;
@@ -11,6 +11,7 @@ export default () => {
   const { resourceList = [] } = useModelState();
   const bdList = [{ name: '首页', href: '/admin' }, { name: '资源管理' }];
   console.log('resourceList', resourceList);
+  //配置状态
   const resourceStatus = [
     { tabName: '全部', key: '0' },
     { tabName: '图片', key: 'image' },
@@ -22,9 +23,9 @@ export default () => {
     { tabName: '上传资源', key: 'upload' },
   ];
   const filterData = (key) => {
-    if (key == '0') return resourceList;
+    if (key == '0') return resourceList.filter((item) => !item.isTrash);
     if (key == '-1') return resourceList.filter((item) => item.isTrash);
-    return resourceList.filter((item) => item.type == key);
+    return resourceList.filter((item) => item.type == key && !item.isTrash);
   };
 
   return (
@@ -34,10 +35,19 @@ export default () => {
           resourceStatus.map((item) => (
             <TabPane
               tab={
-                item.tabName +
-                ((item.key !== 'upload' &&
-                  ` (${filterData(item.key).length})`) ||
-                  '')
+                item.key == '-1' ? (
+                  <div style={{ color: 'red' }}>
+                    <Icon type="delete" />
+                    {item.tabName + ` (${filterData(item.key).length})`}
+                  </div>
+                ) : item.key !== 'upload' ? (
+                  item.tabName + ` (${filterData(item.key).length})`
+                ) : (
+                  <div style={{ color: 'green' }}>
+                    <Icon type="upload" />
+                    {item.tabName}
+                  </div>
+                )
               }
               key={item.key}
             >

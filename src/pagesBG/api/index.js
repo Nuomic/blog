@@ -46,4 +46,6 @@ export default {
 
   //文件操作
   getResource: '/resource/list',
+  deleteResource: '/resource/delete',
+  changeResourceStatus: '/resource/changeStatus',
 };
