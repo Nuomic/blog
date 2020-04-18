@@ -4,8 +4,6 @@ export default {
   deleteArticle: '/article/delete',
   saveArticle: '/article/save',
   changeArticleStatus: '/article/changeStatus',
-  changeArticleCategory:
-    ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
 
   /* 栏目 */
   getCategory: '/category/list',
@@ -45,4 +43,7 @@ export default {
 
   //站点 统计
   getOverview: '/overview',
+
+  //文件操作
+  getResource: '/resource/list',
 };

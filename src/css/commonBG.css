@@ -81,3 +81,18 @@
 .home-card .ant-card-body {
   padding: 0;
 }
+.inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
+.file-card {
+  word-break: break-all;
+  width: 85px;
+  /* height: 140px; */
+  margin: 0 10px;
+  border: none;
+  box-shadow: none;
+}
+.file-card:hover {
+  background-color: rgba(204, 232, 255);
+}
