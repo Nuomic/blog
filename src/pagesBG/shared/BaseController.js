@@ -34,9 +34,6 @@ export default class extends Controller {
     // 获取登录用户信息，将用户信息缓存在 context 里，所有页面都可以共享访问
     console.log('context', context);
     let userInfo = null;
-    // const TOKEN = Cookie.get('TOKEN');
-    // console.log('TOKEN', TOKEN);
-    // if (!TOKEN) delete context.userInfo;
     try {
       if (context.hasOwnProperty('userInfo')) {
         userInfo = context.userInfo;
@@ -65,7 +62,7 @@ export default class extends Controller {
       await this.resHandler(
         () => this.postApi(api.userLogout),
         (res) => {
-          console.log('object', res);
+          console.log('this.context', res);
         },
         (err) => {
           message.error(err.customerErrorMessage);
@@ -139,6 +136,8 @@ export default class extends Controller {
    */
   async resHandler(func, success, fail, options = {}) {
     let { limit = 1, name = '' } = options;
+    console.log('this.context', this.context);
+    console.log('this.contextlocation.pathname', this.location.pathname);
     if (limit < 1) {
       // this.recordLog({...options,errcode:3001},{ctripUid});
       message.error(`网络出错，请再试试吧。`);
@@ -146,6 +145,7 @@ export default class extends Controller {
     }
     try {
       let res = await func();
+
       const { ResponseStatus, returnStatus, ...data } = res;
       if (ResponseStatus.Ack == 'Success') {
         if (returnStatus.isSuccess === true) {
@@ -156,13 +156,10 @@ export default class extends Controller {
         }
       } else {
         if (res.ResponseStatus.ErrorCode == '401') {
+          delete this.context.userInfo;
           this.redirect('/login');
           return;
         }
-        // if (res.ResponseStatus.Errors[0].ErrorCode == '401') {
-        //   redirect(this.context, '/v2/authorized/403');
-        //   return;
-        // }
         message.error(`网络出错，请再试试吧。`);
       }
     } catch (e) {
