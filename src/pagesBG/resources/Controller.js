@@ -52,17 +52,40 @@ export default class Home extends Controller {
       }
     );
   };
+
   handleDownload = async (resourceId) => {
-    await this.resHandler(
-      () => this.getApi(api.download, { resourceId }),
-      (res) => {
-        // this.handleGetResource();
-        message.success('操作成功！');
-        console.log('res');
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
+    try {
+      const res = await fetch(url, {
+        headers,
+      });
+      const blob = await res.blob();
+      // 获取后端headers里面的文件名
+      const filename = decodeURI(
+        res.headers.get('Content-Disposition').split('filename=')[1]
+      );
+      // download
+      const a = document.createElement('a');
+      a.download = filename;
+      a.style.display = 'none';
+      a.href = window.URL.createObjectURL(blob);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (err) {
+      console.error(err);
+      // toast error message
+    }
+    //   console.log('ob==============ject', resourceId);
+    //   await this.resHandler(
+    //     () => this.getApi(api.download, { resourceId }, {}),
+    //     (res) => {
+    //       // this.handleGetResource();
+    //       message.success('操作成功！');
+    //       console.log('res');
+    //     },
+    //     (err) => {
+    //       console.log('err', err);
+    //     }
+    //   );
   };
 }

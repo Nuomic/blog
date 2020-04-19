@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { Menu, Card, Dropdown, Typography, Icon, Modal, Input } from 'antd';
 import moment from 'moment';
+import { download } from '../../api';
 const { confirm } = Modal;
 
 import { useCtrl } from 'react-imvc/hook';
 const { Paragraph } = Typography;
 export default ({ item }) => {
-  // const [newName, setNewName] = useState();
+  console.log('iteem', item.id);
+  const {
+    handleDeleteResource,
+    handleChangeResourceStatus,
+    handleDownload,
+  } = useCtrl();
+
   var newName;
-  console.log('newName', newName);
+  //右键菜单
   const menuConfig = [
     {
       icon: 'edit',
@@ -18,15 +25,11 @@ export default ({ item }) => {
     {
       icon: 'download',
       title: (
-        <a href={item.path} download /* ={item.originalname} */>
-          下载
+        <a href={item.path} download={item.originalname} target="_blank">
+          查看/下载
         </a>
       ),
       color: 'blue',
-    },
-    {
-      icon: 'eye',
-      title: '预览',
     },
     {
       icon: 'delete',
@@ -34,9 +37,10 @@ export default ({ item }) => {
       color: 'red',
     },
   ];
+  //为回收时 增加还原按钮
   if (item.isTrash)
-    menuConfig.splice(3, 0, { icon: 'undo', title: '还原', color: 'purple' });
-  const { handleDeleteResource, handleChangeResourceStatus } = useCtrl();
+    menuConfig.splice(2, 0, { icon: 'undo', title: '还原', color: 'purple' });
+
   const handleAction = (key) => {
     console.log('key', key);
 
@@ -61,19 +65,14 @@ export default ({ item }) => {
           onCancel() {},
         });
         break;
-      // case 1:
-      //   handleDeleteResource(item.id);
-      // case 2:
-      //   handleChangeResourceStatus(item.id, !item.isTrash);
-      //   break;
-      case 3:
+      case 2:
         handleChangeResourceStatus({
           resourceId: item.id,
           isTrash: !item.isTrash,
         });
 
         break;
-      case 4:
+      case 3:
         confirm({
           title: '是否删除' + item.originalname,
           content: '一经删除，该资源无法找回',
