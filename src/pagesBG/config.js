@@ -2,36 +2,41 @@ export const menuList = [
   {
     key: 'home',
     name: '站点总览',
-    icon: 'home'
+    icon: 'home',
   },
   {
     key: 'articlemng',
     name: '文章管理',
-    icon: 'read'
+    icon: 'read',
   },
   {
     key: 'category',
     name: '分类管理',
-    icon: 'unordered-list'
+    icon: 'unordered-list',
   },
   {
     key: 'resources',
     name: '资源管理',
-    icon: 'folder-open'
+    icon: 'folder-open',
+  },
+  {
+    key: 'portfolio',
+    name: '作品管理',
+    icon: 'gift',
   },
   {
     key: 'msgmng',
     name: '留言管理',
-    icon: 'message'
+    icon: 'message',
   },
   {
     key: 'friend',
     name: '友情链接',
-    icon: 'heart'
+    icon: 'heart',
   },
   {
     key: 'user',
     name: '个人中心',
-    icon: 'user'
-  }
+    icon: 'user',
+  },
 ];

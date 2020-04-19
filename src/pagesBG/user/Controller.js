@@ -38,6 +38,20 @@ export default class extends Controller {
       }
     );
   };
+  handleChangUserInfo = async (value) => {
+    await this.resHandler(
+      () => this.postApi(api.changeUserInfo, value),
+      (res) => {
+        console.log('res', res);
+        message.success(res.msg);
+      },
+      (err) => {
+        message.error(err.customerErrorMessage);
+        // console.log('err', err);
+      }
+    );
+  };
+
   handleChangePwd = async (oldPwd, newPwd) => {
     const { userInfo = {} } = this.store.getState();
     const value = {
@@ -45,20 +59,9 @@ export default class extends Controller {
       oldPassword: md5(oldPwd),
       newPassword: md5(newPwd),
     };
-    console.log('value', value);
-    await this.resHandler(
-      () => this.postApi(api.changePwd, value),
-      (res) => {
-        console.log('res', res);
-        message.success(res.msg);
-        setTimeout(() => {
-          this.handleLogout();
-        }, 1000);
-      },
-      (err) => {
-        message.error(err.customerErrorMessage);
-        // console.log('err', err);
-      }
-    );
+    await handleChangUserInfo(value);
+    setTimeout(() => {
+      this.handleLogout();
+    }, 1000);
   };
 }

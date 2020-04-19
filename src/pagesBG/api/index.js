@@ -23,7 +23,7 @@ export default {
   userLogout: '/user/logout',
   userCheck: '/user/check',
   userRegister: '/user/register',
-  changePwd: '/user/edit',
+  changeUserInfo: '/user/edit',
 
   // 其他设置
   getSetting: '/setting/get',

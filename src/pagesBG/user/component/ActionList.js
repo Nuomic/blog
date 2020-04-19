@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Col, Row } from 'antd';
 import BlogDesc from './BlogDesc';
 import Password from './Password';
+import UserInfo from './UserInfo';
 export default ({ addTabs }) => {
   const actionList = [
     {
@@ -18,12 +19,13 @@ export default ({ addTabs }) => {
         'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
       content: Password,
     },
-    // {
-    //   key: '3',
-    //   name: '主题配色',
-    //   imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-    //   content: BlogDesc,
-    // },
+    {
+      key: '3',
+      name: '信息修改',
+      imgUrl:
+        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
+      content: UserInfo,
+    },
     // {
     //   key: '4',
     //   name: '关于我',
