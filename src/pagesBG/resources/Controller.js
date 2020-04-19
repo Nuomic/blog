@@ -42,10 +42,22 @@ export default class Home extends Controller {
   handleChangeResourceStatus = async (args) => {
     await this.resHandler(
       () => this.postApi(api.changeResourceStatus, args),
-
       (res) => {
         this.handleGetResource();
-        message.success('删除成功');
+        message.success('操作成功！');
+        console.log('res');
+      },
+      (err) => {
+        console.log('err', err);
+      }
+    );
+  };
+  handleDownload = async (resourceId) => {
+    await this.resHandler(
+      () => this.getApi(api.download, { resourceId }),
+      (res) => {
+        // this.handleGetResource();
+        message.success('操作成功！');
         console.log('res');
       },
       (err) => {

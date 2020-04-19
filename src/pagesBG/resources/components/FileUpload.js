@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import { Upload, Icon, message, Select, Row, Col, Spin } from 'antd';
+import {
+  Upload,
+  Icon,
+  message,
+  Select,
+  Row,
+  Col,
+  Spin,
+  notification,
+} from 'antd';
 import api from '../../api';
 import { useModelState, useCtrl } from 'react-imvc/hook';
 const { Dragger } = Upload;
 
 export default () => {
   const { restapi } = useModelState();
-  const { handleGetResource } = useCtrl();
+  const { handleGetResource, handleDeleteResource, handleDownload } = useCtrl();
   const [loading, setLoading] = useState(false);
   console.log('loading', loading);
   const props = {
@@ -38,21 +47,35 @@ export default () => {
       console.log('info', info);
       console.log('status', status);
       setLoading(true);
-      if (response) {
-        const { status } = response;
-        if (status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully.`);
-          handleGetResource();
-        } else if (status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-        setLoading(false);
+      if (status === 'done') {
+        notification.success({
+          message: '上传成功',
+          description: `${info.file.name} 文件上传成功！.`,
+        });
+        handleGetResource();
+      } else if (status === 'error') {
+        notification.error({
+          message: '上传失败',
+          description: `${info.file.name} 文件上传失败！.`,
+        });
+      } else if (status === 'removed') {
+        console.log('file.response.id', response.id);
+        handleDeleteResource(response.id);
       }
+      setLoading(false);
+    },
+    previewFile: (file) => {
+      console.log('file', file);
+    },
+    showUploadList: {
+      showPreviewIcon: false,
+      showRemoveIcon: true,
+      showDownloadIcon: false,
     },
   };
   return (
     <Spin spinning={loading}>
-      <Row type="flex" justify="center" align="top">
+      <Row type="flex" justify="center" align="top" className="upload">
         <Col xs={24} lg={12}>
           <Dragger {...props} style={{ minHeight: 300 }}>
             <p className="ant-upload-drag-icon">

@@ -48,4 +48,5 @@ export default {
   getResource: '/resource/list',
   deleteResource: '/resource/delete',
   changeResourceStatus: '/resource/changeStatus',
+  download: '/resource/download',
 };

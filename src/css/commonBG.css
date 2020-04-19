@@ -92,7 +92,12 @@
   margin: 0 10px;
   border: none;
   box-shadow: none;
+  text-align: center;
 }
 .file-card:hover {
   background-color: rgba(204, 232, 255);
+}
+.upload .ant-upload-list-item-card-actions {
+  position: absolute;
+  right: 5px;
 }

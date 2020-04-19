@@ -1,14 +1,15 @@
 import React from 'react';
 import BasicLayout from '../components/BasicLayout';
 import StickyTabs from '../components/StickyTabs';
-import { useModelState } from 'react-imvc/hook';
-import { Tabs, Modal, Menu, Dropdown, Card, Icon } from 'antd';
+import { useModelState, useCtrl } from 'react-imvc/hook';
+import { Tabs, Modal, Icon, Button } from 'antd';
 import FileUpload from './components/FileUpload';
 import FileItem from './components/FileItem';
-const { confirm } = Modal;
 const { TabPane } = Tabs;
+const { confirm } = Modal;
 export default () => {
   const { resourceList = [] } = useModelState();
+  const { handleDeleteResource } = useCtrl();
   const bdList = [{ name: '首页', href: '/admin' }, { name: '资源管理' }];
   console.log('resourceList', resourceList);
   //配置状态
@@ -51,6 +52,31 @@ export default () => {
               }
               key={item.key}
             >
+              {item.key == '-1' && (
+                <div style={{ marginBottom: 10 }}>
+                  <Button
+                    disabled={!filterData(item.key).length}
+                    style={{ color: 'red' }}
+                    onClick={() =>
+                      confirm({
+                        title: '是否清空回收站',
+                        okType: 'danger',
+                        content: '一经删除，该资源无法找回',
+                        onOk: async () => {
+                          await handleDeleteResource(
+                            filterData(item.key)
+                              .map((item) => item.id)
+                              .join(',')
+                          );
+                        },
+                        onCancel() {},
+                      })
+                    }
+                  >
+                    <Icon type="delete" /> 清空回收站
+                  </Button>
+                </div>
+              )}
               {(item.key == 'upload' && <FileUpload />) ||
                 filterData(item.key).map((item) => (
                   <FileItem item={item} key={item.id} />
