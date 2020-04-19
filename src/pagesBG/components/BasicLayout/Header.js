@@ -36,6 +36,7 @@ export default ({ collapsed, handleToggle, breadcrumbList }) => {
         </span>
 
         <Avatar src={userInfo.avatar} />
+        <Button type="link">{userInfo.nickname || userInfo.username}</Button>
         <Button type="link" onClick={handleLogout}>
           退出登录
         </Button>

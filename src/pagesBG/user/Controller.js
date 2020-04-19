@@ -44,6 +44,8 @@ export default class extends Controller {
       (res) => {
         console.log('res', res);
         message.success(res.msg);
+        this.context.userInfo = res.userInfo;
+        this.handleChangeState({ userInfo: res.userInfo });
       },
       (err) => {
         message.error(err.customerErrorMessage);
@@ -59,7 +61,7 @@ export default class extends Controller {
       oldPassword: md5(oldPwd),
       newPassword: md5(newPwd),
     };
-    await handleChangUserInfo(value);
+    await this.handleChangUserInfo(value);
     setTimeout(() => {
       this.handleLogout();
     }, 1000);
