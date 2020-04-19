@@ -3,58 +3,56 @@ import React, { useState } from 'react';
 import api from '../../api';
 import { useModelState } from 'react-imvc/hook';
 export default ({ url, form }) => {
-  const [state, setState] = useState({ loading: false });
+  console.log('url', url);
+  const [loading, setLoading] = useState(false);
   const { getFieldDecorator, setFieldsValue, getFieldValue } = form;
   // getFieldDecorator('avatar');
   const { restapi } = useModelState();
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-  };
-  const beforeUpload = file => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
-    }
-    return isJpgOrPng && isLt2M;
-  };
-  const handleChange = info => {
-    if (info.file.status === 'uploading') {
-      setState({ loading: true });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl => {
-        setState({
-          loading: false
+  const props = {
+    accept: 'image/*',
+    name: 'file',
+    data: (file) => {
+      return { folder: 'image' };
+    },
+    action: restapi + api.uploadFile,
+    onChange(info) {
+      const { status, response } = info.file;
+      console.log('info', info);
+      console.log('status', status);
+      setLoading(true);
+      if (status === 'done') {
+        notification.success({
+          message: '上传成功',
+          description: `${info.file.name} 文件上传成功！.`,
         });
-        setFieldsValue({ avatar: imageUrl });
-      });
-    }
+      } else if (status === 'error') {
+        notification.error({
+          message: '上传失败',
+          description: `${info.file.name} 文件上传失败！.`,
+        });
+      }
+      setLoading(false);
+    },
+
+    showUploadList: {
+      showPreviewIcon: false,
+      showRemoveIcon: true,
+      showDownloadIcon: false,
+    },
   };
   const uploadButton = (
     <div>
-      <Icon type={state.loading ? 'loading' : 'plus'} />
+      <Icon type={loading ? 'loading' : 'plus'} />
       <div className="ant-upload-text">Upload</div>
     </div>
   );
 
   return (
     <Upload
-      name="avatar"
+      {...props}
       listType="picture-card"
       className="avatar-uploader"
-      showUploadList={false}
-      action={restapi + api.uploadFile}
-      // beforeUpload={beforeUpload}
-      // onChange={handleChange}
-      // fileList={getFieldValue('avatar')}
+      fileList={getFieldValue('avatar')}
     >
       {getFieldValue('avatar') ? (
         <img

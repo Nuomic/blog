@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, Modal, Button, Input } from 'antd';
 import { useCtrl, useModelState } from 'react-imvc/hook';
-import Upload from './Upload';
 const { Item } = Form;
 
 export default Form.create()(
@@ -10,10 +9,10 @@ export default Form.create()(
     const { categoryList } = useModelState();
     const { handleSaveCategory } = useCtrl();
     const category =
-      (categoryList && categoryList.find(item => item.id == categoryId)) || {};
+      (categoryList && categoryList.find((item) => item.id == categoryId)) ||
+      {};
     const { getFieldDecorator, validateFields, resetFields } = form;
-    getFieldDecorator('avatar', { initialValue: category.avatar });
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
       validateFields(async (err, fieldsValue) => {
         e.preventDefault();
         if (err) return;
@@ -43,9 +42,13 @@ export default Form.create()(
               <Input />
             )}
           </Item>
+
           <Item label="栏目配图">
-            <Upload form={form} url={category.avatar}></Upload>
+            {getFieldDecorator('avatar', { initialValue: category.avatar })(
+              <Input />
+            )}
           </Item>
+          {/* <Upload form={form} url={category.avatar}></Upload> */}
         </Form>
       </Modal>
     );

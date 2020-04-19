@@ -45,6 +45,7 @@ export default {
   getOverview: '/overview',
 
   //文件操作
+  uploadFile: '/resource/save',
   getResource: '/resource/list',
   deleteResource: '/resource/delete',
   changeResourceStatus: '/resource/changeStatus',
