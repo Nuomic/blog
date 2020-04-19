@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
-import { Menu, Card, Dropdown, Typography, Icon, Modal, Input } from 'antd';
+import {
+  Menu,
+  Card,
+  Dropdown,
+  Typography,
+  Icon,
+  Modal,
+  Input,
+  message,
+} from 'antd';
 import moment from 'moment';
-import { download } from '../../api';
+import copy from 'copy-to-clipboard';
 const { confirm } = Modal;
 
 import { useCtrl } from 'react-imvc/hook';
@@ -30,6 +39,19 @@ export default ({ item }) => {
         </a>
       ),
       color: 'blue',
+    },
+    {
+      icon: 'copy',
+      title: (
+        <span
+          onClick={() => {
+            copy(item.path);
+          }}
+        >
+          复制文件连接
+        </span>
+      ),
+      // color: 'green',
     },
     {
       icon: 'delete',
@@ -65,14 +87,14 @@ export default ({ item }) => {
           onCancel() {},
         });
         break;
-      case 2:
+      case 3:
         handleChangeResourceStatus({
           resourceId: item.id,
           isTrash: !item.isTrash,
         });
 
         break;
-      case 3:
+      case 4:
         confirm({
           title: '是否删除' + item.originalname,
           content: '一经删除，该资源无法找回',
