@@ -72,7 +72,8 @@ function (_Controller) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.resHandler(function () {
+              _context.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
                 return _this.postApi(_api["default"].userLogin, info);
               }, function (res) {
                 if (res.success) {
@@ -86,11 +87,33 @@ function (_Controller) {
                 }
               }, function (err) {
                 console.log('err', err);
-              });
+              }));
 
-            case 1:
+            case 2:
             case "end":
               return _context.stop();
+          }
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleGetCaptcha", function _callee2() {
+      return regeneratorRuntime.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.getApi(_api["default"].getCaptcha);
+              }, function (res) {
+                _this.handleChangeState(res);
+              }, function (err) {
+                console.log('err', err);
+              }));
+
+            case 2:
+            case "end":
+              return _context2.stop();
           }
         }
       });
@@ -102,17 +125,17 @@ function (_Controller) {
   _createClass(Home, [{
     key: "getInitialState",
     value: function getInitialState(initialState) {
-      return regeneratorRuntime.async(function getInitialState$(_context2) {
+      return regeneratorRuntime.async(function getInitialState$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              return _context2.abrupt("return", _objectSpread({}, initialState, {
+              return _context3.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: this.location.pathname
               }));
 
             case 1:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
       }, null, this);
@@ -120,25 +143,29 @@ function (_Controller) {
   }, {
     key: "componentWillCreate",
     value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context3) {
+      return regeneratorRuntime.async(function componentWillCreate$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
+              _context4.next = 2;
+              return regeneratorRuntime.awrap(this.handleGetCaptcha());
+
+            case 2:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      });
+      }, null, this);
     }
   }, {
     key: "componentDidFirstMount",
     value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context4) {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
       });

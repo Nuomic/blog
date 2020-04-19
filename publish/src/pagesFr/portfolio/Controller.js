@@ -55,6 +55,8 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "View", _View["default"]);
 
+    _defineProperty(_assertThisInitialized(_this), "pageName", 'portfolio');
+
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
 
     return _this;

@@ -26,6 +26,9 @@ var _default = function _default(_ref) {
   var _useCtrl = (0, _hook.useCtrl)(),
       handleLogout = _useCtrl.handleLogout;
 
+  var _useModelState = (0, _hook.useModelState)(),
+      userInfo = _useModelState.userInfo;
+
   return _react["default"].createElement(Header, {
     className: "basic-header"
   }, _react["default"].createElement(_antd.Icon, {
@@ -65,7 +68,9 @@ var _default = function _default(_ref) {
     style: {
       fontSize: 30
     }
-  }))), _react["default"].createElement(_antd.Avatar, null), _react["default"].createElement(_antd.Button, {
+  }))), _react["default"].createElement(_antd.Avatar, {
+    src: userInfo.avatar
+  }), _react["default"].createElement(_antd.Button, {
     type: "link",
     onClick: handleLogout
   }, "\u9000\u51FA\u767B\u5F55")));

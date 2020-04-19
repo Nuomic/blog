@@ -50,7 +50,8 @@ var TabPane = _antd.Tabs.TabPane;
 var _default = function _default(_ref) {
   var state = _ref.state,
       handlers = _ref.handlers;
-  var commentList = state.commentList,
+  var _state$commentList = state.commentList,
+      commentList = _state$commentList === void 0 ? [] : _state$commentList,
       userInfo = state.userInfo;
   console.log('state', state);
   console.log('userInfo+++++++++', userInfo);

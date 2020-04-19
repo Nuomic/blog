@@ -61,6 +61,8 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "View", _View["default"]);
 
+    _defineProperty(_assertThisInitialized(_this), "pageName", 'msgboard');
+
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
 
     _defineProperty(_assertThisInitialized(_this), "handleGetCommentList", function _callee() {
@@ -206,19 +208,6 @@ function (_Controller) {
           }
         }
       }, null, this);
-    }
-  }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context7) {
-        while (1) {
-          switch (_context7.prev = _context7.next) {
-            case 0:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      });
     }
   }]);
 

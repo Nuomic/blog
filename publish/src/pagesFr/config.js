@@ -31,6 +31,9 @@ var menuList = [{
   key: 'portfolio',
   name: '作品集'
 }, {
+  key: 'friend',
+  name: '邻居'
+}, {
   key: 'msgboard',
   name: '留言板'
 }];

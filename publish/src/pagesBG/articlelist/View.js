@@ -34,7 +34,8 @@ var _default = function _default(_ref) {
     name: '文章管理',
     href: '/articlemng'
   }];
-  var articleList = state.articleList;
+  var _state$articleList = state.articleList,
+      articleList = _state$articleList === void 0 ? [] : _state$articleList;
   console.log('articleList', articleList);
   var handleDelete = handlers.handleDelete,
       handleChangeArticleStatus = handlers.handleChangeArticleStatus;

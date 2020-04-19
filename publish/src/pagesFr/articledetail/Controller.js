@@ -63,6 +63,8 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "View", _View["default"]);
 
+    _defineProperty(_assertThisInitialized(_this), "pageName", 'articledetail');
+
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload, {
       markdown: '/css/markdown-preview.css',
       codeStyle: '/css/markdown-code.css'
@@ -269,19 +271,6 @@ function (_Controller) {
           }
         }
       }, null, this);
-    }
-  }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context9) {
-        while (1) {
-          switch (_context9.prev = _context9.next) {
-            case 0:
-            case "end":
-              return _context9.stop();
-          }
-        }
-      });
     }
   }]);
 

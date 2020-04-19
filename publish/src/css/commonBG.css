@@ -28,6 +28,7 @@
   border: none;
   box-shadow: 0 3px 8px #d5dadf;
   top: 0;
+  min-width: 400px;
 }
 .basic-breadcrumb {
   padding: 12px 0;
@@ -38,6 +39,7 @@
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 100;
 }
 .basic-sider ::-webkit-scrollbar {
   width: 0 !important;
@@ -72,4 +74,30 @@
 }
 .friend-item-card .ant-card-body {
   padding: 0;
+}
+.home-card {
+  margin-bottom: 12px;
+}
+.home-card .ant-card-body {
+  padding: 0;
+}
+.inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
+.file-card {
+  word-break: break-all;
+  width: 85px;
+  /* height: 140px; */
+  margin: 0 10px;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+.file-card:hover {
+  background-color: rgba(204, 232, 255);
+}
+.upload .ant-upload-list-item-card-actions {
+  position: absolute;
+  right: 5px;
 }

@@ -40,10 +40,24 @@ var _default = [{
     });
   }
 }, {
+  path: '/article/:type/:id',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./article/Controller'));
+    });
+  }
+}, {
   path: '/portfolio',
   controller: function controller() {
     return Promise.resolve().then(function () {
       return _interopRequireWildcard(require('./portfolio/Controller'));
+    });
+  }
+}, {
+  path: '/friend',
+  controller: function controller() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./friend/Controller'));
     });
   }
 }, {

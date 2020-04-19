@@ -69,6 +69,8 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "Model", Model);
 
+    _defineProperty(_assertThisInitialized(_this), "pageName", 'home');
+
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
 
     _defineProperty(_assertThisInitialized(_this), "getArticleList", function _callee() {
@@ -161,19 +163,6 @@ function (_Controller) {
           }
         }
       }, null, this);
-    }
-  }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      });
     }
   }]);
 

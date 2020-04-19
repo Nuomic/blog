@@ -61,6 +61,8 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "View", _View["default"]);
 
+    _defineProperty(_assertThisInitialized(_this), "pageName", 'about');
+
     _defineProperty(_assertThisInitialized(_this), "preload", _objectSpread({}, _this.preload));
 
     _defineProperty(_assertThisInitialized(_this), "getBlogDesc", function _callee() {

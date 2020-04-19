@@ -33,6 +33,10 @@ var _default = function _default() {
     return "/articledetail/".concat(id);
   };
 
+  var handleToSearch = function handleToSearch(type, id) {
+    return "/article/".concat(type, "/").concat(id);
+  };
+
   var SiderItem = function SiderItem(_ref) {
     var name = _ref.name,
         dataSource = _ref.dataSource,
@@ -88,7 +92,9 @@ var _default = function _default() {
       style: {
         cursor: 'pointer'
       }
-    }, item.name);
+    }, _react["default"].createElement(_component.Link, {
+      to: handleToSearch('tag', item.id)
+    }, item.name));
   })), _react["default"].createElement(SiderItem, {
     name: "\u6700\u65B0\u6587\u7AE0",
     dataSource: latestList,
@@ -111,7 +117,7 @@ var _default = function _default() {
           width: '100%'
         }
       }, _react["default"].createElement(_component.Link, {
-        to: handleToDetail(item.id),
+        to: handleToSearch('category', item.id),
         className: "link-color"
       }, item.name), _react["default"].createElement("span", {
         style: {

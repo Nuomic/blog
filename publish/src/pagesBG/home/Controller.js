@@ -63,14 +63,14 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "SSR", false);
 
-    _defineProperty(_assertThisInitialized(_this), "getArticleList", function _callee() {
+    _defineProperty(_assertThisInitialized(_this), "getOverview", function _callee() {
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.postApi(_api["default"].getMngArticleList);
+                return _this.getApi(_api["default"].getOverview);
               }, function (res) {
                 console.log('res', res);
 
@@ -122,25 +122,18 @@ function (_Controller) {
               });
 
             case 5:
+              _context2.next = 7;
+              return regeneratorRuntime.awrap(this.getOverview());
+
+            case 7:
             case "end":
               return _context2.stop();
           }
         }
       }, null, this);
-    }
-  }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      });
-    }
+    } // async componentDidFirstMount() {}
+    //获取文章列表
+
   }]);
 
   return _default;

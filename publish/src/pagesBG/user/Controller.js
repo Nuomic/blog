@@ -15,6 +15,8 @@ var _api = _interopRequireDefault(require("../api"));
 
 var _antd = require("antd");
 
+var _blueimpMd = _interopRequireDefault(require("blueimp-md5"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -114,18 +116,56 @@ function (_Controller) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleChangePwd", function _callee3(oldPwd, newPwd) {
+      var _this$store$getState, _this$store$getState$, userInfo, value;
+
+      return regeneratorRuntime.async(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _this$store$getState = _this.store.getState(), _this$store$getState$ = _this$store$getState.userInfo, userInfo = _this$store$getState$ === void 0 ? {} : _this$store$getState$;
+              value = {
+                userId: userInfo.id,
+                oldPassword: (0, _blueimpMd["default"])(oldPwd),
+                newPassword: (0, _blueimpMd["default"])(newPwd)
+              };
+              console.log('value', value);
+              _context3.next = 5;
+              return regeneratorRuntime.awrap(_this.resHandler(function () {
+                return _this.postApi(_api["default"].changePwd, value);
+              }, function (res) {
+                console.log('res', res);
+
+                _antd.message.success(res.msg);
+
+                setTimeout(function () {
+                  _this.handleLogout();
+                }, 1000);
+              }, function (err) {
+                _antd.message.error(err.customerErrorMessage); // console.log('err', err);
+
+              }));
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    });
+
     return _this;
   }
 
   _createClass(_default, [{
     key: "componentWillCreate",
     value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context3) {
+      return regeneratorRuntime.async(function componentWillCreate$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
       });
@@ -133,12 +173,12 @@ function (_Controller) {
   }, {
     key: "componentDidFirstMount",
     value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context4) {
+      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
       });

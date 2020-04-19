@@ -69,16 +69,23 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "Model", Model);
 
+    _defineProperty(_assertThisInitialized(_this), "pageName", 'article');
+
     _defineProperty(_assertThisInitialized(_this), "getArticleList", function _callee() {
+      var params, search;
       return regeneratorRuntime.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              params = _this.location.params;
+              search = {
+                status: 1
+              };
+              if (params.type == 'tag') search.tagId = params.id;
+              if (params.type == 'category') search.categoryId = params.id;
+              _context.next = 6;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.getApi(_api["default"].getArticleList, {
-                  status: 1
-                });
+                return _this.getApi(_api["default"].getArticleList, search);
               }, function (res) {
                 _this.handleChangeState(res);
 
@@ -87,7 +94,7 @@ function (_Controller) {
                 console.log('res', res);
               }));
 
-            case 2:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -159,19 +166,6 @@ function (_Controller) {
           }
         }
       }, null, this);
-    }
-  }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      });
     }
   }]);
 

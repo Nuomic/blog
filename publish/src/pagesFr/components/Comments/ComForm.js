@@ -144,7 +144,7 @@ var _default = _antd.Form.create()(function (_ref) {
     style: _objectSpread({}, _config.comFormTheme, {
       marginLeft: 10
     })
-  }, _react["default"].createElement(_antd.Form, null, _react["default"].createElement(_antd.Form.Item, null, _react["default"].createElement(_antd.Row, {
+  }, _react["default"].createElement(_antd.Form, null, _react["default"].createElement(_antd.Row, {
     gutter: 8
   }, _react["default"].createElement(_antd.Col, {
     span: 9
@@ -211,7 +211,7 @@ var _default = _antd.Form.create()(function (_ref) {
       height: 52
     },
     onClick: handleSubmit
-  }, "\u63D0\u4EA4\u8BC4\u8BBA")))))))));
+  }, "\u63D0\u4EA4\u8BC4\u8BBA"))))))));
 });
 
 exports["default"] = _default;

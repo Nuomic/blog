@@ -81,7 +81,11 @@ var _default = withData(function (_ref2) {
     name: "customize"
   }), _react["default"].createElement(_component.Style, {
     name: "commonBG"
-  }), _react["default"].createElement(_antd.Layout, null, _react["default"].createElement("div", {
+  }), _react["default"].createElement(_antd.Layout, {
+    style: {
+      minWidth: 600
+    }
+  }, _react["default"].createElement("div", {
     className: "position-fixed",
     style: {
       paddingLeft: collapsed ? 80 : 200,

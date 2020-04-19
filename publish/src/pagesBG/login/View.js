@@ -13,6 +13,8 @@ var _antd = require("antd");
 
 var _blueimpMd = _interopRequireDefault(require("blueimp-md5"));
 
+var _Captcha = _interopRequireDefault(require("./Captcha"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Item = _antd.Form.Item;
@@ -24,6 +26,8 @@ var _default = _antd.Form.create()(function (_ref) {
   var getFieldDecorator = form.getFieldDecorator,
       resetFields = form.resetFields,
       validateFields = form.validateFields;
+  var captcha = state.captcha;
+  console.log('captcha', captcha);
   var handleLogin = handlers.handleLogin;
 
   var handleSubmit = function handleSubmit(e) {
@@ -37,18 +41,17 @@ var _default = _antd.Form.create()(function (_ref) {
               username = values.username, password = values.password;
 
               if (err) {
-                _context.next = 5;
+                _context.next = 4;
                 break;
               }
 
-              console.log('Received values of form: ', values);
-              _context.next = 5;
+              _context.next = 4;
               return regeneratorRuntime.awrap(handleLogin({
                 username: username,
                 password: (0, _blueimpMd["default"])(password)
               }));
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -77,7 +80,7 @@ var _default = _antd.Form.create()(function (_ref) {
   }, _react["default"].createElement(Item, null, getFieldDecorator('username', {
     rules: [{
       required: true,
-      message: 'Please input your username!'
+      message: '请输入用户名!'
     }]
   })(_react["default"].createElement(_antd.Input, {
     prefix: _react["default"].createElement(_antd.Icon, {
@@ -86,36 +89,49 @@ var _default = _antd.Form.create()(function (_ref) {
         color: 'rgba(0,0,0,.25)'
       }
     }),
-    placeholder: "Username"
+    placeholder: "\u8BF7\u8F93\u5165\u7528\u6237\u540D"
   }))), _react["default"].createElement(Item, null, getFieldDecorator('password', {
     rules: [{
       required: true,
-      message: 'Please input your Password!'
+      message: '请输入密码!'
     }]
-  })(_react["default"].createElement(_antd.Input, {
+  })(_react["default"].createElement(_antd.Input.Password, {
     prefix: _react["default"].createElement(_antd.Icon, {
       type: "lock",
       style: {
         color: 'rgba(0,0,0,.25)'
       }
-    }),
-    type: "password",
-    placeholder: "Password"
+    }) // type="password"
+    ,
+    placeholder: "\u8BF7\u8F93\u5165\u5BC6\u7801"
   }))), _react["default"].createElement(Item, null, getFieldDecorator('yanzheng', {
+    validateTrigger: 'onBlur',
     rules: [{
-      required: true,
-      message: 'Please input your Password!'
+      validator: function validator(rule, val, callback) {
+        var code = captcha.join('').toLowerCase();
+        console.log('code', code);
+        if ((val && val.toLowerCase()) != code) callback('验证码错误');
+        callback();
+      }
     }]
   })(_react["default"].createElement(_antd.Input, {
-    prefix: _react["default"].createElement(_antd.Icon, {
-      type: "lock",
-      style: {
-        color: 'rgba(0,0,0,.25)'
-      }
-    }),
-    type: "password",
-    placeholder: "Password"
-  }))), _react["default"].createElement(Item, null, _react["default"].createElement(_antd.Button, {
+    onClick: function onClick() {
+      return resetFields(['yanzheng']);
+    },
+    placeholder: "\u8BF7\u8F93\u5165\u9A8C\u8BC1\u7801",
+    style: {
+      display: 'inline-block',
+      width: 'calc(100% - 155px)'
+    }
+  })), _react["default"].createElement("div", {
+    style: {
+      "float": 'right',
+      marginTop: 5
+    },
+    onClick: function onClick() {
+      return resetFields(['yanzheng']);
+    }
+  }, _react["default"].createElement(_Captcha["default"], null))), _react["default"].createElement(Item, null, _react["default"].createElement(_antd.Button, {
     type: "primary",
     htmlType: "submit",
     className: "login-form-button"

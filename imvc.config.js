@@ -91,7 +91,7 @@ module.exports = {
    * 默认为空
    * 如果配置了这个属性，controller.fetch 方法将为非绝对路径 url 参数，补上 restapi 作为前缀。
    */
-  restapi: 'http://localhost:4000/api/v1',
+  restapi: 'https://zwq666.top/api/v1',
   /**
    * webpack 资源表所在的路径，相对于 webpack 的 output.path
    * react-imvc 默认使用 hash 作为静态资源 js 的文件名
@@ -144,7 +144,7 @@ module.exports = {
    */
   webpackLogger: {
     chunks: false, // Makes the build much quieter
-    colors: true
+    colors: true,
   },
 
   // babel config
@@ -180,8 +180,8 @@ module.exports = {
     hsts: {
       // https://helmetjs.github.io/docs/hsts/
       // 关闭默认的 Strict-Transport-Security
-      maxAge: 0
-    }
+      maxAge: 0,
+    },
   },
 
   /**
@@ -195,18 +195,18 @@ module.exports = {
    */
   ReactViews: {
     beautify: false, // 是否美化 html 响应内容
-    transformViews: false // 默认不转换 view，已经有 babel 做处理
+    transformViews: false, // 默认不转换 view，已经有 babel 做处理
   },
   /**
    * express 中间件 bodyParse 配置
    */
   bodyParser: {
     json: {
-      limit: '10MB'
+      limit: '10MB',
     },
     urlencoded: {
-      extended: false
-    }
+      extended: false,
+    },
   },
   /**
    * express logger 配置
@@ -273,5 +273,5 @@ module.exports = {
   /**
    * 打包出来的服务端 bundle 的文件名
    */
-  serverBundleName: 'server.bundle.js'
+  serverBundleName: 'server.bundle.js',
 };

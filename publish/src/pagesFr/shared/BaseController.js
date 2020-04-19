@@ -83,7 +83,9 @@ function (_Controller) {
             case 0:
               _context.next = 2;
               return regeneratorRuntime.awrap(_this.resHandler(function () {
-                return _this.getApi(_api["default"].getSiderDate);
+                return _this.getApi(_api["default"].getSiderDate, {
+                  pageName: _this.pageName
+                });
               }, function (res) {
                 var siderData = res.siderData;
                 console.log('siderData', siderData);
@@ -106,47 +108,6 @@ function (_Controller) {
 
   _createClass(_default, [{
     key: "getFinalActions",
-
-    /**
-     * 动态获取初始化状态
-     */
-    // async getInitialState(initialState) {
-    //   let state = await super.getInitialState(initialState);
-    //   let { context, location } = this;
-    //   let url = context.basename + '/'
-    //   let options = {
-    //     method: 'POST',
-    //     credentials: 'include',
-    //     raw: true,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       // cookieorigin: getCookieOriginByContext(context)
-    //     },
-    //     body: JSON.stringify({ pageName: this.modulePagename })
-    //   }
-    //   if (context.isServer) {
-    //     options.headers.cookie = context.req.headers.cookie
-    //   }
-    //   try {
-    //     let response = await fetch(url, options)
-    //     let result = await response.json()
-    //     let { ResponseStatus } = result
-    //     if (ResponseStatus.Ack !== "Success" && ResponseStatus.Errors[0].ErrorCode == '401') {
-    //       redirect(this.context, '/v2/authorized/403') //11111111111111111111
-    //       return
-    //     }
-    //   } catch (error) {
-    //     console.error('getUserInfo', error)
-    //   }
-    //   return {
-    //     ...sharedInitialState,
-    //     ...state
-    //   };
-    // }
-
-    /**
-     * 动态获取最终的 actions 集合
-     */
     value: function getFinalActions(actions) {
       return _objectSpread({}, sharedActions, {}, actions);
     }
@@ -174,11 +135,14 @@ function (_Controller) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
+              console.log('this.pageName', this.pageName);
+
+            case 1:
             case "end":
               return _context3.stop();
           }
         }
-      });
+      }, null, this);
     }
   }, {
     key: "postApi",

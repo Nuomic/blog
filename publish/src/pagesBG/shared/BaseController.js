@@ -94,7 +94,7 @@ function (_Controller) {
               }));
 
             case 3:
-              _context.next = 8;
+              _context.next = 9;
               break;
 
             case 5:
@@ -102,7 +102,9 @@ function (_Controller) {
               _context.t0 = _context["catch"](0);
               console.log('_', _context.t0);
 
-            case 8:
+              _this.redirect('/login');
+
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -136,7 +138,7 @@ function (_Controller) {
               return _context2.abrupt("return", _objectSpread({}, initialState, {
                 currentPath: location.pathname,
                 initCollapsed: _jsCookie["default"].get('collapsed') == 'false' ? false : true,
-                userInfo: userInfo
+                userInfo: userInfo || {}
               }));
 
             case 7:

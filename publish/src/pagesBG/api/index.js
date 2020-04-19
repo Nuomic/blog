@@ -10,7 +10,6 @@ var _default = {
   deleteArticle: '/article/delete',
   saveArticle: '/article/save',
   changeArticleStatus: '/article/changeStatus',
-  changeArticleCategory: ' https://www.fastmock.site/mock/4e8085bf9009c950a4262c1fe5ebbd44/api/changeArticleCategory',
 
   /* 栏目 */
   getCategory: '/category/list',
@@ -27,6 +26,7 @@ var _default = {
   userLogout: '/user/logout',
   userCheck: '/user/check',
   userRegister: '/user/register',
+  changePwd: '/user/edit',
   // 其他设置
   getSetting: '/setting/get',
   getFormData: '/setting/getFormData',
@@ -36,6 +36,15 @@ var _default = {
   deleteFriend: '/friend/delete',
   saveFriend: '/friend/save',
   //标签
-  saveTag: '/tag/save'
+  saveTag: '/tag/save',
+  //验证码
+  getCaptcha: '/user/captcha',
+  //站点 统计
+  getOverview: '/overview',
+  //文件操作
+  getResource: '/resource/list',
+  deleteResource: '/resource/delete',
+  changeResourceStatus: '/resource/changeStatus',
+  download: '/resource/download'
 };
 exports["default"] = _default;

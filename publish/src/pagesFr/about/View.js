@@ -19,7 +19,8 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 var _default = function _default(_ref) {
   var state = _ref.state;
-  var blogdesc = state.blogdesc;
+  var _state$blogdesc = state.blogdesc,
+      blogdesc = _state$blogdesc === void 0 ? {} : _state$blogdesc;
   console.log('blogdesc', blogdesc);
   var BreadcrumbList = [{
     name: '首页',

@@ -15,6 +15,7 @@ var _default = {
   getHitokoto: 'https://v1.hitokoto.cn/'
   /* 一言接口 */
   ,
-  getSetting: '/setting/get'
+  getSetting: '/setting/get',
+  saveFriend: '/friend/save'
 };
 exports["default"] = _default;
