@@ -10,15 +10,16 @@ export default ({ state }) => {
 
   return (
     <BasicLayout breadcrumbList={bdList}>
-      <Row gutter={12}>
-        <Col>
+      <Row gutter={18}>
+        <Col xxl={16} md={24} lg={16}>
           <Total />
         </Col>
-        <Col xxl={18} md={24} lg={16}>
-          <PageView />
-        </Col>
-        <Col xxl={6} md={24} lg={8}>
+        <Col xxl={8} md={24} lg={8}>
           <ArticleCount />
+        </Col>
+
+        <Col span={24}>
+          <PageView />
         </Col>
       </Row>
     </BasicLayout>

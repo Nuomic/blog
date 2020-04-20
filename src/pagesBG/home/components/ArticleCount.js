@@ -19,9 +19,9 @@ export default () => {
       },
       radius: 0.8,
       padding: 'auto',
-      legend: {
-        position: 'bottom-center',
-      },
+      // legend: {
+      //   position: 'bottom-center',
+      // },
       data: categoryList,
       angleField: 'count',
       colorField: 'name',
