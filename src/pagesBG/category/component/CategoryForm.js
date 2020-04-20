@@ -33,20 +33,23 @@ export default Form.create()(
       >
         <Form>
           <Item label="栏目名称">
-            {getFieldDecorator('name', { initialValue: category.name })(
-              <Input />
-            )}
+            {getFieldDecorator('name', {
+              initialValue: category.name,
+              rules: [{ required: true, message: '请输入栏目名称！' }],
+            })(<Input />)}
           </Item>
           <Item label="栏目简介">
-            {getFieldDecorator('summary', { initialValue: category.summary })(
-              <Input />
-            )}
+            {getFieldDecorator('summary', {
+              initialValue: category.summary,
+              rules: [{ required: true, message: '请输入栏目简介！' }],
+            })(<Input />)}
           </Item>
 
           <Item label="栏目配图">
-            {getFieldDecorator('avatar', { initialValue: category.avatar })(
-              <Input />
-            )}
+            {getFieldDecorator('avatar', {
+              initialValue: category.avatar,
+              rules: [{ required: true, message: '请输入栏目配图！' }],
+            })(<Input />)}
           </Item>
           {/* <Upload form={form} url={category.avatar}></Upload> */}
         </Form>

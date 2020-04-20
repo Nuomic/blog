@@ -11,7 +11,7 @@ import {
   Skeleton,
   Divider,
   Card,
-  Tag
+  Tag,
 } from 'antd';
 const { Paragraph } = Typography;
 export default () => {
@@ -27,15 +27,15 @@ export default () => {
   const [likeStatus, setLikeStatus] = useState({});
   const initLikeCount = {};
   articleList &&
-    articleList.forEach(item => {
+    articleList.forEach((item) => {
       initLikeCount[item.id] = item.likeCount;
     });
   const [likeCount, setLikeCount] = useState(initLikeCount);
   console.log('likeCount', likeCount);
-  const handleToDetail = id => {
+  const handleToDetail = (id) => {
     return `/articledetail/${id}`;
   };
-  const changeLikeCount = id => {
+  const changeLikeCount = (id) => {
     let current = { [id]: likeCount[id] };
     const articleLikeStatus =
       JSON.parse(window.localStorage.getItem('articleLikeStatus')) || {};
@@ -80,13 +80,13 @@ export default () => {
       itemLayout="vertical"
       size="small"
       pagination={{
-        onChange: page => {
+        onChange: (page) => {
           console.log(page);
         },
-        pageSize: 5
+        pageSize: 5,
       }}
       dataSource={articleList}
-      renderItem={item => (
+      renderItem={(item) => (
         <Skeleton
           loading={loading}
           active
@@ -106,7 +106,7 @@ export default () => {
                 style={{
                   position: 'relative',
                   overflow: 'hidden',
-                  margin: '5px 0'
+                  margin: '5px 0',
                 }}
                 title={
                   <Link to={handleToDetail(item.id)}>
@@ -140,12 +140,14 @@ export default () => {
                       style={{
                         position: 'absolute',
                         bottom: 0,
-                        width: 'calc(100% - 300px)'
+                        width: 'calc(100% - 300px)',
                       }}
                     >
                       <IconText
                         type="clock-circle"
-                        text={moment(item.date).format('YYYY-MM-DD hh:mm:ss')}
+                        text={moment(item.createdAt).format(
+                          'YYYY-MM-DD hh:mm:ss'
+                        )}
                       />
                       <IconText type="read" text={item.viewCount} />
                       <IconText

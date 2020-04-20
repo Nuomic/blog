@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BasicLayout from '../components/BasicLayout';
-import StickyTabs from '../components/StickyTabs';
-import { useModelState, useCtrl } from 'react-imvc/hook';
 import { Tabs, Modal, Icon, Button } from 'antd';
-import FileUpload from './components/FileUpload';
-import FileItem from './components/FileItem';
-const { TabPane } = Tabs;
-const { confirm } = Modal;
-export default () => {
-  // const { portfolioList = [] } = useModelState();
-  // const {} = useCtrl();
-  const bdList = [{ name: '首页', href: '/admin' }, { name: '作品管理' }];
-  //配置状态
+import Form from './components/Form';
+import List from './components/List';
 
-  return <BasicLayout breadcrumbList={bdList}>444444</BasicLayout>;
+export default () => {
+  const bdList = [{ name: '首页', href: '/admin' }, { name: '作品管理' }];
+  const [modalStatus, setModalStatus] = useState(false);
+  const [currentValue, setCurrentValue] = useState({});
+  //配置状态
+  const changModalStatus = (value) => {
+    setCurrentValue(value);
+    setModalStatus(!modalStatus);
+  };
+  return (
+    <BasicLayout breadcrumbList={bdList}>
+      <Button type="primary" onClick={() => changModalStatus({})}>
+        <Icon type="plus" />
+        新增
+      </Button>
+      <List {...{ /* currentValue, modalStatus, */ changModalStatus }} />
+      <Form {...{ currentValue, modalStatus, changModalStatus }} />
+    </BasicLayout>
+  );
 };

@@ -48,7 +48,7 @@ export default ({ item }) => {
             copy(item.path);
           }}
         >
-          复制文件连接
+          复制文件链接
         </span>
       ),
       // color: 'green',

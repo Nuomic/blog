@@ -50,4 +50,9 @@ export default {
   deleteResource: '/resource/delete',
   changeResourceStatus: '/resource/changeStatus',
   download: '/resource/download',
+
+  //作品管理
+  getPortfolio: '/portfolio/list',
+  deletePortfolio: '/portfolio/delete',
+  savePortfolio: '/portfolio/save',
 };
