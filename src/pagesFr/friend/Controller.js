@@ -7,15 +7,7 @@ export default class Home extends Controller {
   // 继承它，编写你的控制器逻辑
   View = View; // 将 react 组件赋值给控制器的 View 属性
   pageName = 'friend';
-  preload = {
-    ...this.preload,
-  };
-  async getInitialState(initialState) {
-    return {
-      ...initialState,
-      currentPath: this.location.pathname,
-    };
-  }
+
   async componentWillCreate() {
     await super.componentWillCreate();
   }

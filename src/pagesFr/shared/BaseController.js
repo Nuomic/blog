@@ -17,12 +17,18 @@ export default class extends Controller {
       ...actions,
     };
   }
+  async getInitialState(initialState) {
+    return {
+      ...initialState,
+      currentPath: this.location.pathname,
+    };
+  }
   async componentWillCreate() {
     await this.getSiderDate();
   }
-  async componentDidFirstMount() {
-    console.log('this.pageName', this.pageName);
-  }
+  // async componentDidFirstMount() {
+  //   console.log('this.pageName', this.pageName);
+  // }
   getSiderDate = async () => {
     await this.resHandler(
       () => this.getApi(api.getSiderDate, { pageName: this.pageName }),

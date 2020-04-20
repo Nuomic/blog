@@ -20,7 +20,6 @@ export default class extends Controller {
     let { context, location } = this;
     let userInfo = await this.getUserInfo();
     if (!Cookie.get('collapsed')) Cookie.set('collapsed', false);
-    console.log('Cookie.get(collapsed)', Cookie.get('collapsed'));
     return {
       ...initialState,
       currentPath: location.pathname,

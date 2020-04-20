@@ -12,12 +12,7 @@ export default class Home extends Controller {
     markdown: '/css/markdown-preview.css',
     codeStyle: '/css/markdown-code.css',
   };
-  async getInitialState(initialState) {
-    return {
-      ...initialState,
-      currentPath: this.location.pathname,
-    };
-  }
+
   async componentWillCreate() {
     await super.componentWillCreate();
     const articleId = this.location.params.articleId;
