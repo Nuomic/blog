@@ -9,4 +9,5 @@ export default {
   getHitokoto: 'https://v1.hitokoto.cn/' /* 一言接口 */,
   getSetting: '/setting/get',
   saveFriend: '/friend/save',
+  getPortfolio: '/portfolio/list',
 };

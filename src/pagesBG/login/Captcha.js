@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useCtrl, useModelState } from 'react-imvc/hook';
 
-export default ({}) => {
+export default () => {
   const { handleGetCaptcha } = useCtrl();
   const { captcha } = useModelState();
   const config = {

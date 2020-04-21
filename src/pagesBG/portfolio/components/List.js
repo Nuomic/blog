@@ -20,9 +20,8 @@ export default ({ changModalStatus }) => {
   return (
     <Row gutter={10}>
       {portfolioList.map((item) => (
-        <Col xxl={4} xs={12} lg={6} md={8}>
+        <Col xxl={4} xs={12} lg={6} md={8} key={item.id}>
           <Card
-            key={item.id}
             cover={
               <div className="out-rectangle ">
                 <img

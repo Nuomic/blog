@@ -3,7 +3,7 @@ import React from 'react';
 import { useModelState } from 'react-imvc/hook';
 import { Statistic, Card, Row, Col, Icon } from 'antd';
 
-export default ({ todayPv }) => {
+export default () => {
   const {
     pvTotal,
     articleTotal,
