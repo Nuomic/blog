@@ -6,14 +6,14 @@ import StickyTabs from '../components/StickyTabs';
 import moment from 'moment';
 const { confirm } = Modal;
 const { TabPane } = Tabs;
-export default ({ state, handlers }) => {
+export default ({ state, ctrl }) => {
   const bdList = [
     { name: '首页', href: '/admin' },
     { name: '文章管理', href: '/articlemng' },
   ];
   const { articleList = [] } = state;
   console.log('articleList', articleList);
-  const { handleDelete, handleChangeArticleStatus } = handlers;
+  const { handleDelete, handleChangeArticleStatus } = ctrl;
   const articleStatus = [
     { tabName: '全部', key: '0' },
     { tabName: '公开', key: '1' },

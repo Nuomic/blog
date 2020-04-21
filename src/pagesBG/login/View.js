@@ -4,11 +4,11 @@ import { Form, Input, Card, Icon, Checkbox, Button } from 'antd';
 import md5 from 'blueimp-md5';
 import Captcha from './Captcha';
 const { Item } = Form;
-export default Form.create()(({ state, form, handlers }) => {
+export default Form.create()(({ state, form, ctrl }) => {
   const { getFieldDecorator, resetFields, validateFields } = form;
   const { captcha } = state;
   console.log('captcha', captcha);
-  const { handleLogin } = handlers;
+  const { handleLogin } = ctrl;
   const handleSubmit = (e) => {
     e.preventDefault();
     validateFields(async (err, values) => {

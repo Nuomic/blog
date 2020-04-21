@@ -8,11 +8,11 @@ import 'moment/locale/zh-cn';
 const { Item } = Form;
 const { confirm } = Modal;
 const { TabPane } = Tabs;
-export default ({ state, handlers }) => {
+export default ({ state, ctrl }) => {
   const { commentList = [], userInfo } = state;
   console.log('state', state);
   console.log('userInfo+++++++++', userInfo);
-  const { handleDeleteComment, handleSaveComment } = handlers;
+  const { handleDeleteComment, handleSaveComment } = ctrl;
   const bdList = [{ name: '首页', href: '/admin' }, { name: '留言管理' }];
   const articleStatus = [
     { tabName: '评论管理', key: '0' },

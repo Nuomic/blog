@@ -5,12 +5,12 @@ import ArticleList from './ArticleList';
 import CategoryForm from './CategoryForm';
 export default ({ addTabs, showConfirm }) => {
   const state = useModelState();
-  const handlers = useCtrl();
+  const { handleDeleteCategory } = useCtrl();
   const [modalStatus, setModalStatus] = useState(false);
   const [currentId, setCurrentId] = useState(undefined);
   const { categoryList } = state;
-  const { handleDeleteCategory } = handlers;
-  const handelModalStatus = id => {
+
+  const handelModalStatus = (id) => {
     setCurrentId(id);
     setModalStatus(!modalStatus);
   };
@@ -32,7 +32,7 @@ export default ({ addTabs, showConfirm }) => {
         </div>
       ),
       key: 'name',
-      render: text => {
+      render: (text) => {
         return (
           <div>
             <span
@@ -41,7 +41,7 @@ export default ({ addTabs, showConfirm }) => {
                 width: 48,
                 height: 48,
                 verticalAlign: 'middle',
-                background: `no-repeat center/100% url(${text.avatar})`
+                background: `no-repeat center/100% url(${text.avatar})`,
               }}
             />
             <span style={{ verticalAlign: 'middle', marginLeft: 10 }}>
@@ -49,12 +49,12 @@ export default ({ addTabs, showConfirm }) => {
             </span>
           </div>
         );
-      }
+      },
     },
     {
       title: <span style={{ marginLeft: 15 }}>操作</span>,
       key: 'action',
-      render: text => {
+      render: (text) => {
         return (
           <>
             <Button
@@ -80,12 +80,12 @@ export default ({ addTabs, showConfirm }) => {
             </Button>
           </>
         );
-      }
+      },
     },
     {
       title: '文章数',
-      dataIndex: 'articleCount'
-    }
+      dataIndex: 'articleCount',
+    },
   ];
   return (
     <>
