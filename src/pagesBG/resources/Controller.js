@@ -1,7 +1,7 @@
 // src/home/Controller
 import Controller from '../shared/BaseController'; // 加载 react-imvc controller 控制器
 import View from './View';
-import Model from './Model';
+import * as Model from './Model';
 import api from '../api';
 import { message } from 'antd';
 export default class Home extends Controller {
