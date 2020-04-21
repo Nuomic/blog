@@ -13,6 +13,8 @@ var _BlogDesc = _interopRequireDefault(require("./BlogDesc"));
 
 var _Password = _interopRequireDefault(require("./Password"));
 
+var _UserInfo = _interopRequireDefault(require("./UserInfo"));
+
 var _this = void 0;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -29,36 +31,35 @@ var _default = function _default(_ref) {
     name: '修改密码',
     imgUrl: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
     content: _Password["default"]
+  }, {
+    key: '3',
+    name: '信息修改',
+    imgUrl: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
+    content: _UserInfo["default"]
   } // {
-  //   key: '3',
-  //   name: '主题配色',
-  //   imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-  //   content: BlogDesc,
-  // },
-  // {
   //   key: '4',
   //   name: '关于我',
   //   imgUrl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
   //   content: BlogDesc,
   // },
   ];
-  return _react["default"].createElement(_antd.Row, {
+  return /*#__PURE__*/_react["default"].createElement(_antd.Row, {
     gutter: 16
   }, actionList.map(function (item) {
-    return _react["default"].createElement(_antd.Col, {
+    return /*#__PURE__*/_react["default"].createElement(_antd.Col, {
       xs: 12,
       lg: 8,
       xl: 6,
       xxl: 4,
       key: item.key,
       onClick: addTabs.bind(_this, item.key, item.name, item.content)
-    }, _react["default"].createElement(_antd.Card, {
+    }, /*#__PURE__*/_react["default"].createElement(_antd.Card, {
       hoverable: true,
-      cover: _react["default"].createElement("img", {
+      cover: /*#__PURE__*/_react["default"].createElement("img", {
         alt: "example",
         src: item.imgUrl
       })
-    }, _react["default"].createElement(_antd.Card.Meta, {
+    }, /*#__PURE__*/_react["default"].createElement(_antd.Card.Meta, {
       title: item.name,
       description: item.desc,
       style: {

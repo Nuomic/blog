@@ -11,15 +11,17 @@ var _antd = require("antd");
 
 var _hook = require("react-imvc/hook");
 
-var _Upload = _interopRequireDefault(require("./Upload"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var Item = _antd.Form.Item;
 
@@ -42,61 +44,75 @@ var _default = _antd.Form.create()(function (_ref) {
   var getFieldDecorator = form.getFieldDecorator,
       validateFields = form.validateFields,
       resetFields = form.resetFields;
-  getFieldDecorator('avatar', {
-    initialValue: category.avatar
-  });
 
   var handleSubmit = function handleSubmit(e) {
-    validateFields(function _callee(err, fieldsValue) {
-      return regeneratorRuntime.async(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              e.preventDefault();
+    validateFields( /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(err, fieldsValue) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                e.preventDefault();
 
-              if (!err) {
-                _context.next = 3;
-                break;
-              }
+                if (!err) {
+                  _context.next = 3;
+                  break;
+                }
 
-              return _context.abrupt("return");
+                return _context.abrupt("return");
 
-            case 3:
-              console.log('fieldsValue', fieldsValue);
-              _context.next = 6;
-              return regeneratorRuntime.awrap(handleSaveCategory(_objectSpread({}, category, {}, fieldsValue), handelModalStatus));
+              case 3:
+                console.log('fieldsValue', fieldsValue);
+                _context.next = 6;
+                return handleSaveCategory(_objectSpread({}, category, {}, fieldsValue), handelModalStatus);
 
-            case 6:
-              resetFields();
+              case 6:
+                resetFields();
 
-            case 7:
-            case "end":
-              return _context.stop();
+              case 7:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      });
-    });
+        }, _callee);
+      }));
+
+      return function (_x, _x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
   };
 
-  return _react["default"].createElement(_antd.Modal, {
+  return /*#__PURE__*/_react["default"].createElement(_antd.Modal, {
     title: categoryId ? '编辑' : '新增',
     visible: modalStatus,
     onOk: handleSubmit,
     onCancel: handelModalStatus
-  }, _react["default"].createElement(_antd.Form, null, _react["default"].createElement(Item, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form, null, /*#__PURE__*/_react["default"].createElement(Item, {
     label: "\u680F\u76EE\u540D\u79F0"
   }, getFieldDecorator('name', {
-    initialValue: category.name
-  })(_react["default"].createElement(_antd.Input, null))), _react["default"].createElement(Item, {
+    initialValue: category.name,
+    rules: [{
+      required: true,
+      message: '请输入栏目名称！'
+    }]
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, null))), /*#__PURE__*/_react["default"].createElement(Item, {
     label: "\u680F\u76EE\u7B80\u4ECB"
   }, getFieldDecorator('summary', {
-    initialValue: category.summary
-  })(_react["default"].createElement(_antd.Input, null))), _react["default"].createElement(Item, {
+    initialValue: category.summary,
+    rules: [{
+      required: true,
+      message: '请输入栏目简介！'
+    }]
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, null))), /*#__PURE__*/_react["default"].createElement(Item, {
     label: "\u680F\u76EE\u914D\u56FE"
-  }, _react["default"].createElement(_Upload["default"], {
-    form: form,
-    url: category.avatar
-  }))));
+  }, getFieldDecorator('avatar', {
+    initialValue: category.avatar,
+    rules: [{
+      required: true,
+      message: '请输入栏目配图！'
+    }]
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, null)))));
 });
 
 exports["default"] = _default;

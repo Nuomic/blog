@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var _default = function _default(props) {
   console.log('props', props);
-  return _react["default"].createElement(_BasicLayout["default"], null, _react["default"].createElement(_Article["default"], null));
+  return /*#__PURE__*/_react["default"].createElement(_BasicLayout["default"], null, /*#__PURE__*/_react["default"].createElement(_Article["default"], null));
 };
 
 exports["default"] = _default;

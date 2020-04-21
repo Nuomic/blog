@@ -29,48 +29,50 @@ var _default = function _default(_ref) {
   var _useModelState = (0, _hook.useModelState)(),
       userInfo = _useModelState.userInfo;
 
-  return _react["default"].createElement(Header, {
+  return /*#__PURE__*/_react["default"].createElement(Header, {
     className: "basic-header"
-  }, _react["default"].createElement(_antd.Icon, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
     className: "basic-trigger",
     type: collapsed ? 'menu-unfold' : 'menu-fold',
     onClick: handleToggle
-  }), _react["default"].createElement("div", {
+  }), /*#__PURE__*/_react["default"].createElement("div", {
     className: "basic-breadcrumb",
     style: {
       display: 'inline-block'
     }
-  }, breadcrumbList && _react["default"].createElement(_antd.Breadcrumb, {
+  }, breadcrumbList && /*#__PURE__*/_react["default"].createElement(_antd.Breadcrumb, {
     separator: ">",
     className: "basic-layout-breadcrumb-bg"
   }, breadcrumbList.map(function (item, index) {
-    return _react["default"].createElement(_antd.Breadcrumb.Item, {
+    return /*#__PURE__*/_react["default"].createElement(_antd.Breadcrumb.Item, {
       key: index
-    }, _react["default"].createElement(_component.Link, {
+    }, /*#__PURE__*/_react["default"].createElement(_component.Link, {
       to: item.href
     }, item.name));
-  })) || null), _react["default"].createElement("div", {
+  })) || null), /*#__PURE__*/_react["default"].createElement("div", {
     className: "fr ",
     style: {
       paddingRight: 24,
       lineHeight: '66px'
     }
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: {
       margin: '0 30px',
       position: 'relative',
       top: 10
     }
-  }, _react["default"].createElement(_antd.Badge, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Badge, {
     count: 100
-  }, _react["default"].createElement(_antd.Icon, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
     type: "bell",
     style: {
       fontSize: 30
     }
-  }))), _react["default"].createElement(_antd.Avatar, {
+  }))), /*#__PURE__*/_react["default"].createElement(_antd.Avatar, {
     src: userInfo.avatar
-  }), _react["default"].createElement(_antd.Button, {
+  }), /*#__PURE__*/_react["default"].createElement(_antd.Button, {
+    type: "link"
+  }, userInfo.nickname || userInfo.username), /*#__PURE__*/_react["default"].createElement(_antd.Button, {
     type: "link",
     onClick: handleLogout
   }, "\u9000\u51FA\u767B\u5F55")));

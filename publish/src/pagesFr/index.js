@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -14,64 +14,64 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var _default = [{
   path: '/',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./home/Controller'));
+    return Promise.resolve('./home/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/home',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./home/Controller'));
+    return Promise.resolve('./home/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/about',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./about/Controller'));
+    return Promise.resolve('./about/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/article',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./article/Controller'));
+    return Promise.resolve('./article/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/article/:type/:id',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./article/Controller'));
+    return Promise.resolve('./article/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/portfolio',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./portfolio/Controller'));
+    return Promise.resolve('./portfolio/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/friend',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./friend/Controller'));
+    return Promise.resolve('./friend/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/msgboard',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./msgboard/Controller'));
+    return Promise.resolve('./msgboard/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }, {
   path: '/articledetail/:articleId',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./articledetail/Controller'));
+    return Promise.resolve('./articledetail/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   }
 }];

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -14,90 +14,98 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var _default = [{
   path: '/login',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./login/Controller'));
+    return Promise.resolve('./login/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '登录'
 }, {
   path: '/admin',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./home/Controller'));
+    return Promise.resolve('./home/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '首页'
 }, {
   path: '/admin/home',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./home/Controller'));
+    return Promise.resolve('./home/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '首页'
 }, {
   path: '/admin/md/add',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./article/Controller'));
+    return Promise.resolve('./article/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '富文本新增'
 }, {
   path: "/admin/md/edit/:articleId",
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./article/Controller'));
+    return Promise.resolve('./article/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '富文本编辑页'
 }, {
   path: '/admin/category',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./category/Controller'));
+    return Promise.resolve('./category/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '分类管理'
 }, {
   path: '/admin/articlemng',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./articlelist/Controller'));
+    return Promise.resolve('./articlelist/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '文章管理'
 }, {
   path: '/admin/msgmng',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./msgboard/Controller'));
+    return Promise.resolve('./msgboard/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '留言管理'
 }, {
   path: '/admin/resources',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./resources/Controller'));
+    return Promise.resolve('./resources/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '资源管理'
 }, {
   path: '/admin/friend',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./friend/Controller'));
+    return Promise.resolve('./friend/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '友情链接'
 }, {
   path: '/admin/user',
   controller: function controller() {
-    return Promise.resolve().then(function () {
-      return _interopRequireWildcard(require('./user/Controller'));
+    return Promise.resolve('./user/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
     });
   },
   name: '个人中心'
+}, {
+  path: '/admin/portfolio',
+  controller: function controller() {
+    return Promise.resolve('./portfolio/Controller').then(function (s) {
+      return _interopRequireWildcard(require(s));
+    });
+  },
+  name: '作品管理'
 }];
 exports["default"] = _default;

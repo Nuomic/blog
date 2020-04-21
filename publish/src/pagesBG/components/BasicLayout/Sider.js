@@ -21,26 +21,26 @@ var _default = function _default(_ref) {
   var currentPath = _ref.currentPath,
       collapsed = _ref.collapsed,
       handleToggle = _ref.handleToggle;
-  return _react["default"].createElement(Sider, {
+  return /*#__PURE__*/_react["default"].createElement(Sider, {
     className: "basic-sider overflow-hidden",
     trigger: null,
     collapsible: true,
     collapsed: collapsed,
     breakpoint: "lg"
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     className: "basic-logo"
-  }), _react["default"].createElement(_antd.Menu, {
+  }), /*#__PURE__*/_react["default"].createElement(_antd.Menu, {
     theme: "dark",
     mode: "inline",
     defaultSelectedKeys: currentPath != '/admin' ? currentPath : 'home'
   }, _config.menuList && _config.menuList.map(function (item) {
-    return _react["default"].createElement(_antd.Menu.Item, {
+    return /*#__PURE__*/_react["default"].createElement(_antd.Menu.Item, {
       key: item.key
-    }, _react["default"].createElement(_component.Link, {
+    }, /*#__PURE__*/_react["default"].createElement(_component.Link, {
       to: "/admin/".concat(item.key)
-    }, _react["default"].createElement(_antd.Icon, {
+    }, /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
       type: item.icon
-    }), _react["default"].createElement("span", null, item.name)));
+    }), /*#__PURE__*/_react["default"].createElement("span", null, item.name)));
   })));
 };
 

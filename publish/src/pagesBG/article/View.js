@@ -22,26 +22,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var _default = _antd.Form.create()(function (_ref) {
   var form = _ref.form,
       state = _ref.state;
-  return _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       padding: 10,
       backgroundColor: '#f8f8f8'
     }
-  }, _react["default"].createElement(_component.Style, {
+  }, /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "antd"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "antdPro"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "customize"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "commonBG"
-  }), _react["default"].createElement(_Title["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_Title["default"], {
     form: form,
     modalStatus: state.modalStatus,
     title: state.article.title
-  }), _react["default"].createElement(_Editor["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_Editor["default"], {
     form: form
-  }), _react["default"].createElement(_SaveModal["default"], {
+  }), /*#__PURE__*/_react["default"].createElement(_SaveModal["default"], {
     form: form,
     modalStatus: state.modalStatus
   }));

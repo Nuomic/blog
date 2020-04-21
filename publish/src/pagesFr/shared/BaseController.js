@@ -19,7 +19,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
@@ -27,7 +27,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -35,28 +39,30 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var querystring = require('querystring');
 
-var _default =
-/*#__PURE__*/
-function (_Controller) {
+var _default = /*#__PURE__*/function (_Controller) {
   _inherits(_default, _Controller);
 
-  function _default() {
-    var _getPrototypeOf2;
+  var _super = _createSuper(_default);
 
+  function _default() {
     var _this;
 
     _classCallCheck(this, _default);
@@ -65,7 +71,7 @@ function (_Controller) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(_default)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "preload", {
       antd: '/css/antd.min.css',
@@ -76,13 +82,13 @@ function (_Controller) {
 
     _defineProperty(_assertThisInitialized(_this), "SSR", _this.location.query.ssr != 0);
 
-    _defineProperty(_assertThisInitialized(_this), "getSiderDate", function _callee() {
-      return regeneratorRuntime.async(function _callee$(_context) {
+    _defineProperty(_assertThisInitialized(_this), "getSiderDate", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return regeneratorRuntime.awrap(_this.resHandler(function () {
+              return _this.resHandler(function () {
                 return _this.getApi(_api["default"].getSiderDate, {
                   pageName: _this.pageName
                 });
@@ -93,15 +99,15 @@ function (_Controller) {
                 _this.handleChangeState(res);
               }, function (err) {
                 console.log('err', err);
-              }));
+              });
 
             case 2:
             case "end":
               return _context.stop();
           }
         }
-      });
-    });
+      }, _callee);
+    })));
 
     return _this;
   }
@@ -112,38 +118,59 @@ function (_Controller) {
       return _objectSpread({}, sharedActions, {}, actions);
     }
   }, {
-    key: "componentWillCreate",
-    value: function componentWillCreate() {
-      return regeneratorRuntime.async(function componentWillCreate$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return regeneratorRuntime.awrap(this.getSiderDate());
+    key: "getInitialState",
+    value: function () {
+      var _getInitialState = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(initialState) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                return _context2.abrupt("return", _objectSpread({}, initialState, {
+                  currentPath: this.location.pathname
+                }));
 
-            case 2:
-            case "end":
-              return _context2.stop();
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
           }
-        }
-      }, null, this);
-    }
+        }, _callee2, this);
+      }));
+
+      function getInitialState(_x) {
+        return _getInitialState.apply(this, arguments);
+      }
+
+      return getInitialState;
+    }()
   }, {
-    key: "componentDidFirstMount",
-    value: function componentDidFirstMount() {
-      return regeneratorRuntime.async(function componentDidFirstMount$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              console.log('this.pageName', this.pageName);
+    key: "componentWillCreate",
+    value: function () {
+      var _componentWillCreate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return this.getSiderDate();
 
-            case 1:
-            case "end":
-              return _context3.stop();
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
           }
-        }
-      }, null, this);
-    }
+        }, _callee3, this);
+      }));
+
+      function componentWillCreate() {
+        return _componentWillCreate.apply(this, arguments);
+      }
+
+      return componentWillCreate;
+    }() // async componentDidFirstMount() {
+    //   console.log('this.pageName', this.pageName);
+    // }
+
   }, {
     key: "postApi",
 
@@ -208,104 +235,112 @@ function (_Controller) {
 
   }, {
     key: "resHandler",
-    value: function resHandler(func, success, fail) {
-      var options,
-          _options$limit,
-          limit,
-          _options$name,
-          name,
-          res,
-          ResponseStatus,
-          returnStatus,
-          data,
-          _args4 = arguments;
+    value: function () {
+      var _resHandler = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(func, success, fail) {
+        var options,
+            _options$limit,
+            limit,
+            _options$name,
+            name,
+            res,
+            ResponseStatus,
+            returnStatus,
+            data,
+            _args4 = arguments;
 
-      return regeneratorRuntime.async(function resHandler$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              options = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : {};
-              _options$limit = options.limit, limit = _options$limit === void 0 ? 1 : _options$limit, _options$name = options.name, name = _options$name === void 0 ? '' : _options$name;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                options = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : {};
+                _options$limit = options.limit, limit = _options$limit === void 0 ? 1 : _options$limit, _options$name = options.name, name = _options$name === void 0 ? '' : _options$name;
 
-              if (!(limit < 1)) {
-                _context4.next = 5;
+                if (!(limit < 1)) {
+                  _context4.next = 5;
+                  break;
+                }
+
+                // this.recordLog({...options,errcode:3001},{ctripUid});
+                _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
+
+                return _context4.abrupt("return");
+
+              case 5:
+                _context4.prev = 5;
+                _context4.next = 8;
+                return func();
+
+              case 8:
+                res = _context4.sent;
+                ResponseStatus = res.ResponseStatus, returnStatus = res.returnStatus, data = _objectWithoutProperties(res, ["ResponseStatus", "returnStatus"]);
+
+                if (!(ResponseStatus.Ack == 'Success')) {
+                  _context4.next = 18;
+                  break;
+                }
+
+                if (!(returnStatus.isSuccess === true)) {
+                  _context4.next = 15;
+                  break;
+                }
+
+                return _context4.abrupt("return", success(data));
+
+              case 15:
+                return _context4.abrupt("return", fail(res.returnStatus));
+
+              case 16:
+                _context4.next = 25;
                 break;
-              }
 
-              // this.recordLog({...options,errcode:3001},{ctripUid});
-              _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
+              case 18:
+                if (!(res.ResponseStatus.Errors[0].ErrorCode == 'MobileRequestFilterException')) {
+                  _context4.next = 21;
+                  break;
+                }
 
-              return _context4.abrupt("return");
+                this.login();
+                return _context4.abrupt("return");
 
-            case 5:
-              _context4.prev = 5;
-              _context4.next = 8;
-              return regeneratorRuntime.awrap(func());
+              case 21:
+                if (!(res.ResponseStatus.Errors[0].ErrorCode == '401')) {
+                  _context4.next = 24;
+                  break;
+                }
 
-            case 8:
-              res = _context4.sent;
-              ResponseStatus = res.ResponseStatus, returnStatus = res.returnStatus, data = _objectWithoutProperties(res, ["ResponseStatus", "returnStatus"]);
+                redirect(this.context, '/v2/authorized/403');
+                return _context4.abrupt("return");
 
-              if (!(ResponseStatus.Ack == 'Success')) {
-                _context4.next = 18;
+              case 24:
+                _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
+
+              case 25:
+                _context4.next = 31;
                 break;
-              }
 
-              if (!(returnStatus.isSuccess === true)) {
-                _context4.next = 15;
-                break;
-              }
+              case 27:
+                _context4.prev = 27;
+                _context4.t0 = _context4["catch"](5);
+                console.log(name, '***************请求异常****************', _context4.t0.toString()); // this.recordLog(options,{ctripUid});
 
-              return _context4.abrupt("return", success(data));
+                this.resHandler(func, success, fail, {
+                  limit: limit - 1
+                });
 
-            case 15:
-              return _context4.abrupt("return", fail(res.returnStatus));
-
-            case 16:
-              _context4.next = 25;
-              break;
-
-            case 18:
-              if (!(res.ResponseStatus.Errors[0].ErrorCode == 'MobileRequestFilterException')) {
-                _context4.next = 21;
-                break;
-              }
-
-              this.login();
-              return _context4.abrupt("return");
-
-            case 21:
-              if (!(res.ResponseStatus.Errors[0].ErrorCode == '401')) {
-                _context4.next = 24;
-                break;
-              }
-
-              redirect(this.context, '/v2/authorized/403');
-              return _context4.abrupt("return");
-
-            case 24:
-              _antd.message.error("\u7F51\u7EDC\u51FA\u9519\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u5427\u3002");
-
-            case 25:
-              _context4.next = 31;
-              break;
-
-            case 27:
-              _context4.prev = 27;
-              _context4.t0 = _context4["catch"](5);
-              console.log(name, '***************请求异常****************', _context4.t0.toString()); // this.recordLog(options,{ctripUid});
-
-              this.resHandler(func, success, fail, {
-                limit: limit - 1
-              });
-
-            case 31:
-            case "end":
-              return _context4.stop();
+              case 31:
+              case "end":
+                return _context4.stop();
+            }
           }
-        }
-      }, null, this, [[5, 27]]);
-    } // getKeyTranlate(key, options = {}) {
+        }, _callee4, this, [[5, 27]]);
+      }));
+
+      function resHandler(_x2, _x3, _x4) {
+        return _resHandler.apply(this, arguments);
+      }
+
+      return resHandler;
+    }() // getKeyTranlate(key, options = {}) {
     //   const language = this.store.getState().language || {};
     //   return language[key] ? language[key].replace(/\$\{\s*(\w+)\s*(([\+\-])\s*(\d+)\s*)?\}/g, (text) => options[text.substring(2, text.length - 1)]) : '';
     // }

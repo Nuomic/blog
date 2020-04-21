@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21,15 +21,23 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -77,40 +85,46 @@ var _default = _antd.Form.create()(function (_ref) {
       validateFields = form.validateFields; // 保存评论
 
   var handleSubmit = function handleSubmit(e) {
-    validateFields(function _callee(err, fieldsValue) {
-      return regeneratorRuntime.async(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              e.preventDefault();
+    validateFields( /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(err, fieldsValue) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                e.preventDefault();
 
-              if (!err) {
-                _context.next = 3;
-                break;
-              }
+                if (!err) {
+                  _context.next = 3;
+                  break;
+                }
 
-              return _context.abrupt("return");
+                return _context.abrupt("return");
 
-            case 3:
-              window.localStorage.setItem('nickname', fieldsValue.nickname);
-              window.localStorage.setItem('email', fieldsValue.email);
-              console.log('fieldsValue', fieldsValue);
-              _context.next = 8;
-              return regeneratorRuntime.awrap(handleSaveCommit(_objectSpread({
-                parentId: parentId,
-                articleId: articleId
-              }, fieldsValue)));
+              case 3:
+                window.localStorage.setItem('nickname', fieldsValue.nickname);
+                window.localStorage.setItem('email', fieldsValue.email);
+                console.log('fieldsValue', fieldsValue);
+                _context.next = 8;
+                return handleSaveCommit(_objectSpread({
+                  parentId: parentId,
+                  articleId: articleId
+                }, fieldsValue));
 
-            case 8:
-              handleRefreshRandomNum();
+              case 8:
+                handleRefreshRandomNum();
 
-            case 9:
-            case "end":
-              return _context.stop();
+              case 9:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      });
-    });
+        }, _callee);
+      }));
+
+      return function (_x, _x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
   }; //验证码校验
 
 
@@ -122,9 +136,9 @@ var _default = _antd.Form.create()(function (_ref) {
     callback();
   };
 
-  return _react["default"].createElement(_antd.Row, null, _react["default"].createElement(_antd.Col, {
+  return /*#__PURE__*/_react["default"].createElement(_antd.Row, null, /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 1
-  }, _react["default"].createElement(_antd.Avatar, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Avatar, {
     style: {
       backgroundColor: 'rgb(230, 230, 230)'
     },
@@ -132,34 +146,34 @@ var _default = _antd.Form.create()(function (_ref) {
     icon: "user",
     size: 40,
     className: "fr"
-  })), _react["default"].createElement(_antd.Col, {
+  })), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 23
-  }, _react["default"].createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: {
       marginLeft: 10
     }
-  }, "\u7545\u6240\u6B32\u8A00\u5427"), _react["default"].createElement(_antd.Card, {
+  }, "\u7545\u6240\u6B32\u8A00\u5427"), /*#__PURE__*/_react["default"].createElement(_antd.Card, {
     size: "small",
     className: "comment-form",
     style: _objectSpread({}, _config.comFormTheme, {
       marginLeft: 10
     })
-  }, _react["default"].createElement(_antd.Form, null, _react["default"].createElement(_antd.Row, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form, null, /*#__PURE__*/_react["default"].createElement(_antd.Row, {
     gutter: 8
-  }, _react["default"].createElement(_antd.Col, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 9
-  }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('nickname', {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('nickname', {
     validateTrigger: 'onBlur',
     rules: [{
       required: true,
       message: '请输入昵称'
     }],
     initialValue: userInfo.nickname
-  })(_react["default"].createElement(_antd.Input, {
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, {
     placeholder: "\u6635\u79F0"
-  })))), _react["default"].createElement(_antd.Col, {
+  })))), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 10
-  }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('email', {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('email', {
     validateTrigger: 'onBlur',
     rules: [{
       required: true,
@@ -167,43 +181,43 @@ var _default = _antd.Form.create()(function (_ref) {
       message: '邮箱格式不正确!'
     }],
     initialValue: userInfo.email
-  })(_react["default"].createElement(_antd.Input, {
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, {
     placeholder: "\u90AE\u7BB1"
-  })))), _react["default"].createElement(_antd.Col, {
+  })))), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 5
-  }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('verCode', {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('verCode', {
     validateTrigger: 'onBlur',
     rules: [{
       validator: handleverCodeCheck
     }]
-  })(_react["default"].createElement(_antd.Input, {
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, {
     onFocus: function onFocus() {
       return resetFields('verCode');
     },
-    suffix: _react["default"].createElement(_antd.Icon, {
+    suffix: /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
       type: "sync",
       spin: randomNum[2],
       onClick: handleRefreshRandomNum
     }),
     placeholder: randomNum && "".concat(randomNum[0], " + ").concat(randomNum[1], " = ?") || undefined
-  })))), _react["default"].createElement(_antd.Col, {
+  })))), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 19
-  }, _react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('content', {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form.Item, null, getFieldDecorator('content', {
     rules: [{
       required: true,
       message: '说点啥吧'
     }]
-  })(_react["default"].createElement(TextArea, {
+  })( /*#__PURE__*/_react["default"].createElement(TextArea, {
     autoSize: {
       minRows: 2,
       maxRows: 3
     },
     placeholder: hitokoto.hitokoto && "\u4E00\u8A00\uFF1A".concat(hitokoto.hitokoto)
-  })))), _react["default"].createElement(_antd.Col, {
+  })))), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 5
-  }, _react["default"].createElement(_antd.Form.Item, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form.Item, {
     className: "margin-0"
-  }, _react["default"].createElement(_antd.Button, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Button, {
     ghost: true,
     type: "primary",
     style: {

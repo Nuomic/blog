@@ -4,7 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+
+var _getArticleList$delet;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _default = (_getArticleList$delet = {
   // 文章// 改变文章状态 // 删除文章
   getArticleList: '/article/list',
   deleteArticle: '/article/delete',
@@ -26,7 +31,7 @@ var _default = {
   userLogout: '/user/logout',
   userCheck: '/user/check',
   userRegister: '/user/register',
-  changePwd: '/user/edit',
+  changeUserInfo: '/user/edit',
   // 其他设置
   getSetting: '/setting/get',
   getFormData: '/setting/getFormData',
@@ -40,11 +45,7 @@ var _default = {
   //验证码
   getCaptcha: '/user/captcha',
   //站点 统计
-  getOverview: '/overview',
-  //文件操作
-  getResource: '/resource/list',
-  deleteResource: '/resource/delete',
-  changeResourceStatus: '/resource/changeStatus',
-  download: '/resource/download'
-};
+  getOverview: '/overview'
+}, _defineProperty(_getArticleList$delet, "uploadFile", '/resource/save'), _defineProperty(_getArticleList$delet, "getResource", '/resource/list'), _defineProperty(_getArticleList$delet, "deleteResource", '/resource/delete'), _defineProperty(_getArticleList$delet, "changeResourceStatus", '/resource/changeStatus'), _defineProperty(_getArticleList$delet, "download", '/resource/download'), _defineProperty(_getArticleList$delet, "getPortfolio", '/portfolio/list'), _defineProperty(_getArticleList$delet, "deletePortfolio", '/portfolio/delete'), _defineProperty(_getArticleList$delet, "savePortfolio", '/portfolio/save'), _getArticleList$delet);
+
 exports["default"] = _default;

@@ -25,19 +25,21 @@ var _default = function _default(_ref) {
   var bdList = [{
     name: '首页'
   }];
-  return _react["default"].createElement(_BasicLayout["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_BasicLayout["default"], {
     breadcrumbList: bdList
-  }, _react["default"].createElement(_antd.Row, {
-    gutter: 12
-  }, _react["default"].createElement(_antd.Col, null, _react["default"].createElement(_Total["default"], null)), _react["default"].createElement(_antd.Col, {
-    xxl: 18,
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Row, {
+    gutter: 18
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Col, {
+    xxl: 16,
     md: 24,
     lg: 16
-  }, _react["default"].createElement(_PageView["default"], null)), _react["default"].createElement(_antd.Col, {
-    xxl: 6,
+  }, /*#__PURE__*/_react["default"].createElement(_Total["default"], null)), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
+    xxl: 8,
     md: 24,
     lg: 8
-  }, _react["default"].createElement(_ArticleCount["default"], null))));
+  }, /*#__PURE__*/_react["default"].createElement(_ArticleCount["default"], null)), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
+    span: 24
+  }, /*#__PURE__*/_react["default"].createElement(_PageView["default"], null))));
 };
 
 exports["default"] = _default;

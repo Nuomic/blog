@@ -30,18 +30,18 @@ var withData = (0, _connect["default"])(function (_ref) {
 var _default = withData(function (_ref2) {
   var children = _ref2.children,
       currentPath = _ref2.currentPath;
-  return _react["default"].createElement(_antd.Layout, {
+  return /*#__PURE__*/_react["default"].createElement(_antd.Layout, {
     style: {
       backgroundColor: _config.themeColor.headBgColor
     }
-  }, _react["default"].createElement(Header, {
+  }, /*#__PURE__*/_react["default"].createElement(Header, {
     style: {
       backgroundColor: _config.themeColor.headBgColor
     },
     className: "basic-header"
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     className: "logo"
-  }), _react["default"].createElement(_antd.Menu, {
+  }), /*#__PURE__*/_react["default"].createElement(_antd.Menu, {
     mode: "horizontal",
     defaultSelectedKeys: currentPath != '/' ? currentPath : 'home',
     style: {
@@ -50,16 +50,16 @@ var _default = withData(function (_ref2) {
     },
     className: "basic-header-menu"
   }, _config2.menuList && _config2.menuList.map(function (item) {
-    return _react["default"].createElement(_antd.Menu.Item, {
+    return /*#__PURE__*/_react["default"].createElement(_antd.Menu.Item, {
       key: item.key
-    }, _react["default"].createElement(_component.Link, {
+    }, /*#__PURE__*/_react["default"].createElement(_component.Link, {
       to: "/".concat(item.key)
-    }, _react["default"].createElement("span", {
+    }, /*#__PURE__*/_react["default"].createElement("span", {
       style: {
         color: '#fff'
       }
     }, item.name)));
-  }))), _react["default"].createElement("div", {
+  }))), /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       marginTop: 64
     }

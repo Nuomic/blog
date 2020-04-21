@@ -32,53 +32,53 @@ var _default = function _default(_ref) {
     size: 'small',
     bordered: false
   };
-  return _react["default"].createElement(_BasicLayout["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_BasicLayout["default"], {
     BreadcrumbList: BreadcrumbList
-  }, _react["default"].createElement(_component.Style, {
+  }, /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "about"
-  }), _react["default"].createElement(_antd.Card, _extends({
+  }), /*#__PURE__*/_react["default"].createElement(_antd.Card, _extends({
     title: '个人介绍'
-  }, cardSetting), _react["default"].createElement("p", {
+  }, cardSetting), /*#__PURE__*/_react["default"].createElement("p", {
     style: {
       lineHeight: 2,
       whiteSpace: 'pre-wrap'
     }
-  }, blogdesc.userDesc)), _react["default"].createElement(_antd.Card, _extends({
+  }, blogdesc.userDesc)), /*#__PURE__*/_react["default"].createElement(_antd.Card, _extends({
     title: '博客介绍'
-  }, cardSetting), _react["default"].createElement("p", {
+  }, cardSetting), /*#__PURE__*/_react["default"].createElement("p", {
     style: {
       lineHeight: 2,
       whiteSpace: 'pre-wrap'
     }
-  }, blogdesc.blogDesc)), _react["default"].createElement(_antd.Card, _extends({
+  }, blogdesc.blogDesc)), /*#__PURE__*/_react["default"].createElement(_antd.Card, _extends({
     title: '友情赞助'
-  }, cardSetting), _react["default"].createElement("div", {
+  }, cardSetting), /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       width: 200,
       margin: '0 20px',
       display: 'inline-block',
       textAlign: 'center'
     }
-  }, _react["default"].createElement("img", {
+  }, /*#__PURE__*/_react["default"].createElement("img", {
     src: blogdesc.weChat,
     alt: "",
     width: "100%"
-  }), _react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     style: {
       fontSize: 20
     }
-  }, "\u5FAE\u4FE1")), _react["default"].createElement("div", {
+  }, "\u5FAE\u4FE1")), /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       width: 200,
       margin: '0 20px',
       display: 'inline-block',
       textAlign: 'center'
     }
-  }, _react["default"].createElement("img", {
+  }, /*#__PURE__*/_react["default"].createElement("img", {
     src: blogdesc.alipay,
     alt: "",
     width: "100%"
-  }), _react["default"].createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     style: {
       fontSize: 20
     }

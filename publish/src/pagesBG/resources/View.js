@@ -21,6 +21,10 @@ var _FileItem = _interopRequireDefault(require("./components/FileItem"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var TabPane = _antd.Tabs.TabPane;
 var confirm = _antd.Modal.confirm;
 
@@ -78,29 +82,29 @@ var _default = function _default() {
     });
   };
 
-  return _react["default"].createElement(_BasicLayout["default"], {
+  return /*#__PURE__*/_react["default"].createElement(_BasicLayout["default"], {
     breadcrumbList: bdList
-  }, _react["default"].createElement(_StickyTabs["default"], null, resourceStatus && resourceStatus.map(function (item) {
-    return _react["default"].createElement(TabPane, {
-      tab: item.key == '-1' ? _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement(_StickyTabs["default"], null, resourceStatus && resourceStatus.map(function (item) {
+    return /*#__PURE__*/_react["default"].createElement(TabPane, {
+      tab: item.key == '-1' ? /*#__PURE__*/_react["default"].createElement("div", {
         style: {
           color: 'red'
         }
-      }, _react["default"].createElement(_antd.Icon, {
+      }, /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
         type: "delete"
-      }), item.tabName + " (".concat(filterData(item.key).length, ")")) : item.key !== 'upload' ? item.tabName + " (".concat(filterData(item.key).length, ")") : _react["default"].createElement("div", {
+      }), item.tabName + " (".concat(filterData(item.key).length, ")")) : item.key !== 'upload' ? item.tabName + " (".concat(filterData(item.key).length, ")") : /*#__PURE__*/_react["default"].createElement("div", {
         style: {
           color: 'green'
         }
-      }, _react["default"].createElement(_antd.Icon, {
+      }, /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
         type: "upload"
       }), item.tabName),
       key: item.key
-    }, item.key == '-1' && _react["default"].createElement("div", {
+    }, item.key == '-1' && /*#__PURE__*/_react["default"].createElement("div", {
       style: {
         marginBottom: 10
       }
-    }, _react["default"].createElement(_antd.Button, {
+    }, /*#__PURE__*/_react["default"].createElement(_antd.Button, {
       disabled: !filterData(item.key).length,
       style: {
         color: 'red'
@@ -110,30 +114,38 @@ var _default = function _default() {
           title: '是否清空回收站',
           okType: 'danger',
           content: '一经删除，该资源无法找回',
-          onOk: function onOk() {
-            return regeneratorRuntime.async(function onOk$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    _context.next = 2;
-                    return regeneratorRuntime.awrap(handleDeleteResource(filterData(item.key).map(function (item) {
-                      return item.id;
-                    }).join(',')));
+          onOk: function () {
+            var _onOk = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return handleDeleteResource(filterData(item.key).map(function (item) {
+                        return item.id;
+                      }).join(','));
 
-                  case 2:
-                  case "end":
-                    return _context.stop();
+                    case 2:
+                    case "end":
+                      return _context.stop();
+                  }
                 }
-              }
-            });
-          },
+              }, _callee);
+            }));
+
+            function onOk() {
+              return _onOk.apply(this, arguments);
+            }
+
+            return onOk;
+          }(),
           onCancel: function onCancel() {}
         });
       }
-    }, _react["default"].createElement(_antd.Icon, {
+    }, /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
       type: "delete"
-    }), " \u6E05\u7A7A\u56DE\u6536\u7AD9")), item.key == 'upload' && _react["default"].createElement(_FileUpload["default"], null) || filterData(item.key).map(function (item) {
-      return _react["default"].createElement(_FileItem["default"], {
+    }), " \u6E05\u7A7A\u56DE\u6536\u7AD9")), item.key == 'upload' && /*#__PURE__*/_react["default"].createElement(_FileUpload["default"], null) || filterData(item.key).map(function (item) {
+      return /*#__PURE__*/_react["default"].createElement(_FileItem["default"], {
         item: item,
         key: item.id
       });

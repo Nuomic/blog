@@ -16,6 +16,7 @@ var _default = {
   /* 一言接口 */
   ,
   getSetting: '/setting/get',
-  saveFriend: '/friend/save'
+  saveFriend: '/friend/save',
+  getPortfolio: '/portfolio/list'
 };
 exports["default"] = _default;

@@ -26,44 +26,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var _default = function _default(_ref) {
   var children = _ref.children,
       BreadcrumbList = _ref.BreadcrumbList;
-  return _react["default"].createElement(_StarBG["default"], null, _react["default"].createElement(_Header["default"], null), _react["default"].createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement(_StarBG["default"], null, /*#__PURE__*/_react["default"].createElement(_Header["default"], null), /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       width: '70%',
       minWidth: 1180,
       margin: 'auto'
     }
-  }, BreadcrumbList && _react["default"].createElement(_antd.Breadcrumb, {
+  }, BreadcrumbList && /*#__PURE__*/_react["default"].createElement(_antd.Breadcrumb, {
     separator: ">",
     className: "basic-layout-breadcrumb-bg"
   }, BreadcrumbList.map(function (item, index) {
-    return _react["default"].createElement(_antd.Breadcrumb.Item, {
+    return /*#__PURE__*/_react["default"].createElement(_antd.Breadcrumb.Item, {
       key: index
-    }, _react["default"].createElement(_component.Link, {
+    }, /*#__PURE__*/_react["default"].createElement(_component.Link, {
       to: item.href
     }, item.name));
-  })), _react["default"].createElement(_antd.Row, {
+  })), /*#__PURE__*/_react["default"].createElement(_antd.Row, {
     style: {
       overflow: 'hidden'
     }
-  }, _react["default"].createElement(_antd.Col, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 17
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     className: "basic-layout-article-bg",
     style: {
       backgroundColor: _config.themeColor.articleBgColor
     }
-  }, children)), _react["default"].createElement(_antd.Col, {
+  }, children)), /*#__PURE__*/_react["default"].createElement(_antd.Col, {
     span: 7
-  }, _react["default"].createElement("div", {
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     className: "basic-layout-sider-bg",
     style: {
       background: _config.themeColor.siderBgColor
     }
-  }, _react["default"].createElement(_Sider["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_Sider["default"], {
     style: {
       width: '100%'
     }
-  }))))), _react["default"].createElement(_Footer["default"], null), _react["default"].createElement(_antd.BackTop, {
+  }))))), /*#__PURE__*/_react["default"].createElement(_Footer["default"], null), /*#__PURE__*/_react["default"].createElement(_antd.BackTop, {
     style: {
       articleBgColor: '#fff'
     }

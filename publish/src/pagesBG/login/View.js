@@ -17,86 +17,96 @@ var _Captcha = _interopRequireDefault(require("./Captcha"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var Item = _antd.Form.Item;
 
 var _default = _antd.Form.create()(function (_ref) {
   var state = _ref.state,
       form = _ref.form,
-      handlers = _ref.handlers;
+      ctrl = _ref.ctrl;
   var getFieldDecorator = form.getFieldDecorator,
       resetFields = form.resetFields,
       validateFields = form.validateFields;
   var captcha = state.captcha;
   console.log('captcha', captcha);
-  var handleLogin = handlers.handleLogin;
+  var handleLogin = ctrl.handleLogin;
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    validateFields(function _callee(err, values) {
-      var username, password;
-      return regeneratorRuntime.async(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              username = values.username, password = values.password;
+    validateFields( /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(err, values) {
+        var username, password;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                username = values.username, password = values.password;
 
-              if (err) {
+                if (err) {
+                  _context.next = 4;
+                  break;
+                }
+
                 _context.next = 4;
-                break;
-              }
+                return handleLogin({
+                  username: username,
+                  password: (0, _blueimpMd["default"])(password)
+                });
 
-              _context.next = 4;
-              return regeneratorRuntime.awrap(handleLogin({
-                username: username,
-                password: (0, _blueimpMd["default"])(password)
-              }));
-
-            case 4:
-            case "end":
-              return _context.stop();
+              case 4:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      });
-    });
+        }, _callee);
+      }));
+
+      return function (_x, _x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
   };
 
-  return _react["default"].createElement(_react["default"].Fragment, null, _react["default"].createElement(_component.Style, {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "antd"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "antdPro"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "customize"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "commonBG"
-  }), _react["default"].createElement(_component.Style, {
+  }), /*#__PURE__*/_react["default"].createElement(_component.Style, {
     name: "login"
-  }), _react["default"].createElement("div", {
+  }), /*#__PURE__*/_react["default"].createElement("div", {
     className: "login-bgimage"
-  }, _react["default"].createElement(_antd.Card, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Card, {
     className: "login-box"
-  }, _react["default"].createElement(_antd.Form, {
+  }, /*#__PURE__*/_react["default"].createElement(_antd.Form, {
     onSubmit: handleSubmit,
     className: "login-form"
-  }, _react["default"].createElement(Item, null, getFieldDecorator('username', {
+  }, /*#__PURE__*/_react["default"].createElement(Item, null, getFieldDecorator('username', {
     rules: [{
       required: true,
       message: '请输入用户名!'
     }]
-  })(_react["default"].createElement(_antd.Input, {
-    prefix: _react["default"].createElement(_antd.Icon, {
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, {
+    prefix: /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
       type: "user",
       style: {
         color: 'rgba(0,0,0,.25)'
       }
     }),
     placeholder: "\u8BF7\u8F93\u5165\u7528\u6237\u540D"
-  }))), _react["default"].createElement(Item, null, getFieldDecorator('password', {
+  }))), /*#__PURE__*/_react["default"].createElement(Item, null, getFieldDecorator('password', {
     rules: [{
       required: true,
       message: '请输入密码!'
     }]
-  })(_react["default"].createElement(_antd.Input.Password, {
-    prefix: _react["default"].createElement(_antd.Icon, {
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input.Password, {
+    prefix: /*#__PURE__*/_react["default"].createElement(_antd.Icon, {
       type: "lock",
       style: {
         color: 'rgba(0,0,0,.25)'
@@ -104,7 +114,7 @@ var _default = _antd.Form.create()(function (_ref) {
     }) // type="password"
     ,
     placeholder: "\u8BF7\u8F93\u5165\u5BC6\u7801"
-  }))), _react["default"].createElement(Item, null, getFieldDecorator('yanzheng', {
+  }))), /*#__PURE__*/_react["default"].createElement(Item, null, getFieldDecorator('yanzheng', {
     validateTrigger: 'onBlur',
     rules: [{
       validator: function validator(rule, val, callback) {
@@ -114,7 +124,7 @@ var _default = _antd.Form.create()(function (_ref) {
         callback();
       }
     }]
-  })(_react["default"].createElement(_antd.Input, {
+  })( /*#__PURE__*/_react["default"].createElement(_antd.Input, {
     onClick: function onClick() {
       return resetFields(['yanzheng']);
     },
@@ -123,7 +133,7 @@ var _default = _antd.Form.create()(function (_ref) {
       display: 'inline-block',
       width: 'calc(100% - 155px)'
     }
-  })), _react["default"].createElement("div", {
+  })), /*#__PURE__*/_react["default"].createElement("div", {
     style: {
       "float": 'right',
       marginTop: 5
@@ -131,7 +141,7 @@ var _default = _antd.Form.create()(function (_ref) {
     onClick: function onClick() {
       return resetFields(['yanzheng']);
     }
-  }, _react["default"].createElement(_Captcha["default"], null))), _react["default"].createElement(Item, null, _react["default"].createElement(_antd.Button, {
+  }, /*#__PURE__*/_react["default"].createElement(_Captcha["default"], null))), /*#__PURE__*/_react["default"].createElement(Item, null, /*#__PURE__*/_react["default"].createElement(_antd.Button, {
     type: "primary",
     htmlType: "submit",
     className: "login-form-button"

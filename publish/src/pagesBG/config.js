@@ -21,6 +21,10 @@ var menuList = [{
   name: '资源管理',
   icon: 'folder-open'
 }, {
+  key: 'portfolio',
+  name: '作品管理',
+  icon: 'gift'
+}, {
   key: 'msgmng',
   name: '留言管理',
   icon: 'message'
