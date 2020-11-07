@@ -4,7 +4,7 @@ export default()=> {
   return (
     <Carousel autoplay>
     <div>
-      <h3>1</h3>
+      <h3>2</h3>
     </div>
     <div>
       <h3>2</h3>
